@@ -1,0 +1,92 @@
+/* 
+  HomeBin.strings
+  Thermostat
+
+  Created by Keen on 2017/6/6.
+  Copyright © 2017年 GalaxyWind. All rights reserved.
+*/
+
+
+// 标题
+"温控器" = "LinKon";
+"添加设备" = "Add";
+"设备信息" = "Info";
+"定时" = "Timer";
+"添加定时器" = "Add";
+"修改定时器" = "Edit";
+
+// 文本
+"序列号" = "SSID";
+"密码" = "Password";
+"路由器WI-FI密码" = "Wi-Fi Password";
+"昵称" = "Nickname";
+"确认" = "Confirm";
+"智能恒温" = "Intelligent Constant";
+"温度曲线" = "Temperature Curve";
+"定时器" = "Timer";
+"了解详情" = "Details";
+"随心所欲" = "Do as your wish";
+"时间" = "Time";
+"开始时间" = "Start";
+"结束时间" = "End";
+"重复" = "Repeat";
+"开关" = "Switch";
+"温度" = "Temperature";
+"风速" = "Wind";
+"模式" = "Mode";
+"情景" = "Scene";
+"至" = "To";
+
+// 按钮
+"确定" = "Confirm";
+"新设备" = "New Device";
+"已配置过的设备" = "Configured Device";
+"取消" = "Cancel";
+"搜索设备" = "Search Device";
+"修改昵称" = "Edit Nickname";
+"修改密码" = "Edit Password";
+"删除" = "Remove";
+"编辑" = "Edit";
+"开始搜索" = "Search";
+"添加" = "Add";
+"遥控面板" = "Control";
+"智能设置" = "Setting";
+"开关定时" = "Switch";
+"阶段定时" = "Stage";
+"保存" = "Save";
+
+// 连接
+"离线" = "Disconnect";
+
+// 运行
+"待机" = "OFF";
+
+// 模式
+"制冷" = "Cool";
+"制热" = "Heat";
+"换气" = "Ventilation";
+
+// 情景
+"恒温" = "Constant";
+"节能" = "Green";
+"离家" = "Leave";
+
+// 风速
+"低风" = "Low";
+"中风" = "Medium";
+"高风" = "High";
+
+
+// 周期
+"周" = "";
+"全" = "All";
+"每日" = "Everyday";
+"次日" = "Next";
+"一" = "Mo";
+"二" = "Tu";
+"三" = "We";
+"四" = "Th";
+"五" = "Fr";
+"六" = "Sa";
+"日" = "Su";
+"、" = ", ";

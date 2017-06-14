@@ -1,0 +1,143 @@
+//
+//  Device.h
+//  Thermostat
+//
+//  Created by Keen on 2017/6/1.
+//  Copyright © 2017年 GalaxyWind. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "Declare.h"
+
+#define KDeviceSN            @"sn"
+#define KDeviceNickname      @"nickname"
+#define KDevicePassword      @"password"
+#define KDeviceConnection    @"connection"
+#define KDeviceRunning       @"running"
+#define KDeviceWind          @"wind"
+#define KDeviceMode          @"mode"
+#define KDeviceScene         @"scene"
+#define KDeviceSetting       @"setting"
+#define KDeviceLock          @"lock"
+#define KDeviceDelay         @"delay"
+#define KDeviceHumidity      @"humidity"
+#define KDeviceTemperature   @"temperature"
+
+@interface Device : NSObject
+
+
+/**
+ 序列号
+ */
+@property (nonatomic, copy) NSString *sn;
+
+
+/**
+ 昵称
+ */
+@property (nonatomic, copy) NSString *nickname;
+
+
+/**
+ 密码
+ */
+@property (nonatomic, copy) NSString *password;
+
+
+/**
+ 连接状态
+ */
+@property (nonatomic, assign) ConnectionState connection;
+
+
+/**
+ 运行状态
+ */
+@property (nonatomic, assign) RunningState running;
+
+
+/**
+ 风速
+ */
+@property (nonatomic, assign) LinKonWind wind;
+
+
+/**
+ 模式
+ */
+@property (nonatomic, assign) LinKonMode mode;
+
+
+/**
+ 情景
+ */
+@property (nonatomic, assign) LinKonScene scene;
+
+
+/**
+ 设定温度
+ */
+@property (nonatomic, assign) float setting;
+
+
+/**
+ 儿童锁
+ */
+@property (nonatomic, assign) BOOL lock;
+
+
+/**
+ 延时开关截止时间
+ */
+@property (nonatomic, assign) NSTimeInterval delay;
+
+
+/**
+ 当前湿度
+ */
+@property (nonatomic, assign) float humidity;
+
+
+/**
+ 当前温度
+ */
+@property (nonatomic, assign) float temperature;
+
+
+
+/**
+ 状态字符
+ */
+@property (nonatomic, readonly) NSString *stateString;
+
+
+/**
+ 切换运行状态
+ */
+@property (nonatomic, readonly) RunningState        switchRunning;
+
+
+/**
+ 切换模式
+ */
+@property (nonatomic, readonly) LinKonMode          switchMode;
+
+
+/**
+ 切换情景
+ */
+@property (nonatomic, readonly) LinKonScene         switchScene;
+
+
+/**
+ 切换风速
+ */
+@property (nonatomic, readonly) LinKonWind    switchWind;
+
+
+/**
+ 切换延时
+ */
+@property (nonatomic, readonly) NSTimeInterval      switchDelay;
+
+@end

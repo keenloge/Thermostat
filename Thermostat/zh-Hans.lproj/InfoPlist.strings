@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Thermostat
+
+  Created by Keen on 2017/5/31.
+  Copyright © 2017年 GalaxyWind. All rights reserved.
+*/
+
+CFBundleDisplayName = "林肯温控器";
