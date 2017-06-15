@@ -13,6 +13,8 @@
 
 // 图片大小
 const CGFloat ControlTabButtonImageSize    = 30.0;
+const CGFloat ControlTabButtonTitleHeight  = 11.0;
+
 
 @implementation ControlTabButton
 
@@ -38,17 +40,19 @@ const CGFloat ControlTabButtonImageSize    = 30.0;
 }
 
 - (CGRect)imageRectForContentRect:(CGRect)contentRect {
+    CGFloat offsetY = (CGRectGetHeight(contentRect) - (ControlTabButtonImageSize + ControlTabButtonTitleHeight)) / 2.0;
     return CGRectMake(0,
-                      0,
+                      offsetY,
                       CGRectGetWidth(contentRect),
                       ControlTabButtonImageSize);
 }
 
 - (CGRect)titleRectForContentRect:(CGRect)contentRect {
+    CGFloat offsetY = (CGRectGetHeight(contentRect) - (ControlTabButtonImageSize + ControlTabButtonTitleHeight)) / 2.0;
     return CGRectMake(0,
-                      ControlTabButtonImageSize,
+                      offsetY + ControlTabButtonImageSize,
                       CGRectGetWidth(contentRect),
-                      CGRectGetHeight(contentRect) - ControlTabButtonImageSize);
+                      ControlTabButtonTitleHeight);
 }
 
 - (void)setSelected:(BOOL)selected {

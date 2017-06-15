@@ -14,56 +14,14 @@
 #import "NSTimerAdditions.h"
 #import "Globals.h"
 
-// 当前温度, 湿度, 倒计时图标 大小
-const CGFloat CircleInfoViewImageIconSize = 30.0;
-
-// 基准线均以 inLayer 为标准, 用纵横个两条线, 将 inLayer 分为九分(井字,九宫格)
-// 上基准线, 距离顶部的距离 与 高度 比值
-const CGFloat CircleInfoViewBaseLineTopScale        = 0.3;
-// 下基准线, 距离底部的距离 与 高度 比值
-const CGFloat CircleInfoViewBaseLineBottomScale     = 0.3;
-// 左基准线, 距离左边的距离 与 宽度 比值
-const CGFloat CircleInfoViewBaseLineLeftScale       = 0.35;
-// 右基准线, 距离右边的距离 与 宽度 比值
-const CGFloat CircleInfoViewBaseLineRightScale      = 0.35;
-
-// 当前温度, 湿度 文本 高度 与 inLayer 高度 比值
-const CGFloat CircleInfoViewCurrentLabelHeightScale = 0.08;
-
-// 换气/待机 主文本 宽/高 与 inLayer 宽/高 比值
-const CGFloat CircleInfoViewMainLabelWidthScale     = 0.8;
-const CGFloat CircleInfoViewMainLabelHeightScale    = 0.3;
-
-// 设定温度 文本 宽/高 与 inLayer 宽/高 比值
-const CGFloat CircleInfoViewSettingLabelWidthScale  = 0.5;
-const CGFloat CircleInfoViewSettingLabelHeightScale = 0.3;
-
-// 模式 文本 宽/高 与 inLayer 宽/高 比值
-const CGFloat CircleInfoViewModeLabelWidthScale     = 0.2;
-const CGFloat CircleInfoViewModeLabelHeightScale    = 0.08;
-
-// 单位 文本 宽/高 与 inLayer 宽/高 比值
-const CGFloat CircleInfoViewUnitLabelWidthScale     = 0.2;
-const CGFloat CircleInfoViewUnitLabelHeightScale    = 0.14;
-
-// 倒计时文本 高度 与 计时图标 高度 比值
-const CGFloat CircleInfoViewTimerLabelHeightScale   = 0.6;
-
-// 一小时包含秒数 60 * 60
-const CGFloat CircleInfoViewSecondsPerHour          = 3600.0;
-// 一分钟包含秒数
-const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
-
-
-// 外围转圈图片 缩进
-const CGFloat CircleInfoViewRoundImageViewInset     = -3.0;
 
 // 外圈 缩进 / 厚度
-const CGFloat CircleInfoViewOutLayerInset           = 17.0;
+const CGFloat CircleInfoViewOutLayerInset           = 19.0;
+const CGFloat CircleInfoViewOutLayerInset_3_5       = 14.0;
 const CGFloat CircleInfoViewOutLayerBorderWidth     = 1.0;
 
 // 中圈 缩进 / 厚度
-const CGFloat CircleInfoViewMiddleLayerInset        = 3.0;
+const CGFloat CircleInfoViewMiddleLayerInset        = 4.0;
 const CGFloat CircleInfoViewMiddleLayerBorderWidth  = 3.0;
 
 // 内圈 缩进 / 厚度
@@ -71,41 +29,37 @@ const CGFloat CircleInfoViewInLayerInset            = 3.0;
 const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
 
 
+// 当前温度, 湿度, 倒计时图标 大小
+const CGFloat CircleInfoViewImageIconSize           = 30.0;
+// 当前温度与湿度横向间距
+const CGFloat CircleInfoViewImageIconOffsetX        = 27.0;
+// 当前温度湿度图标与文字纵向间距
+const CGFloat CircleInfoViewImageIconOffsetY        = -4.0;
+
+
+// 基准线均以 inLayer 为标准, 用纵横个两条线, 将 inLayer 分为九分(井字,九宫格)
+// 上基准线, 距离顶部的距离 与 高度 比值
+const CGFloat CircleInfoViewBaseLineTopScale        = 228.0 / 744.0;
+const CGFloat CircleInfoViewBaseLineTopScale_3_5    = 114.0 / 360.0;
+// 下基准线, 距离顶部的距离 与 高度 比值
+const CGFloat CircleInfoViewBaseLineBottomScale     = 408.0 / 744.0;
+const CGFloat CircleInfoViewBaseLineBottomScale_3_5 = 204.0 / 360.0;
+
+// 计时器Y值偏移
+const CGFloat CircleInfoViewTimerOffsetY            = -2.0;
+// 计时器X值偏移
+const CGFloat CircleInfoViewTimerOffsetX            = -5.0;
+
+
+// 一小时包含秒数 60 * 60
+const CGFloat CircleInfoViewSecondsPerHour          = 3600.0;
+// 一分钟包含秒数
+const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
+
 
 
 @interface DeviceCircleView () {
-    // 基准线
-    CGFloat baseLineTop;    // 上基准线
-    CGFloat baseLineBottom; // 下基准线
-    CGFloat baseLineLeft;   // 左基准线
-    CGFloat baseLineRight;  // 右基准线
-    
-    // 延时开关
-    UIFont *timerLabelFont;
-    CGSize timerLabelSize;
-    
-    // 温度,湿度
-    UIFont *currentLabelFont;
-    CGSize currentLabelSize;
-    
-    // 换气,待机
-    CGSize mainLabelSize;
-    UIFont *mainLabelFont;
-    
-    // 设置温度
-    CGSize settingLabelSize;
-    UIFont *settingLabelFont;
-    
-    // 模式
-    CGSize modeLabelSize;
-    UIFont *modeLabelFont;
-    
-    // 单位
-    CGSize unitLabelSize;
-    UIFont *unitLabelFont;
-    
-    // 修正高度
-    CGFloat fixHeight;
+
 }
 
 @property (nonatomic, strong) UIImageView *roundImageView;
@@ -113,14 +67,21 @@ const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
 @property (nonatomic, strong) CALayer *middleLayer;
 @property (nonatomic, strong) CAGradientLayer *inLayer;
 
+@property (nonatomic, strong) UIView *contentIconView;
 @property (nonatomic, strong) UIImageView *humidityImageView;
 @property (nonatomic, strong) UIImageView *temperatureImageView;
 @property (nonatomic, strong) UILabel *humidityLabel;
 @property (nonatomic, strong) UILabel *temperatureLabel;
+
+
+@property (nonatomic, strong) UIView *contentSettingView;
 @property (nonatomic, strong) UILabel *settingLabel;
 @property (nonatomic, strong) UILabel *modeLabel;
 @property (nonatomic, strong) UILabel *unitLabel;
+
 @property (nonatomic, strong) UILabel *mainLabel;
+
+@property (nonatomic, strong) UIView *contentTimerView;
 @property (nonatomic, strong) UIImageView *timerImageView;
 @property (nonatomic, strong) UILabel *timerLabel;
 
@@ -155,61 +116,25 @@ const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
 #pragma mark - 界面刷新
 
 - (void)baseInitialiseSubViews {
-    self.backgroundColor = HB_COLOR_BASE_MAIN;
-    
-    // 外围圈
     self.roundImageView.opaque = YES;
     self.outLayer.opaque = YES;
     self.middleLayer.opaque = YES;
     self.inLayer.opaque = YES;
     
-    // 基准线 参考了 inLayer 所以一定要放在 inLayer 之后计算.
-    baseLineTop = floorf(CGRectGetMinY(self.inLayer.frame) + CGRectGetHeight(self.inLayer.frame) * CircleInfoViewBaseLineTopScale);
-    baseLineBottom = floorf(CGRectGetMaxY(self.inLayer.frame) - CGRectGetHeight(self.inLayer.frame) * CircleInfoViewBaseLineBottomScale);
-    baseLineLeft = floorf(CGRectGetMinX(self.inLayer.frame) + CGRectGetWidth(self.inLayer.frame) * CircleInfoViewBaseLineLeftScale);
-    baseLineRight = floorf(CGRectGetMaxX(self.inLayer.frame) - CGRectGetWidth(self.inLayer.frame) * CircleInfoViewBaseLineRightScale);
-    
-    
-    // 当前 温度, 湿度, 分别以左右基准线居中显示, 紧贴, 因此最大宽度则为 左右基准线之间距离
-    currentLabelSize = CGSizeMake(floorf(CGRectGetWidth(self.inLayer.frame) * (1 - CircleInfoViewBaseLineLeftScale - CircleInfoViewBaseLineRightScale)),
-                                  floorf(CGRectGetHeight(self.inLayer.frame) * CircleInfoViewCurrentLabelHeightScale));
-    currentLabelFont = UIFontOf1XPix(currentLabelSize.height);
+    self.contentIconView.opaque = YES;
     self.humidityImageView.opaque = YES;
     self.temperatureImageView.opaque = YES;
     self.humidityLabel.opaque = YES;
     self.temperatureLabel.opaque = YES;
     
-    // 换气, 待机
-    mainLabelSize = CGSizeMake(floorf(CGRectGetWidth(self.inLayer.frame) * CircleInfoViewMainLabelWidthScale),
-                              floorf(CGRectGetHeight(self.inLayer.frame) * CircleInfoViewMainLabelHeightScale));
-    mainLabelFont = UIFontOf1XPix(mainLabelSize.height);
-    
-    
-    // 设置温度, 单位, 模式
-    settingLabelSize = CGSizeMake(floorf(CGRectGetWidth(self.inLayer.frame) * CircleInfoViewSettingLabelWidthScale),
-                                  floorf(CGRectGetHeight(self.inLayer.frame) * CircleInfoViewSettingLabelHeightScale));
-    unitLabelSize = CGSizeMake(floorf(CGRectGetWidth(self.inLayer.frame) * CircleInfoViewUnitLabelWidthScale),
-                               floorf(CGRectGetHeight(self.inLayer.frame) * CircleInfoViewUnitLabelHeightScale));
-    modeLabelSize = CGSizeMake(floorf(CGRectGetWidth(self.inLayer.frame) * CircleInfoViewModeLabelWidthScale),
-                               floorf(CGRectGetHeight(self.inLayer.frame) * CircleInfoViewModeLabelHeightScale));
-    settingLabelFont = UIFontOf1XPix(settingLabelSize.height);
-    unitLabelFont = UIFontOf1XPix(unitLabelSize.height);
-    modeLabelFont = UIFontOf1XPix(modeLabelSize.height);
-    
-    // 修正因字号差距形成的高度差
-    fixHeight = ceilf((settingLabelSize.height - settingLabelFont.capHeight) / 2.0);
-    modeLabelSize.height = modeLabelFont.capHeight;
-    unitLabelSize.height = unitLabelFont.capHeight;
-    
+    self.contentSettingView.opaque = YES;
     self.settingLabel.opaque = YES;
-    self.unitLabel.opaque = YES;
     self.modeLabel.opaque = YES;
+    self.unitLabel.opaque = YES;
     
+    self.mainLabel.opaque = YES;
     
-    // 延时开关
-    NSString *timerString = @"000\"00'00";
-    timerLabelFont = UIFontOf1XPix(CircleInfoViewImageIconSize * CircleInfoViewTimerLabelHeightScale);
-    timerLabelSize = [timerString sizeWithAttributes:@{NSFontAttributeName : timerLabelFont}];
+    self.contentTimerView.opaque = YES;
     self.timerImageView.opaque = YES;
     self.timerLabel.opaque = YES;
 }
@@ -220,9 +145,7 @@ const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
     if (device.running == RunningStateOFF || device.mode == LinKonModeAir) {
         // 待机 或者 换气
         self.mainLabel.hidden = NO;
-        self.settingLabel.hidden = YES;
-        self.modeLabel.hidden = YES;
-        self.unitLabel.hidden = YES;
+        self.contentSettingView.hidden = YES;
         
         if (device.running == RunningStateOFF) {
             self.mainLabel.text = [Globals runningString:device.running];
@@ -235,10 +158,8 @@ const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
         }
     } else {
         self.mainLabel.hidden = YES;
-        self.settingLabel.hidden = NO;
-        self.modeLabel.hidden = NO;
-        self.unitLabel.hidden = NO;
-
+        self.contentSettingView.hidden = NO;
+        
         self.settingLabel.text = [NSString stringWithFormat:@"%.1f", device.setting];
         self.modeLabel.text = [Globals modeString:device.mode];
         switch (device.mode) {
@@ -317,8 +238,7 @@ const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
         }
         Device *device = (Device *)object;
         if (device.delay > 0.0) {
-            selfWeak.timerImageView.hidden = NO;
-            selfWeak.timerLabel.hidden = NO;
+            selfWeak.contentTimerView.hidden = NO;
             if (device.running == RunningStateON) {
                 selfWeak.timerImageView.image = [UIImage imageNamed:@"icon_timer_off"];
             } else {
@@ -326,8 +246,7 @@ const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
             }
             selfWeak.timeOffset = device.delay - [NSDate timeIntervalSinceReferenceDate];
         } else {
-            selfWeak.timerImageView.hidden = YES;
-            selfWeak.timerLabel.hidden = YES;
+            selfWeak.contentTimerView.hidden = YES;
         }
     }];
 }
@@ -366,9 +285,8 @@ const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
 
 - (UIImageView *)roundImageView {
     if (!_roundImageView) {
-        _roundImageView = [[UIImageView alloc] initWithFrame:CGRectInset(self.bounds, CircleInfoViewRoundImageViewInset, CircleInfoViewRoundImageViewInset)];
+        _roundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
         [self addSubview:_roundImageView];
-        
         _roundImageView.image = [UIImage imageNamed:@"bkg_cycle_hot"];
     }
     return _roundImageView;
@@ -377,7 +295,12 @@ const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
 - (CALayer *)outLayer {
     if (!_outLayer) {
         _outLayer = [CALayer layer];
-        CGFloat offset = KHorizontalCeil(CircleInfoViewOutLayerInset);
+        CGFloat offset = 0.0;
+        if (IPHONE_INCH_3_5) {
+            offset = CircleInfoViewOutLayerInset_3_5;
+        } else {
+            offset = KHorizontalRound(CircleInfoViewOutLayerInset);
+        }
         _outLayer.frame = CGRectInset(self.roundImageView.frame, offset, offset);
         [self.layer addSublayer:_outLayer];
         _outLayer.cornerRadius = CGRectGetHeight(_outLayer.frame) / 2.0;
@@ -391,7 +314,8 @@ const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
 - (CALayer *)middleLayer {
     if (!_middleLayer) {
         _middleLayer = [CALayer layer];
-        _middleLayer.frame = CGRectInset(self.outLayer.frame, CircleInfoViewMiddleLayerInset, CircleInfoViewMiddleLayerInset);
+        CGFloat offset = KHorizontalRound(CircleInfoViewMiddleLayerInset);
+        _middleLayer.frame = CGRectInset(self.outLayer.frame, offset, offset);
         [self.layer addSublayer:_middleLayer];
         _middleLayer.cornerRadius = CGRectGetHeight(_middleLayer.frame) / 2.0;
         _middleLayer.borderColor = UIColorFromHex(0xd5eef9).CGColor;
@@ -403,7 +327,8 @@ const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
 - (CAGradientLayer *)inLayer {
     if (!_inLayer) {
         _inLayer = [CAGradientLayer layer];
-        _inLayer.frame = CGRectInset(self.middleLayer.frame, CircleInfoViewInLayerInset, CircleInfoViewInLayerInset);
+        CGFloat offset = KHorizontalRound(CircleInfoViewInLayerInset);
+        _inLayer.frame = CGRectInset(self.middleLayer.frame, offset, offset);
         _inLayer.colors = @[(__bridge id)UIColorFromHex(0xff5c23).CGColor, (__bridge id)UIColorFromHex(0xffd1d1).CGColor];
         _inLayer.startPoint = CGPointMake(0, 0);
         _inLayer.endPoint = CGPointMake(0, 1.0);
@@ -416,163 +341,257 @@ const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
     return _inLayer;
 }
 
+#pragma mark - 当前温度 与 湿度
+
+- (UIView *)contentIconView {
+    if (!_contentIconView) {
+        _contentIconView = [UIView new];
+        [self addSubview:_contentIconView];
+        
+        WeakObj(self);
+        [_contentIconView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(selfWeak);
+        }];
+    }
+    return _contentIconView;
+}
+
 - (UIImageView *)humidityImageView {
     if (!_humidityImageView) {
-        _humidityImageView = [[UIImageView alloc] initWithFrame:CGRectMake(baseLineLeft - CircleInfoViewImageIconSize / 2.0,
-                                                                           baseLineTop - CircleInfoViewImageIconSize,
-                                                                           CircleInfoViewImageIconSize,
-                                                                           CircleInfoViewImageIconSize)];
-        [self addSubview:_humidityImageView];
-        
+        _humidityImageView = [UIImageView new];
+        [self.contentIconView addSubview:_humidityImageView];
         _humidityImageView.image = [UIImage imageNamed:@"icon_humidity"];
-        _humidityImageView.alpha = 0.8;
+//        _humidityImageView.alpha = 0.8;
+
+        WeakObj(self);
+        [_humidityImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.bottom.equalTo(selfWeak.contentIconView);
+            CGFloat size = KHorizontalRound(CircleInfoViewImageIconSize);
+            make.size.mas_equalTo(CGSizeMake(size, size));
+        }];
     }
     return _humidityImageView;
 }
 
-- (UILabel *)humidityLabel {
-    if (!_humidityLabel) {
-        _humidityLabel = [[UILabel alloc] initWithFrame:CGRectMake(baseLineLeft - currentLabelSize.width / 2.0,
-                                                                   baseLineTop,
-                                                                   currentLabelSize.width,
-                                                                   currentLabelSize.height)];
-        [self addSubview:_humidityLabel];
-        
-        _humidityLabel.font = currentLabelFont;
-        _humidityLabel.textAlignment = NSTextAlignmentCenter;
-        _humidityLabel.textColor = HB_COLOR_BASE_WHITE;
-        _humidityLabel.text = @"70%";
-        _humidityLabel.alpha = 0.8;
-    }
-    return _humidityLabel;
-}
-
 - (UIImageView *)temperatureImageView {
     if (!_temperatureImageView) {
-        _temperatureImageView = [[UIImageView alloc] initWithFrame:CGRectMake(baseLineRight - CircleInfoViewImageIconSize / 2.0,
-                                                                              baseLineTop - CircleInfoViewImageIconSize,
-                                                                              CircleInfoViewImageIconSize,
-                                                                              CircleInfoViewImageIconSize)];
-        [self addSubview:_temperatureImageView];
-        
+        _temperatureImageView = [UIImageView new];
+        [self.contentIconView addSubview:_temperatureImageView];
         _temperatureImageView.image = [UIImage imageNamed:@"icon_temperature"];
-        _temperatureImageView.alpha = 0.8;
+//        _temperatureImageView.alpha = 0.8;
+
+        WeakObj(self);
+        [_temperatureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.right.bottom.equalTo(selfWeak.contentIconView);
+            make.left.equalTo(selfWeak.humidityImageView.mas_right).offset(KHorizontalRound(CircleInfoViewImageIconOffsetX));
+            make.width.equalTo(selfWeak.humidityImageView);
+        }];
     }
     return _temperatureImageView;
 }
 
+- (UILabel *)humidityLabel {
+    if (!_humidityLabel) {
+        _humidityLabel = [UILabel new];
+        [self addSubview:_humidityLabel];
+        if (IPHONE_INCH_3_5) {
+            _humidityLabel.font = UIFontOf2XPix(20);
+        } else {
+            _humidityLabel.font = UIFontOf3XPix(KHorizontalRound(39));
+        }
+        _humidityLabel.textColor = HB_COLOR_BASE_WHITE;
+        _humidityLabel.text = @"70%";
+        
+        WeakObj(self);
+        [_humidityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(selfWeak.contentIconView.mas_bottom).offset(KHorizontalRound(CircleInfoViewImageIconOffsetY));
+            make.centerX.equalTo(selfWeak.humidityImageView);
+            CGFloat scale = 0.0;
+            if (IPHONE_INCH_3_5) {
+                scale = CircleInfoViewBaseLineTopScale_3_5;
+            } else {
+                scale = CircleInfoViewBaseLineTopScale;
+            }
+            CGFloat offsetCenterY = (selfWeak.inLayer.frame.size.height * scale) + CGRectGetMinY(selfWeak.inLayer.frame);
+            make.centerY.equalTo(selfWeak.mas_top).offset(offsetCenterY);
+        }];
+    }
+    return _humidityLabel;
+}
+
 - (UILabel *)temperatureLabel {
     if (!_temperatureLabel) {
-        _temperatureLabel = [[UILabel alloc] initWithFrame:CGRectMake(baseLineRight - currentLabelSize.width / 2.0,
-                                                                      baseLineTop,
-                                                                      currentLabelSize.width,
-                                                                      currentLabelSize.height)];
+        _temperatureLabel = [UILabel new];
         [self addSubview:_temperatureLabel];
-        
-        _temperatureLabel.font = currentLabelFont;
-        _temperatureLabel.textAlignment = NSTextAlignmentCenter;
+        _temperatureLabel.font = self.humidityLabel.font;
         _temperatureLabel.textColor = HB_COLOR_BASE_WHITE;
-        _temperatureLabel.text = @"27.5℃";
-        _temperatureLabel.alpha = 0.8;
+        _temperatureLabel.text = @"27.0℃";
+
+        WeakObj(self);
+        [_temperatureLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(selfWeak.humidityLabel);
+            make.centerX.equalTo(selfWeak.temperatureImageView);
+        }];
     }
     return _temperatureLabel;
 }
 
-- (UILabel *)mainLabel {
-    if (!_mainLabel) {
-        _mainLabel = [[UILabel alloc] initWithFrame:CGRectMake(floorf(CGRectGetMidX(self.inLayer.frame) - mainLabelSize.width / 2.0),
-                                                              baseLineBottom - mainLabelSize.height,
-                                                              mainLabelSize.width,
-                                                              mainLabelSize.height)];
-        [self addSubview:_mainLabel];
+#pragma mark - 设置温度 单位 与 模式
+
+- (UIView *)contentSettingView {
+    if (!_contentSettingView) {
+        _contentSettingView = [UIView new];
+        [self addSubview:_contentSettingView];
         
-        _mainLabel.textColor = HB_COLOR_BASE_WHITE;
-        _mainLabel.font = mainLabelFont;
-        _mainLabel.adjustsFontSizeToFitWidth = YES;
-        _mainLabel.textAlignment = NSTextAlignmentCenter;
-        _mainLabel.text = KString(@"--");
+        WeakObj(self);
+        [_contentSettingView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(selfWeak);
+            CGFloat scale = 0.0;
+            if (IPHONE_INCH_3_5) {
+                scale = CircleInfoViewBaseLineBottomScale_3_5;
+            } else {
+                scale = CircleInfoViewBaseLineBottomScale;
+            }
+            CGFloat offsetCenterY = (selfWeak.inLayer.frame.size.height * scale) + CGRectGetMinY(selfWeak.inLayer.frame);
+            make.centerY.equalTo(selfWeak.mas_top).offset(offsetCenterY);
+        }];
     }
-    return _mainLabel;
+    return _contentSettingView;
 }
 
 - (UILabel *)settingLabel {
     if (!_settingLabel) {
-        _settingLabel = [[UILabel alloc] initWithFrame:CGRectMake(baseLineRight - settingLabelSize.width,
-                                                                  baseLineBottom - settingLabelSize.height,
-                                                                  settingLabelSize.width,
-                                                                  settingLabelSize.height)];
-        [self addSubview:_settingLabel];
+        _settingLabel = [UILabel new];
+        [self.contentSettingView addSubview:_settingLabel];
         
-        _settingLabel.font = settingLabelFont;
+        if (IPHONE_INCH_3_5) {
+            _settingLabel.font = UIFontOf2XPix(124);
+        } else {
+            _settingLabel.font = UIFontOf3XPix(KHorizontalRound(240));
+        }
         _settingLabel.textColor = HB_COLOR_BASE_WHITE;
-        _settingLabel.textAlignment = NSTextAlignmentRight;
-        _settingLabel.text = @"--";
+        _settingLabel.text = @"23.5";
+        
+        WeakObj(self);
+        [_settingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.bottom.equalTo(selfWeak.contentSettingView);
+        }];
     }
     return _settingLabel;
 }
 
 - (UILabel *)modeLabel {
     if (!_modeLabel) {
-        _modeLabel = [[UILabel alloc] initWithFrame:CGRectMake(baseLineRight,
-                                                               CGRectGetMinY(self.settingLabel.frame) + fixHeight,
-                                                               modeLabelSize.width,
-                                                               modeLabelSize.height)];
-        [self addSubview:_modeLabel];
+        _modeLabel = [UILabel new];
+        [self.contentSettingView addSubview:_modeLabel];
         
-        _modeLabel.font = modeLabelFont;
+        if (IPHONE_INCH_3_5) {
+            _modeLabel.font = UIFontOf2XPix(24);
+        } else {
+            _modeLabel.font = UIFontOf3XPix(KHorizontalRound(48));
+        }
         _modeLabel.textColor = HB_COLOR_BASE_WHITE;
-        _modeLabel.textAlignment = NSTextAlignmentLeft;
-        _modeLabel.text = KString(@"--");
-        _modeLabel.alpha = 0.8;
+        _modeLabel.text = KString(@"制冷");
+        
+        WeakObj(self);
+        [_modeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(selfWeak.unitLabel);
+            make.bottom.equalTo(selfWeak.unitLabel.mas_top);
+        }];
     }
     return _modeLabel;
 }
 
 - (UILabel *)unitLabel {
     if (!_unitLabel) {
-        _unitLabel = [[UILabel alloc] initWithFrame:CGRectMake(baseLineRight,
-                                                               CGRectGetMaxY(self.settingLabel.frame) - unitLabelSize.height - fixHeight,
-                                                               unitLabelSize.width,
-                                                               unitLabelSize.height)];
-        [self addSubview:_unitLabel];
+        _unitLabel = [UILabel new];
+        [self.contentSettingView addSubview:_unitLabel];
         
-        _unitLabel.font = unitLabelFont;
+        if (IPHONE_INCH_3_5) {
+            _unitLabel.font = UIFontOf2XPix(62);
+        } else {
+            _unitLabel.font = UIFontOf3XPix(KHorizontalRound(120));
+        }
         _unitLabel.textColor = HB_COLOR_BASE_WHITE;
-        _unitLabel.textAlignment = NSTextAlignmentLeft;
         _unitLabel.text = KString(@"℃");
+        
+        WeakObj(self);
+        [_unitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.greaterThanOrEqualTo(selfWeak.settingLabel.mas_right);
+            make.baseline.equalTo(selfWeak.settingLabel);
+            make.right.equalTo(selfWeak.contentSettingView);
+        }];
     }
     return _unitLabel;
 }
 
+- (UILabel *)mainLabel {
+    if (!_mainLabel) {
+        _mainLabel = [UILabel new];
+        [self addSubview:_mainLabel];
+        
+        _mainLabel.textColor = HB_COLOR_BASE_WHITE;
+        _mainLabel.font = self.settingLabel.font;
+        _mainLabel.text = KString(@"换气");
+        
+        WeakObj(self);
+        [_mainLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.equalTo(selfWeak.contentSettingView);
+        }];
+    }
+    return _mainLabel;
+}
+
+#pragma mark - 计时器
+
+- (UIView *)contentTimerView {
+    if (!_contentTimerView) {
+        _contentTimerView = [UIView new];
+        [self addSubview:_contentTimerView];
+        
+        _contentTimerView.alpha = 0.6;
+        
+        WeakObj(self);
+        [_contentTimerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(selfWeak.contentSettingView.mas_bottom).offset(KHorizontalRound(CircleInfoViewTimerOffsetY));
+            make.centerX.equalTo(selfWeak);
+        }];
+    }
+    return _contentTimerView;
+}
 
 - (UIImageView *)timerImageView {
     if (!_timerImageView) {
-        CGFloat totalWidth = CircleInfoViewImageIconSize + timerLabelSize.width;
-        CGFloat offsetWidth = floorf((CGRectGetWidth(self.inLayer.frame) - totalWidth) / 2.0);
-        _timerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMinX(self.inLayer.frame) + offsetWidth,
-                                                                        baseLineBottom,
-                                                                        CircleInfoViewImageIconSize,
-                                                                        CircleInfoViewImageIconSize)];
-        [self addSubview:_timerImageView];
+        _timerImageView = [UIImageView new];
+        [self.contentTimerView addSubview:_timerImageView];
         
         _timerImageView.image = [UIImage imageNamed:@"icon_timer_off"];
         _timerImageView.tintColor = HB_COLOR_BASE_BLACK;
-        _timerImageView.alpha = 0.7;
+        
+        WeakObj(self);
+        [_timerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.bottom.equalTo(selfWeak.contentTimerView);
+            CGFloat size = KHorizontalRound(CircleInfoViewImageIconSize);
+            make.size.mas_equalTo(CGSizeMake(size, size));
+        }];
     }
     return _timerImageView;
 }
 
 - (UILabel *)timerLabel {
     if (!_timerLabel) {
-        _timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.timerImageView.frame),
-                                                                CGRectGetMinY(self.timerImageView.frame),
-                                                                timerLabelSize.width,
-                                                                CGRectGetHeight(self.timerImageView.frame))];
-        [self addSubview:_timerLabel];
+        _timerLabel = [UILabel new];
+        [self.contentTimerView addSubview:_timerLabel];
         
-        _timerLabel.font = timerLabelFont;
+        _timerLabel.font = UIFontOf3XPix(KHorizontalRound(40));
         _timerLabel.textColor = HB_COLOR_BASE_BLACK;
-        _timerLabel.text = @"00\"00'00";
+        _timerLabel.text = @"02\"48'56";
+
+        WeakObj(self);
+        [_timerLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.right.equalTo(selfWeak.contentTimerView);
+            make.left.equalTo(selfWeak.timerImageView.mas_right).offset(KHorizontalRound(CircleInfoViewTimerOffsetX));
+        }];
     }
     return _timerLabel;
 }

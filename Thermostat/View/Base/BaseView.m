@@ -19,14 +19,25 @@
 }
 */
 
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(baseRestLanguage) name:KNotificationNameSwitchLanguage object:nil];
-        
-        [self baseInitialiseSubViews];
-        [self baseRestLanguage];
+- (instancetype)init {
+    if (self = [super init]) {
+        [self _baseInit];
     }
     return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self _baseInit];
+    }
+    return self;
+}
+
+- (void)_baseInit {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(baseRestLanguage) name:KNotificationNameSwitchLanguage object:nil];
+    
+    [self baseInitialiseSubViews];
+    [self baseRestLanguage];
 }
 
 - (void)dealloc {

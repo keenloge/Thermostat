@@ -21,6 +21,7 @@
 #define UIFontOf3XPix(px) [UIFont systemFontOfSize:(px / 3.0)]
 
 #define UIFontOf1XPix(px) UIFontOf3XPix(px * 3.0)
+#define UIFontOf2XPix(px) UIFontOf3XPix(px / 2.0 * 3.0)
 
 // Log控制
 #ifdef DEBUG

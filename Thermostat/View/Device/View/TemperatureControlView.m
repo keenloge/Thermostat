@@ -12,6 +12,12 @@
 #import "DeviceManager.h"
 #import "Device.h"
 
+const CGFloat KTemperatureControlCountShow      = 5.0;
+const CGFloat KTemperatureControlCutLineOffsetY = 12.0;
+const CGFloat KTemperatureControlCutLineHeight  = 11.0;
+const CGFloat KTemperatureControlCutLineWidth   = 1.0;
+
+
 @interface TemperatureControlView () <UIScrollViewDelegate> {
     CGFloat offsetX;        // 指示线X偏移
     CGFloat offsetY;        // 指示线Y偏移
@@ -53,15 +59,10 @@
 #pragma mark - 界面刷新
 
 - (void)baseInitialiseSubViews {
-    if (IPHONE_INCH_3_5 || IPHONE_INCH_4_0) {
-        numberShow = 5.0;
-    } else {
-        numberShow = 6.0;
-    }
-    
-    offsetY = KHorizontalFloor(12);
-    lineViewHeight = KHorizontalFloor(11);
-    lineViewWidth = 1.0;
+    numberShow = KTemperatureControlCountShow;
+    offsetY = KHorizontalRound(KTemperatureControlCutLineOffsetY);
+    lineViewHeight = KHorizontalRound(KTemperatureControlCutLineHeight);
+    lineViewWidth = KTemperatureControlCutLineWidth;
     offsetX = floor((CGRectGetWidth(self.frame) - lineViewWidth) / 2.0);
     
     
@@ -77,7 +78,7 @@
     self.currentIndex = self.contentScrollView.contentOffset.x / itemWidth + 0.5;
     
     CGFloat currentCenterX = self.contentScrollView.contentOffset.x + (itemWidth / 2.0);
-    CGFloat preCount = (numberShow - 1) / 2.0;
+    CGFloat preCount = (numberShow + 1) / 2.0;
     NSInteger beginIndex = MAX(0, floor(self.currentIndex - preCount));
     NSInteger endIndex = MIN(ceil(self.currentIndex + preCount), self.slideViewArray.count - 1);
     
@@ -90,8 +91,8 @@
         label = [self.slideViewArray objectAtIndex:i];
         
         offsetIndex = fabs((label.center.x - currentCenterX) / itemWidth);
-        labelAlpha = 1 - offsetIndex / (preCount + 2);
-        labelScale = 1 - offsetIndex / (preCount * 4);
+        labelAlpha = 1 - offsetIndex / (preCount + 0);
+        labelScale = 1 - offsetIndex / (preCount * 2);
         
         label.alpha = labelAlpha;
         label.transform = CGAffineTransformMakeScale(labelScale, labelScale);
@@ -198,11 +199,10 @@
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((itemWidth + itemOffsetX) * count, 0, itemWidth, itemHeight)];
             [_contentScrollView addSubview:label];
             label.backgroundColor = HB_COLOR_BASE_WHITE;
-            label.font = UIFontOf3XPix(68);
+            label.font = UIFontOf3XPix(KHorizontalRound(68));
             label.textAlignment = NSTextAlignmentCenter;
             label.textColor = HB_COLOR_BASE_MAIN;
             label.text = [NSString stringWithFormat:@"%.1f℃", i];
-            label.adjustsFontSizeToFitWidth = YES;
             [tmpArray addObject:label];
             count++;
         }

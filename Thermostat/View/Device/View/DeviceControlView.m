@@ -61,7 +61,7 @@
 
 - (TemperatureControlView *)temperatureView {
     if (!_temperatureView) {
-        CGFloat scale = IPHONE_INCH_3_5 ? 0.5 : 0.34;
+        CGFloat scale = IPHONE_INCH_3_5 ? 0.5 : 0.35;
         _temperatureView = [[TemperatureControlView alloc] initWithFrame:CGRectMake(0,
                                                                                     0,
                                                                                     CGRectGetWidth(self.frame),

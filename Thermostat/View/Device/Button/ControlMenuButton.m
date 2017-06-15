@@ -27,7 +27,7 @@ const CGFloat ControlMenuButtonImageSize = 55;
 }
 
 - (CGRect)imageRectForContentRect:(CGRect)contentRect {
-    CGSize imageSize = CGSizeMake(KHorizontalCeil(ControlMenuButtonImageSize), KHorizontalCeil(ControlMenuButtonImageSize));
+    CGSize imageSize = CGSizeMake(KHorizontalRound(ControlMenuButtonImageSize), KHorizontalRound(ControlMenuButtonImageSize));
     
     if (MIN(CGRectGetWidth(contentRect), CGRectGetHeight(contentRect)) < MAX(imageSize.height, imageSize.width)) {
         return contentRect;

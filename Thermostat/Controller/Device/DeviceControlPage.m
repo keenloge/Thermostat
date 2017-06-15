@@ -24,7 +24,7 @@ const CGFloat DeviceControlSettingRowsHeight    = 68.0;
 const CGFloat DeviceControlSettingFooterHeight  = 47.0;
 
 // 底部 Tabbar 高度
-const CGFloat DeviceControlTabBarHeight         = 48.0;
+const CGFloat DeviceControlTabBarHeight         = 49.0;
 
 // 设备信息展示宽高比, 分别在 16:9 或者 3:2 的屏幕中的比例
 const CGFloat DeviceControlInfoViewScale_16_9   = 1095.0 / 1242.0;

@@ -13,11 +13,26 @@
 #import "Device.h"
 #import "Declare.h"
 
+// 设备信息圈大小
+const CGFloat KDeviceCircleInfoViewSize     = 300.0;
+// 设备信息圈在3.5寸设备上的大小
+const CGFloat KDeviceCircleInfoViewSize_3_5 = 212.0;
+// 设备信息圈Y值偏移
+const CGFloat KDeviceCircleInfoViewOffsetY  = 8.0;
+
+// 设备 儿童锁, 情景, 风速 图标X偏移
+const CGFloat KDeviceInfoIconOffsetX            = 35.0;
+// 底部间距
+const CGFloat KDeviceInfoIconPaddingBottom      = 12.0;
+// 3.5寸设备上的底部间距
+const CGFloat KDeviceInfoIconPaddingBottom_3_5  = 6.0;
+// 图标大小
+const CGFloat KDeviceInfoIconSize               = 30.0;
+
 @interface DeviceInfoView () {
     CGFloat imageViewOffsetX;
     CGFloat imageViewBottomPadding;
     CGFloat imageViewSize;
-    CGFloat infoViewSize;
 }
 
 @property (nonatomic, strong) DeviceCircleView *circleInfoView;
@@ -42,12 +57,13 @@
 - (void)baseInitialiseSubViews {
     self.backgroundColor = HB_COLOR_BASE_MAIN;
     
-    imageViewOffsetX = KHorizontalRound(40.0);
-    imageViewBottomPadding = KHorizontalCeil(12.0);
-    imageViewSize = KHorizontalRound(30.0);
-    
-    CGFloat maxSize = MIN(CGRectGetWidth(self.frame), CGRectGetHeight(self.frame) - imageViewBottomPadding - imageViewSize);
-    infoViewSize = MIN(maxSize, 300);
+    imageViewOffsetX = KHorizontalRound(KDeviceInfoIconOffsetX);
+    if (IPHONE_INCH_3_5) {
+        imageViewBottomPadding = KDeviceInfoIconPaddingBottom_3_5;
+    } else {
+        imageViewBottomPadding = KHorizontalRound(KDeviceInfoIconPaddingBottom);
+    }
+    imageViewSize = KHorizontalRound(KDeviceInfoIconSize);
     
     self.circleInfoView.opaque = YES;
     self.lockImageView.opaque = YES;
@@ -116,10 +132,17 @@
 
 - (DeviceCircleView *)circleInfoView {
     if (!_circleInfoView) {
-        _circleInfoView = [[DeviceCircleView alloc] initWithFrame:CGRectMake((CGRectGetWidth(self.frame) - infoViewSize) / 2.0,
-                                                                           (CGRectGetHeight(self.frame) - imageViewBottomPadding - imageViewSize - infoViewSize) / 2.0,
-                                                                           infoViewSize,
-                                                                           infoViewSize)];
+        CGFloat circleSize = 0.0;
+        CGFloat offsetY = 0.0;
+        if (IPHONE_INCH_3_5) {
+            circleSize = KDeviceCircleInfoViewSize_3_5 + KHorizontalRound(KDeviceCircleInfoViewOffsetY);
+        } else {
+            circleSize = KHorizontalRound(KDeviceCircleInfoViewSize);
+            offsetY = KHorizontalRound(KDeviceCircleInfoViewOffsetY);
+        }
+        CGFloat offsetX = (CGRectGetWidth(self.frame) - circleSize) / 2.0;
+        
+        _circleInfoView = [[DeviceCircleView alloc] initWithFrame:CGRectMake(offsetX, offsetY, circleSize, circleSize)];
         [self addSubview:_circleInfoView];
     }
     return _circleInfoView;
