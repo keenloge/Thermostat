@@ -221,22 +221,28 @@
         imgD = [UIImage imageNamed:strNameD];
     }
     
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    CGFloat navigationBarSize = 44.0;
+    CGFloat navigationBarOffsetX = 11.0;
+
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(isRight ? navigationBarOffsetX : -navigationBarOffsetX,
+                                                                  0,
+                                                                  navigationBarSize,
+                                                                  navigationBarSize)];
     
-    btn.frame = CGRectMake(0, 0, 44, 44);
-    [btn setImage:imgN forState:UIControlStateNormal];
+    [button addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    button.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    [button setImage:imgN forState:UIControlStateNormal];
     if (imgD) {
-        [btn setImage:imgD forState:UIControlStateHighlighted];
+        [button setImage:imgD forState:UIControlStateHighlighted];
     }
     
-    [btn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *bbItem = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    UIView *contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, navigationBarSize, navigationBarSize)];
+    [contentView addSubview:button];
+
+    UIBarButtonItem *bbItem = [[UIBarButtonItem alloc] initWithCustomView:contentView];
     if (isRight) {
-        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
         self.navigationItem.rightBarButtonItem = bbItem;
     } else {
-        btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         self.navigationItem.leftBarButtonItem = bbItem;
     }
 }

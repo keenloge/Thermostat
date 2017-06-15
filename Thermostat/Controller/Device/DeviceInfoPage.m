@@ -73,13 +73,13 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
     
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(numberLabel, nicknameLabel, passwordLabel, numberTextField, nicknameTextField, passwordTextField, confirmButton);
     NSDictionary *metricsDictionary = @{
-                                        @"paddingTop" : @(KHorizontalCeil(DeviceInfoInputPaddingTop)),
-                                        @"paddingSide" : @(KHorizontalCeil(DeviceInfoInputPaddingSide)),
-                                        @"inputHeight" : @(KHorizontalCeil(DeviceInfoInputHeight)),
-                                        @"inputOffsetX" : @(KHorizontalCeil(DeviceInfoInputOffsetX)),
-                                        @"inputOffsetY" : @(KHorizontalCeil(DeviceInfoInputOffsetY)),
-                                        @"buttonHeight" : @(KHorizontalCeil(DeviceInfoButtonHeight)),
-                                        @"buttonOffsetY" : @(KHorizontalCeil(DeviceInfoButtonOffsetY))
+                                        @"paddingTop" : @(KHorizontalRound(DeviceInfoInputPaddingTop)),
+                                        @"paddingSide" : @(KHorizontalRound(DeviceInfoInputPaddingSide)),
+                                        @"inputHeight" : @(KHorizontalRound(DeviceInfoInputHeight)),
+                                        @"inputOffsetX" : @(KHorizontalRound(DeviceInfoInputOffsetX)),
+                                        @"inputOffsetY" : @(KHorizontalRound(DeviceInfoInputOffsetY)),
+                                        @"buttonHeight" : @(KHorizontalRound(DeviceInfoButtonHeight)),
+                                        @"buttonOffsetY" : @(KHorizontalRound(DeviceInfoButtonOffsetY))
                                         };
 
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-paddingTop-[numberTextField(inputHeight)]-inputOffsetY-[nicknameTextField(numberTextField)]-inputOffsetY-[passwordTextField(numberTextField)]-buttonOffsetY-[confirmButton(buttonHeight)]" options:0 metrics:metricsDictionary views:viewsDictionary]];
@@ -122,6 +122,7 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
     if (!_numberLabel) {
         _numberLabel = [Globals addedSubViewClass:[InputFrontLabel class] toView:self.view];
         _numberLabel.text = KString(@"序列号");
+        _numberLabel.userInteractionEnabled = NO;
     }
     return _numberLabel;
 }

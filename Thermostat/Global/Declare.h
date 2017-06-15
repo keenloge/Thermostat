@@ -18,7 +18,7 @@
 
 // 字体字号 由像素初始化
 // pt = px / (96 / 72) , 此处由于是 3 倍分辨率 故 pt =  (px / 3) / (96 / 72) 等价于 pt = px / 4.0
-#define UIFontOf3XPix(px) [UIFont systemFontOfSize:(px / 4.0)]
+#define UIFontOf3XPix(px) [UIFont systemFontOfSize:(px / 3.0)]
 
 #define UIFontOf1XPix(px) UIFontOf3XPix(px * 3.0)
 

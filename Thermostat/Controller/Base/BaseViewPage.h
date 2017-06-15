@@ -10,7 +10,6 @@
 #import "ColorConfig.h"
 #import "Declare.h"
 #import "Globals.h"
-#import "UIViewAdditions.h"
 
 @interface BaseViewPage : UIViewController
 

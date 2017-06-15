@@ -83,6 +83,7 @@ const CGFloat DeviceListRowsHeight = 77.0;
 #pragma mark - 界面刷新
 
 - (void)baseInitialiseSubViews {
+    self.baseTableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.baseTableView.rowHeight = DeviceListRowsHeight;
     self.baseTableView.tableHeaderView = self.linkonBannerView;
     
@@ -247,11 +248,19 @@ const CGFloat DeviceListRowsHeight = 77.0;
 
 - (DeviceBlankView *)blankView {
     if (!_blankView) {
-        _blankView = [[DeviceBlankView alloc] initWithFrame:CGRectMake(0,
-                                                                       self.linkonBannerView.bottom,
-                                                                       self.linkonBannerView.width,
-                                                                       NAVIGATION_VIEW_HEIGHT - self.linkonBannerView.bottom)];
+        _blankView = [DeviceBlankView new];
         [self.view addSubview:_blankView];
+        
+        WeakObj(self);
+        _blankView.block = ^{
+            id con = [DeviceSearchPage new];
+            [selfWeak pushViewController:con];
+        };
+        
+        [_blankView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(selfWeak.linkonBannerView.mas_bottom);
+            make.left.bottom.right.equalTo(selfWeak.view);
+        }];
     }
     return _blankView;
 }

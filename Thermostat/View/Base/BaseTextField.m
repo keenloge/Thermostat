@@ -57,6 +57,7 @@ const CGFloat KTextInputCornerRadius    = 3.0;
     self.layer.borderColor = KColorInputBorder.CGColor;
     self.clipsToBounds = YES;
     self.textColor = KColorInputText;
+    self.font = UIFontOf3XPix(45);
     
     [self baseInitialiseSubViews];
 }

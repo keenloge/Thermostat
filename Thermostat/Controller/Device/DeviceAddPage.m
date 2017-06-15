@@ -68,13 +68,13 @@ const CGFloat DeviceAddButtonOffsetY = 38.0;
     
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(numberLabel, passwordLabel, numberTextField, passwordTextField, confirmButton);
     NSDictionary *metricsDictionary = @{
-                                        @"paddingTop" : @(KHorizontalCeil(DeviceAddInputPaddingTop)),
-                                        @"paddingSide" : @(KHorizontalCeil(DeviceAddInputPaddingSide)),
-                                        @"inputHeight" : @(KHorizontalCeil(DeviceAddInputHeight)),
-                                        @"inputOffsetX" : @(KHorizontalCeil(DeviceAddInputOffsetX)),
-                                        @"inputOffsetY" : @(KHorizontalCeil(DeviceAddInputOffsetY)),
-                                        @"buttonHeight" : @(KHorizontalCeil(DeviceAddButtonHeight)),
-                                        @"buttonOffsetY" : @(KHorizontalCeil(DeviceAddButtonOffsetY))
+                                        @"paddingTop" : @(KHorizontalRound(DeviceAddInputPaddingTop)),
+                                        @"paddingSide" : @(KHorizontalRound(DeviceAddInputPaddingSide)),
+                                        @"inputHeight" : @(KHorizontalRound(DeviceAddInputHeight)),
+                                        @"inputOffsetX" : @(KHorizontalRound(DeviceAddInputOffsetX)),
+                                        @"inputOffsetY" : @(KHorizontalRound(DeviceAddInputOffsetY)),
+                                        @"buttonHeight" : @(KHorizontalRound(DeviceAddButtonHeight)),
+                                        @"buttonOffsetY" : @(KHorizontalRound(DeviceAddButtonOffsetY))
                                         };
 
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-paddingTop-[numberTextField(inputHeight)]-inputOffsetY-[passwordTextField(numberTextField)]-buttonOffsetY-[confirmButton(buttonHeight)]" options:0 metrics:metricsDictionary views:viewsDictionary]];

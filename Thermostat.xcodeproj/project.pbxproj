@@ -21,7 +21,6 @@
 		112D4FDA1EDF9FE100B5026E /* bkg_banner2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 112D4FD11EDF9FE000B5026E /* bkg_banner2@3x.png */; };
 		112D4FDE1EDFAE1600B5026E /* DeviceBlankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FDD1EDFAE1600B5026E /* DeviceBlankView.m */; };
 		112D4FE21EDFAE5300B5026E /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FE11EDFAE5300B5026E /* BaseView.m */; };
-		112D4FE51EDFAF1600B5026E /* DeviceBlankButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FE41EDFAF1600B5026E /* DeviceBlankButton.m */; };
 		112D4FE81EDFAF3E00B5026E /* BaseButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FE71EDFAF3E00B5026E /* BaseButton.m */; };
 		112D4FEB1EDFB48B00B5026E /* DeviceSearchPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FEA1EDFB48B00B5026E /* DeviceSearchPage.m */; };
 		112D4FEE1EDFB49D00B5026E /* DeviceInfoPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FED1EDFB49D00B5026E /* DeviceInfoPage.m */; };
@@ -51,7 +50,6 @@
 		117FD7471EDECA9F003A60B1 /* BaseAlertPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7461EDECA9F003A60B1 /* BaseAlertPage.m */; };
 		117FD74A1EDECABC003A60B1 /* BasePickerPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7491EDECABC003A60B1 /* BasePickerPage.m */; };
 		117FD74D1EDECAF4003A60B1 /* BaseListViewPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD74C1EDECAF4003A60B1 /* BaseListViewPage.m */; };
-		117FD7501EDECB21003A60B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD74F1EDECB21003A60B1 /* UIViewAdditions.m */; };
 		117FD7531EDECB36003A60B1 /* UIImageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7521EDECB36003A60B1 /* UIImageAdditions.m */; };
 		117FD7561EDECB6A003A60B1 /* UILabelAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7551EDECB6A003A60B1 /* UILabelAdditions.m */; };
 		117FD7591EDECB80003A60B1 /* NSDictionaryAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7581EDECB80003A60B1 /* NSDictionaryAdditions.m */; };
@@ -83,6 +81,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1126D07A1EF20E9600BE5289 /* Thermostat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thermostat-Prefix.pch"; sourceTree = "<group>"; };
 		112D4FBE1EDF987700B5026E /* DeviceListPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListPage.h; sourceTree = "<group>"; };
 		112D4FBF1EDF987700B5026E /* DeviceListPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListPage.m; sourceTree = "<group>"; };
 		112D4FC11EDF988F00B5026E /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManager.h; sourceTree = "<group>"; };
@@ -102,8 +101,6 @@
 		112D4FDD1EDFAE1600B5026E /* DeviceBlankView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceBlankView.m; sourceTree = "<group>"; };
 		112D4FE01EDFAE5300B5026E /* BaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseView.h; sourceTree = "<group>"; };
 		112D4FE11EDFAE5300B5026E /* BaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseView.m; sourceTree = "<group>"; };
-		112D4FE31EDFAF1600B5026E /* DeviceBlankButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceBlankButton.h; sourceTree = "<group>"; };
-		112D4FE41EDFAF1600B5026E /* DeviceBlankButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceBlankButton.m; sourceTree = "<group>"; };
 		112D4FE61EDFAF3E00B5026E /* BaseButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseButton.h; sourceTree = "<group>"; };
 		112D4FE71EDFAF3E00B5026E /* BaseButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseButton.m; sourceTree = "<group>"; };
 		112D4FE91EDFB48B00B5026E /* DeviceSearchPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceSearchPage.h; sourceTree = "<group>"; };
@@ -162,8 +159,6 @@
 		117FD7491EDECABC003A60B1 /* BasePickerPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasePickerPage.m; sourceTree = "<group>"; };
 		117FD74B1EDECAF4003A60B1 /* BaseListViewPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseListViewPage.h; sourceTree = "<group>"; };
 		117FD74C1EDECAF4003A60B1 /* BaseListViewPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseListViewPage.m; sourceTree = "<group>"; };
-		117FD74E1EDECB21003A60B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
-		117FD74F1EDECB21003A60B1 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		117FD7511EDECB36003A60B1 /* UIImageAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIImageAdditions.h; sourceTree = "<group>"; };
 		117FD7521EDECB36003A60B1 /* UIImageAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImageAdditions.m; sourceTree = "<group>"; };
 		117FD7541EDECB6A003A60B1 /* UILabelAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UILabelAdditions.h; sourceTree = "<group>"; };
@@ -240,8 +235,6 @@
 		112D4FC71EDF9D6800B5026E /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				112D4FE31EDFAF1600B5026E /* DeviceBlankButton.h */,
-				112D4FE41EDFAF1600B5026E /* DeviceBlankButton.m */,
 				112D4FFE1EDFC59900B5026E /* DevicePopButton.h */,
 				112D4FFF1EDFC59900B5026E /* DevicePopButton.m */,
 				112D50191EE01FD700B5026E /* ControlMenuButton.h */,
@@ -350,6 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				117FD70C1EDEC2B9003A60B1 /* main.m */,
+				1126D07A1EF20E9600BE5289 /* Thermostat-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -357,8 +351,6 @@
 		117FD7221EDEC7CE003A60B1 /* Addition */ = {
 			isa = PBXGroup;
 			children = (
-				117FD74E1EDECB21003A60B1 /* UIViewAdditions.h */,
-				117FD74F1EDECB21003A60B1 /* UIViewAdditions.m */,
 				117FD7511EDECB36003A60B1 /* UIImageAdditions.h */,
 				117FD7521EDECB36003A60B1 /* UIImageAdditions.m */,
 				117FD7541EDECB6A003A60B1 /* UILabelAdditions.h */,
@@ -778,9 +770,7 @@
 				112D50061EE00EB700B5026E /* NotifyTarget.m in Sources */,
 				11FA11421EE0F0670017948D /* SettingArrowCell.m in Sources */,
 				11FA113C1EE0F0130017948D /* BaseIconCell.m in Sources */,
-				117FD7501EDECB21003A60B1 /* UIViewAdditions.m in Sources */,
 				112D4FEB1EDFB48B00B5026E /* DeviceSearchPage.m in Sources */,
-				112D4FE51EDFAF1600B5026E /* DeviceBlankButton.m in Sources */,
 				11C2F61B1EE3B284008ED62F /* Task.m in Sources */,
 				11FA113F1EE0F0560017948D /* SettingSwitchCell.m in Sources */,
 				112D4FEE1EDFB49D00B5026E /* DeviceInfoPage.m in Sources */,
@@ -940,6 +930,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = ULP85HJC9V;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Thermostat/Thermostat-Prefix.pch";
 				INFOPLIST_FILE = Thermostat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.galaxywind.Thermostat;
@@ -954,6 +946,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = ULP85HJC9V;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Thermostat/Thermostat-Prefix.pch";
 				INFOPLIST_FILE = Thermostat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.galaxywind.Thermostat;

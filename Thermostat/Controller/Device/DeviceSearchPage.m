@@ -67,12 +67,12 @@ const CGFloat DeviceSearchButtonSize = 144.0;
     
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(ssidLabel, passwordLabel, ssidTextField, passwordTextField, contentSearchView, searchButton);
     NSDictionary *metricsDictionary = @{
-                                        @"paddingTop" : @(KHorizontalCeil(DeviceSearchInputPaddingTop)),
-                                        @"paddingSide" : @(KHorizontalCeil(DeviceSearchInputPaddingSide)),
-                                        @"inputHeight" : @(KHorizontalCeil(DeviceSearchInputHeight)),
-                                        @"inputOffsetX" : @(KHorizontalCeil(DeviceSearchInputOffsetX)),
-                                        @"inputOffsetY" : @(KHorizontalCeil(DeviceSearchInputOffsetY)),
-                                        @"buttonSize" : @(KHorizontalCeil(DeviceSearchButtonSize))
+                                        @"paddingTop" : @(KHorizontalRound(DeviceSearchInputPaddingTop)),
+                                        @"paddingSide" : @(KHorizontalRound(DeviceSearchInputPaddingSide)),
+                                        @"inputHeight" : @(KHorizontalRound(DeviceSearchInputHeight)),
+                                        @"inputOffsetX" : @(KHorizontalRound(DeviceSearchInputOffsetX)),
+                                        @"inputOffsetY" : @(KHorizontalRound(DeviceSearchInputOffsetY)),
+                                        @"buttonSize" : @(KHorizontalRound(DeviceSearchButtonSize))
                                         };
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-paddingTop-[ssidTextField(inputHeight)]-inputOffsetY-[passwordTextField(ssidTextField)][contentSearchView]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
@@ -93,7 +93,7 @@ const CGFloat DeviceSearchButtonSize = 144.0;
 - (UILabel *)ssidLabel {
     if (!_ssidLabel) {
         _ssidLabel = [Globals addedSubViewClass:[InputFrontLabel class] toView:self.view];
-        _ssidLabel.text = KString(@"序列号");
+        _ssidLabel.text = KString(@"SSID");
     }
     return _ssidLabel;
 }
@@ -110,6 +110,7 @@ const CGFloat DeviceSearchButtonSize = 144.0;
     if (!_ssidTextField) {
         _ssidTextField = [Globals addedSubViewClass:[BaseTextField class] toView:self.view];
         _ssidTextField.text = @"**************************************************";
+        _ssidTextField.userInteractionEnabled = NO;
     }
     return _ssidTextField;
 }
