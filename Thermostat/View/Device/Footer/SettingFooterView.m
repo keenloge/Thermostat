@@ -12,7 +12,7 @@
 #import "ColorConfig.h"
 
 const CGFloat SettingFooterIntroduceLabelOffsetX = 15.0;
-const CGFloat SettingFooterDetailButtonWidth = 80.0;
+const CGFloat SettingFooterDetailButtonWidth = 79.0;
 
 @interface SettingFooterView () {
 
@@ -71,7 +71,7 @@ const CGFloat SettingFooterDetailButtonWidth = 80.0;
 - (UILabel *)introduceLabel {
     if (!_introduceLabel) {
         _introduceLabel = [Globals addedSubViewClass:[UILabel class] toView:self.contentView];
-        _introduceLabel.font = UIFontOf3XPix(45);
+        _introduceLabel.font = UIFontOf3XPix(38);
         _introduceLabel.textColor = HB_COLOR_BASE_GRAY;
         _introduceLabel.numberOfLines = 0;
     }
@@ -83,7 +83,7 @@ const CGFloat SettingFooterDetailButtonWidth = 80.0;
         _detailButton = [Globals addedSubViewClass:[UIButton class] toView:self.contentView];
         [_detailButton setTitleColor:HB_COLOR_BASE_MAIN forState:UIControlStateNormal];
         [_detailButton setTitle:KString(@"了解详情") forState:UIControlStateNormal];
-        _detailButton.titleLabel.font = UIFontOf3XPix(45);
+        _detailButton.titleLabel.font = UIFontOf3XPix(38);
     }
     return _detailButton;
 }

@@ -14,7 +14,7 @@
 // 左边距
 const CGFloat BaseIconCellPaddingLeft   = 10.0;
 // 图标大小
-const CGFloat BaseIconCellIconSize      = 36.0;
+const CGFloat BaseIconCellIconSize      = 43.0;
 // 图标与文本间距
 const CGFloat BaseIconCellOffsetX       = 10.0;
 
@@ -77,7 +77,7 @@ const CGFloat BaseIconCellOffsetX       = 10.0;
     if (!_iconTitleLabel) {
         _iconTitleLabel = [Globals addedSubViewClass:[UILabel class] toView:self.contentView];
         _iconTitleLabel.textColor = HB_COLOR_BASE_BLACK;
-        _iconTitleLabel.font = UIFontOf3XPix(65);
+        _iconTitleLabel.font = UIFontOf3XPix(60);
     }
     return _iconTitleLabel;
 }

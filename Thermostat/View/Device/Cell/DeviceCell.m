@@ -12,108 +12,46 @@
 #import "Globals.h"
 #import "Device.h"
 #import "DeviceManager.h"
+#import "InfoButton.h"
 
 #define KInfoButtonColor   UIColorFromHex(0xb3b3b3)
 
-const CGFloat KInfoButtonSize = 28.0;  //  = 84.0 / 3.0
+const CGFloat LinKonCellCircleSize      = 52.0;
+const CGFloat LinKonCellPaddingTop      = 20.0;
+const CGFloat LinKonCellPaddingLeft     = 18.0;
+const CGFloat LinKonCellPaddingBottom   = 19.0;
+const CGFloat LinKonCellTitleHeight     = 17.0;
+const CGFloat LinKonCellDetailHeight    = 14.0;
+const CGFloat LinKonCellOffsetX         = 13.0;
+const CGFloat LinKonCellInfoWidth       = 64.0;
 
-@interface DeviceInfoButton : UIButton
 
-@end
+@interface DeviceCell ()
 
-@implementation DeviceInfoButton
-
-- (instancetype)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        [self setTitle:@"i" forState:UIControlStateNormal];
-        self.titleLabel.font = UIFontOf3XPix(55);
-        self.titleLabel.textAlignment = NSTextAlignmentCenter;
-        [self setTitleColor:KInfoButtonColor forState:UIControlStateNormal];
-        self.titleLabel.layer.borderColor = KInfoButtonColor.CGColor;
-        self.titleLabel.layer.borderWidth = 1.0;
-        self.titleLabel.layer.cornerRadius = KInfoButtonSize / 2.0;
-    }
-    return self;
-}
-
-- (CGRect)contentRectForBounds:(CGRect)bounds {
-    return bounds;
-}
-
-- (CGRect)titleRectForContentRect:(CGRect)contentRect {
-    return CGRectMake((CGRectGetWidth(contentRect) - KInfoButtonSize) / 2.0,
-                      (CGRectGetHeight(contentRect) - KInfoButtonSize) / 2.0,
-                      KInfoButtonSize,
-                      KInfoButtonSize);
-}
-
-@end
-
-@interface DeviceCell () {
-
-}
-
-@property (nonatomic, strong) UIView             *circleView;
-@property (nonatomic, strong) UIImageView        *deviceImageView;
-@property (nonatomic, strong) UILabel            *nicknameLabel;
-@property (nonatomic, strong) UILabel            *stateDetailLabel;
-@property (nonatomic, strong) DeviceInfoButton   *infoButton;
+@property (nonatomic, strong) UIView *contentIconView;
+@property (nonatomic, strong) UIImageView *iconImageView;
+@property (nonatomic, strong) UILabel *nicknameLabel;
+@property (nonatomic, strong) UILabel *stateLabel;
+@property (nonatomic, strong) InfoButton *infoButton;
 
 
 @end
 
 @implementation DeviceCell
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        UIView             *circleView = self.circleView;
-        UIImageView        *deviceImageView = self.deviceImageView;
-        UILabel            *nicknameLabel = self.nicknameLabel;
-        UILabel            *stateDetailLabel = self.stateDetailLabel;
-        DeviceInfoButton   *infoButton = self.infoButton;
-        
-        UIView *superContentView = self.contentView;
-        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(circleView, deviceImageView, nicknameLabel, stateDetailLabel, infoButton, superContentView);
-        
-        NSDictionary *metricsDictionary = @{
-                                            @"paddingLeft" : @(18),
-                                            @"paddingTop" : @(20),
-                                            @"circleSize" : @(52),
-                                            @"offsetX" : @(13),
-                                            @"offsetY" : @(11),
-                                            @"infoWidth" : @(64),
-                                            @"nameHeight" : @(17),
-                                            @"stateHeight" : @(14),
-                                            @"iconSize" : @(36),
-                                            };
-        
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-paddingLeft-[circleView(circleSize)]-offsetX-[nicknameLabel]-(>=offsetX)-[infoButton(infoWidth)]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[circleView(circleSize)]" options:0 metrics:metricsDictionary views:viewsDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[infoButton]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[circleView]-(<=1)-[superContentView]" options:NSLayoutFormatAlignAllCenterY metrics:metricsDictionary views:viewsDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-paddingTop-[nicknameLabel(nameHeight)]-offsetY-[stateDetailLabel(stateHeight)]" options:NSLayoutFormatAlignAllLeft metrics:metricsDictionary views:viewsDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[deviceImageView(iconSize)]-(<=1)-[circleView]" options:NSLayoutFormatAlignAllCenterY metrics:metricsDictionary views:viewsDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[deviceImageView(iconSize)]-(<=1)-[circleView]" options:NSLayoutFormatAlignAllCenterX metrics:metricsDictionary views:viewsDictionary]];
-        
-        [self.contentView layoutIfNeeded];
-        
-        self.circleView.layer.cornerRadius = self.circleView.frame.size.height / 2.0;
-    }
-    return self;
-}
-
 #pragma mark - 界面刷新
 
 - (void)changeStateWithDevice:(Device *)device {
-    self.stateDetailLabel.text = device.stateString;
+    self.stateLabel.text = device.stateString;
     if (device.connection == ConnectionStateOFF) {
-        self.stateDetailLabel.textColor = HB_COLOR_BASE_RED;
+        self.stateLabel.textColor = HB_COLOR_BASE_RED;
     } else if (device.running == RunningStateOFF) {
-        self.stateDetailLabel.textColor = HB_COLOR_BASE_GREEN;
+        self.stateLabel.textColor = HB_COLOR_BASE_GREEN;
     } else {
-        self.stateDetailLabel.textColor = HB_COLOR_BASE_GRAY;
+        self.stateLabel.textColor = HB_COLOR_BASE_GRAY;
     }
 }
+
 
 #pragma mark - 点击事件
 
@@ -169,54 +107,106 @@ const CGFloat KInfoButtonSize = 28.0;  //  = 84.0 / 3.0
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    self.circleView.backgroundColor = HB_COLOR_BASE_MAIN;
+    self.contentIconView.backgroundColor = HB_COLOR_BASE_MAIN;
 }
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     [super setHighlighted:highlighted animated:animated];
-    self.circleView.backgroundColor = HB_COLOR_BASE_MAIN;
+    self.contentIconView.backgroundColor = HB_COLOR_BASE_MAIN;
 }
 
-#pragma mark - 懒加载
+#pragma mark - 界面布局
 
-- (UIView *)circleView {
-    if (!_circleView) {
-        _circleView = [Globals addedSubViewClass:[UIView class] toView:self.contentView];
-        _circleView.backgroundColor = HB_COLOR_BASE_MAIN;
-    }
-    return _circleView;
+- (void)baseInitialiseSubViews {
+    [super baseInitialiseSubViews];
+    
+    self.contentIconView.opaque = YES;
+    self.iconImageView.opaque = YES;
+    self.nicknameLabel.opaque = YES;
+    self.stateLabel.opaque = YES;
+    self.infoButton.opaque = YES;
 }
 
-- (UIImageView *)deviceImageView {
-    if (!_deviceImageView) {
-        _deviceImageView = [Globals addedSubViewClass:[UIImageView class] toView:self.circleView];
-        _deviceImageView.image = [UIImage imageNamed:@"cell_device"];
+- (UIView *)contentIconView {
+    if (!_contentIconView) {
+        _contentIconView = [UIView new];
+        [self.contentView addSubview:_contentIconView];
+        _contentIconView.layer.cornerRadius = LinKonCellCircleSize / 2.0;
+        _contentIconView.backgroundColor = HB_COLOR_BASE_MAIN;
+        
+        WeakObj(self);
+        [_contentIconView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(selfWeak.contentView).offset(KHorizontalRound(LinKonCellPaddingLeft));
+            make.centerY.equalTo(selfWeak.contentView);
+            make.height.mas_equalTo(LinKonCellCircleSize);
+            make.width.mas_equalTo(selfWeak.contentIconView.mas_height);
+        }];
     }
-    return _deviceImageView;
+    return _contentIconView;
+}
+
+- (UIImageView *)iconImageView {
+    if (!_iconImageView) {
+        _iconImageView = [UIImageView new];
+        [self.contentIconView addSubview:_iconImageView];
+        _iconImageView.image = [UIImage imageNamed:@"cell_device"];
+        
+        WeakObj(self);
+        [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(selfWeak.contentIconView).multipliedBy(1/sqrt(2.0));
+            make.height.equalTo(selfWeak.iconImageView.mas_width);
+            make.center.equalTo(selfWeak.contentIconView);
+        }];
+    }
+    return _iconImageView;
 }
 
 - (UILabel *)nicknameLabel {
     if (!_nicknameLabel) {
-        _nicknameLabel = [Globals addedSubViewClass:[UILabel class] toView:self.contentView];
+        _nicknameLabel = [UILabel new];
+        [self.contentView addSubview:_nicknameLabel];
         _nicknameLabel.font = UIFontOf3XPix(51);
-        _nicknameLabel.textColor = HB_COLOR_BASE_DARK;
+        _nicknameLabel.textColor = UIColorFromHex(0x484848);
+        
+        WeakObj(self);
+        [_nicknameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(selfWeak.contentIconView.mas_right).offset(KHorizontalRound(LinKonCellOffsetX));
+            make.centerY.equalTo(selfWeak.contentView.mas_top).offset(LinKonCellPaddingTop + LinKonCellTitleHeight / 2.0);
+            
+            make.top.equalTo(selfWeak.contentView).offset(LinKonCellPaddingTop);
+        }];
     }
     return _nicknameLabel;
 }
 
-- (UILabel *)stateDetailLabel {
-    if (!_stateDetailLabel) {
-        _stateDetailLabel = [Globals addedSubViewClass:[UILabel class] toView:self.contentView];
-        _stateDetailLabel.font = UIFontOf3XPix(42);
-        _stateDetailLabel.textColor = HB_COLOR_BASE_GRAY;
+- (UILabel *)stateLabel {
+    if (!_stateLabel) {
+        _stateLabel = [UILabel new];
+        [self.contentView addSubview:_stateLabel];
+        _stateLabel.font = UIFontOf3XPix(42);
+        _stateLabel.textColor = UIColorFromHex(0x666666);
+        
+        WeakObj(self);
+        [_stateLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(selfWeak.nicknameLabel);
+            make.centerY.equalTo(selfWeak.contentView.mas_bottom).offset(-LinKonCellPaddingBottom - LinKonCellDetailHeight / 2.0);
+        }];
+        
     }
-    return _stateDetailLabel;
+    return _stateLabel;
 }
 
-- (DeviceInfoButton *)infoButton {
+- (InfoButton *)infoButton {
     if (!_infoButton) {
-        _infoButton = [Globals addedSubViewClass:[DeviceInfoButton class] toView:self.contentView];
+        _infoButton = [InfoButton new];
+        [self.contentView addSubview:_infoButton];
         [_infoButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        WeakObj(self);
+        [_infoButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.right.equalTo(selfWeak.contentView);
+            make.width.mas_equalTo(LinKonCellInfoWidth);
+        }];
     }
     return _infoButton;
 }

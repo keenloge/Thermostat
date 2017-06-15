@@ -297,7 +297,7 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
         
         _settingTableView.dataSource = self;
         _settingTableView.delegate = self;
-        _settingTableView.rowHeight = KHorizontalCeil(DeviceControlSettingRowsHeight);
+        _settingTableView.rowHeight = DeviceControlSettingRowsHeight;
         _settingTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _settingTableView.tableFooterView = [UIView new];
         

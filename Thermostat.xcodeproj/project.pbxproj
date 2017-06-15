@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1126D07D1EF2875900BE5289 /* InfoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1126D07C1EF2875900BE5289 /* InfoButton.m */; };
+		1126D0801EF2887000BE5289 /* BaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1126D07F1EF2887000BE5289 /* BaseCell.m */; };
 		112D4FC01EDF987700B5026E /* DeviceListPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FBF1EDF987700B5026E /* DeviceListPage.m */; };
 		112D4FC31EDF988F00B5026E /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FC21EDF988F00B5026E /* DeviceManager.m */; };
 		112D4FC61EDF989D00B5026E /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FC51EDF989D00B5026E /* Device.m */; };
@@ -82,6 +84,10 @@
 
 /* Begin PBXFileReference section */
 		1126D07A1EF20E9600BE5289 /* Thermostat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thermostat-Prefix.pch"; sourceTree = "<group>"; };
+		1126D07B1EF2875900BE5289 /* InfoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoButton.h; sourceTree = "<group>"; };
+		1126D07C1EF2875900BE5289 /* InfoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoButton.m; sourceTree = "<group>"; };
+		1126D07E1EF2887000BE5289 /* BaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCell.h; sourceTree = "<group>"; };
+		1126D07F1EF2887000BE5289 /* BaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCell.m; sourceTree = "<group>"; };
 		112D4FBE1EDF987700B5026E /* DeviceListPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListPage.h; sourceTree = "<group>"; };
 		112D4FBF1EDF987700B5026E /* DeviceListPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListPage.m; sourceTree = "<group>"; };
 		112D4FC11EDF988F00B5026E /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManager.h; sourceTree = "<group>"; };
@@ -235,6 +241,8 @@
 		112D4FC71EDF9D6800B5026E /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				1126D07B1EF2875900BE5289 /* InfoButton.h */,
+				1126D07C1EF2875900BE5289 /* InfoButton.m */,
 				112D4FFE1EDFC59900B5026E /* DevicePopButton.h */,
 				112D4FFF1EDFC59900B5026E /* DevicePopButton.m */,
 				112D50191EE01FD700B5026E /* ControlMenuButton.h */,
@@ -295,6 +303,8 @@
 				112D4FFC1EDFB76200B5026E /* BaseTextField.m */,
 				11FA113A1EE0F0130017948D /* BaseIconCell.h */,
 				11FA113B1EE0F0130017948D /* BaseIconCell.m */,
+				1126D07E1EF2887000BE5289 /* BaseCell.h */,
+				1126D07F1EF2887000BE5289 /* BaseCell.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -770,11 +780,13 @@
 				112D50061EE00EB700B5026E /* NotifyTarget.m in Sources */,
 				11FA11421EE0F0670017948D /* SettingArrowCell.m in Sources */,
 				11FA113C1EE0F0130017948D /* BaseIconCell.m in Sources */,
+				1126D0801EF2887000BE5289 /* BaseCell.m in Sources */,
 				112D4FEB1EDFB48B00B5026E /* DeviceSearchPage.m in Sources */,
 				11C2F61B1EE3B284008ED62F /* Task.m in Sources */,
 				11FA113F1EE0F0560017948D /* SettingSwitchCell.m in Sources */,
 				112D4FEE1EDFB49D00B5026E /* DeviceInfoPage.m in Sources */,
 				11AC58361EE50434003D12EB /* TaskPickCell.m in Sources */,
+				1126D07D1EF2875900BE5289 /* InfoButton.m in Sources */,
 				117FD7661EDECD92003A60B1 /* DeviceCell.m in Sources */,
 				11AC58301EE503FB003D12EB /* TaskRepeatCell.m in Sources */,
 				11AC58391EE50B3B003D12EB /* TimePickerPage.m in Sources */,

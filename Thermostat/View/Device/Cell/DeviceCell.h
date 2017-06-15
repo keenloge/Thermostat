@@ -6,13 +6,13 @@
 //  Copyright © 2017年 GalaxyWind. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseCell.h"
 
 @class Device;
 
 typedef void(^DeviceCellInfoBlock)();
 
-@interface DeviceCell : UITableViewCell
+@interface DeviceCell : BaseCell
 
 @property (nonatomic, copy) DeviceCellInfoBlock infoBlock;
 @property (nonatomic, copy) NSString *sn;
