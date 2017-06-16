@@ -37,8 +37,7 @@
                                             };
         
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-paddingLeft-[taskTitleLabel]-(<=1)-[superContentView]" options:NSLayoutFormatAlignAllCenterY metrics:metricsDictionary views:viewsDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[superContentView]-(<=1)-[taskDetailLabel][arrowImageView]|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[arrowImageView]|" options:0 metrics:nil views:viewsDictionary]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[superContentView]-(<=1)-[taskDetailLabel]-(-20)-[arrowImageView(77)]-(-21)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
         [arrowImageView addConstraint:[NSLayoutConstraint constraintWithItem:arrowImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:arrowImageView attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0.0]];
     }
     return self;

@@ -32,9 +32,9 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         UIImageView *iconArrowImageView = self.iconArrowImageView;
         
-        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(iconArrowImageView);
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[iconArrowImageView]-(-15)-|" options:0 metrics:nil views:viewsDictionary]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[iconArrowImageView]|" options:0 metrics:nil views:viewsDictionary]];
+        UIView *superContentView = self.contentView;
+        NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(iconArrowImageView, superContentView);
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[superContentView]-(<=-1)-[iconArrowImageView(77)]-(-21)-|" options:NSLayoutFormatAlignAllCenterY metrics:nil views:viewsDictionary]];
         [iconArrowImageView addConstraint:[NSLayoutConstraint constraintWithItem:iconArrowImageView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:iconArrowImageView attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0]];
     }
     return self;

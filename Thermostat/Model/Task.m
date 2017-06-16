@@ -26,7 +26,7 @@ const Byte WeekEveryDay = 127;
         self.timeFrom = [self minuteToNow];
         if (self.type == TaskTypeSwitch) {
             // 开关
-            self.running = NO;
+            self.running = RunningStateOFF;
         } else if (self.type == TaskTypeStage) {
             // 阶段
             self.timeTo = self.timeFrom + 30;

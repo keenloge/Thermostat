@@ -61,7 +61,6 @@
 		11AC581F1EE4EE69003D12EB /* TaskBlankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC581E1EE4EE69003D12EB /* TaskBlankView.m */; };
 		11AC58231EE4EF36003D12EB /* TaskBlankButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC58221EE4EF36003D12EB /* TaskBlankButton.m */; };
 		11AC58271EE4F245003D12EB /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC58261EE4F245003D12EB /* TaskCell.m */; };
-		11AC582A1EE4F3EF003D12EB /* TaskSloganView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC58291EE4F3EF003D12EB /* TaskSloganView.m */; };
 		11AC582D1EE4FDE2003D12EB /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC582C1EE4FDE2003D12EB /* NSStringAdditions.m */; };
 		11AC58301EE503FB003D12EB /* TaskRepeatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC582F1EE503FB003D12EB /* TaskRepeatCell.m */; };
 		11AC58331EE50417003D12EB /* TaskSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC58321EE50417003D12EB /* TaskSwitchCell.m */; };
@@ -185,8 +184,6 @@
 		11AC58221EE4EF36003D12EB /* TaskBlankButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskBlankButton.m; sourceTree = "<group>"; };
 		11AC58251EE4F245003D12EB /* TaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskCell.h; sourceTree = "<group>"; };
 		11AC58261EE4F245003D12EB /* TaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskCell.m; sourceTree = "<group>"; };
-		11AC58281EE4F3EF003D12EB /* TaskSloganView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskSloganView.h; sourceTree = "<group>"; };
-		11AC58291EE4F3EF003D12EB /* TaskSloganView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskSloganView.m; sourceTree = "<group>"; };
 		11AC582B1EE4FDE2003D12EB /* NSStringAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringAdditions.h; sourceTree = "<group>"; };
 		11AC582C1EE4FDE2003D12EB /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringAdditions.m; sourceTree = "<group>"; };
 		11AC582E1EE503FB003D12EB /* TaskRepeatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskRepeatCell.h; sourceTree = "<group>"; };
@@ -558,8 +555,6 @@
 			children = (
 				11AC581D1EE4EE69003D12EB /* TaskBlankView.h */,
 				11AC581E1EE4EE69003D12EB /* TaskBlankView.m */,
-				11AC58281EE4F3EF003D12EB /* TaskSloganView.h */,
-				11AC58291EE4F3EF003D12EB /* TaskSloganView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -756,7 +751,6 @@
 				11AC58231EE4EF36003D12EB /* TaskBlankButton.m in Sources */,
 				117FD7101EDEC2B9003A60B1 /* AppDelegate.m in Sources */,
 				11AC583F1EE50B66003D12EB /* EnumPickerPage.m in Sources */,
-				11AC582A1EE4F3EF003D12EB /* TaskSloganView.m in Sources */,
 				11FA11391EE0EEE60017948D /* ControlTabButton.m in Sources */,
 				112D4FFA1EDFB74D00B5026E /* BaseLabel.m in Sources */,
 				112D50121EE01CDC00B5026E /* DeviceCircleView.m in Sources */,

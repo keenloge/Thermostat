@@ -85,6 +85,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 
 - (void)baseInitialiseSubViews {
     self.baseTableView.opaque = YES;
+    self.baseTableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.baseTableView.backgroundColor = UIColorFromHex(0xf2f2f2);
 }
 

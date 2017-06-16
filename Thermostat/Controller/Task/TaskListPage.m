@@ -84,6 +84,7 @@ const CGFloat TaskListRowsHeight = 80.0;
     if (_blankView) {
         self.blankView.hidden = YES;
     }
+    self.baseTableView.separatorInset = UIEdgeInsetsMake(0, KHorizontalRound(57), 0, 0);
     self.baseTableView.hidden = NO;
     self.baseTableView.rowHeight = TaskListRowsHeight;
 }
