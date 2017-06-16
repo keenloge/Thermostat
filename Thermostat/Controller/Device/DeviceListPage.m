@@ -20,6 +20,7 @@
 #import "BaseNavigationPage.h"
 #import "DeviceNicknameEditPage.h"
 #import "DevicePasswordEditPage.h"
+#import "AppDelegate.h"
 
 const CGFloat DeviceListRowsHeight = 77.0;
 
@@ -54,6 +55,9 @@ const CGFloat DeviceListRowsHeight = 77.0;
 
     [self addBarButtonItemLeftNormalImageName:@"nav_more" hightLited:nil];
     [self addBarButtonItemRightNormalImageName:@"nav_add_circle" hightLited:nil];
+    
+//    [[AppDelegate instance].revealPage panGestureRecognizer];
+    [[AppDelegate instance].revealPage tapGestureRecognizer];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -190,6 +194,17 @@ const CGFloat DeviceListRowsHeight = 77.0;
     }
 }
 
+#pragma mark - SWRevealViewControllerDelegate
+
+- (void)revealController:(SWRevealViewController *)revealController didMoveToPosition:(FrontViewPosition)position {
+//    menuListView.scrollEnabled = position == FrontViewPositionLeft;
+//    if (position == FrontViewPositionLeft) {
+//        if (menuListView.contentOffset.x < 0.1) {
+//            menuListView.scrollEnabled = NO;
+//        }
+//    }
+}
+
 #pragma mark - 点击事件
 
 - (void)barButtonItemRightPressed:(id)sender {
@@ -217,8 +232,7 @@ const CGFloat DeviceListRowsHeight = 77.0;
 }
 
 - (void)barButtonItemLeftPressed:(id)sender {
-    // 切换语言
-    [[LanguageManager sharedManager] switchLanguage];
+    [[AppDelegate instance].revealPage revealToggle:nil];
 }
 
 #pragma mark - Getter

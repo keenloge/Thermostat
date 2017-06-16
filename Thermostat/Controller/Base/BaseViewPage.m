@@ -34,6 +34,7 @@
     }
     self.navigationController.navigationBar.translucent = NO;
     self.hidesBottomBarWhenPushed = YES;
+    self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
     
     WeakObj(self);
     [[NSNotificationCenter defaultCenter] addObserverForName:KNotificationNameSwitchLanguage object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
