@@ -134,7 +134,7 @@
         WeakObj(self);
         [_notifyView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.height.mas_greaterThanOrEqualTo(55);
-            make.width.mas_equalTo(180);
+            make.width.mas_lessThanOrEqualTo(180);
             make.center.equalTo(selfWeak.view);
         }];
     }

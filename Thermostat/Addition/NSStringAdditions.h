@@ -13,3 +13,10 @@
 + (NSString *)uuidString;
 
 @end
+
+
+@interface NSString (MixLengh)
+
+- (NSInteger)mixedLenght;
+
+@end

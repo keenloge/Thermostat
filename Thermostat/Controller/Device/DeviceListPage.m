@@ -18,6 +18,8 @@
 #import "Device.h"
 #import "LanguageManager.h"
 #import "BaseNavigationPage.h"
+#import "DeviceNicknameEditPage.h"
+#import "DevicePasswordEditPage.h"
 
 const CGFloat DeviceListRowsHeight = 77.0;
 
@@ -144,13 +146,14 @@ const CGFloat DeviceListRowsHeight = 77.0;
     WeakObj(self);
     WeakObj(device);
     cell.infoBlock = ^{
-        id con = [[DevicePopPage alloc] initWithDevice:device block:^(DevicePopAction aTag) {
+        id popPage = [[DevicePopPage alloc] initWithDevice:device block:^(DevicePopAction aTag) {
+            id editPage = nil;
             switch (aTag) {
                 case DevicePopActionNickname:
-                    
+                    editPage = [[DeviceNicknameEditPage alloc] init];
                     break;
                 case DevicePopActionPassword:
-                    
+                    editPage = [[DevicePasswordEditPage alloc] init];
                     break;
                 case DevicePopActionRemove:
                     [[DeviceManager sharedManager] removeDevice:deviceWeak.sn];
@@ -158,9 +161,10 @@ const CGFloat DeviceListRowsHeight = 77.0;
                 default:
                     break;
             }
+            [selfWeak pushViewController:editPage];
         }];
-        if (con) {
-            [selfWeak presentViewController:con animated:YES completion:^{
+        if (popPage) {
+            [selfWeak presentViewController:popPage animated:YES completion:^{
                 
             }];
         }

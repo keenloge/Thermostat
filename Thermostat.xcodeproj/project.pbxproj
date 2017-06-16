@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		112387951EF3C1AF0030DC50 /* DeviceNicknameEditPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112387941EF3C1AF0030DC50 /* DeviceNicknameEditPage.m */; };
+		112387981EF3C1CA0030DC50 /* DevicePasswordEditPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112387971EF3C1CA0030DC50 /* DevicePasswordEditPage.m */; };
+		1123879B1EF3DBAF0030DC50 /* DeviceInputPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1123879A1EF3DBAF0030DC50 /* DeviceInputPage.m */; };
 		1126D07D1EF2875900BE5289 /* InfoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1126D07C1EF2875900BE5289 /* InfoButton.m */; };
 		1126D0801EF2887000BE5289 /* BaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1126D07F1EF2887000BE5289 /* BaseCell.m */; };
 		112D4FC01EDF987700B5026E /* DeviceListPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FBF1EDF987700B5026E /* DeviceListPage.m */; };
@@ -82,6 +85,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		112387931EF3C1AF0030DC50 /* DeviceNicknameEditPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceNicknameEditPage.h; sourceTree = "<group>"; };
+		112387941EF3C1AF0030DC50 /* DeviceNicknameEditPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceNicknameEditPage.m; sourceTree = "<group>"; };
+		112387961EF3C1CA0030DC50 /* DevicePasswordEditPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicePasswordEditPage.h; sourceTree = "<group>"; };
+		112387971EF3C1CA0030DC50 /* DevicePasswordEditPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicePasswordEditPage.m; sourceTree = "<group>"; };
+		112387991EF3DBAF0030DC50 /* DeviceInputPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInputPage.h; sourceTree = "<group>"; };
+		1123879A1EF3DBAF0030DC50 /* DeviceInputPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInputPage.m; sourceTree = "<group>"; };
 		1126D07A1EF20E9600BE5289 /* Thermostat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thermostat-Prefix.pch"; sourceTree = "<group>"; };
 		1126D07B1EF2875900BE5289 /* InfoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoButton.h; sourceTree = "<group>"; };
 		1126D07C1EF2875900BE5289 /* InfoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoButton.m; sourceTree = "<group>"; };
@@ -412,6 +421,12 @@
 				112D4FED1EDFB49D00B5026E /* DeviceInfoPage.m */,
 				112D4FEF1EDFB4B000B5026E /* DeviceAddPage.h */,
 				112D4FF01EDFB4B000B5026E /* DeviceAddPage.m */,
+				112387931EF3C1AF0030DC50 /* DeviceNicknameEditPage.h */,
+				112387941EF3C1AF0030DC50 /* DeviceNicknameEditPage.m */,
+				112387961EF3C1CA0030DC50 /* DevicePasswordEditPage.h */,
+				112387971EF3C1CA0030DC50 /* DevicePasswordEditPage.m */,
+				112387991EF3DBAF0030DC50 /* DeviceInputPage.h */,
+				1123879A1EF3DBAF0030DC50 /* DeviceInputPage.m */,
 				112D4FF21EDFB4BF00B5026E /* DeviceControlPage.h */,
 				112D4FF31EDFB4BF00B5026E /* DeviceControlPage.m */,
 			);
@@ -775,8 +790,10 @@
 				11FA11421EE0F0670017948D /* SettingArrowCell.m in Sources */,
 				11FA113C1EE0F0130017948D /* BaseIconCell.m in Sources */,
 				1126D0801EF2887000BE5289 /* BaseCell.m in Sources */,
+				1123879B1EF3DBAF0030DC50 /* DeviceInputPage.m in Sources */,
 				112D4FEB1EDFB48B00B5026E /* DeviceSearchPage.m in Sources */,
 				11C2F61B1EE3B284008ED62F /* Task.m in Sources */,
+				112387951EF3C1AF0030DC50 /* DeviceNicknameEditPage.m in Sources */,
 				11FA113F1EE0F0560017948D /* SettingSwitchCell.m in Sources */,
 				112D4FEE1EDFB49D00B5026E /* DeviceInfoPage.m in Sources */,
 				11AC58361EE50434003D12EB /* TaskPickCell.m in Sources */,
@@ -799,6 +816,7 @@
 				117FD74D1EDECAF4003A60B1 /* BaseListViewPage.m in Sources */,
 				113227081EE6987400E1D0C4 /* DeviceSearchButton.m in Sources */,
 				11C2F6151EE3B236008ED62F /* TaskListPage.m in Sources */,
+				112387981EF3C1CA0030DC50 /* DevicePasswordEditPage.m in Sources */,
 				112D50001EDFC59900B5026E /* DevicePopButton.m in Sources */,
 				112D4FC01EDF987700B5026E /* DeviceListPage.m in Sources */,
 			);
