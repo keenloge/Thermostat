@@ -15,6 +15,9 @@
     BOOL hasPushView;
 }
 
+@property (nonatomic, strong) UIView *notifyView;
+@property (nonatomic, strong) UILabel *notifyLabel;
+
 @end
 
 @implementation BaseViewPage
@@ -70,7 +73,11 @@
     _messageNotify = messageNotify;
     
     if (_messageNotify.length > 0) {
-        
+        self.notifyLabel.text = _messageNotify;
+        self.notifyView.hidden = NO;
+        [self performSelector:@selector(hideMessageNotifyView) withObject:nil afterDelay:1.0];
+    } else {
+        self.notifyView.hidden = YES;
     }
 }
 
@@ -103,7 +110,56 @@
 
 #pragma mark - 其他内部函数（以上某一类特有的功能接口，可以放在分类里面）
 
+- (void)hideMessageNotifyView {
+    self.notifyView.alpha = 0.9;
+    [UIView animateWithDuration:0.25 animations:^{
+        self.notifyView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        self.notifyView.alpha = 0.9;
+        self.notifyView.hidden = YES;
+    }];
+}
+
 #pragma mark - 懒加载 view初始化实现
+
+- (UIView *)notifyView {
+    if (!_notifyView) {
+        _notifyView = [UIView new];
+        [self.view addSubview:_notifyView];
+        
+        _notifyView.layer.cornerRadius = 10.0;
+        _notifyView.backgroundColor = HB_COLOR_BASE_BLACK;
+        _notifyView.alpha = 0.9;
+        
+        WeakObj(self);
+        [_notifyView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_greaterThanOrEqualTo(55);
+            make.width.mas_equalTo(180);
+            make.center.equalTo(selfWeak.view);
+        }];
+    }
+    [self.view bringSubviewToFront:_notifyView];
+    return _notifyView;
+}
+
+- (UILabel *)notifyLabel {
+    if (!_notifyLabel) {
+        _notifyLabel = [UILabel new];
+        [self.notifyView addSubview:_notifyLabel];
+        
+        _notifyLabel.font = UIFontOf2XPix(24);
+        _notifyLabel.textColor = HB_COLOR_BASE_WHITE;
+        _notifyLabel.numberOfLines = 0;
+        _notifyLabel.textAlignment = NSTextAlignmentCenter;
+        
+        WeakObj(self);
+        [_notifyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            CGFloat offsetInsets = 20.0;
+            make.edges.equalTo(selfWeak.notifyView).insets(UIEdgeInsetsMake(offsetInsets, offsetInsets, offsetInsets, offsetInsets));
+        }];
+    }
+    return _notifyLabel;
+}
 
 @end
 

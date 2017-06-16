@@ -57,7 +57,6 @@ const CGFloat DeviceListRowsHeight = 77.0;
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.linkonBannerView startFlip];
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
