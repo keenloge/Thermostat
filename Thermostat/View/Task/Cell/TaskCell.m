@@ -237,7 +237,7 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
         [self.contentView addSubview:_planLabel];
         
         _planLabel.numberOfLines = 0;
-        _planLabel.font = UIFontOf3XPix(36);
+        _planLabel.font = UIFontOf3XPix(KHorizontalRound(34));
         _planLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.6);
         
         WeakObj(self);

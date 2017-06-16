@@ -533,10 +533,12 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
         _mainLabel.textColor = HB_COLOR_BASE_WHITE;
         _mainLabel.font = self.settingLabel.font;
         _mainLabel.text = KString(@"换气");
+        _mainLabel.adjustsFontSizeToFitWidth = YES;
         
         WeakObj(self);
         [_mainLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(selfWeak.contentSettingView);
+            make.width.mas_lessThanOrEqualTo(CGRectGetWidth(selfWeak.inLayer.frame) - 20);
         }];
     }
     return _mainLabel;

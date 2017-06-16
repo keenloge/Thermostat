@@ -35,8 +35,7 @@ const CGFloat TaskListRowsHeight = 80.0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = KString(@"定时");
-    [self addBarButtonItemRightNormalImageName:@"nav_add_circle" hightLited:nil];
+    [self addBarButtonItemRightNormalImageName:@"nav_add_blank" hightLited:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -71,6 +70,7 @@ const CGFloat TaskListRowsHeight = 80.0;
 }
 
 - (void)showBlankView {
+    self.navigationItem.title = KString(@"定时");
     self.blankView.hidden = NO;
     self.baseTableView.hidden = YES;
     WeakObj(self);
@@ -81,6 +81,7 @@ const CGFloat TaskListRowsHeight = 80.0;
 }
 
 - (void)hideBlankView {
+    self.navigationItem.title = KString(@"定时器列表");
     if (_blankView) {
         self.blankView.hidden = YES;
     }

@@ -61,7 +61,11 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
     if (self.type == TaskEditTypeNew) {
         self.navigationItem.title = KString(@"添加定时器");
     } else if (self.type == TaskEditTypeEdit) {
-        self.navigationItem.title = KString(@"修改定时器");
+        if (self.task.type == TaskTypeStage) {
+            self.navigationItem.title = KString(@"阶段定时器设置");
+        } else {
+            self.navigationItem.title = KString(@"开关定时器设置");
+        }
     }
     [self addBarButtonItemRightTitle:KString(@"保存")];
 }
@@ -265,13 +269,14 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
     
     WeakObj(self);
     if (indexPath.section == 0) {
+        TaskPickCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (indexPath.row == 0) {
-            con = [[TimePickerPage alloc] initWithTime:self.task.timeFrom block:^(NSInteger time) {
+            con = [[TimePickerPage alloc] initWithTitle:cell.titleString time:self.task.timeFrom block:^(NSInteger time) {
                 selfWeak.task.timeFrom = time;
                 [selfWeak.baseTableView reloadData];
             }];
         } else if (indexPath.row == 1) {
-            con = [[TimePickerPage alloc] initWithTime:self.task.timeTo block:^(NSInteger time) {
+            con = [[TimePickerPage alloc] initWithTitle:cell.titleString time:self.task.timeTo block:^(NSInteger time) {
                 selfWeak.task.timeTo = time;
                 [selfWeak.baseTableView reloadData];
             }];

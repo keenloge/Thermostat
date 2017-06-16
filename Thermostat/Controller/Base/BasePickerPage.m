@@ -11,9 +11,9 @@
 #import "Declare.h"
 #import "Globals.h"
 
-const CGFloat BasePickerTitleHeight = 44.0;
+const CGFloat BasePickerTitleHeight = 43.0;
 const CGFloat BasePickerButtonHeight = 44.0;
-const CGFloat BasePickerCheckHeight = 177.0;
+const CGFloat BasePickerCheckHeight = 176.0;
 const CGFloat BasePickerOffset = 1.0;
 
 @interface BasePickerPage () <UIPickerViewDataSource, UIPickerViewDelegate> {

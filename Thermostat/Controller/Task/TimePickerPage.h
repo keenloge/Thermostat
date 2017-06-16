@@ -12,7 +12,8 @@ typedef void(^TimePickerBlock)(NSInteger time);
 
 @interface TimePickerPage : BasePickerPage
 
-- (instancetype)initWithTime:(NSInteger)time
-                       block:(TimePickerBlock)block;
+- (instancetype)initWithTitle:(NSString *)title
+                         time:(NSInteger)time
+                        block:(TimePickerBlock)block;
 
 @end

@@ -19,9 +19,11 @@
 
 @implementation TimePickerPage
 
-- (instancetype)initWithTime:(NSInteger)time
-                       block:(TimePickerBlock)block {
+- (instancetype)initWithTitle:(NSString *)title
+                         time:(NSInteger)time
+                        block:(TimePickerBlock)block {
     if (self = [super init]) {
+        self.titleString = title;
         self.time = time;
         self.block = block;
     }
@@ -43,8 +45,6 @@
 
 - (void)baseInitialiseSubViews {
     [super baseInitialiseSubViews];
-    
-    self.titleString = KString(@"时间");
 
     NSInteger hour = self.time / 60;
     NSInteger minute = self.time % 60;
@@ -89,7 +89,7 @@
 #pragma mark - UIPickerViewDelegate
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component {
-    return 50.0;
+    return 100.0;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
