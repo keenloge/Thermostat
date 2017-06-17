@@ -11,6 +11,7 @@
 #import "Declare.h"
 #import "DeviceManager.h"
 #import "Device.h"
+#import "Globals.h"
 
 const CGFloat KTemperatureControlCountShow      = 5.0;
 const CGFloat KTemperatureControlCutLineOffsetY = 12.0;
@@ -202,7 +203,7 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
             label.font = UIFontOf3XPix(KHorizontalRound(68));
             label.textAlignment = NSTextAlignmentCenter;
             label.textColor = HB_COLOR_BASE_MAIN;
-            label.text = [NSString stringWithFormat:@"%.1f℃", i];
+            label.text = [Globals settingString:i];
             [tmpArray addObject:label];
             count++;
         }

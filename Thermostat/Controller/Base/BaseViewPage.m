@@ -9,6 +9,7 @@
 #import "BaseViewPage.h"
 #import "NSDictionaryAdditions.h"
 #import "LanguageManager.h"
+#import "TemperatureUnitManager.h"
 
 @interface BaseViewPage () {
     BOOL isDidAppear;
@@ -38,11 +39,14 @@
     
     WeakObj(self);
     [[NSNotificationCenter defaultCenter] addObserverForName:KNotificationNameSwitchLanguage object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-        [selfWeak baseRestLanguage];
+        [selfWeak baseResetLanguage];
     }];
-    
+    [[NSNotificationCenter defaultCenter] addObserverForName:KNotificationNameSwitchUnit object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        [selfWeak baseResetUnit];
+    }];
+
     [self baseInitialiseSubViews];
-    [self baseRestLanguage];
+    [self baseResetLanguage];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -85,7 +89,11 @@
 #pragma mark - 数据更新
 
 #pragma mark - 界面刷新
-- (void)baseRestLanguage {
+- (void)baseResetLanguage {
+    
+}
+
+- (void)baseResetUnit {
     
 }
 

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#define KNotificationNameSwitchUnit @"SwitchUnit"
 
 /**
  温度单位
@@ -26,5 +27,7 @@ typedef NS_ENUM(NSInteger, TemperatureUnitType) {
 @property (nonatomic, readonly) NSString *unitString;
 
 + (instancetype)sharedManager;
+
+- (CGFloat)fixedTemperatureSetting:(CGFloat)setting;
 
 @end

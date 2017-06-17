@@ -43,7 +43,7 @@
     self.baseTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
-- (void)baseRestLanguage {
+- (void)baseResetLanguage {
     self.navigationItem.title = KString(@"系统设置");
     [self.baseTableView reloadData];
 }

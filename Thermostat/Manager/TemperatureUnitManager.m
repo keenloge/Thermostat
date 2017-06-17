@@ -54,8 +54,18 @@ static TemperatureUnitManager *_currentTemperatureUnitManager;
 }
 
 - (void)setUnitType:(TemperatureUnitType)unitType {
-    [[NSUserDefaults standardUserDefaults] setInteger:unitType forKey:TEMPERATUREUNIT_SET];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    if (unitType != _unitType) {
+        [[NSUserDefaults standardUserDefaults] setInteger:unitType forKey:TEMPERATUREUNIT_SET];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KNotificationNameSwitchUnit object:nil];
+    }
+}
+
+- (CGFloat)fixedTemperatureSetting:(CGFloat)setting {
+    if (self.unitType == TemperatureUnitTypeFahrenheit) {
+        setting = setting * 1.8 + 32;
+    }
+    return setting;
 }
 
 @end

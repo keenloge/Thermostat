@@ -7,6 +7,7 @@
 //
 
 #import "Globals.h"
+#import "TemperatureUnitManager.h"
 
 @implementation Globals
 
@@ -104,7 +105,7 @@
 }
 
 + (NSString *)settingString:(float)setting {
-    return [NSString stringWithFormat:@"%.1f℃", setting];
+    return [NSString stringWithFormat:@"%.1f%@", [[TemperatureUnitManager sharedManager] fixedTemperatureSetting:setting], [TemperatureUnitManager sharedManager].unitString];
 }
 
 + (NSString *)timeString:(NSInteger)time {

@@ -105,8 +105,12 @@ const CGFloat DeviceListRowsHeight = 77.0;
     }];
 }
 
-- (void)baseRestLanguage {
+- (void)baseResetLanguage {
     self.navigationItem.title = KString(@"温控器");
+    [self.baseTableView reloadData];
+}
+
+- (void)baseResetUnit {
     [self.baseTableView reloadData];
 }
 

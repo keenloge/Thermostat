@@ -23,8 +23,12 @@
 /**
  初次调用将发生在 baseInitialiseSubViews 之后, 切换语言后将自动调用
  */
-- (void)baseRestLanguage;
+- (void)baseResetLanguage;
 
+/**
+ 切换温度单位后调用
+ */
+- (void)baseResetUnit;
 
 // Button
 - (void)baseAddTargetForButton:(UIButton *)sender;

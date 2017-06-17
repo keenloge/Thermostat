@@ -34,10 +34,10 @@
 }
 
 - (void)_baseInit {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(baseRestLanguage) name:KNotificationNameSwitchLanguage object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(baseResetLanguage) name:KNotificationNameSwitchLanguage object:nil];
     
     [self baseInitialiseSubViews];
-    [self baseRestLanguage];
+    [self baseResetLanguage];
 }
 
 - (void)dealloc {
@@ -48,7 +48,7 @@
     
 }
 
-- (void)baseRestLanguage {
+- (void)baseResetLanguage {
     
 }
 

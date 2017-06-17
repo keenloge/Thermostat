@@ -11,6 +11,6 @@
 @interface BaseView : UIView
 
 - (void)baseInitialiseSubViews;
-- (void)baseRestLanguage;
+- (void)baseResetLanguage;
 
 @end

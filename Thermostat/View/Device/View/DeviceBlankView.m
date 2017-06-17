@@ -34,7 +34,7 @@ const CGFloat KDeviceBlankLabelOffsetY = 6.0;
     self.blankButton.opaque = YES;
 }
 
-- (void)baseRestLanguage {
+- (void)baseResetLanguage {
     self.blankLabel.text = KString(@"搜索设备");
 }
 

@@ -13,6 +13,7 @@
 #import "Device.h"
 #import "NSTimerAdditions.h"
 #import "Globals.h"
+#import "TemperatureUnitManager.h"
 
 
 // 外圈 缩进 / 厚度
@@ -160,7 +161,8 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
         self.mainLabel.hidden = YES;
         self.contentSettingView.hidden = NO;
         
-        self.settingLabel.text = [NSString stringWithFormat:@"%.1f", device.setting];
+        CGFloat setting = [[TemperatureUnitManager sharedManager] fixedTemperatureSetting:device.setting];
+        self.settingLabel.text = [NSString stringWithFormat:@"%.1f", setting];
         self.modeLabel.text = [Globals modeString:device.mode];
         switch (device.mode) {
             case LinKonModeHot:
@@ -425,7 +427,7 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
         [self addSubview:_temperatureLabel];
         _temperatureLabel.font = self.humidityLabel.font;
         _temperatureLabel.textColor = HB_COLOR_BASE_WHITE;
-        _temperatureLabel.text = @"27.0℃";
+        _temperatureLabel.text = [Globals settingString:27.5];
 
         WeakObj(self);
         [_temperatureLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -513,7 +515,7 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
             _unitLabel.font = UIFontOf3XPix(KHorizontalRound(120));
         }
         _unitLabel.textColor = HB_COLOR_BASE_WHITE;
-        _unitLabel.text = KString(@"℃");
+        _unitLabel.text = [TemperatureUnitManager sharedManager].unitString;
         
         WeakObj(self);
         [_unitLabel mas_makeConstraints:^(MASConstraintMaker *make) {
