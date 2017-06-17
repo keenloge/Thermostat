@@ -1,12 +1,12 @@
 //
-//  Device.m
+//  LinKonDevice.m
 //  Thermostat
 //
 //  Created by Keen on 2017/6/1.
 //  Copyright © 2017年 GalaxyWind. All rights reserved.
 //
 
-#import "Device.h"
+#import "LinKonDevice.h"
 #import "Declare.h"
 #import "DeviceManager.h"
 #import "Globals.h"
@@ -17,18 +17,18 @@ const NSTimeInterval MinTimeOffset  = 10;
 // 最大延时时间 8小时
 const NSTimeInterval MaxTimeOffset  = 70.0;
 
-@implementation Device
+@implementation LinKonDevice
 
 + (instancetype)deviceWithSN:(NSString *)sn {
-    Device *item = [[Device alloc] init];
+    LinKonDevice *item = [[LinKonDevice alloc] init];
     item.sn = sn;
     return item;
 }
 
 - (instancetype)init {
     if (self = [super init]) {
-        _connection = ConnectionStateOFF;
-        _running = RunningStateOFF;
+        _connection = DeviceConnectionStateOffLine;
+        _running = DeviceRunningStateTurnOFF;
         _mode = LinKonModeCool;
         _scene = LinKonSceneConstant;
         _wind = LinKonWindLow;
@@ -41,9 +41,9 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
 }
 
 - (NSString *)stateString {
-    if (self.connection == ConnectionStateOFF) {
+    if (self.connection == DeviceConnectionStateOffLine) {
         return [Globals connectionString:self.connection];
-    } else if (self.running == RunningStateOFF) {
+    } else if (self.running == DeviceRunningStateTurnOFF) {
         return [Globals runningString:self.running];
     } else if (self.mode == LinKonModeAir) {
         return [Globals modeString:self.mode];
@@ -52,11 +52,11 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
     }
 }
 
-- (RunningState)switchRunning {
-    if (self.running == RunningStateOFF) {
-        return RunningStateON;
+- (DeviceRunningState)switchRunning {
+    if (self.running == DeviceRunningStateTurnOFF) {
+        return DeviceRunningStateTurnON;
     } else {
-        return RunningStateOFF;
+        return DeviceRunningStateTurnOFF;
     }
 }
 
@@ -119,7 +119,7 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
     _setting = roundf(setting * 2.0) / 2.0;
 }
 
-- (void)setRunning:(RunningState)running {
+- (void)setRunning:(DeviceRunningState)running {
     _running = running;
     self.delay = 0.0;
     [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceDelay value:@(self.delay)];

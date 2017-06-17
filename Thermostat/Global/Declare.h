@@ -82,32 +82,32 @@
 #define LINKON_TEMPERATURE_OFFSET   (0.5)
 
 // 周期 - 无
-FOUNDATION_EXPORT const Byte WeekNone;
+FOUNDATION_EXPORT const Byte TimerRepeatNone;
 
 // 周期 - 每天
-FOUNDATION_EXPORT const Byte WeekEveryDay;
+FOUNDATION_EXPORT const Byte TimerRepeatEveryDay;
 
 /**
  连接状态
  
- - ConnectionStateOFF: 离线
- - ConnectionStateON: 在线
+ - DeviceConnectionStateOffLine: 离线
+ - DeviceConnectionStateOnLine: 在线
  */
-typedef NS_ENUM(NSInteger, ConnectionState) {
-    ConnectionStateOFF  = 1,
-    ConnectionStateON   = 2,
+typedef NS_ENUM(NSInteger, DeviceConnectionState) {
+    DeviceConnectionStateOffLine  = 1,
+    DeviceConnectionStateOnLine   = 2,
 };
 
 
 /**
  运行状态
  
- - RunningStateOFF: 待机
- - RunningStateON: 开机
+ - DeviceRunningStateTurnOFF: 待机
+ - DeviceRunningStateTurnON: 开机
  */
-typedef NS_ENUM(NSInteger, RunningState) {
-    RunningStateOFF     = 1,
-    RunningStateON      = 2,
+typedef NS_ENUM(NSInteger, DeviceRunningState) {
+    DeviceRunningStateTurnOFF     = 1,
+    DeviceRunningStateTurnON      = 2,
 };
 
 
@@ -156,34 +156,34 @@ typedef NS_ENUM(NSInteger, LinKonScene) {
 /**
  重复(每周)
  
- - WeekMonday: 周一
- - WeekTuesday: 周二
- - WeekWednesday: 周三
- - WeekThursday: 周四
- - WeekFriday: 周五
- - WeekSaturday: 周六
- - WeekSunday: 周日
+ - TimerRepeatMonday: 周一
+ - TimerRepeatTuesday: 周二
+ - TimerRepeatWednesday: 周三
+ - TimerRepeatThursday: 周四
+ - TimerRepeatFriday: 周五
+ - TimerRepeatSaturday: 周六
+ - TimerRepeatSunday: 周日
  */
-typedef NS_ENUM(Byte, Week) {
-    WeekMonday      = 1 << 0,
-    WeekTuesday     = 1 << 1,
-    WeekWednesday   = 1 << 2,
-    WeekThursday    = 1 << 3,
-    WeekFriday      = 1 << 4,
-    WeekSaturday    = 1 << 5,
-    WeekSunday      = 1 << 6,
+typedef NS_ENUM(Byte, TimerRepeat) {
+    TimerRepeatMonday      = 1 << 0,
+    TimerRepeatTuesday     = 1 << 1,
+    TimerRepeatWednesday   = 1 << 2,
+    TimerRepeatThursday    = 1 << 3,
+    TimerRepeatFriday      = 1 << 4,
+    TimerRepeatSaturday    = 1 << 5,
+    TimerRepeatSunday      = 1 << 6,
 };
 
 
 /**
  任务类别
  
- - TaskTypeSwitch: 开关任务
- - TaskTypeStage: 阶段任务
+ - LinKonTimerTaskTypeSwitch: 开关任务
+ - LinKonTimerTaskTypeStage: 阶段任务
  */
-typedef NS_ENUM(NSInteger, TaskType) {
-    TaskTypeSwitch  = 1,
-    TaskTypeStage   = 2,
+typedef NS_ENUM(NSInteger, LinKonTimerTaskType) {
+    LinKonTimerTaskTypeSwitch  = 1,
+    LinKonTimerTaskTypeStage   = 2,
 };
 
 #endif /* Declare_h */

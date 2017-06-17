@@ -12,7 +12,7 @@
 #import "ColorConfig.h"
 #import "UILabelAdditions.h"
 #import "TaskManager.h"
-#import "Task.h"
+#import "LinKonTimerTask.h"
 
 const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
 
@@ -64,20 +64,20 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
 
 #pragma mark - 界面刷新
 
-- (void)updateIconImageViewWithTask:(Task *)task {
+- (void)updateIconImageViewWithTask:(LinKonTimerTask *)task {
     NSString *imageName = nil;
     if (task.validate) {
         self.timeLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.85);
-        if (task.type == TaskTypeSwitch) {
+        if (task.type == LinKonTimerTaskTypeSwitch) {
             imageName = @"cell_switch_on";
-        } else if (task.type == TaskTypeStage) {
+        } else if (task.type == LinKonTimerTaskTypeStage) {
             imageName = @"cell_stage_on";
         }
     } else {
         self.timeLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.6);
-        if (task.type == TaskTypeSwitch) {
+        if (task.type == LinKonTimerTaskTypeSwitch) {
             imageName = @"cell_switch_off";
-        } else if (task.type == TaskTypeStage) {
+        } else if (task.type == LinKonTimerTaskTypeStage) {
             imageName = @"cell_stage_off";
         }
     }
@@ -85,13 +85,13 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
     self.validSwitch.on = task.validate;
 }
 
-- (void)updateTimeLabelWithTask:(Task *)task {
-    if (task.type == TaskTypeSwitch) {
+- (void)updateTimeLabelWithTask:(LinKonTimerTask *)task {
+    if (task.type == LinKonTimerTaskTypeSwitch) {
         // 开关时间
         self.timeLabel.font = UIFontOf3XPix(KHorizontalRound(63));
         self.toLabel.hidden = YES;
         self.timeLabel.text = [Globals timeString:task.timeFrom];
-    } else if (task.type == TaskTypeStage) {
+    } else if (task.type == LinKonTimerTaskTypeStage) {
         // 起止时间
         self.timeLabel.font = UIFontOf3XPix(KHorizontalRound(54));
         self.toLabel.hidden = NO;
@@ -100,13 +100,13 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
     }
 }
 
-- (void)updatePlanLabelWithTask:(Task *)task {
+- (void)updatePlanLabelWithTask:(LinKonTimerTask *)task {
 
     // 周期
     NSString *repeatString = [Globals repeatString:task.repeat];
     
     NSString *settingString = nil;
-    if (task.type == TaskTypeSwitch && task.running == RunningStateOFF) {
+    if (task.type == LinKonTimerTaskTypeSwitch && task.running == DeviceRunningStateTurnOFF) {
         settingString = KString(@"关");
     } else {
         // 设定
@@ -146,12 +146,12 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
 
 #pragma mark - Setter
 
-- (void)setTask:(Task *)task {
+- (void)setTask:(LinKonTimerTask *)task {
     _task = task;
     
     WeakObj(self);
     [[TaskManager sharedManager] registerListener:self task:task.number device:task.sn key:KTaskValidate block:^(NSObject *object) {
-        Task *task = (Task *)object;
+        LinKonTimerTask *task = (LinKonTimerTask *)object;
         [selfWeak updateIconImageViewWithTask:task];
     }];
     

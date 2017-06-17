@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NotifyTarget.h"
 
-@class Task;
+@class LinKonTimerTask;
 
 @interface TaskManager : NSObject
 
@@ -22,7 +22,7 @@
  
  @param task 任务
  */
-- (void)addTask:(Task *)task;
+- (void)addTask:(LinKonTimerTask *)task;
 
 /**
  移除任务
@@ -38,7 +38,7 @@
  
  @param task 任务
  */
-- (void)editTask:(Task *)task;
+- (void)editTask:(LinKonTimerTask *)task;
 
 /**
  获取任务
@@ -47,7 +47,7 @@
  @param sn 设备SN
  @return 任务
  */
-- (Task *)getTask:(NSString *)number
+- (LinKonTimerTask *)getTask:(NSString *)number
            device:(NSString *)sn;
 
 #pragma mark - 监听列表

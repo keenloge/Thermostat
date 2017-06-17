@@ -7,7 +7,7 @@
 //
 
 #import "DeviceManager.h"
-#import "Device.h"
+#import "LinKonDevice.h"
 
 static DeviceManager *_currentDeviceManager;
 
@@ -17,7 +17,7 @@ static DeviceManager *_currentDeviceManager;
 /**
  设备列表
  */
-@property (nonatomic, strong) NSMutableArray<Device*> *deviceArray;
+@property (nonatomic, strong) NSMutableArray<LinKonDevice*> *deviceArray;
 
 
 /**
@@ -93,7 +93,7 @@ static DeviceManager *_currentDeviceManager;
  @param item 设备
  */
 
-- (void)addDevice:(Device *)item {
+- (void)addDevice:(LinKonDevice *)item {
     if (!item.sn) {
         return;
     }
@@ -131,7 +131,7 @@ static DeviceManager *_currentDeviceManager;
     }
     
     for (int i = 0; i < self.deviceArray.count; i++) {
-        Device *device = [self.deviceArray objectAtIndex:i];
+        LinKonDevice *device = [self.deviceArray objectAtIndex:i];
         if ([device.sn isEqualToString:sn]) {
             [self.deviceArray removeObjectAtIndex:i];
             
@@ -152,12 +152,12 @@ static DeviceManager *_currentDeviceManager;
  @return 设备
  */
 
-- (Device *)getDevice:(NSString *)sn {
+- (LinKonDevice *)getDevice:(NSString *)sn {
     if (!sn) {
         return nil;
     }
     
-    for (Device *item in self.deviceArray) {
+    for (LinKonDevice *item in self.deviceArray) {
         if ([sn isEqualToString:item.sn]) {
             return item;
         }
@@ -287,7 +287,7 @@ static DeviceManager *_currentDeviceManager;
     [target.blockDictionary setObject:[block copy] forKey:key];
     
     // 立即通知
-    Device *device = [self getDevice:sn];
+    LinKonDevice *device = [self getDevice:sn];
     if (device) {
         if (block) {
             block(device);
@@ -301,7 +301,7 @@ static DeviceManager *_currentDeviceManager;
  
  @param device 设备
  */
-- (void)resignListenerTargetWithDevice:(Device *)device {
+- (void)resignListenerTargetWithDevice:(LinKonDevice *)device {
     
     if (!device.sn) {
         return;
@@ -338,7 +338,7 @@ static DeviceManager *_currentDeviceManager;
         return;
     }
     
-    Device *device = [self getDevice:sn];
+    LinKonDevice *device = [self getDevice:sn];
     if (device) {
         // 找到全局对应的设备, 并更新值
         [device setValue:value forKey:key];

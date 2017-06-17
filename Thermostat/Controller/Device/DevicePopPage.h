@@ -8,7 +8,7 @@
 
 #import "BaseAlertPage.h"
 
-@class Device;
+@class LinKonDevice;
 
 
 /**
@@ -35,7 +35,7 @@ typedef void(^DevicePopBlock)(DevicePopAction action);
 
 @interface DevicePopPage : BaseAlertPage
 
-- (instancetype)initWithDevice:(Device *)item
+- (instancetype)initWithDevice:(LinKonDevice *)item
                          block:(DevicePopBlock)aBlock;
 
 @end

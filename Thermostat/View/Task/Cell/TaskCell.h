@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class Task;
+@class LinKonTimerTask;
 
 @interface TaskCell : UITableViewCell
 
-@property (nonatomic, copy) Task *task;
+@property (nonatomic, copy) LinKonTimerTask *task;
 
 @end

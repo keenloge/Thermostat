@@ -10,7 +10,7 @@
 #import "ColorConfig.h"
 #import "Declare.h"
 #import "DeviceManager.h"
-#import "Device.h"
+#import "LinKonDevice.h"
 #import "NSTimerAdditions.h"
 #import "Globals.h"
 #import "TemperatureUnitManager.h"
@@ -140,15 +140,15 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
     self.timerLabel.opaque = YES;
 }
 
-- (void)updateInfoViewWithDevice:(Device *)device {
+- (void)updateInfoViewWithDevice:(LinKonDevice *)device {
     self.roundImageView.hidden = NO;
     
-    if (device.running == RunningStateOFF || device.mode == LinKonModeAir) {
+    if (device.running == DeviceRunningStateTurnOFF || device.mode == LinKonModeAir) {
         // 待机 或者 换气
         self.mainLabel.hidden = NO;
         self.contentSettingView.hidden = YES;
         
-        if (device.running == RunningStateOFF) {
+        if (device.running == DeviceRunningStateTurnOFF) {
             self.mainLabel.text = [Globals runningString:device.running];
             self.inLayer.colors = @[(__bridge id)UIColorFromHex(0xa6ff94).CGColor, (__bridge id)UIColorFromHex(0x38c1ff).CGColor];
             self.roundImageView.hidden = YES;
@@ -208,40 +208,40 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
     
     // 监听运行状态
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceRunning block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         [selfWeak updateInfoViewWithDevice:device];
     }];
     
     // 监听设置温度
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceSetting block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         [selfWeak updateInfoViewWithDevice:device];
     }];
     
     // 监听模式
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceMode block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         [selfWeak updateInfoViewWithDevice:device];
     }];
     
     // 监听延时开关
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceDelay block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         if (device.delay > 0.0) {
             selfWeak.contentTimerView.hidden = NO;
-            if (device.running == RunningStateON) {
+            if (device.running == DeviceRunningStateTurnON) {
                 selfWeak.timerImageView.image = [UIImage imageNamed:@"icon_timer_off"];
             } else {
                 selfWeak.timerImageView.image = [UIImage imageNamed:@"icon_timer_on"];
@@ -275,7 +275,7 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
         } else {
             // 倒计时结束了
             [timer invalidate];
-            Device *device = [[DeviceManager sharedManager] getDevice:blockSN];
+            LinKonDevice *device = [[DeviceManager sharedManager] getDevice:blockSN];
             [[DeviceManager sharedManager] editDevice:blockSN key:KDeviceRunning value:@(device.switchRunning)];
         }
     }];
@@ -472,7 +472,6 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
             _settingLabel.font = UIFontOf3XPix(KHorizontalRound(240));
         }
         _settingLabel.textColor = HB_COLOR_BASE_WHITE;
-        _settingLabel.text = @"23.5";
         
         WeakObj(self);
         [_settingLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -493,7 +492,6 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
             _modeLabel.font = UIFontOf3XPix(KHorizontalRound(48));
         }
         _modeLabel.textColor = HB_COLOR_BASE_WHITE;
-        _modeLabel.text = KString(@"制冷");
         
         WeakObj(self);
         [_modeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -589,7 +587,6 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
         
         _timerLabel.font = UIFontOf3XPix(KHorizontalRound(40));
         _timerLabel.textColor = HB_COLOR_BASE_BLACK;
-        _timerLabel.text = @"02\"48'56";
 
         WeakObj(self);
         [_timerLabel mas_makeConstraints:^(MASConstraintMaker *make) {

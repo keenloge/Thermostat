@@ -13,9 +13,9 @@
 #import "DeviceSearchPage.h"
 #import "DeviceAddPage.h"
 #import "DevicePopPage.h"
-#import "DeviceControlPage.h"
+#import "LinKonDeviceControlPage.h"
 #import "DeviceCell.h"
-#import "Device.h"
+#import "LinKonDevice.h"
 #import "LanguageManager.h"
 #import "BaseNavigationPage.h"
 #import "DeviceNicknameEditPage.h"
@@ -144,7 +144,7 @@ const CGFloat DeviceListRowsHeight = 77.0;
         cell = [[DeviceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
     }
     
-    Device *device = [self.baseContentArr objectAtIndex:indexPath.row];
+    LinKonDevice *device = [self.baseContentArr objectAtIndex:indexPath.row];
     
     cell.sn = device.sn;
     
@@ -183,11 +183,11 @@ const CGFloat DeviceListRowsHeight = 77.0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
-    Device *device = [self.baseContentArr objectAtIndex:indexPath.row];
-    if (device.connection == ConnectionStateOFF) {
-        [[DeviceManager sharedManager] editDevice:device.sn key:KDeviceConnection value:@(ConnectionStateON)];
+    LinKonDevice *device = [self.baseContentArr objectAtIndex:indexPath.row];
+    if (device.connection == DeviceConnectionStateOffLine) {
+        [[DeviceManager sharedManager] editDevice:device.sn key:KDeviceConnection value:@(DeviceConnectionStateOnLine)];
     } else {
-        id con = [[DeviceControlPage alloc] initWithDevice:device.sn];
+        id con = [[LinKonDeviceControlPage alloc] initWithDevice:device.sn];
         BaseNavigationPage *navCon = [[BaseNavigationPage alloc] initWithRootViewController:con];
         [self presentViewController:navCon animated:YES completion:^{
             

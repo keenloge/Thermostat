@@ -1,5 +1,5 @@
 //
-//  Device.h
+//  LinKonDevice.h
 //  Thermostat
 //
 //  Created by Keen on 2017/6/1.
@@ -23,7 +23,7 @@
 #define KDeviceHumidity      @"humidity"
 #define KDeviceTemperature   @"temperature"
 
-@interface Device : NSObject
+@interface LinKonDevice : NSObject
 
 
 /**
@@ -47,13 +47,13 @@
 /**
  连接状态
  */
-@property (nonatomic, assign) ConnectionState connection;
+@property (nonatomic, assign) DeviceConnectionState connection;
 
 
 /**
  运行状态
  */
-@property (nonatomic, assign) RunningState running;
+@property (nonatomic, assign) DeviceRunningState running;
 
 
 /**
@@ -114,7 +114,7 @@
 /**
  切换运行状态
  */
-@property (nonatomic, readonly) RunningState        switchRunning;
+@property (nonatomic, readonly) DeviceRunningState        switchRunning;
 
 
 /**

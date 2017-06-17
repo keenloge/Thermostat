@@ -10,7 +10,7 @@
 #import "ColorConfig.h"
 #import "DeviceCircleView.h"
 #import "DeviceManager.h"
-#import "Device.h"
+#import "LinKonDevice.h"
 #import "Declare.h"
 
 // 设备信息圈大小
@@ -80,18 +80,18 @@ const CGFloat KDeviceInfoIconSize               = 30.0;
     
     WeakObj(self);
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceLock block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         selfWeak.lockImageView.alpha = device.lock ? 0.5 : 1.0;
     }];
     
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceScene block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         switch (device.scene) {
             case LinKonSceneConstant:
                 selfWeak.sceneImageView.image = [UIImage imageNamed:@"icon_scene_constant"];
@@ -108,10 +108,10 @@ const CGFloat KDeviceInfoIconSize               = 30.0;
     }];
     
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceWind block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         switch (device.wind) {
             case LinKonWindLow:
                 selfWeak.windImageView.image = [UIImage imageNamed:@"icon_wind_low"];

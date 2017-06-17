@@ -57,6 +57,10 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
     self.headTitleLabel.opaque = YES;
 }
 
+- (void)baseResetLanguage {
+    [self.menuTableView reloadData];
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

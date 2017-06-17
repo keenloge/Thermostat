@@ -90,7 +90,7 @@
     UIButton *button = [Globals addedSubViewClass:[UIButton class] toView:self.buttonContentView];
     button.tag = tag;
     
-    if (tag == WeekEveryDay) {
+    if (tag == TimerRepeatEveryDay) {
         [button setTitle:KString(@"全") forState:UIControlStateNormal];
     } else {
         [button setTitle:[Globals weekString:tag] forState:UIControlStateNormal];
@@ -114,11 +114,11 @@
 
 - (void)buttonPressed:(UIButton *)sender {
     Byte repeat = sender.tag;
-    if (sender.tag == WeekEveryDay) {
+    if (sender.tag == TimerRepeatEveryDay) {
         if (sender.isSelected) {
-            repeat = WeekNone;
+            repeat = TimerRepeatNone;
         } else {
-            repeat = WeekEveryDay;
+            repeat = TimerRepeatEveryDay;
         }
     } else {
         if (sender.isSelected) {
@@ -175,56 +175,56 @@
 
 - (UIButton *)mondayButton {
     if (!_mondayButton) {
-        _mondayButton    = [self addedRepeatButtonWithTag:WeekMonday];
+        _mondayButton    = [self addedRepeatButtonWithTag:TimerRepeatMonday];
     }
     return _mondayButton;
 }
 
 - (UIButton *)tuesdayButton {
     if (!_tuesdayButton) {
-        _tuesdayButton   = [self addedRepeatButtonWithTag:WeekTuesday];
+        _tuesdayButton   = [self addedRepeatButtonWithTag:TimerRepeatTuesday];
     }
     return _tuesdayButton;
 }
 
 - (UIButton *)wednesdayButton {
     if (!_wednesdayButton) {
-        _wednesdayButton = [self addedRepeatButtonWithTag:WeekWednesday];
+        _wednesdayButton = [self addedRepeatButtonWithTag:TimerRepeatWednesday];
     }
     return _wednesdayButton;
 }
 
 - (UIButton *)thursdayButton {
     if (!_thursdayButton) {
-        _thursdayButton  = [self addedRepeatButtonWithTag:WeekThursday];
+        _thursdayButton  = [self addedRepeatButtonWithTag:TimerRepeatThursday];
     }
     return _thursdayButton;
 }
 
 - (UIButton *)fridayButton {
     if (!_fridayButton) {
-        _fridayButton    = [self addedRepeatButtonWithTag:WeekFriday];
+        _fridayButton    = [self addedRepeatButtonWithTag:TimerRepeatFriday];
     }
     return _fridayButton;
 }
 
 - (UIButton *)saturdayButton {
     if (!_saturdayButton) {
-        _saturdayButton  = [self addedRepeatButtonWithTag:WeekSaturday];
+        _saturdayButton  = [self addedRepeatButtonWithTag:TimerRepeatSaturday];
     }
     return _saturdayButton;
 }
 
 - (UIButton *)sundayButton {
     if (!_sundayButton) {
-        _sundayButton    = [self addedRepeatButtonWithTag:WeekSunday];
+        _sundayButton    = [self addedRepeatButtonWithTag:TimerRepeatSunday];
     }
     return _sundayButton;
 }
 
 - (UIButton *)allDayButton {
     if (!_allDayButton) {
-        _allDayButton    = [self addedRepeatButtonWithTag:WeekEveryDay];
+        _allDayButton    = [self addedRepeatButtonWithTag:TimerRepeatEveryDay];
     }
     return _allDayButton;
 }

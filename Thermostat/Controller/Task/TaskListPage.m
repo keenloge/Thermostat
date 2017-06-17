@@ -11,7 +11,7 @@
 #import "TaskBlankView.h"
 #import "TaskEditPage.h"
 #import "TaskCell.h"
-#import "Task.h"
+#import "LinKonTimerTask.h"
 
 const CGFloat TaskListRowsHeight = 80.0;
 
@@ -74,7 +74,7 @@ const CGFloat TaskListRowsHeight = 80.0;
     self.blankView.hidden = NO;
     self.baseTableView.hidden = YES;
     WeakObj(self);
-    self.blankView.block = ^(TaskType type) {
+    self.blankView.block = ^(LinKonTimerTaskType type) {
         id con = [[TaskEditPage alloc] initWithType:type device:selfWeak.sn];
         [selfWeak pushViewController:con];
     };
@@ -103,7 +103,7 @@ const CGFloat TaskListRowsHeight = 80.0;
         cell = [[TaskCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierCell];
     }
     
-    Task *item = [self.baseContentArr objectAtIndex:indexPath.row];
+    LinKonTimerTask *item = [self.baseContentArr objectAtIndex:indexPath.row];
     cell.task = item;
     
     return cell;
@@ -113,7 +113,7 @@ const CGFloat TaskListRowsHeight = 80.0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    Task *item = [self.baseContentArr objectAtIndex:indexPath.row];
+    LinKonTimerTask *item = [self.baseContentArr objectAtIndex:indexPath.row];
     id con = [[TaskEditPage alloc] initWithTask:item.number device:self.sn];
     [self pushViewController:con];
 }
@@ -126,14 +126,14 @@ const CGFloat TaskListRowsHeight = 80.0;
     WeakObj(self);
     UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:KString(@"编辑") handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         action.backgroundColor = UIColorFromHex(0xcccccc);
-        Task *item = [selfWeak.baseContentArr objectAtIndex:indexPath.row];
+        LinKonTimerTask *item = [selfWeak.baseContentArr objectAtIndex:indexPath.row];
         id con = [[TaskEditPage alloc] initWithTask:item.number device:selfWeak.sn];
         [selfWeak pushViewController:con];
         [selfWeak.baseTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }];
     UITableViewRowAction *removeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:KString(@"删除") handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         action.backgroundColor = UIColorFromHex(0xff0021);
-        Task *item = [selfWeak.baseContentArr objectAtIndex:indexPath.row];
+        LinKonTimerTask *item = [selfWeak.baseContentArr objectAtIndex:indexPath.row];
         [[TaskManager sharedManager] removeTask:item.number device:selfWeak.sn];
     }];
     return @[removeAction, editAction];
@@ -148,11 +148,11 @@ const CGFloat TaskListRowsHeight = 80.0;
         
     }];
     UIAlertAction *searchAction = [UIAlertAction actionWithTitle:KString(@"开关定时") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        id con = [[TaskEditPage alloc] initWithType:TaskTypeSwitch device:selfWeak.sn];
+        id con = [[TaskEditPage alloc] initWithType:LinKonTimerTaskTypeSwitch device:selfWeak.sn];
         [selfWeak pushViewController:con];
     }];
     UIAlertAction *addAction = [UIAlertAction actionWithTitle:KString(@"阶段定时") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        id con = [[TaskEditPage alloc] initWithType:TaskTypeStage device:selfWeak.sn];
+        id con = [[TaskEditPage alloc] initWithType:LinKonTimerTaskTypeStage device:selfWeak.sn];
         [selfWeak pushViewController:con];
     }];
     

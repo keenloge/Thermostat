@@ -45,6 +45,8 @@
 "摄氏度" = "Centigrade";
 "华氏度" = "Fahrenheit";
 "语言设置" = "Language Settings";
+"设置" = "Settings";
+"关于我们" = "About";
 
 // 按钮
 "确定" = "Confirm";

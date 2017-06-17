@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NotifyTarget.h"
 
-@class Device;
+@class LinKonDevice;
 
 @interface DeviceManager : NSObject
 
@@ -29,7 +29,7 @@
  @param item 设备
  */
 
-- (void)addDevice:(Device *)item;
+- (void)addDevice:(LinKonDevice *)item;
 
 /**
  移除设备
@@ -46,7 +46,7 @@
  @return 设备
  */
 
-- (Device *)getDevice:(NSString *)sn;
+- (LinKonDevice *)getDevice:(NSString *)sn;
 
 #pragma mark 列表监听
 

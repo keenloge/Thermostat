@@ -7,7 +7,7 @@
 //
 
 #import "TaskManager.h"
-#import "Task.h"
+#import "LinKonTimerTask.h"
 
 static TaskManager *_currentTaskManager;
 
@@ -92,7 +92,7 @@ static TaskManager *_currentTaskManager;
 
  @param task 任务
  */
-- (void)addTask:(Task *)task {
+- (void)addTask:(LinKonTimerTask *)task {
     
     if (!task.number || !task.sn) {
         return;
@@ -145,7 +145,7 @@ static TaskManager *_currentTaskManager;
     
     NSMutableArray *taskArray = [self.taskListDictionary objectForKey:sn];
     for (int i = 0; i < taskArray.count; i++) {
-        Task *task = [taskArray objectAtIndex:i];
+        LinKonTimerTask *task = [taskArray objectAtIndex:i];
         if ([task.number isEqualToString:number]) {
             [taskArray removeObjectAtIndex:i];
             
@@ -165,14 +165,14 @@ static TaskManager *_currentTaskManager;
 
  @param task 任务
  */
-- (void)editTask:(Task *)task {
+- (void)editTask:(LinKonTimerTask *)task {
     if (!task || !task.number || !task.sn) {
         return;
     }
     
     NSMutableArray *taskArray = [self.taskListDictionary objectForKey:task.sn];
     for (int i = 0; i < taskArray.count; i++) {
-        Task *item = [taskArray objectAtIndex:i];
+        LinKonTimerTask *item = [taskArray objectAtIndex:i];
         if ([task.number isEqualToString:item.number]) {
             [taskArray removeObjectAtIndex:i];
             [taskArray insertObject:task atIndex:i];
@@ -190,7 +190,7 @@ static TaskManager *_currentTaskManager;
  @param sn 设备SN
  @return 任务
  */
-- (Task *)getTask:(NSString *)number
+- (LinKonTimerTask *)getTask:(NSString *)number
            device:(NSString *)sn {
     
     if (!number || !sn) {
@@ -198,7 +198,7 @@ static TaskManager *_currentTaskManager;
     }
     
     NSArray *taskArray = [self.taskListDictionary objectForKey:sn];
-    for (Task *item in taskArray) {
+    for (LinKonTimerTask *item in taskArray) {
         if ([item.number isEqualToString:number]) {
             return item;
         }
@@ -347,7 +347,7 @@ static TaskManager *_currentTaskManager;
     [target.blockDictionary setObject:[block copy] forKey:key];
     
     // 立即通知
-    Task *task = [self getTask:number device:sn];
+    LinKonTimerTask *task = [self getTask:number device:sn];
     if (task) {
         if (block) {
             block(task);
@@ -361,7 +361,7 @@ static TaskManager *_currentTaskManager;
 
  @param task 任务
  */
-- (void)resignListenerTargetWithTask:(Task *)task {
+- (void)resignListenerTargetWithTask:(LinKonTimerTask *)task {
     
     if (!task || !task.sn || !task.number) {
         return;
@@ -401,7 +401,7 @@ static TaskManager *_currentTaskManager;
         return;
     }
 
-    Task *task = [self getTask:number device:sn];
+    LinKonTimerTask *task = [self getTask:number device:sn];
     if (task) {
         // 找到全局对应的任务, 并更新值
         [task setValue:value forKey:key];

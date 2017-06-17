@@ -11,7 +11,7 @@
 #import "BaseTextField.h"
 #import "BaseButton.h"
 #import "DeviceManager.h"
-#import "Device.h"
+#import "LinKonDevice.h"
 
 const CGFloat DeviceAddInputPaddingTop = 43.0;
 const CGFloat DeviceAddInputPaddingSide = 27.0;
@@ -96,7 +96,7 @@ const CGFloat DeviceAddButtonOffsetY = 38.0;
         self.messageNotify = KString(@"请输入密码");
         [self.passwordTextField becomeFirstResponder];
     } else {
-        Device *device = [[Device alloc] init];
+        LinKonDevice *device = [[LinKonDevice alloc] init];
         device.sn = self.numberTextField.text;
         device.nickname = KString(@"温控器");
         device.password = self.passwordTextField.text;

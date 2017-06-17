@@ -10,7 +10,7 @@
 #import "ControlMenuButton.h"
 #import "ColorConfig.h"
 #import "DeviceManager.h"
-#import "Device.h"
+#import "LinKonDevice.h"
 #import "Declare.h"
 #import "FeedBackManager.h"
 
@@ -23,7 +23,7 @@
     CGFloat bottomButtonHeight;
 }
 
-@property (nonatomic, strong) Device *device;
+@property (nonatomic, strong) LinKonDevice *device;
 @property (nonatomic, strong) ControlMenuButton *timerButton;
 @property (nonatomic, strong) ControlMenuButton *runningButton;
 @property (nonatomic, strong) ControlMenuButton *sceneButton;
@@ -66,7 +66,7 @@
 
 - (void)buttonPressed:(UIButton *)sender {
     if (sender == self.runningButton) {
-        if (self.device.running == RunningStateON) {
+        if (self.device.running == DeviceRunningStateTurnON) {
             // 关机
             [[FeedBackManager sharedManager] vibrateSoundTurnOff];
         } else {
@@ -98,15 +98,15 @@
     
     WeakObj(self);
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceRunning block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         selfWeak.device = device;
-        selfWeak.sceneButton.enabled = device.running != RunningStateOFF;
-        selfWeak.modeButton.enabled = device.running != RunningStateOFF;
-        selfWeak.windButton.enabled = device.running != RunningStateOFF;
-        if (device.running == RunningStateON) {
+        selfWeak.sceneButton.enabled = device.running != DeviceRunningStateTurnOFF;
+        selfWeak.modeButton.enabled = device.running != DeviceRunningStateTurnOFF;
+        selfWeak.windButton.enabled = device.running != DeviceRunningStateTurnOFF;
+        if (device.running == DeviceRunningStateTurnON) {
             [selfWeak.timerButton setImage:[UIImage imageNamed:@"btn_menu_timer_off"] forState:UIControlStateNormal];
         } else {
             [selfWeak.timerButton setImage:[UIImage imageNamed:@"btn_menu_timer_on"] forState:UIControlStateNormal];

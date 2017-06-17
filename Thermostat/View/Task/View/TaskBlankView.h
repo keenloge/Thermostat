@@ -9,7 +9,7 @@
 #import "BaseView.h"
 #import "Declare.h"
 
-typedef void(^TaskBlankBlock)(TaskType type);
+typedef void(^TaskBlankBlock)(LinKonTimerTaskType type);
 
 @interface TaskBlankView : BaseView
 

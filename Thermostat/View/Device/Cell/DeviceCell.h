@@ -8,7 +8,7 @@
 
 #import "BaseCell.h"
 
-@class Device;
+@class LinKonDevice;
 
 typedef void(^DeviceCellInfoBlock)();
 

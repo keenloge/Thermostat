@@ -1,12 +1,12 @@
 //
-//  DeviceControlPage.m
+//  LinKonDeviceControlPage.m
 //  Thermostat
 //
 //  Created by Keen on 2017/6/1.
 //  Copyright © 2017年 GalaxyWind. All rights reserved.
 //
 
-#import "DeviceControlPage.h"
+#import "LinKonDeviceControlPage.h"
 #import "ControlTabButton.h"
 #import "DeviceInfoView.h"
 #import "DeviceControlView.h"
@@ -16,7 +16,7 @@
 #import "LinKonPopView.h"
 #import "TaskListPage.h"
 #import "DeviceManager.h"
-#import "Device.h"
+#import "LinKonDevice.h"
 
 // 设置列表行高
 const CGFloat DeviceControlSettingRowsHeight    = 68.0;
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
     ControlTabButtonTagSetting = 1,
 };
 
-@interface DeviceControlPage () <UITableViewDataSource, UITableViewDelegate> {
+@interface LinKonDeviceControlPage () <UITableViewDataSource, UITableViewDelegate> {
     
 }
 
@@ -56,7 +56,7 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
 
 @end
 
-@implementation DeviceControlPage
+@implementation LinKonDeviceControlPage
 
 - (instancetype)initWithDevice:(NSString *)sn {
     if (self = [super init]) {
@@ -215,7 +215,7 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
         
         WeakObj(self);
         [[DeviceManager sharedManager] registerListener:self device:self.sn key:KDeviceNickname block:^(NSObject *object) {
-            Device *device = (Device *)object;
+            LinKonDevice *device = (LinKonDevice *)object;
             selfWeak.navigationItem.title = device.nickname;
         }];
     }

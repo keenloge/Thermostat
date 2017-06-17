@@ -10,7 +10,7 @@
 #import "ColorConfig.h"
 #import "Declare.h"
 #import "DeviceManager.h"
-#import "Device.h"
+#import "LinKonDevice.h"
 #import "Globals.h"
 
 const CGFloat KTemperatureControlCountShow      = 5.0;
@@ -100,9 +100,9 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
     }
 }
 
-- (void)updateSlideViewStateWithDevice:(Device *)device {
+- (void)updateSlideViewStateWithDevice:(LinKonDevice *)device {
     self.userInteractionEnabled = YES;
-    if (device.running == RunningStateOFF) {
+    if (device.running == DeviceRunningStateTurnOFF) {
         self.userInteractionEnabled = NO;
     } else {
         if (device.mode == LinKonModeAir) {
@@ -156,24 +156,24 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
     
     WeakObj(self);
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceSetting block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         selfWeak.scrollToIndex = (device.setting - LINKON_TEMPERATURE_MIN) / LINKON_TEMPERATURE_OFFSET;
     }];
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceRunning block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         [selfWeak updateSlideViewStateWithDevice:device];
     }];
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceMode block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         [selfWeak updateSlideViewStateWithDevice:device];
     }];
 }

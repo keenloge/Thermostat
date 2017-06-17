@@ -13,6 +13,6 @@
 @interface TaskEditPage : BaseListViewPage
 
 - (instancetype)initWithTask:(NSString *)number device:(NSString *)sn;
-- (instancetype)initWithType:(TaskType)type device:(NSString *)sn;
+- (instancetype)initWithType:(LinKonTimerTaskType)type device:(NSString *)sn;
 
 @end

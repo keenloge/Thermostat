@@ -1,5 +1,5 @@
 //
-//  Task.h
+//  LinKonTimerTask.h
 //  Thermostat
 //
 //  Created by Keen on 2017/6/4.
@@ -11,7 +11,7 @@
 
 #define KTaskNumber     @"number"
 #define KTaskSN         @"sn"
-#define KTaskType       @"type"
+#define KLinKonTimerTaskType       @"type"
 #define KTaskTimeFrom   @"timeFrom"
 #define KTaskTimeTo     @"timeTo"
 #define KTaskValidate   @"validate"
@@ -22,9 +22,9 @@
 #define KTaskScene      @"scene"
 #define KTaskSetting    @"setting"
 
-@interface Task : NSObject
+@interface LinKonTimerTask : NSObject
 
-- (instancetype)initWithType:(TaskType)type device:(NSString *)sn;
+- (instancetype)initWithType:(LinKonTimerTaskType)type device:(NSString *)sn;
 
 /**
  任务编号, 唯一
@@ -39,7 +39,7 @@
 /**
  任务类别
  */
-@property (nonatomic, assign) TaskType type;
+@property (nonatomic, assign) LinKonTimerTaskType type;
 
 /**
  起始时间, 距离 00:00 经过的分钟数
@@ -65,7 +65,7 @@
 /**
  运行状态
  */
-@property (nonatomic, assign) RunningState running;
+@property (nonatomic, assign) DeviceRunningState running;
 
 
 /**
@@ -99,6 +99,6 @@
  @param week 星期
  @return 切换后的周期
  */
-- (Byte)switchRepeatWeak:(Week)week;
+- (Byte)switchRepeatWeak:(TimerRepeat)week;
 
 @end

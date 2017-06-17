@@ -14,7 +14,7 @@
 #import "TemperaturePickerPage.h"
 #import "EnumPickerPage.h"
 #import "TaskManager.h"
-#import "Task.h"
+#import "LinKonTimerTask.h"
 
 const CGFloat TaskEditRepeatRowsHeight  = 88.0;
 const CGFloat TaskEditSettingRowsHeight = 44.0;
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 @interface TaskEditPage ()
 
 @property (nonatomic, assign) TaskEditType type;
-@property (nonatomic, strong) Task *task;
+@property (nonatomic, strong) LinKonTimerTask *task;
 
 @end
 
@@ -47,10 +47,10 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
     return self;
 }
 
-- (instancetype)initWithType:(TaskType)type device:(NSString *)sn {
+- (instancetype)initWithType:(LinKonTimerTaskType)type device:(NSString *)sn {
     if (self = [super init]) {
         self.type = TaskEditTypeNew;
-        self.task = [[Task alloc] initWithType:type device:sn];
+        self.task = [[LinKonTimerTask alloc] initWithType:type device:sn];
     }
     return self;
 }
@@ -61,7 +61,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
     if (self.type == TaskEditTypeNew) {
         self.navigationItem.title = KString(@"添加定时器");
     } else if (self.type == TaskEditTypeEdit) {
-        if (self.task.type == TaskTypeStage) {
+        if (self.task.type == LinKonTimerTaskTypeStage) {
             self.navigationItem.title = KString(@"阶段定时器设置");
         } else {
             self.navigationItem.title = KString(@"开关定时器设置");
@@ -109,10 +109,10 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        if (self.task.type == TaskTypeSwitch) {
+        if (self.task.type == LinKonTimerTaskTypeSwitch) {
             // 开关任务 只有一个时间
             return 1;
-        } else if (self.task.type == TaskTypeStage) {
+        } else if (self.task.type == LinKonTimerTaskTypeStage) {
             // 阶段任务 有起止时间
             return 2;
         }
@@ -121,9 +121,9 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
         return 1;
     } else if (section == 2) {
         // 只有开关任务才有开关选项
-        if (self.task.type == TaskTypeSwitch) {
+        if (self.task.type == LinKonTimerTaskTypeSwitch) {
             return 1;
-        } else if (self.task.type == TaskTypeStage) {
+        } else if (self.task.type == LinKonTimerTaskTypeStage) {
             return 0;
         }
     } else if (section == 3) {
@@ -133,29 +133,29 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
             return 0;
         }
         
-        if (self.task.type == TaskTypeSwitch) {
-            if (self.task.running == RunningStateON) {
+        if (self.task.type == LinKonTimerTaskTypeSwitch) {
+            if (self.task.running == DeviceRunningStateTurnON) {
                 // 开机任务
                 return 1;
             } else {
                 // 关机任务
                 return 0;
             }
-        } else if (self.task.type == TaskTypeStage) {
+        } else if (self.task.type == LinKonTimerTaskTypeStage) {
             // 阶段任务
             return 1;
         }
     } else if (section == 4) {
         // 风速 模式 情景 设定
-        if (self.task.type == TaskTypeSwitch) {
-            if (self.task.running == RunningStateON) {
+        if (self.task.type == LinKonTimerTaskTypeSwitch) {
+            if (self.task.running == DeviceRunningStateTurnON) {
                 // 开机任务
                 return 3;
             } else {
                 // 关机任务
                 return 0;
             }
-        } else if (self.task.type == TaskTypeStage) {
+        } else if (self.task.type == LinKonTimerTaskTypeStage) {
             // 阶段任务
             return 3;
         }
@@ -208,10 +208,10 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
             cell = [[TaskSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierSwitchCell];
         }
         
-        cell.open = self.task.running == RunningStateON;
+        cell.open = self.task.running == DeviceRunningStateTurnON;
         WeakObj(self);
         cell.block = ^(BOOL value) {
-            selfWeak.task.running = value ? RunningStateON : RunningStateOFF;
+            selfWeak.task.running = value ? DeviceRunningStateTurnON : DeviceRunningStateTurnOFF;
             [selfWeak.baseTableView reloadData];
         };
         
@@ -225,9 +225,9 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
         
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
-                if (self.task.type == TaskTypeSwitch) {
+                if (self.task.type == LinKonTimerTaskTypeSwitch) {
                     cell.titleString = KString(@"时间");
-                } else if (self.task.type == TaskTypeStage) {
+                } else if (self.task.type == LinKonTimerTaskTypeStage) {
                     cell.titleString = KString(@"开始时间");
                 }
                 cell.detailString = [Globals timeString:self.task.timeFrom];

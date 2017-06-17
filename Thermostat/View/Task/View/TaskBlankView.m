@@ -108,7 +108,7 @@ const CGFloat TaskBlankSubTitleCenterYScale = 543.0 / 2016.0;
         [_switchButton setTitle:KString(@"开关定时") forState:UIControlStateNormal];
         [_switchButton setImage:[UIImage imageNamed:@"btn_switch_n"] forState:UIControlStateNormal];
         [_switchButton setImage:[UIImage imageNamed:@"btn_switch_d"] forState:UIControlStateHighlighted];
-        _switchButton.tag = TaskTypeSwitch;
+        _switchButton.tag = LinKonTimerTaskTypeSwitch;
         [_switchButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _switchButton;
@@ -120,7 +120,7 @@ const CGFloat TaskBlankSubTitleCenterYScale = 543.0 / 2016.0;
         [_stageButton setTitle:KString(@"阶段定时") forState:UIControlStateNormal];
         [_stageButton setImage:[UIImage imageNamed:@"btn_stage_n"] forState:UIControlStateNormal];
         [_stageButton setImage:[UIImage imageNamed:@"btn_stage_d"] forState:UIControlStateHighlighted];
-        _stageButton.tag = TaskTypeStage;
+        _stageButton.tag = LinKonTimerTaskTypeStage;
         [_stageButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _stageButton;

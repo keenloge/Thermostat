@@ -18,11 +18,11 @@
     return subView;
 }
 
-+ (NSString *)connectionString:(ConnectionState)connection {
++ (NSString *)connectionString:(DeviceConnectionState)connection {
     switch (connection) {
-        case ConnectionStateOFF:
+        case DeviceConnectionStateOffLine:
             return KString(@"离线");
-        case ConnectionStateON:
+        case DeviceConnectionStateOnLine:
             return KString(@"在线");
         default:
             break;
@@ -30,11 +30,11 @@
     return nil;
 }
 
-+ (NSString *)runningString:(RunningState)running {
++ (NSString *)runningString:(DeviceRunningState)running {
     switch (running) {
-        case RunningStateON:
+        case DeviceRunningStateTurnON:
             return KString(@"开机");
-        case RunningStateOFF:
+        case DeviceRunningStateTurnOFF:
             return KString(@"待机");
         default:
             break;
@@ -83,21 +83,21 @@
     return nil;
 }
 
-+ (NSString *)weekString:(Week)week {
++ (NSString *)weekString:(TimerRepeat)week {
     switch (week) {
-        case WeekMonday:
+        case TimerRepeatMonday:
             return KString(@"一");
-        case WeekTuesday:
+        case TimerRepeatTuesday:
             return KString(@"二");
-        case WeekWednesday:
+        case TimerRepeatWednesday:
             return KString(@"三");
-        case WeekThursday:
+        case TimerRepeatThursday:
             return KString(@"四");
-        case WeekFriday:
+        case TimerRepeatFriday:
             return KString(@"五");
-        case WeekSaturday:
+        case TimerRepeatSaturday:
             return KString(@"六");
-        case WeekSunday:
+        case TimerRepeatSunday:
             return KString(@"日");
         default:
             break;
@@ -115,21 +115,21 @@
 }
 
 + (NSString *)repeatString:(Byte)repeat {
-    if (repeat == WeekEveryDay) {
+    if (repeat == TimerRepeatEveryDay) {
         return KString(@"每日");
-    } else if (repeat == WeekNone) {
+    } else if (repeat == TimerRepeatNone) {
         return @"";
     } else {
         static NSArray *weekArray = nil;
         if (!weekArray) {
             weekArray = @[
-                          @(WeekMonday),
-                          @(WeekTuesday),
-                          @(WeekWednesday),
-                          @(WeekThursday),
-                          @(WeekFriday),
-                          @(WeekSaturday),
-                          @(WeekSunday),
+                          @(TimerRepeatMonday),
+                          @(TimerRepeatTuesday),
+                          @(TimerRepeatWednesday),
+                          @(TimerRepeatThursday),
+                          @(TimerRepeatFriday),
+                          @(TimerRepeatSaturday),
+                          @(TimerRepeatSunday),
                           ];
         }
         NSMutableArray *titleArray = [NSMutableArray array];

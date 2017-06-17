@@ -11,7 +11,7 @@
 #import "BaseTextField.h"
 #import "BaseButton.h"
 #import "DeviceManager.h"
-#import "Device.h"
+#import "LinKonDevice.h"
 
 const CGFloat DeviceInfoInputPaddingTop = 43.0;
 const CGFloat DeviceInfoInputPaddingSide = 27.0;
@@ -108,7 +108,7 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
     } else {
         [self popViewController];
         
-        Device *device = [[Device alloc] init];
+        LinKonDevice *device = [[LinKonDevice alloc] init];
         device.sn = self.numberTextField.text;
         device.nickname = self.nicknameTextField.text;
         device.password = self.passwordTextField.text;

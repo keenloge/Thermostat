@@ -1,5 +1,5 @@
 //
-//  DeviceControlPage.h
+//  LinKonDeviceControlPage.h
 //  Thermostat
 //
 //  Created by Keen on 2017/6/1.
@@ -8,7 +8,7 @@
 
 #import "BaseViewPage.h"
 
-@interface DeviceControlPage : BaseViewPage
+@interface LinKonDeviceControlPage : BaseViewPage
 
 - (instancetype)initWithDevice:(NSString *)sn;
 

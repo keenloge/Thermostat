@@ -28,7 +28,7 @@
  @param connection 连接状态
  @return 连接状态字符串
  */
-+ (NSString *)connectionString:(ConnectionState)connection;
++ (NSString *)connectionString:(DeviceConnectionState)connection;
 
 
 /**
@@ -37,7 +37,7 @@
  @param running 运行状态
  @return 运行状态字符串
  */
-+ (NSString *)runningString:(RunningState)running;
++ (NSString *)runningString:(DeviceRunningState)running;
 
 
 /**
@@ -73,7 +73,7 @@
  @param week 星期
  @return 星期字符串
  */
-+ (NSString *)weekString:(Week)week;
++ (NSString *)weekString:(TimerRepeat)week;
 
 
 /**

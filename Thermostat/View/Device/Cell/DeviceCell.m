@@ -10,7 +10,7 @@
 #import "ColorConfig.h"
 #import "Declare.h"
 #import "Globals.h"
-#import "Device.h"
+#import "LinKonDevice.h"
 #import "DeviceManager.h"
 #import "InfoButton.h"
 
@@ -41,11 +41,11 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
 
 #pragma mark - 界面刷新
 
-- (void)changeStateWithDevice:(Device *)device {
+- (void)changeStateWithDevice:(LinKonDevice *)device {
     self.stateLabel.text = device.stateString;
-    if (device.connection == ConnectionStateOFF) {
+    if (device.connection == DeviceConnectionStateOffLine) {
         self.stateLabel.textColor = HB_COLOR_BASE_RED;
-    } else if (device.running == RunningStateOFF) {
+    } else if (device.running == DeviceRunningStateTurnOFF) {
         self.stateLabel.textColor = HB_COLOR_BASE_GREEN;
     } else {
         self.stateLabel.textColor = HB_COLOR_BASE_GRAY;
@@ -68,39 +68,39 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
     
     WeakObj(self);
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceNickname block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         selfWeak.nicknameLabel.text = device.nickname;
     }];
     
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceConnection block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         [selfWeak changeStateWithDevice:device];
     }];
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceRunning block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         [selfWeak changeStateWithDevice:device];
     }];
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceSetting block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         [selfWeak changeStateWithDevice:device];
     }];
     [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceMode block:^(NSObject *object) {
-        if (![object isKindOfClass:[Device class]]) {
+        if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
-        Device *device = (Device *)object;
+        LinKonDevice *device = (LinKonDevice *)object;
         [selfWeak changeStateWithDevice:device];
     }];
 }

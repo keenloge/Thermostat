@@ -15,7 +15,7 @@
 		1126D0801EF2887000BE5289 /* BaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1126D07F1EF2887000BE5289 /* BaseCell.m */; };
 		112D4FC01EDF987700B5026E /* DeviceListPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FBF1EDF987700B5026E /* DeviceListPage.m */; };
 		112D4FC31EDF988F00B5026E /* DeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FC21EDF988F00B5026E /* DeviceManager.m */; };
-		112D4FC61EDF989D00B5026E /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FC51EDF989D00B5026E /* Device.m */; };
+		112D4FC61EDF989D00B5026E /* LinKonDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FC51EDF989D00B5026E /* LinKonDevice.m */; };
 		112D4FD21EDF9FE100B5026E /* bkg_banner0.png in Resources */ = {isa = PBXBuildFile; fileRef = 112D4FC91EDF9FE000B5026E /* bkg_banner0.png */; };
 		112D4FD31EDF9FE100B5026E /* bkg_banner0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 112D4FCA1EDF9FE000B5026E /* bkg_banner0@2x.png */; };
 		112D4FD41EDF9FE100B5026E /* bkg_banner0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 112D4FCB1EDF9FE000B5026E /* bkg_banner0@3x.png */; };
@@ -31,7 +31,7 @@
 		112D4FEB1EDFB48B00B5026E /* DeviceSearchPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FEA1EDFB48B00B5026E /* DeviceSearchPage.m */; };
 		112D4FEE1EDFB49D00B5026E /* DeviceInfoPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FED1EDFB49D00B5026E /* DeviceInfoPage.m */; };
 		112D4FF11EDFB4B000B5026E /* DeviceAddPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FF01EDFB4B000B5026E /* DeviceAddPage.m */; };
-		112D4FF41EDFB4BF00B5026E /* DeviceControlPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FF31EDFB4BF00B5026E /* DeviceControlPage.m */; };
+		112D4FF41EDFB4BF00B5026E /* LinKonDeviceControlPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FF31EDFB4BF00B5026E /* LinKonDeviceControlPage.m */; };
 		112D4FF71EDFB4E000B5026E /* DevicePopPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FF61EDFB4E000B5026E /* DevicePopPage.m */; };
 		112D4FFA1EDFB74D00B5026E /* BaseLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FF91EDFB74D00B5026E /* BaseLabel.m */; };
 		112D4FFD1EDFB76200B5026E /* BaseTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FFC1EDFB76200B5026E /* BaseTextField.m */; };
@@ -86,7 +86,7 @@
 		11AC583F1EE50B66003D12EB /* EnumPickerPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC583E1EE50B66003D12EB /* EnumPickerPage.m */; };
 		11C2F6151EE3B236008ED62F /* TaskListPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C2F6141EE3B236008ED62F /* TaskListPage.m */; };
 		11C2F6181EE3B24C008ED62F /* TaskEditPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C2F6171EE3B24C008ED62F /* TaskEditPage.m */; };
-		11C2F61B1EE3B284008ED62F /* Task.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C2F61A1EE3B284008ED62F /* Task.m */; };
+		11C2F61B1EE3B284008ED62F /* LinKonTimerTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C2F61A1EE3B284008ED62F /* LinKonTimerTask.m */; };
 		11C2F61E1EE3F13B008ED62F /* TaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C2F61D1EE3F13B008ED62F /* TaskManager.m */; };
 		11EF7AA91EE7CB6B004403C9 /* NSTimerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EF7AA81EE7CB6B004403C9 /* NSTimerAdditions.m */; };
 		11FA11391EE0EEE60017948D /* ControlTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA11381EE0EEE60017948D /* ControlTabButton.m */; };
@@ -115,8 +115,8 @@
 		112D4FBF1EDF987700B5026E /* DeviceListPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListPage.m; sourceTree = "<group>"; };
 		112D4FC11EDF988F00B5026E /* DeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManager.h; sourceTree = "<group>"; };
 		112D4FC21EDF988F00B5026E /* DeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceManager.m; sourceTree = "<group>"; };
-		112D4FC41EDF989D00B5026E /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Device.h; sourceTree = "<group>"; };
-		112D4FC51EDF989D00B5026E /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Device.m; sourceTree = "<group>"; };
+		112D4FC41EDF989D00B5026E /* LinKonDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinKonDevice.h; sourceTree = "<group>"; };
+		112D4FC51EDF989D00B5026E /* LinKonDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonDevice.m; sourceTree = "<group>"; };
 		112D4FC91EDF9FE000B5026E /* bkg_banner0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkg_banner0.png; sourceTree = "<group>"; };
 		112D4FCA1EDF9FE000B5026E /* bkg_banner0@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_banner0@2x.png"; sourceTree = "<group>"; };
 		112D4FCB1EDF9FE000B5026E /* bkg_banner0@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_banner0@3x.png"; sourceTree = "<group>"; };
@@ -138,8 +138,8 @@
 		112D4FED1EDFB49D00B5026E /* DeviceInfoPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfoPage.m; sourceTree = "<group>"; };
 		112D4FEF1EDFB4B000B5026E /* DeviceAddPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceAddPage.h; sourceTree = "<group>"; };
 		112D4FF01EDFB4B000B5026E /* DeviceAddPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceAddPage.m; sourceTree = "<group>"; };
-		112D4FF21EDFB4BF00B5026E /* DeviceControlPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceControlPage.h; sourceTree = "<group>"; };
-		112D4FF31EDFB4BF00B5026E /* DeviceControlPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceControlPage.m; sourceTree = "<group>"; };
+		112D4FF21EDFB4BF00B5026E /* LinKonDeviceControlPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinKonDeviceControlPage.h; sourceTree = "<group>"; };
+		112D4FF31EDFB4BF00B5026E /* LinKonDeviceControlPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonDeviceControlPage.m; sourceTree = "<group>"; };
 		112D4FF51EDFB4E000B5026E /* DevicePopPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevicePopPage.h; sourceTree = "<group>"; };
 		112D4FF61EDFB4E000B5026E /* DevicePopPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevicePopPage.m; sourceTree = "<group>"; };
 		112D4FF81EDFB74D00B5026E /* BaseLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseLabel.h; sourceTree = "<group>"; };
@@ -250,8 +250,8 @@
 		11C2F6141EE3B236008ED62F /* TaskListPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskListPage.m; sourceTree = "<group>"; };
 		11C2F6161EE3B24C008ED62F /* TaskEditPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskEditPage.h; sourceTree = "<group>"; };
 		11C2F6171EE3B24C008ED62F /* TaskEditPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskEditPage.m; sourceTree = "<group>"; };
-		11C2F6191EE3B284008ED62F /* Task.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Task.h; sourceTree = "<group>"; };
-		11C2F61A1EE3B284008ED62F /* Task.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Task.m; sourceTree = "<group>"; };
+		11C2F6191EE3B284008ED62F /* LinKonTimerTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinKonTimerTask.h; sourceTree = "<group>"; };
+		11C2F61A1EE3B284008ED62F /* LinKonTimerTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonTimerTask.m; sourceTree = "<group>"; };
 		11C2F61C1EE3F13B008ED62F /* TaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskManager.h; sourceTree = "<group>"; };
 		11C2F61D1EE3F13B008ED62F /* TaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskManager.m; sourceTree = "<group>"; };
 		11EF7AA71EE7CB6B004403C9 /* NSTimerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTimerAdditions.h; sourceTree = "<group>"; };
@@ -509,8 +509,8 @@
 				112387971EF3C1CA0030DC50 /* DevicePasswordEditPage.m */,
 				112387991EF3DBAF0030DC50 /* DeviceInputPage.h */,
 				1123879A1EF3DBAF0030DC50 /* DeviceInputPage.m */,
-				112D4FF21EDFB4BF00B5026E /* DeviceControlPage.h */,
-				112D4FF31EDFB4BF00B5026E /* DeviceControlPage.m */,
+				112D4FF21EDFB4BF00B5026E /* LinKonDeviceControlPage.h */,
+				112D4FF31EDFB4BF00B5026E /* LinKonDeviceControlPage.m */,
 			);
 			path = Device;
 			sourceTree = "<group>";
@@ -565,10 +565,10 @@
 		117FD7291EDEC7CE003A60B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				112D4FC41EDF989D00B5026E /* Device.h */,
-				112D4FC51EDF989D00B5026E /* Device.m */,
-				11C2F6191EE3B284008ED62F /* Task.h */,
-				11C2F61A1EE3B284008ED62F /* Task.m */,
+				112D4FC41EDF989D00B5026E /* LinKonDevice.h */,
+				112D4FC51EDF989D00B5026E /* LinKonDevice.m */,
+				11C2F6191EE3B284008ED62F /* LinKonTimerTask.h */,
+				11C2F61A1EE3B284008ED62F /* LinKonTimerTask.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -887,7 +887,7 @@
 				1123879B1EF3DBAF0030DC50 /* DeviceInputPage.m in Sources */,
 				113B90381EF55C7900E96617 /* LinKonPopCell.m in Sources */,
 				112D4FEB1EDFB48B00B5026E /* DeviceSearchPage.m in Sources */,
-				11C2F61B1EE3B284008ED62F /* Task.m in Sources */,
+				11C2F61B1EE3B284008ED62F /* LinKonTimerTask.m in Sources */,
 				112387951EF3C1AF0030DC50 /* DeviceNicknameEditPage.m in Sources */,
 				11FA113F1EE0F0560017948D /* SettingSwitchCell.m in Sources */,
 				112D4FEE1EDFB49D00B5026E /* DeviceInfoPage.m in Sources */,
@@ -897,14 +897,14 @@
 				1145C5391EF4FC8200988ABE /* SideSettingCell.m in Sources */,
 				11AC58301EE503FB003D12EB /* TaskRepeatCell.m in Sources */,
 				11AC58391EE50B3B003D12EB /* TimePickerPage.m in Sources */,
-				112D4FF41EDFB4BF00B5026E /* DeviceControlPage.m in Sources */,
+				112D4FF41EDFB4BF00B5026E /* LinKonDeviceControlPage.m in Sources */,
 				117FD7561EDECB6A003A60B1 /* UILabelAdditions.m in Sources */,
 				112D4FE81EDFAF3E00B5026E /* BaseButton.m in Sources */,
 				112D4FF71EDFB4E000B5026E /* DevicePopPage.m in Sources */,
 				113B90321EF51C4E00E96617 /* FeedBackManager.m in Sources */,
 				117FD7411EDECA5C003A60B1 /* BaseNavigationPage.m in Sources */,
 				112D4FDE1EDFAE1600B5026E /* DeviceBlankView.m in Sources */,
-				112D4FC61EDF989D00B5026E /* Device.m in Sources */,
+				112D4FC61EDF989D00B5026E /* LinKonDevice.m in Sources */,
 				112D500C1EE01CA700B5026E /* DeviceControlView.m in Sources */,
 				1145C5241EF4B71000988ABE /* BaseGradientLayerView.m in Sources */,
 				112D50181EE01EB900B5026E /* MenuControlView.m in Sources */,

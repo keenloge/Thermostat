@@ -11,7 +11,7 @@
 #import "Globals.h"
 #import "Declare.h"
 #import "ColorConfig.h"
-#import "Device.h"
+#import "LinKonDevice.h"
 
 const CGFloat DevicePopTitleHeight = 38.0;
 const CGFloat DevicePopCutLineHeight = 1.0;
@@ -21,7 +21,7 @@ const CGFloat DevicePopButtonPaddingLeft = 16.0;
 
 @interface DevicePopPage ()
 
-@property (nonatomic, strong) Device *device;
+@property (nonatomic, strong) LinKonDevice *device;
 @property (nonatomic, copy) DevicePopBlock block;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIView *cutLineView;
@@ -34,7 +34,7 @@ const CGFloat DevicePopButtonPaddingLeft = 16.0;
 
 @implementation DevicePopPage
 
-- (instancetype)initWithDevice:(Device *)item
+- (instancetype)initWithDevice:(LinKonDevice *)item
                          block:(DevicePopBlock)aBlock {
     if (self = [super init]) {
         self.device = item;
