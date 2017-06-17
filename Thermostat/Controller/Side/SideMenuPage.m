@@ -8,6 +8,9 @@
 
 #import "SideMenuPage.h"
 #import "SideMenuCell.h"
+#import "SideAboutPage.h"
+#import "SideSettingPage.h"
+#import <ViewDeck.h>
 
 const CGFloat SideMenuContentSizeWidth      = 253.0;
 const CGFloat SideMenuContentHeaderHeight   = 236.0;
@@ -87,6 +90,14 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [self.viewDeckController closeSide:YES];
+    id con = nil;
+    if (indexPath.row == 0) {
+        con = [SideSettingPage new];
+    } else if (indexPath.row == 1) {
+        con = [SideAboutPage new];
+    }
+    [(UINavigationController*)self.viewDeckController.centerViewController pushViewController:con animated:YES];
 }
 
 #pragma mark - 懒加载

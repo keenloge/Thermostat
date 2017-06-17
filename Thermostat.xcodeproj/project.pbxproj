@@ -48,6 +48,9 @@
 		113227081EE6987400E1D0C4 /* DeviceSearchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 113227071EE6987400E1D0C4 /* DeviceSearchButton.m */; };
 		1145C5211EF4AD2B00988ABE /* SideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5201EF4AD2B00988ABE /* SideMenuCell.m */; };
 		1145C5241EF4B71000988ABE /* BaseGradientLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */; };
+		1145C5271EF4CDB400988ABE /* SideAboutPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5261EF4CDB400988ABE /* SideAboutPage.m */; };
+		1145C52A1EF4CDCC00988ABE /* SideSettingPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5291EF4CDCC00988ABE /* SideSettingPage.m */; };
+		1145C52D1EF4D21300988ABE /* ViewDeckAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C52C1EF4D21300988ABE /* ViewDeckAdditions.m */; };
 		117FD70D1EDEC2B9003A60B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD70C1EDEC2B9003A60B1 /* main.m */; };
 		117FD7101EDEC2B9003A60B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD70F1EDEC2B9003A60B1 /* AppDelegate.m */; };
 		117FD7181EDEC2B9003A60B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 117FD7171EDEC2B9003A60B1 /* Assets.xcassets */; };
@@ -162,6 +165,12 @@
 		1145C5201EF4AD2B00988ABE /* SideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuCell.m; sourceTree = "<group>"; };
 		1145C5221EF4B71000988ABE /* BaseGradientLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseGradientLayerView.h; sourceTree = "<group>"; };
 		1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseGradientLayerView.m; sourceTree = "<group>"; };
+		1145C5251EF4CDB400988ABE /* SideAboutPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideAboutPage.h; sourceTree = "<group>"; };
+		1145C5261EF4CDB400988ABE /* SideAboutPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideAboutPage.m; sourceTree = "<group>"; };
+		1145C5281EF4CDCC00988ABE /* SideSettingPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideSettingPage.h; sourceTree = "<group>"; };
+		1145C5291EF4CDCC00988ABE /* SideSettingPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideSettingPage.m; sourceTree = "<group>"; };
+		1145C52B1EF4D21300988ABE /* ViewDeckAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewDeckAdditions.h; sourceTree = "<group>"; };
+		1145C52C1EF4D21300988ABE /* ViewDeckAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewDeckAdditions.m; sourceTree = "<group>"; };
 		117FD7081EDEC2B9003A60B1 /* Thermostat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thermostat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		117FD70C1EDEC2B9003A60B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		117FD70E1EDEC2B9003A60B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -258,6 +267,10 @@
 			children = (
 				1123879D1EF3DE000030DC50 /* SideMenuPage.h */,
 				1123879E1EF3DE000030DC50 /* SideMenuPage.m */,
+				1145C5251EF4CDB400988ABE /* SideAboutPage.h */,
+				1145C5261EF4CDB400988ABE /* SideAboutPage.m */,
+				1145C5281EF4CDCC00988ABE /* SideSettingPage.h */,
+				1145C5291EF4CDCC00988ABE /* SideSettingPage.m */,
 			);
 			path = Side;
 			sourceTree = "<group>";
@@ -414,6 +427,8 @@
 				11AC582C1EE4FDE2003D12EB /* NSStringAdditions.m */,
 				11EF7AA71EE7CB6B004403C9 /* NSTimerAdditions.h */,
 				11EF7AA81EE7CB6B004403C9 /* NSTimerAdditions.m */,
+				1145C52B1EF4D21300988ABE /* ViewDeckAdditions.h */,
+				1145C52C1EF4D21300988ABE /* ViewDeckAdditions.m */,
 			);
 			path = Addition;
 			sourceTree = "<group>";
@@ -798,6 +813,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				117FD7441EDECA76003A60B1 /* BaseViewPage.m in Sources */,
+				1145C5271EF4CDB400988ABE /* SideAboutPage.m in Sources */,
 				11AC581F1EE4EE69003D12EB /* TaskBlankView.m in Sources */,
 				11EF7AA91EE7CB6B004403C9 /* NSTimerAdditions.m in Sources */,
 				117FD7531EDECB36003A60B1 /* UIImageAdditions.m in Sources */,
@@ -816,6 +832,7 @@
 				117FD75E1EDECBD6003A60B1 /* Globals.m in Sources */,
 				112D4FC31EDF988F00B5026E /* DeviceManager.m in Sources */,
 				117FD70D1EDEC2B9003A60B1 /* main.m in Sources */,
+				1145C52D1EF4D21300988ABE /* ViewDeckAdditions.m in Sources */,
 				11C2F6181EE3B24C008ED62F /* TaskEditPage.m in Sources */,
 				117FD7471EDECA9F003A60B1 /* BaseAlertPage.m in Sources */,
 				11AC58271EE4F245003D12EB /* TaskCell.m in Sources */,
@@ -856,6 +873,7 @@
 				112D4FE21EDFAE5300B5026E /* BaseView.m in Sources */,
 				117FD74D1EDECAF4003A60B1 /* BaseListViewPage.m in Sources */,
 				113227081EE6987400E1D0C4 /* DeviceSearchButton.m in Sources */,
+				1145C52A1EF4CDCC00988ABE /* SideSettingPage.m in Sources */,
 				11C2F6151EE3B236008ED62F /* TaskListPage.m in Sources */,
 				112387981EF3C1CA0030DC50 /* DevicePasswordEditPage.m in Sources */,
 				112D50001EDFC59900B5026E /* DevicePopButton.m in Sources */,

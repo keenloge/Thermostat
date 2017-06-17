@@ -10,7 +10,7 @@
 #import "BaseNavigationPage.h"
 #import "DeviceListPage.h"
 #import "SideMenuPage.h"
-#import <ViewDeck.h>
+#import "ViewDeckAdditions.h"
 
 @interface AppDelegate ()
 
@@ -28,7 +28,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 
     // 首页
@@ -40,7 +39,6 @@
     
     // 侧滑控件
     self.deckPage = [[IIViewDeckController alloc] initWithCenterViewController:navigationPage leftViewController:self.menuPage];
-    
     
     self.window.rootViewController = self.deckPage;
     [self.window makeKeyAndVisible];
