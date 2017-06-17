@@ -46,6 +46,8 @@
 		113226FF1EE6454100E1D0C4 /* LanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 113226FE1EE6454100E1D0C4 /* LanguageManager.m */; };
 		113227021EE65B3800E1D0C4 /* HomeBin.strings in Resources */ = {isa = PBXBuildFile; fileRef = 113227041EE65B3800E1D0C4 /* HomeBin.strings */; };
 		113227081EE6987400E1D0C4 /* DeviceSearchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 113227071EE6987400E1D0C4 /* DeviceSearchButton.m */; };
+		1145C5211EF4AD2B00988ABE /* SideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5201EF4AD2B00988ABE /* SideMenuCell.m */; };
+		1145C5241EF4B71000988ABE /* BaseGradientLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */; };
 		117FD70D1EDEC2B9003A60B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD70C1EDEC2B9003A60B1 /* main.m */; };
 		117FD7101EDEC2B9003A60B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD70F1EDEC2B9003A60B1 /* AppDelegate.m */; };
 		117FD7181EDEC2B9003A60B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 117FD7171EDEC2B9003A60B1 /* Assets.xcassets */; };
@@ -156,6 +158,10 @@
 		113227051EE65B3A00E1D0C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HomeBin.strings; sourceTree = "<group>"; };
 		113227061EE6987400E1D0C4 /* DeviceSearchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceSearchButton.h; sourceTree = "<group>"; };
 		113227071EE6987400E1D0C4 /* DeviceSearchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceSearchButton.m; sourceTree = "<group>"; };
+		1145C51F1EF4AD2B00988ABE /* SideMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuCell.h; sourceTree = "<group>"; };
+		1145C5201EF4AD2B00988ABE /* SideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuCell.m; sourceTree = "<group>"; };
+		1145C5221EF4B71000988ABE /* BaseGradientLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseGradientLayerView.h; sourceTree = "<group>"; };
+		1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseGradientLayerView.m; sourceTree = "<group>"; };
 		117FD7081EDEC2B9003A60B1 /* Thermostat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thermostat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		117FD70C1EDEC2B9003A60B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		117FD70E1EDEC2B9003A60B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -323,8 +329,27 @@
 				11FA113B1EE0F0130017948D /* BaseIconCell.m */,
 				1126D07E1EF2887000BE5289 /* BaseCell.h */,
 				1126D07F1EF2887000BE5289 /* BaseCell.m */,
+				1145C5221EF4B71000988ABE /* BaseGradientLayerView.h */,
+				1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		1145C51D1EF4ACF400988ABE /* Side */ = {
+			isa = PBXGroup;
+			children = (
+				1145C51E1EF4AD0700988ABE /* Cell */,
+			);
+			path = Side;
+			sourceTree = "<group>";
+		};
+		1145C51E1EF4AD0700988ABE /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				1145C51F1EF4AD2B00988ABE /* SideMenuCell.h */,
+				1145C5201EF4AD2B00988ABE /* SideMenuCell.m */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		117FD6FF1EDEC2B9003A60B1 = {
@@ -511,6 +536,7 @@
 		117FD72B1EDEC7CE003A60B1 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1145C51D1EF4ACF400988ABE /* Side */,
 				112D4FDF1EDFAE4500B5026E /* Base */,
 				117FD72C1EDEC7CE003A60B1 /* Device */,
 				117FD72D1EDEC7CE003A60B1 /* Public */,
@@ -731,7 +757,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		74DC20A74B063B53EB04B540 /* [CP] Embed Pods Frameworks */ = {
@@ -822,6 +848,7 @@
 				112D4FDE1EDFAE1600B5026E /* DeviceBlankView.m in Sources */,
 				112D4FC61EDF989D00B5026E /* Device.m in Sources */,
 				112D500C1EE01CA700B5026E /* DeviceControlView.m in Sources */,
+				1145C5241EF4B71000988ABE /* BaseGradientLayerView.m in Sources */,
 				112D50181EE01EB900B5026E /* MenuControlView.m in Sources */,
 				1123879F1EF3DE000030DC50 /* SideMenuPage.m in Sources */,
 				112D50151EE01E3D00B5026E /* TemperatureControlView.m in Sources */,
@@ -833,6 +860,7 @@
 				112387981EF3C1CA0030DC50 /* DevicePasswordEditPage.m in Sources */,
 				112D50001EDFC59900B5026E /* DevicePopButton.m in Sources */,
 				112D4FC01EDF987700B5026E /* DeviceListPage.m in Sources */,
+				1145C5211EF4AD2B00988ABE /* SideMenuCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,11 +10,13 @@
 #import "BaseNavigationPage.h"
 #import "DeviceListPage.h"
 #import "SideMenuPage.h"
+#import <ViewDeck.h>
 
 @interface AppDelegate ()
 
 @property (nonatomic, strong) DeviceListPage *homePage;
 @property (nonatomic, strong) SideMenuPage *menuPage;
+@property (nonatomic, strong) IIViewDeckController *deckPage;
 
 @end
 
@@ -28,10 +30,6 @@
     // Override point for customization after application launch.
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//    id homePage = [[DeviceListPage alloc] init];
-//    id navCon = [[BaseNavigationPage alloc] initWithRootViewController:homePage];
-//    self.window.rootViewController = navCon;
-//    [self.window makeKeyAndVisible];
 
     // 首页
     self.homePage = [[DeviceListPage alloc] init];
@@ -41,16 +39,10 @@
     self.menuPage = [[SideMenuPage alloc] init];
     
     // 侧滑控件
-    self.revealPage = [[SWRevealViewController alloc] initWithRearViewController:self.menuPage frontViewController:navigationPage];
+    self.deckPage = [[IIViewDeckController alloc] initWithCenterViewController:navigationPage leftViewController:self.menuPage];
     
-    //浮动层离左边距的宽度
-    self.revealPage.rearViewRevealWidth = 260;
     
-    //是否让浮动层弹回原位
-    //mainRevealController.bounceBackOnOverdraw = NO;
-    [self.revealPage setFrontViewPosition:FrontViewPositionLeft animated:YES];
-    
-    self.window.rootViewController = self.revealPage;
+    self.window.rootViewController = self.deckPage;
     [self.window makeKeyAndVisible];
 
     return YES;
