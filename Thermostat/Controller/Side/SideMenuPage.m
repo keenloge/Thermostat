@@ -109,8 +109,7 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
         
         _menuTableView.rowHeight = 57.0;
         _menuTableView.scrollEnabled = NO;
-        _menuTableView.separatorColor = HB_COLOR_BASE_WHITE;
-        _menuTableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+        _menuTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _menuTableView.tableFooterView = [UIView new];
         _menuTableView.dataSource = self;
         _menuTableView.delegate = self;
@@ -143,6 +142,17 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
         effectView.frame = backgroundImageView.bounds;
         [backgroundImageView addSubview:effectView];
         effectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        
+        UIView *cutLineBottomView = [UIView new];
+        [_contentHeaderView addSubview:cutLineBottomView];
+        
+        cutLineBottomView.backgroundColor = UIColorFromHex(0xe0e0e0);
+        
+        [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.right.mas_equalTo(0);
+            make.height.mas_equalTo(1);
+        }];
+
     }
     return _contentHeaderView;
 }

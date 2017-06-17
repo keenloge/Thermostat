@@ -51,6 +51,9 @@
 		1145C5271EF4CDB400988ABE /* SideAboutPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5261EF4CDB400988ABE /* SideAboutPage.m */; };
 		1145C52A1EF4CDCC00988ABE /* SideSettingPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5291EF4CDCC00988ABE /* SideSettingPage.m */; };
 		1145C52D1EF4D21300988ABE /* ViewDeckAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C52C1EF4D21300988ABE /* ViewDeckAdditions.m */; };
+		1145C5391EF4FC8200988ABE /* SideSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5381EF4FC8200988ABE /* SideSettingCell.m */; };
+		1145C53C1EF4FCAC00988ABE /* SideSettingSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C53B1EF4FCAC00988ABE /* SideSettingSwitchCell.m */; };
+		1145C53F1EF4FD1C00988ABE /* SideSettingCheckCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C53E1EF4FD1C00988ABE /* SideSettingCheckCell.m */; };
 		117FD70D1EDEC2B9003A60B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD70C1EDEC2B9003A60B1 /* main.m */; };
 		117FD7101EDEC2B9003A60B1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD70F1EDEC2B9003A60B1 /* AppDelegate.m */; };
 		117FD7181EDEC2B9003A60B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 117FD7171EDEC2B9003A60B1 /* Assets.xcassets */; };
@@ -171,6 +174,12 @@
 		1145C5291EF4CDCC00988ABE /* SideSettingPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideSettingPage.m; sourceTree = "<group>"; };
 		1145C52B1EF4D21300988ABE /* ViewDeckAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewDeckAdditions.h; sourceTree = "<group>"; };
 		1145C52C1EF4D21300988ABE /* ViewDeckAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewDeckAdditions.m; sourceTree = "<group>"; };
+		1145C5371EF4FC8200988ABE /* SideSettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideSettingCell.h; sourceTree = "<group>"; };
+		1145C5381EF4FC8200988ABE /* SideSettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideSettingCell.m; sourceTree = "<group>"; };
+		1145C53A1EF4FCAC00988ABE /* SideSettingSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideSettingSwitchCell.h; sourceTree = "<group>"; };
+		1145C53B1EF4FCAC00988ABE /* SideSettingSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideSettingSwitchCell.m; sourceTree = "<group>"; };
+		1145C53D1EF4FD1C00988ABE /* SideSettingCheckCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideSettingCheckCell.h; sourceTree = "<group>"; };
+		1145C53E1EF4FD1C00988ABE /* SideSettingCheckCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideSettingCheckCell.m; sourceTree = "<group>"; };
 		117FD7081EDEC2B9003A60B1 /* Thermostat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thermostat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		117FD70C1EDEC2B9003A60B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		117FD70E1EDEC2B9003A60B1 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -361,6 +370,12 @@
 			children = (
 				1145C51F1EF4AD2B00988ABE /* SideMenuCell.h */,
 				1145C5201EF4AD2B00988ABE /* SideMenuCell.m */,
+				1145C5371EF4FC8200988ABE /* SideSettingCell.h */,
+				1145C5381EF4FC8200988ABE /* SideSettingCell.m */,
+				1145C53A1EF4FCAC00988ABE /* SideSettingSwitchCell.h */,
+				1145C53B1EF4FCAC00988ABE /* SideSettingSwitchCell.m */,
+				1145C53D1EF4FD1C00988ABE /* SideSettingCheckCell.h */,
+				1145C53E1EF4FD1C00988ABE /* SideSettingCheckCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -820,6 +835,7 @@
 				11AC583C1EE50B4E003D12EB /* TemperaturePickerPage.m in Sources */,
 				11AC58231EE4EF36003D12EB /* TaskBlankButton.m in Sources */,
 				117FD7101EDEC2B9003A60B1 /* AppDelegate.m in Sources */,
+				1145C53F1EF4FD1C00988ABE /* SideSettingCheckCell.m in Sources */,
 				11AC583F1EE50B66003D12EB /* EnumPickerPage.m in Sources */,
 				11FA11391EE0EEE60017948D /* ControlTabButton.m in Sources */,
 				112D4FFA1EDFB74D00B5026E /* BaseLabel.m in Sources */,
@@ -843,6 +859,7 @@
 				11AC58331EE50417003D12EB /* TaskSwitchCell.m in Sources */,
 				117FD76B1EDECE2C003A60B1 /* BannerView.m in Sources */,
 				112D50061EE00EB700B5026E /* NotifyTarget.m in Sources */,
+				1145C53C1EF4FCAC00988ABE /* SideSettingSwitchCell.m in Sources */,
 				11FA11421EE0F0670017948D /* SettingArrowCell.m in Sources */,
 				11FA113C1EE0F0130017948D /* BaseIconCell.m in Sources */,
 				1126D0801EF2887000BE5289 /* BaseCell.m in Sources */,
@@ -855,6 +872,7 @@
 				11AC58361EE50434003D12EB /* TaskPickCell.m in Sources */,
 				1126D07D1EF2875900BE5289 /* InfoButton.m in Sources */,
 				117FD7661EDECD92003A60B1 /* DeviceCell.m in Sources */,
+				1145C5391EF4FC8200988ABE /* SideSettingCell.m in Sources */,
 				11AC58301EE503FB003D12EB /* TaskRepeatCell.m in Sources */,
 				11AC58391EE50B3B003D12EB /* TimePickerPage.m in Sources */,
 				112D4FF41EDFB4BF00B5026E /* DeviceControlPage.m in Sources */,

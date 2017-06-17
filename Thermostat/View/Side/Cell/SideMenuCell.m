@@ -19,6 +19,7 @@ const CGFloat KSideMenuCellIconSize     = 18.0;
 @property (nonatomic, strong) UIImageView *iconImageView;
 @property (nonatomic, strong) UILabel *mainTitleLabel;
 @property (nonatomic, strong) UIImageView *arrowImageView;
+@property (nonatomic, strong) UIView *cutLineView;
 
 @end
 
@@ -37,6 +38,7 @@ const CGFloat KSideMenuCellIconSize     = 18.0;
     self.iconImageView.opaque = YES;
     self.mainTitleLabel.opaque = YES;
     self.arrowImageView.opaque = YES;
+    self.cutLineView.opaque = YES;
 }
 
 #pragma mark - Setter
@@ -122,6 +124,21 @@ const CGFloat KSideMenuCellIconSize     = 18.0;
         }];
     }
     return _arrowImageView;
+}
+
+- (UIView *)cutLineView {
+    if (!_cutLineView) {
+        _cutLineView = [UIView new];
+        [self addSubview:_cutLineView];
+        
+        _cutLineView.backgroundColor = UIColorFromHex(0xe0e0e0);
+        
+        [_cutLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.right.mas_equalTo(0);
+            make.height.mas_equalTo(1);
+        }];
+    }
+    return _cutLineView;
 }
 
 @end
