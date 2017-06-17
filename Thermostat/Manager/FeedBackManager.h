@@ -15,4 +15,22 @@
 
 + (instancetype)sharedManager;
 
+
+/**
+ 点击
+ */
+- (void)vibrateSoundClick;
+
+
+/**
+ 开机
+ */
+- (void)vibrateSoundTurnOn;
+
+
+/**
+ 关机
+ */
+- (void)vibrateSoundTurnOff;
+
 @end

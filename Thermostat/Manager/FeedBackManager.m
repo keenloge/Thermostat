@@ -6,6 +6,7 @@
 //  Copyright © 2017年 GalaxyWind. All rights reserved.
 //
 
+#import <AudioToolbox/AudioToolbox.h>
 #import "FeedBackManager.h"
 
 #define FEEDBACK_SOUND_SET      @"FeedBack_Sound"
@@ -80,6 +81,33 @@ static FeedBackManager *_currentFeedBackManager;
     
     [[NSUserDefaults standardUserDefaults] setBool:_vibrate forKey:FEEDBACK_VIBRATE_SET];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)vibrateSoundClick {
+    [self vibrateIfNeeded];
+    [self playSoundIfNeeded:1114];
+}
+
+- (void)vibrateSoundTurnOn {
+    [self vibrateIfNeeded];
+    [self playSoundIfNeeded:1109];
+}
+
+- (void)vibrateSoundTurnOff {
+    [self vibrateIfNeeded];
+    [self playSoundIfNeeded:1110];
+}
+
+- (void)vibrateIfNeeded {
+    if (self.isVibrate) {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    }
+}
+
+- (void)playSoundIfNeeded:(SystemSoundID)value {
+    if (self.isSound) {
+        AudioServicesPlaySystemSound(value);
+    }
 }
 
 @end

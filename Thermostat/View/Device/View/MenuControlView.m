@@ -12,6 +12,7 @@
 #import "DeviceManager.h"
 #import "Device.h"
 #import "Declare.h"
+#import "FeedBackManager.h"
 
 @interface MenuControlView () {
     CGFloat offsetX;
@@ -65,17 +66,28 @@
 
 - (void)buttonPressed:(UIButton *)sender {
     if (sender == self.runningButton) {
+        if (self.device.running == RunningStateON) {
+            // 关机
+            [[FeedBackManager sharedManager] vibrateSoundTurnOff];
+        } else {
+            // 开机
+            [[FeedBackManager sharedManager] vibrateSoundTurnOn];
+        }
         [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceRunning value:@(self.device.switchRunning)];
-    } else if (sender == self.modeButton) {
-        [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceMode value:@(self.device.switchMode)];
-    } else if (sender == self.windButton) {
-        [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceWind value:@(self.device.switchWind)];
-    } else if (sender == self.sceneButton) {
-        [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceScene value:@(self.device.switchScene)];
-    } else if (sender == self.lockButton) {
-        [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceLock value:@(!self.device.lock)];
-    } else if (sender == self.timerButton) {
-        [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceDelay value:@(self.device.switchDelay)];
+    } else {
+        [[FeedBackManager sharedManager] vibrateSoundClick];
+
+        if (sender == self.modeButton) {
+            [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceMode value:@(self.device.switchMode)];
+        } else if (sender == self.windButton) {
+            [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceWind value:@(self.device.switchWind)];
+        } else if (sender == self.sceneButton) {
+            [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceScene value:@(self.device.switchScene)];
+        } else if (sender == self.lockButton) {
+            [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceLock value:@(!self.device.lock)];
+        } else if (sender == self.timerButton) {
+            [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceDelay value:@(self.device.switchDelay)];
+        }
     }
 }
 
