@@ -13,6 +13,7 @@
 #import "SettingFooterView.h"
 #import "SettingSwitchCell.h"
 #import "SettingArrowCell.h"
+#import "LinKonPopView.h"
 #import "TaskListPage.h"
 #import "DeviceManager.h"
 #import "Device.h"
@@ -49,6 +50,7 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
 @property (nonatomic, strong) ControlTabButton *settingButton;
 @property (nonatomic, strong) UITableView *settingTableView;
 
+@property (nonatomic, strong) LinKonPopView *popView;
 
 @property (nonatomic, assign) NSInteger selectedIndex;
 
@@ -67,7 +69,6 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.navigationItem.hidesBackButton = YES;
-    [self addBarButtonItemBackWithAction:@selector(barButtonItemLeftPressed:)];
     self.selectedIndex = ControlTabButtonTagControl;
 }
 
@@ -183,6 +184,10 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
     }];
 }
 
+- (void)barButtonItemRightPressed:(id)sender {
+    self.popView.hidden = NO;
+}
+
 - (void)baseButtonPressed:(UIButton *)sender {
     self.selectedIndex = sender.tag;
 }
@@ -196,14 +201,17 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
     self.settingButton.selected = _selectedIndex == self.settingButton.tag;
     
     if (index == ControlTabButtonTagSetting) {
+        [self.view bringSubviewToFront:self.settingTableView];
         self.settingTableView.hidden = NO;
         self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItem = nil;
         self.navigationItem.title = KString(@"智能设置");
     } else {
         if (_settingTableView) {
             self.settingTableView.hidden = YES;
         }
         [self addBarButtonItemBackWithAction:@selector(barButtonItemLeftPressed:)];
+        [self addBarButtonItemRightNormalImageName:@"nav_add_blank" hightLited:nil];
         
         WeakObj(self);
         [[DeviceManager sharedManager] registerListener:self device:self.sn key:KDeviceNickname block:^(NSObject *object) {
@@ -303,6 +311,24 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
         
     }
     return _settingTableView;
+}
+
+- (LinKonPopView *)popView {
+    if (!_popView) {
+        _popView = [LinKonPopView new];
+        [self.view addSubview:_popView];
+        
+        WeakObj(self);
+        _popView.popBlock = ^(NSInteger index) {
+            selfWeak.messageNotify = @"24小时曲线";
+        };
+        
+        [_popView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.mas_equalTo(0);
+            make.bottom.equalTo(selfWeak.tabView.mas_top);
+        }];
+    }
+    return _popView;
 }
 
 @end

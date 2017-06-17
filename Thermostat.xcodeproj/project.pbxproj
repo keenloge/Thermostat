@@ -48,6 +48,8 @@
 		113227081EE6987400E1D0C4 /* DeviceSearchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 113227071EE6987400E1D0C4 /* DeviceSearchButton.m */; };
 		113B902F1EF5183600E96617 /* TemperatureUnitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B902E1EF5183600E96617 /* TemperatureUnitManager.m */; };
 		113B90321EF51C4E00E96617 /* FeedBackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B90311EF51C4E00E96617 /* FeedBackManager.m */; };
+		113B90351EF53AA800E96617 /* LinKonPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B90341EF53AA800E96617 /* LinKonPopView.m */; };
+		113B90381EF55C7900E96617 /* LinKonPopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B90371EF55C7900E96617 /* LinKonPopCell.m */; };
 		1145C5211EF4AD2B00988ABE /* SideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5201EF4AD2B00988ABE /* SideMenuCell.m */; };
 		1145C5241EF4B71000988ABE /* BaseGradientLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */; };
 		1145C5271EF4CDB400988ABE /* SideAboutPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5261EF4CDB400988ABE /* SideAboutPage.m */; };
@@ -170,6 +172,10 @@
 		113B902E1EF5183600E96617 /* TemperatureUnitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemperatureUnitManager.m; sourceTree = "<group>"; };
 		113B90301EF51C4E00E96617 /* FeedBackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackManager.h; sourceTree = "<group>"; };
 		113B90311EF51C4E00E96617 /* FeedBackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackManager.m; sourceTree = "<group>"; };
+		113B90331EF53AA800E96617 /* LinKonPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinKonPopView.h; sourceTree = "<group>"; };
+		113B90341EF53AA800E96617 /* LinKonPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonPopView.m; sourceTree = "<group>"; };
+		113B90361EF55C7900E96617 /* LinKonPopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinKonPopCell.h; sourceTree = "<group>"; };
+		113B90371EF55C7900E96617 /* LinKonPopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonPopCell.m; sourceTree = "<group>"; };
 		1145C51F1EF4AD2B00988ABE /* SideMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuCell.h; sourceTree = "<group>"; };
 		1145C5201EF4AD2B00988ABE /* SideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuCell.m; sourceTree = "<group>"; };
 		1145C5221EF4B71000988ABE /* BaseGradientLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseGradientLayerView.h; sourceTree = "<group>"; };
@@ -338,6 +344,8 @@
 				112D50141EE01E3D00B5026E /* TemperatureControlView.m */,
 				112D50161EE01EB900B5026E /* MenuControlView.h */,
 				112D50171EE01EB900B5026E /* MenuControlView.m */,
+				113B90331EF53AA800E96617 /* LinKonPopView.h */,
+				113B90341EF53AA800E96617 /* LinKonPopView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -624,6 +632,8 @@
 				11FA113E1EE0F0560017948D /* SettingSwitchCell.m */,
 				11FA11401EE0F0670017948D /* SettingArrowCell.h */,
 				11FA11411EE0F0670017948D /* SettingArrowCell.m */,
+				113B90361EF55C7900E96617 /* LinKonPopCell.h */,
+				113B90371EF55C7900E96617 /* LinKonPopCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -871,9 +881,11 @@
 				112D50061EE00EB700B5026E /* NotifyTarget.m in Sources */,
 				1145C53C1EF4FCAC00988ABE /* SideSettingSwitchCell.m in Sources */,
 				11FA11421EE0F0670017948D /* SettingArrowCell.m in Sources */,
+				113B90351EF53AA800E96617 /* LinKonPopView.m in Sources */,
 				11FA113C1EE0F0130017948D /* BaseIconCell.m in Sources */,
 				1126D0801EF2887000BE5289 /* BaseCell.m in Sources */,
 				1123879B1EF3DBAF0030DC50 /* DeviceInputPage.m in Sources */,
+				113B90381EF55C7900E96617 /* LinKonPopCell.m in Sources */,
 				112D4FEB1EDFB48B00B5026E /* DeviceSearchPage.m in Sources */,
 				11C2F61B1EE3B284008ED62F /* Task.m in Sources */,
 				112387951EF3C1AF0030DC50 /* DeviceNicknameEditPage.m in Sources */,
