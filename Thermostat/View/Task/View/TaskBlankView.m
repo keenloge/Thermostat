@@ -52,7 +52,7 @@ const CGFloat TaskBlankSubTitleCenterYScale = 543.0 / 2016.0;
 #pragma mark - 界面刷新
 
 - (void)baseInitialiseSubViews {
-    if ([[[LanguageManager sharedManager] currentLanguage] isEqualToString:@"en"]) {
+    if ([LanguageManager sharedManager].typeLanguage == LanguageTypeEnglish) {
         self.singleTitleLabel.opaque = YES;
     } else {
         self.contentMainTitleView.opaque = YES;

@@ -10,4 +10,7 @@
 
 @interface SideSettingSwitchCell : SideSettingCell
 
+@property (nonatomic, assign) BOOL open;
+@property (nonatomic, copy) void(^switchBlock)(BOOL value);
+
 @end

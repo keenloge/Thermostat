@@ -14,6 +14,7 @@
 "定时" = "Timer";
 "添加定时器" = "Add";
 "修改定时器" = "Edit";
+"系统设置" = "System Settings";
 
 // 文本
 "序列号" = "SSID";
@@ -37,6 +38,13 @@
 "情景" = "Scene";
 "至" = "To";
 "关" = "OFF";
+"控制反馈" = "Feedback";
+"声音" = "Sound";
+"振动" = "Vibrate";
+"温度单位" = "Temperature Scale";
+"摄氏度" = "Centigrade";
+"华氏度" = "Fahrenheit";
+"语言设置" = "Language Settings";
 
 // 按钮
 "确定" = "Confirm";

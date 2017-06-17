@@ -10,14 +10,17 @@
 
 #define KNotificationNameSwitchLanguage @"SwitchLanguage"
 
+typedef NS_ENUM(NSInteger, LanguageType) {
+    LanguageTypeEnglish,
+    LanguageTypeChinese,
+};
+
 @interface LanguageManager : NSObject
+
+@property (nonatomic, assign) LanguageType typeLanguage;
 
 + (instancetype)sharedManager;
 
-- (void)switchLanguage;
-
 - (NSString *)getStringForKey:(NSString *)key withTable:(NSString *)table;
-
-- (NSString *)currentLanguage;
 
 @end

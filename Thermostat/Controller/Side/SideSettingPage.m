@@ -9,6 +9,8 @@
 #import "SideSettingPage.h"
 #import "SideSettingSwitchCell.h"
 #import "SideSettingCheckCell.h"
+#import "TemperatureUnitManager.h"
+#import "FeedBackManager.h"
 
 @interface SideSettingPage ()
 
@@ -19,7 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.title = KString(@"系统设置");
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,6 +41,11 @@
 - (void)baseInitialiseSubViews {
     self.baseTableView.rowHeight = 54.0;
     self.baseTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+}
+
+- (void)baseRestLanguage {
+    self.navigationItem.title = KString(@"系统设置");
+    [self.baseTableView reloadData];
 }
 
 #pragma mark - UITableViewDataSource
@@ -110,10 +116,21 @@
             cell = [[SideSettingSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierSwitchCell];
         }
         
+        WeakObj(self);
         if (indexPath.row == 0) {
             cell.titleString = KString(@"声音");
+            cell.open = [FeedBackManager sharedManager].isSound;
+            cell.switchBlock = ^(BOOL value) {
+                [FeedBackManager sharedManager].sound = value;
+                [selfWeak.baseTableView reloadData];
+            };
         } else if (indexPath.row == 1) {
             cell.titleString = KString(@"振动");
+            cell.open = [FeedBackManager sharedManager].isVibrate;
+            cell.switchBlock = ^(BOOL value) {
+                [FeedBackManager sharedManager].vibrate = value;
+                [selfWeak.baseTableView reloadData];
+            };
         }
         
         return cell;
@@ -122,20 +139,32 @@
         SideSettingCheckCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCheckCell];
         if (cell == nil) {
             cell = [[SideSettingCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierCheckCell];
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
         
+        cell.accessoryType = UITableViewCellAccessoryNone;
         if (indexPath.section == 1) {
             if (indexPath.row == 0) {
                 cell.titleString = KString(@"摄氏度");
+                if ([TemperatureUnitManager sharedManager].unitType == TemperatureUnitTypeCentigrade) {
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                }
             } else if (indexPath.row == 1) {
                 cell.titleString = KString(@"华氏度");
+                if ([TemperatureUnitManager sharedManager].unitType == TemperatureUnitTypeFahrenheit) {
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                }
             }
         } else if (indexPath.section == 2) {
             if (indexPath.row == 0) {
                 cell.titleString = KString(@"简体中文");
+                if ([LanguageManager sharedManager].typeLanguage == LanguageTypeChinese) {
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                }
             } else if (indexPath.row == 1) {
                 cell.titleString = KString(@"English");
+                if ([LanguageManager sharedManager].typeLanguage == LanguageTypeEnglish) {
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                }
             }
         }
         
@@ -155,6 +184,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            [TemperatureUnitManager sharedManager].unitType = TemperatureUnitTypeCentigrade;
+        } else if (indexPath.row == 1) {
+            [TemperatureUnitManager sharedManager].unitType = TemperatureUnitTypeFahrenheit;
+        }
+        [self.baseTableView reloadData];
+    } else if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            [LanguageManager sharedManager].typeLanguage = LanguageTypeChinese;
+        } else if (indexPath.row == 1) {
+            [LanguageManager sharedManager].typeLanguage = LanguageTypeEnglish;
+        }
+    }
 }
 
 

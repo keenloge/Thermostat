@@ -46,6 +46,8 @@
 		113226FF1EE6454100E1D0C4 /* LanguageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 113226FE1EE6454100E1D0C4 /* LanguageManager.m */; };
 		113227021EE65B3800E1D0C4 /* HomeBin.strings in Resources */ = {isa = PBXBuildFile; fileRef = 113227041EE65B3800E1D0C4 /* HomeBin.strings */; };
 		113227081EE6987400E1D0C4 /* DeviceSearchButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 113227071EE6987400E1D0C4 /* DeviceSearchButton.m */; };
+		113B902F1EF5183600E96617 /* TemperatureUnitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B902E1EF5183600E96617 /* TemperatureUnitManager.m */; };
+		113B90321EF51C4E00E96617 /* FeedBackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B90311EF51C4E00E96617 /* FeedBackManager.m */; };
 		1145C5211EF4AD2B00988ABE /* SideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5201EF4AD2B00988ABE /* SideMenuCell.m */; };
 		1145C5241EF4B71000988ABE /* BaseGradientLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */; };
 		1145C5271EF4CDB400988ABE /* SideAboutPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5261EF4CDB400988ABE /* SideAboutPage.m */; };
@@ -164,6 +166,10 @@
 		113227051EE65B3A00E1D0C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/HomeBin.strings; sourceTree = "<group>"; };
 		113227061EE6987400E1D0C4 /* DeviceSearchButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceSearchButton.h; sourceTree = "<group>"; };
 		113227071EE6987400E1D0C4 /* DeviceSearchButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceSearchButton.m; sourceTree = "<group>"; };
+		113B902D1EF5183600E96617 /* TemperatureUnitManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemperatureUnitManager.h; sourceTree = "<group>"; };
+		113B902E1EF5183600E96617 /* TemperatureUnitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TemperatureUnitManager.m; sourceTree = "<group>"; };
+		113B90301EF51C4E00E96617 /* FeedBackManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackManager.h; sourceTree = "<group>"; };
+		113B90311EF51C4E00E96617 /* FeedBackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackManager.m; sourceTree = "<group>"; };
 		1145C51F1EF4AD2B00988ABE /* SideMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuCell.h; sourceTree = "<group>"; };
 		1145C5201EF4AD2B00988ABE /* SideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuCell.m; sourceTree = "<group>"; };
 		1145C5221EF4B71000988ABE /* BaseGradientLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseGradientLayerView.h; sourceTree = "<group>"; };
@@ -534,6 +540,10 @@
 			children = (
 				113226FD1EE6454100E1D0C4 /* LanguageManager.h */,
 				113226FE1EE6454100E1D0C4 /* LanguageManager.m */,
+				113B902D1EF5183600E96617 /* TemperatureUnitManager.h */,
+				113B902E1EF5183600E96617 /* TemperatureUnitManager.m */,
+				113B90301EF51C4E00E96617 /* FeedBackManager.h */,
+				113B90311EF51C4E00E96617 /* FeedBackManager.m */,
 				112D4FC11EDF988F00B5026E /* DeviceManager.h */,
 				112D4FC21EDF988F00B5026E /* DeviceManager.m */,
 				11C2F61C1EE3F13B008ED62F /* TaskManager.h */,
@@ -879,6 +889,7 @@
 				117FD7561EDECB6A003A60B1 /* UILabelAdditions.m in Sources */,
 				112D4FE81EDFAF3E00B5026E /* BaseButton.m in Sources */,
 				112D4FF71EDFB4E000B5026E /* DevicePopPage.m in Sources */,
+				113B90321EF51C4E00E96617 /* FeedBackManager.m in Sources */,
 				117FD7411EDECA5C003A60B1 /* BaseNavigationPage.m in Sources */,
 				112D4FDE1EDFAE1600B5026E /* DeviceBlankView.m in Sources */,
 				112D4FC61EDF989D00B5026E /* Device.m in Sources */,
@@ -893,6 +904,7 @@
 				113227081EE6987400E1D0C4 /* DeviceSearchButton.m in Sources */,
 				1145C52A1EF4CDCC00988ABE /* SideSettingPage.m in Sources */,
 				11C2F6151EE3B236008ED62F /* TaskListPage.m in Sources */,
+				113B902F1EF5183600E96617 /* TemperatureUnitManager.m in Sources */,
 				112387981EF3C1CA0030DC50 /* DevicePasswordEditPage.m in Sources */,
 				112D50001EDFC59900B5026E /* DevicePopButton.m in Sources */,
 				112D4FC01EDF987700B5026E /* DeviceListPage.m in Sources */,

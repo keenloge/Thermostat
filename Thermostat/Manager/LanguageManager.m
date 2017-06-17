@@ -23,6 +23,8 @@ static LanguageManager *_currentLanguageManager;
 
 @implementation LanguageManager
 
+@synthesize typeLanguage = _typeLanguage;
+
 #pragma mark - 单例
 
 + (instancetype)allocWithZone:(struct _NSZone *)zone {
@@ -64,22 +66,6 @@ static LanguageManager *_currentLanguageManager;
     return _language;
 }
 
-- (void)switchLanguage {
-    if ([self.language isEqualToString:LANGUAGE_English]) {
-        // 切换到中文
-        [[NSUserDefaults standardUserDefaults] setObject:@[LANGUAGE_Chinese] forKey:LANGUAGE_SET];
-    } else {
-        // 切换到英文
-        [[NSUserDefaults standardUserDefaults] setObject:@[LANGUAGE_English] forKey:LANGUAGE_SET];
-    }
-
-    self.language = nil;
-    self.bundle = nil;
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    [[NSNotificationCenter defaultCenter] postNotificationName:KNotificationNameSwitchLanguage object:nil];
-}
-
 - (NSString *)getStringForKey:(NSString *)key withTable:(NSString *)table {
     if (!table) {
         table = @"HomeBin";
@@ -92,6 +78,32 @@ static LanguageManager *_currentLanguageManager;
 
 - (NSString *)currentLanguage {
     return [self.language copy];
+}
+
+- (LanguageType)typeLanguage {
+    if ([self.language isEqualToString:LANGUAGE_English]) {
+        _typeLanguage = LanguageTypeEnglish;
+    } else {
+        _typeLanguage = LanguageTypeChinese;
+    }
+    return _typeLanguage;
+}
+
+- (void)setTypeLanguage:(LanguageType)typeLanguage {
+    if (typeLanguage != self.typeLanguage) {
+        _typeLanguage = typeLanguage;
+        
+        if (_typeLanguage == LanguageTypeEnglish) {
+            [[NSUserDefaults standardUserDefaults] setObject:@[LANGUAGE_English] forKey:LANGUAGE_SET];
+        } else {
+            [[NSUserDefaults standardUserDefaults] setObject:@[LANGUAGE_Chinese] forKey:LANGUAGE_SET];
+        }
+        self.language = nil;
+        self.bundle = nil;
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[NSNotificationCenter defaultCenter] postNotificationName:KNotificationNameSwitchLanguage object:nil];
+    }
 }
 
 @end
