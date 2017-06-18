@@ -186,4 +186,22 @@ typedef NS_ENUM(NSInteger, LinKonTimerTaskType) {
     LinKonTimerTaskTypeStage   = 2,
 };
 
+
+/**
+ 林肯温控器属性组
+
+ - LinKonPropertyGroupNone: 无
+ - LinKonPropertyGroupBinding: 绑定
+ - LinKonPropertyGroupState: 状态
+ - LinKonPropertyGroupSetting: 设置
+ - LinKonPropertyGroupTimer: 定时器
+ */
+typedef NS_ENUM(Byte, LinKonPropertyGroup) {
+    LinKonPropertyGroupNone     = 0,
+    LinKonPropertyGroupBinding  = 1 << 0,
+    LinKonPropertyGroupState    = 1 << 1,
+    LinKonPropertyGroupSetting  = 1 << 2,
+    LinKonPropertyGroupTimer    = 1 << 3,
+};
+
 #endif /* Declare_h */

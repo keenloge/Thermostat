@@ -22,11 +22,11 @@
 //    return _keyArray;
 //}
 
-- (NSMutableDictionary *)blockDictionary {
-    if (!_blockDictionary) {
-        _blockDictionary = [NSMutableDictionary dictionary];
-    }
-    return _blockDictionary;
-}
+//- (NSMutableDictionary *)blockDictionary {
+//    if (!_blockDictionary) {
+//        _blockDictionary = [NSMutableDictionary dictionary];
+//    }
+//    return _blockDictionary;
+//}
 
 @end

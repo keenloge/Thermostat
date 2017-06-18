@@ -42,6 +42,7 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
 #pragma mark - 界面刷新
 
 - (void)changeStateWithDevice:(LinKonDevice *)device {
+    self.nicknameLabel.text = device.nickname;
     self.stateLabel.text = device.stateString;
     if (device.connection == DeviceConnectionStateOffLine) {
         self.stateLabel.textColor = HB_COLOR_BASE_RED;
@@ -67,36 +68,7 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
     _sn = sn;
     
     WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceNickname block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
-        selfWeak.nicknameLabel.text = device.nickname;
-    }];
-    
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceConnection block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
-        [selfWeak changeStateWithDevice:device];
-    }];
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceRunning block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
-        [selfWeak changeStateWithDevice:device];
-    }];
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceSetting block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
-        [selfWeak changeStateWithDevice:device];
-    }];
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceMode block:^(NSObject *object) {
+    [[DeviceManager sharedManager] registerListener:selfWeak device:sn group:LinKonPropertyGroupBinding | LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(NSObject *object) {
         if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }

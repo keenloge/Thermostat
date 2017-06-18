@@ -47,9 +47,20 @@ typedef void(^NotifyListBlock)(NSArray *array);
  */
 @property (nonatomic, copy) NotifyListBlock listBlock;
 
+///**
+// 属性监听 Block 字典
+// */
+//@property (nonatomic, strong) NSMutableDictionary<NSString*, NotifyTargetBlock> *blockDictionary;
+
+
 /**
- 属性监听 Block 字典
+ 监听属性组
  */
-@property (nonatomic, strong) NSMutableDictionary<NSString*, NotifyTargetBlock> *blockDictionary;
+@property (nonatomic, assign) Byte propertyGroup;
+
+/**
+ 属性监听回调
+ */
+@property (nonatomic, copy) NotifyTargetBlock groupBlock;
 
 @end

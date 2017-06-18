@@ -38,6 +38,19 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
     return item;
 }
 
++ (LinKonPropertyGroup)groupProperty:(NSString *)key {
+    if ([key isEqualToString:KDeviceConnection]
+        || [key isEqualToString:KDeviceRunning]) {
+        return LinKonPropertyGroupState;
+    } else if ([key isEqualToString:KDeviceNickname]
+               || [key isEqualToString:KDevicePassword]) {
+        return LinKonPropertyGroupBinding;
+    } else {
+        return LinKonPropertyGroupSetting;
+    }
+    return LinKonPropertyGroupNone;
+}
+
 - (void)randomProperty {
     _sn = [self randomSN];
     
@@ -162,8 +175,8 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
 
 - (void)setRunning:(DeviceRunningState)running {
     _running = running;
-    self.delay = 0.0;
-    [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceDelay value:@(self.delay)];
+//    self.delay = 0.0;
+    [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceDelay value:@(0.0)];
 }
 
 @end

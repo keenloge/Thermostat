@@ -102,12 +102,8 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
 
 - (void)updateSlideViewStateWithDevice:(LinKonDevice *)device {
     self.userInteractionEnabled = YES;
-    if (device.running == DeviceRunningStateTurnOFF) {
+    if (device.running == DeviceRunningStateTurnOFF || device.mode == LinKonModeAir) {
         self.userInteractionEnabled = NO;
-    } else {
-        if (device.mode == LinKonModeAir) {
-            self.userInteractionEnabled = NO;
-        }
     }
     for (UILabel *label in self.slideViewArray) {
         label.textColor = self.userInteractionEnabled ? label.textColor = HB_COLOR_BASE_MAIN : HB_COLOR_BASE_LIGHT;
@@ -155,26 +151,13 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
     _sn = sn;
     
     WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceSetting block:^(NSObject *object) {
+    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(NSObject *object) {
         if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
         LinKonDevice *device = (LinKonDevice *)object;
+        [selfWeak updateSlideViewStateWithDevice:device];
         selfWeak.scrollToIndex = (device.setting - LINKON_TEMPERATURE_MIN) / LINKON_TEMPERATURE_OFFSET;
-    }];
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceRunning block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
-        [selfWeak updateSlideViewStateWithDevice:device];
-    }];
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceMode block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
-        [selfWeak updateSlideViewStateWithDevice:device];
     }];
 }
 
@@ -183,8 +166,7 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
         return;
     }
     _scrollToIndex = index;
-    UIView *subView = [self.slideViewArray objectAtIndex:index];
-    [self.contentScrollView scrollRectToVisible:subView.frame animated:YES];
+    [self.contentScrollView setContentOffset:CGPointMake(CGRectGetWidth(self.contentScrollView.frame) * index, 0) animated:YES];
 }
 
 #pragma mark - Getter

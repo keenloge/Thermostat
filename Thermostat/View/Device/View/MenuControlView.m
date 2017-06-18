@@ -97,7 +97,7 @@
     _sn = sn;
     
     WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceRunning block:^(NSObject *object) {
+    [[DeviceManager sharedManager] registerListener:self device:self.sn group:LinKonPropertyGroupState block:^(NSObject *object) {
         if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }

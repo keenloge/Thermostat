@@ -66,12 +66,12 @@
  
  @param listener 监听者
  @param sn 设备SN
- @param key 属性
+ @param group 属性组
  @param block 回调 Block
  */
 - (void)registerListener:(id)listener
                   device:(NSString *)sn
-                     key:(NSString *)key
+                   group:(Byte)group
                    block:(NotifyTargetBlock)block;
 
 /**

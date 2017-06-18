@@ -143,6 +143,28 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
 - (void)updateInfoViewWithDevice:(LinKonDevice *)device {
     self.roundImageView.hidden = NO;
     
+    // 延时开关机
+    if (device.delay > 0.0) {
+        self.contentTimerView.hidden = NO;
+        if (device.running == DeviceRunningStateTurnON) {
+            self.timerImageView.image = [UIImage imageNamed:@"icon_timer_off"];
+        } else {
+            self.timerImageView.image = [UIImage imageNamed:@"icon_timer_on"];
+        }
+        self.timeOffset = device.delay - [NSDate timeIntervalSinceReferenceDate];
+    } else {
+        if ([self.countDownTimer isValid]) {
+            [self.countDownTimer invalidate];
+            self.countDownTimer = nil;
+        }
+        self.contentTimerView.hidden = YES;
+    }
+    
+    // 当前温度, 湿度
+    self.humidityLabel.text = [NSString stringWithFormat:@"%.0f%%", device.humidity * 100];
+    self.temperatureLabel.text = [Globals settingString:device.temperature];
+    
+    // 模式 设定温度
     if (device.running == DeviceRunningStateTurnOFF || device.mode == LinKonModeAir) {
         // 待机 或者 换气
         self.mainLabel.hidden = NO;
@@ -206,50 +228,12 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
     [[NSRunLoop currentRunLoop] addTimer:self.roundTimer forMode:NSRunLoopCommonModes];
     [self.roundTimer fire];
     
-    // 监听运行状态
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceRunning block:^(NSObject *object) {
+    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(NSObject *object) {
         if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
         LinKonDevice *device = (LinKonDevice *)object;
         [selfWeak updateInfoViewWithDevice:device];
-    }];
-    
-    // 监听设置温度
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceSetting block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
-        [selfWeak updateInfoViewWithDevice:device];
-    }];
-    
-    // 监听模式
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceMode block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
-        [selfWeak updateInfoViewWithDevice:device];
-    }];
-    
-    // 监听延时开关
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceDelay block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
-        if (device.delay > 0.0) {
-            selfWeak.contentTimerView.hidden = NO;
-            if (device.running == DeviceRunningStateTurnON) {
-                selfWeak.timerImageView.image = [UIImage imageNamed:@"icon_timer_off"];
-            } else {
-                selfWeak.timerImageView.image = [UIImage imageNamed:@"icon_timer_on"];
-            }
-            selfWeak.timeOffset = device.delay - [NSDate timeIntervalSinceReferenceDate];
-        } else {
-            selfWeak.contentTimerView.hidden = YES;
-        }
     }];
 }
 
@@ -402,7 +386,6 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
             _humidityLabel.font = UIFontOf3XPix(KHorizontalRound(39));
         }
         _humidityLabel.textColor = HB_COLOR_BASE_WHITE;
-        _humidityLabel.text = @"70%";
         
         WeakObj(self);
         [_humidityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -427,7 +410,6 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
         [self addSubview:_temperatureLabel];
         _temperatureLabel.font = self.humidityLabel.font;
         _temperatureLabel.textColor = HB_COLOR_BASE_WHITE;
-        _temperatureLabel.text = [Globals settingString:27.5];
 
         WeakObj(self);
         [_temperatureLabel mas_makeConstraints:^(MASConstraintMaker *make) {

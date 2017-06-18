@@ -239,15 +239,15 @@ static DeviceManager *_currentDeviceManager;
  
  @param listener 监听者
  @param sn 设备SN
- @param key 属性
+ @param group 属性组
  @param block 回调 Block
  */
 - (void)registerListener:(id)listener
                   device:(NSString *)sn
-                     key:(NSString *)key
+                   group:(Byte)group
                    block:(NotifyTargetBlock)block {
     
-    if (!listener || !sn || !key || !block) {
+    if (!listener || !sn || (group == 0) || !block) {
         return;
     }
     
@@ -263,14 +263,6 @@ static DeviceManager *_currentDeviceManager;
             if (item.listener == listener) {
                 // 之前注册过
                 target = item;
-                if (![target.sign isEqualToString:sn]) {
-                    // 监听对象已改变, 须注销之前的监听
-                    target.sign = sn;
-                    [target.blockDictionary removeAllObjects];
-                } else {
-                    // 监听对象未改变
-                    // Do Nothing
-                }
                 break;
             }
         }
@@ -280,11 +272,12 @@ static DeviceManager *_currentDeviceManager;
         // 一次全新的注册
         target = [[NotifyTarget alloc] init];
         target.listener = listener;
-        target.sign = sn;
         [self.editBlockArray addObject:target];
     }
     
-    [target.blockDictionary setObject:[block copy] forKey:key];
+    target.sign = sn;
+    target.propertyGroup = group;
+    target.groupBlock = block;
     
     // 立即通知
     LinKonDevice *device = [self getDevice:sn];
@@ -343,6 +336,7 @@ static DeviceManager *_currentDeviceManager;
         // 找到全局对应的设备, 并更新值
         [device setValue:value forKey:key];
         
+        LinKonPropertyGroup group = [LinKonDevice groupProperty:key];
         for (int i = 0; i < self.editBlockArray.count; i++) {
             NotifyTarget *item = [self.editBlockArray objectAtIndex:i];
             if (!item.listener) {
@@ -351,10 +345,9 @@ static DeviceManager *_currentDeviceManager;
                 i--;
                 continue;
             } else {
-                if ([item.sign isEqualToString:sn]) {
-                    NotifyTargetBlock block = [item.blockDictionary objectForKey:key];
-                    if (block) {
-                        block(device);
+                if ([item.sign isEqualToString:sn] && (item.propertyGroup & group) == group) {
+                    if (item.groupBlock) {
+                        item.groupBlock(device);
                     }
                 }
             }

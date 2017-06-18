@@ -326,7 +326,7 @@ static TaskManager *_currentTaskManager;
                 if (![target.sign isEqualToString:number]) {
                     // 监听任务已改变, 须注销之前的监听
                     target.sign = number;
-                    [target.blockDictionary removeAllObjects];
+//                    [target.blockDictionary removeAllObjects];
                 } else {
                     // 监听任务未改变
                     // Do Nothing
@@ -344,7 +344,7 @@ static TaskManager *_currentTaskManager;
         [targetArray addObject:target];
     }
     
-    [target.blockDictionary setObject:[block copy] forKey:key];
+//    [target.blockDictionary setObject:[block copy] forKey:key];
     
     // 立即通知
     LinKonTimerTask *task = [self getTask:number device:sn];
@@ -416,10 +416,10 @@ static TaskManager *_currentTaskManager;
                 continue;
             } else {
                 if ([item.sign isEqualToString:number]) {
-                    NotifyTargetBlock block = [item.blockDictionary objectForKey:key];
-                    if (block) {
-                        block(task);
-                    }
+//                    NotifyTargetBlock block = [item.blockDictionary objectForKey:key];
+//                    if (block) {
+//                        block(task);
+//                    }
                 }
             }
         }

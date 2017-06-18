@@ -214,7 +214,7 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
         [self addBarButtonItemRightNormalImageName:@"nav_add_blank" hightLited:nil];
         
         WeakObj(self);
-        [[DeviceManager sharedManager] registerListener:self device:self.sn key:KDeviceNickname block:^(NSObject *object) {
+        [[DeviceManager sharedManager] registerListener:self device:self.sn group:LinKonPropertyGroupBinding block:^(NSObject *object) {
             LinKonDevice *device = (LinKonDevice *)object;
             selfWeak.navigationItem.title = device.nickname;
         }];

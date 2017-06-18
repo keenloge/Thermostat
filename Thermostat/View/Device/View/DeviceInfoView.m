@@ -79,19 +79,16 @@ const CGFloat KDeviceInfoIconSize               = 30.0;
     self.circleInfoView.sn = sn;
     
     WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceLock block:^(NSObject *object) {
+    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(NSObject *object) {
         if (![object isKindOfClass:[LinKonDevice class]]) {
             return ;
         }
         LinKonDevice *device = (LinKonDevice *)object;
+        
+        // 儿童锁图标控制
         selfWeak.lockImageView.alpha = device.lock ? 0.5 : 1.0;
-    }];
-    
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceScene block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
+        
+        // 情景图标控制
         switch (device.scene) {
             case LinKonSceneConstant:
                 selfWeak.sceneImageView.image = [UIImage imageNamed:@"icon_scene_constant"];
@@ -105,13 +102,9 @@ const CGFloat KDeviceInfoIconSize               = 30.0;
             default:
                 break;
         }
-    }];
-    
-    [[DeviceManager sharedManager] registerListener:self device:sn key:KDeviceWind block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
+        selfWeak.sceneImageView.alpha = device.running == DeviceRunningStateTurnON ? 1.0 : 0.5;
+        
+        // 风速图标控制
         switch (device.wind) {
             case LinKonWindLow:
                 selfWeak.windImageView.image = [UIImage imageNamed:@"icon_wind_low"];
@@ -125,6 +118,8 @@ const CGFloat KDeviceInfoIconSize               = 30.0;
             default:
                 break;
         }
+        selfWeak.windImageView.alpha = device.running == DeviceRunningStateTurnON ? 1.0 : 0.5;
+
     }];
 }
 

@@ -143,4 +143,6 @@
 + (instancetype)randomDevice;
 + (instancetype)deviceWithSN:(NSString *)sn password:(NSString *)password;
 
++ (LinKonPropertyGroup)groupProperty:(NSString *)key;
+
 @end
