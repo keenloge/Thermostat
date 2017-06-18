@@ -6,11 +6,11 @@
 //  Copyright © 2017年 GalaxyWind. All rights reserved.
 //
 
-#import "BaseAlertPage.h"
+#import "BasePopPage.h"
 
 typedef void(^BasePickerConfirmBlock)();
 
-@interface BasePickerPage : BaseAlertPage {
+@interface BasePickerPage : BasePopPage {
 
 }
 

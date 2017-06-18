@@ -65,7 +65,7 @@
 		117FD7361EDEC8DA003A60B1 /* Localizeble.strings in Resources */ = {isa = PBXBuildFile; fileRef = 117FD7381EDEC8DA003A60B1 /* Localizeble.strings */; };
 		117FD7411EDECA5C003A60B1 /* BaseNavigationPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7401EDECA5C003A60B1 /* BaseNavigationPage.m */; };
 		117FD7441EDECA76003A60B1 /* BaseViewPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7431EDECA76003A60B1 /* BaseViewPage.m */; };
-		117FD7471EDECA9F003A60B1 /* BaseAlertPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7461EDECA9F003A60B1 /* BaseAlertPage.m */; };
+		117FD7471EDECA9F003A60B1 /* BasePopPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7461EDECA9F003A60B1 /* BasePopPage.m */; };
 		117FD74A1EDECABC003A60B1 /* BasePickerPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7491EDECABC003A60B1 /* BasePickerPage.m */; };
 		117FD74D1EDECAF4003A60B1 /* BaseListViewPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD74C1EDECAF4003A60B1 /* BaseListViewPage.m */; };
 		117FD7531EDECB36003A60B1 /* UIImageAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7521EDECB36003A60B1 /* UIImageAdditions.m */; };
@@ -74,6 +74,7 @@
 		117FD75E1EDECBD6003A60B1 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD75D1EDECBD6003A60B1 /* Globals.m */; };
 		117FD7661EDECD92003A60B1 /* DeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7651EDECD92003A60B1 /* DeviceCell.m */; };
 		117FD76B1EDECE2C003A60B1 /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD76A1EDECE2C003A60B1 /* BannerView.m */; };
+		11A60FC21EF60F7C007C7B91 /* BaseAlertPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A60FC11EF60F7C007C7B91 /* BaseAlertPage.m */; };
 		11AC581F1EE4EE69003D12EB /* TaskBlankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC581E1EE4EE69003D12EB /* TaskBlankView.m */; };
 		11AC58231EE4EF36003D12EB /* TaskBlankButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC58221EE4EF36003D12EB /* TaskBlankButton.m */; };
 		11AC58271EE4F245003D12EB /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC58261EE4F245003D12EB /* TaskCell.m */; };
@@ -206,8 +207,8 @@
 		117FD7401EDECA5C003A60B1 /* BaseNavigationPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationPage.m; sourceTree = "<group>"; };
 		117FD7421EDECA76003A60B1 /* BaseViewPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewPage.h; sourceTree = "<group>"; };
 		117FD7431EDECA76003A60B1 /* BaseViewPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewPage.m; sourceTree = "<group>"; };
-		117FD7451EDECA9F003A60B1 /* BaseAlertPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAlertPage.h; sourceTree = "<group>"; };
-		117FD7461EDECA9F003A60B1 /* BaseAlertPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAlertPage.m; sourceTree = "<group>"; };
+		117FD7451EDECA9F003A60B1 /* BasePopPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasePopPage.h; sourceTree = "<group>"; };
+		117FD7461EDECA9F003A60B1 /* BasePopPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasePopPage.m; sourceTree = "<group>"; };
 		117FD7481EDECABC003A60B1 /* BasePickerPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasePickerPage.h; sourceTree = "<group>"; };
 		117FD7491EDECABC003A60B1 /* BasePickerPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasePickerPage.m; sourceTree = "<group>"; };
 		117FD74B1EDECAF4003A60B1 /* BaseListViewPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseListViewPage.h; sourceTree = "<group>"; };
@@ -226,6 +227,8 @@
 		117FD7651EDECD92003A60B1 /* DeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCell.m; sourceTree = "<group>"; };
 		117FD7691EDECE2C003A60B1 /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
 		117FD76A1EDECE2C003A60B1 /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
+		11A60FC01EF60F7C007C7B91 /* BaseAlertPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAlertPage.h; sourceTree = "<group>"; };
+		11A60FC11EF60F7C007C7B91 /* BaseAlertPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAlertPage.m; sourceTree = "<group>"; };
 		11AC581D1EE4EE69003D12EB /* TaskBlankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskBlankView.h; sourceTree = "<group>"; };
 		11AC581E1EE4EE69003D12EB /* TaskBlankView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskBlankView.m; sourceTree = "<group>"; };
 		11AC58211EE4EF36003D12EB /* TaskBlankButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskBlankButton.h; sourceTree = "<group>"; };
@@ -482,10 +485,12 @@
 				117FD7431EDECA76003A60B1 /* BaseViewPage.m */,
 				117FD74B1EDECAF4003A60B1 /* BaseListViewPage.h */,
 				117FD74C1EDECAF4003A60B1 /* BaseListViewPage.m */,
-				117FD7451EDECA9F003A60B1 /* BaseAlertPage.h */,
-				117FD7461EDECA9F003A60B1 /* BaseAlertPage.m */,
+				117FD7451EDECA9F003A60B1 /* BasePopPage.h */,
+				117FD7461EDECA9F003A60B1 /* BasePopPage.m */,
 				117FD7481EDECABC003A60B1 /* BasePickerPage.h */,
 				117FD7491EDECABC003A60B1 /* BasePickerPage.m */,
+				11A60FC01EF60F7C007C7B91 /* BaseAlertPage.h */,
+				11A60FC11EF60F7C007C7B91 /* BaseAlertPage.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -860,6 +865,7 @@
 				11FA11391EE0EEE60017948D /* ControlTabButton.m in Sources */,
 				112D4FFA1EDFB74D00B5026E /* BaseLabel.m in Sources */,
 				112D50121EE01CDC00B5026E /* DeviceCircleView.m in Sources */,
+				11A60FC21EF60F7C007C7B91 /* BaseAlertPage.m in Sources */,
 				11AC582D1EE4FDE2003D12EB /* NSStringAdditions.m in Sources */,
 				11C2F61E1EE3F13B008ED62F /* TaskManager.m in Sources */,
 				117FD7591EDECB80003A60B1 /* NSDictionaryAdditions.m in Sources */,
@@ -870,7 +876,7 @@
 				117FD70D1EDEC2B9003A60B1 /* main.m in Sources */,
 				1145C52D1EF4D21300988ABE /* ViewDeckAdditions.m in Sources */,
 				11C2F6181EE3B24C008ED62F /* TaskEditPage.m in Sources */,
-				117FD7471EDECA9F003A60B1 /* BaseAlertPage.m in Sources */,
+				117FD7471EDECA9F003A60B1 /* BasePopPage.m in Sources */,
 				11AC58271EE4F245003D12EB /* TaskCell.m in Sources */,
 				112D501B1EE01FD700B5026E /* ControlMenuButton.m in Sources */,
 				112D4FF11EDFB4B000B5026E /* DeviceAddPage.m in Sources */,

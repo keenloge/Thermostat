@@ -6,7 +6,7 @@
 //  Copyright © 2017年 GalaxyWind. All rights reserved.
 //
 
-#import "BaseAlertPage.h"
+#import "BasePopPage.h"
 
 @class LinKonDevice;
 
@@ -33,7 +33,7 @@ typedef NS_ENUM(NSInteger, DevicePopAction) {
  */
 typedef void(^DevicePopBlock)(DevicePopAction action);
 
-@interface DevicePopPage : BaseAlertPage
+@interface DevicePopPage : BasePopPage
 
 - (instancetype)initWithDevice:(LinKonDevice *)item
                          block:(DevicePopBlock)aBlock;

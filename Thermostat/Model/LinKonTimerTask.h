@@ -11,7 +11,7 @@
 
 #define KTaskNumber     @"number"
 #define KTaskSN         @"sn"
-#define KLinKonTimerTaskType       @"type"
+#define KTaskType       @"type"
 #define KTaskTimeFrom   @"timeFrom"
 #define KTaskTimeTo     @"timeTo"
 #define KTaskValidate   @"validate"

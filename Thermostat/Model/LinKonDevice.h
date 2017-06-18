@@ -57,6 +57,17 @@
 
 
 /**
+ 当前湿度
+ */
+@property (nonatomic, assign) float humidity;
+
+
+/**
+ 当前温度
+ */
+@property (nonatomic, assign) float temperature;
+
+/**
  风速
  */
 @property (nonatomic, assign) LinKonWind wind;
@@ -92,18 +103,7 @@
 @property (nonatomic, assign) NSTimeInterval delay;
 
 
-/**
- 当前湿度
- */
-@property (nonatomic, assign) float humidity;
-
-
-/**
- 当前温度
- */
-@property (nonatomic, assign) float temperature;
-
-
+#pragma mark - 只读属性
 
 /**
  状态字符
@@ -114,30 +114,30 @@
 /**
  切换运行状态
  */
-@property (nonatomic, readonly) DeviceRunningState        switchRunning;
+@property (nonatomic, readonly) DeviceRunningState switchRunning;
 
 
 /**
  切换模式
  */
-@property (nonatomic, readonly) LinKonMode          switchMode;
+@property (nonatomic, readonly) LinKonMode switchMode;
 
 
 /**
  切换情景
  */
-@property (nonatomic, readonly) LinKonScene         switchScene;
+@property (nonatomic, readonly) LinKonScene switchScene;
 
 
 /**
  切换风速
  */
-@property (nonatomic, readonly) LinKonWind    switchWind;
+@property (nonatomic, readonly) LinKonWind switchWind;
 
 
 /**
  切换延时
  */
-@property (nonatomic, readonly) NSTimeInterval      switchDelay;
+@property (nonatomic, readonly) NSTimeInterval switchDelay;
 
 @end

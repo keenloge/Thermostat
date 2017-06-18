@@ -60,4 +60,6 @@
 
 @interface BaseViewPage (KeyBoardControl)
 
+- (void)hideKeyBoard;
+
 @end

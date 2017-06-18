@@ -18,6 +18,8 @@
     NSInteger countDownTimes;
 }
 
+@property (nonatomic, copy) DeviceSearchBlock block;
+
 @property (nonatomic, copy) NSString *titleString;
 @property (nonatomic, strong) NSTimer *countdownTimer;
 @property (nonatomic, assign) BOOL isAnimation;
@@ -63,7 +65,6 @@
 - (void)baseInitialiseSubViews {
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     [self setImage:[UIImage imageWithColor:HB_COLOR_BASE_MAIN] forState:UIControlStateNormal];
-    [self addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     pulsingCount = 2.0;
     animationDuration = 2.0;
@@ -71,6 +72,22 @@
 
 
 #pragma mark - 动画
+
+- (void)startAnimationWithDuration:(NSInteger)duration finishBlock:(DeviceSearchBlock)block {
+    self.block = block;
+    
+    self.userInteractionEnabled = NO;
+    self.titleString = self.titleLabel.text;
+    
+    [self beginAnimation];
+    countDownTimes = duration;
+    WeakObj(self);
+    self.countdownTimer = [NSTimer hb_scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer) {
+        [selfWeak countDown];
+    }];
+    [[NSRunLoop currentRunLoop] addTimer:self.countdownTimer forMode:NSRunLoopCommonModes];
+    [self.countdownTimer fire];
+}
 
 - (void)beginAnimation {
     CGRect rect = self.bounds;
@@ -128,33 +145,21 @@
 #pragma mark - 计时函数
 
 - (void)countDown {
-    if (countDownTimes <= 0) {
-        [self setTitle:self.titleString forState:UIControlStateNormal];
+    [self setTitle:[NSString stringWithFormat:@"%zd", countDownTimes--] forState:UIControlStateNormal];
+    if (countDownTimes < 0) {
+//        [self setTitle:self.titleString forState:UIControlStateNormal];
         [self stopAnimation];
         self.userInteractionEnabled = YES;
         [self.countdownTimer invalidate];
         if (self.block) {
             self.block();
         }
-    } else {
-        [self setTitle:[NSString stringWithFormat:@"%zd", countDownTimes--] forState:UIControlStateNormal];
     }
 }
 
 #pragma mark - 点击事件
 
 - (void)buttonPressed:(id)sender {
-    self.userInteractionEnabled = NO;
-    self.titleString = self.titleLabel.text;
-    
-    [self beginAnimation];
-    countDownTimes = 5;
-    WeakObj(self);
-    self.countdownTimer = [NSTimer hb_scheduledTimerWithTimeInterval:1.0 repeats:YES block:^(NSTimer *timer) {
-        [selfWeak countDown];
-    }];
-    [[NSRunLoop currentRunLoop] addTimer:self.countdownTimer forMode:NSRunLoopCommonModes];
-    [self.countdownTimer fire];
 }
 
 #pragma mark - 懒加载

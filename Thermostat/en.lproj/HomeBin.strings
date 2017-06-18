@@ -17,7 +17,7 @@
 "系统设置" = "System Settings";
 
 // 文本
-"序列号" = "SSID";
+"序列号" = "SN";
 "密码" = "Password";
 "路由器WI-FI密码" = "Wi-Fi Password";
 "昵称" = "Nickname";
