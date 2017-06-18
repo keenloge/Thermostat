@@ -18,6 +18,21 @@
     return subView;
 }
 
++ (NSString *)formatSN:(NSString *)sn {
+    NSInteger formatLength = 4;
+    if (sn.length % formatLength == 0) {
+        NSMutableArray *tempArray = [NSMutableArray array];
+        NSString *subString = nil;
+        for (int i = 0; i < sn.length / formatLength; i++) {
+            subString = [sn substringWithRange:NSMakeRange(i * formatLength, formatLength)];
+            [tempArray addObject:subString];
+        }
+        return [tempArray componentsJoinedByString:@" "];
+    } else {
+        return sn;
+    }
+}
+
 + (NSString *)connectionString:(DeviceConnectionState)connection {
     switch (connection) {
         case DeviceConnectionStateOffLine:

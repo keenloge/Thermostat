@@ -155,10 +155,10 @@ const CGFloat DeviceListRowsHeight = 77.0;
             id editPage = nil;
             switch (aTag) {
                 case DevicePopActionNickname:
-                    editPage = [[DeviceNicknameEditPage alloc] init];
+                    editPage = [[DeviceNicknameEditPage alloc] initWithDevice:deviceWeak.sn];
                     break;
                 case DevicePopActionPassword:
-                    editPage = [[DevicePasswordEditPage alloc] init];
+                    editPage = [[DevicePasswordEditPage alloc] initWithDevice:deviceWeak.sn];
                     break;
                 case DevicePopActionRemove:
                     [[DeviceManager sharedManager] removeDevice:deviceWeak.sn];

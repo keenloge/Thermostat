@@ -12,6 +12,7 @@
 #import "BaseButton.h"
 #import "DeviceManager.h"
 #import "LinKonDevice.h"
+#import "BaseAlertPage.h"
 
 const CGFloat DeviceInfoInputPaddingTop = 43.0;
 const CGFloat DeviceInfoInputPaddingSide = 27.0;
@@ -32,7 +33,7 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
 @property (nonatomic, strong) BaseTextField *nicknameTextField;
 @property (nonatomic, strong) BaseTextField *passwordTextField;
 @property (nonatomic, strong) ColorMainButton *confirmButton;
-
+@property (nonatomic, strong) LinKonDevice *device;
 
 @end
 
@@ -42,6 +43,12 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = KString(@"设备信息");
+    [self addBarButtonItemBackWithAction:@selector(barButtonItemLeftPressed:)];
+    
+    self.device = [LinKonDevice randomDevice];
+    self.numberTextField.text = [Globals formatSN:self.device.sn];
+    self.nicknameTextField.text = self.device.nickname;
+    self.passwordTextField.text = self.device.password;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,6 +66,12 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
  }
  */
 
+- (void)addDeviceWithInput {
+    [self popViewController];
+    self.device.nickname = self.nicknameTextField.text;
+    self.device.password = self.passwordTextField.text;
+    [[DeviceManager sharedManager] addDevice:self.device];
+}
 
 #pragma mark - 界面布局
 
@@ -92,28 +105,38 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
     numberTextField.text = @"LinKon";
 }
 
-
 #pragma mark - 点击事件
 
 - (void)baseButtonPressed:(id)sender {
-    if (self.numberTextField.text.length < 1) {
-        self.messageNotify = KString(@"请输入设备序列号");
-        [self.numberTextField becomeFirstResponder];
-    } else if (self.nicknameTextField.text.length < 1) {
+    [self hideKeyBoard];
+   if (self.nicknameTextField.text.length < 1) {
         self.messageNotify = KString(@"请输入设备昵称");
         [self.nicknameTextField becomeFirstResponder];
     } else if (self.passwordTextField.text.length < 1) {
         self.messageNotify = KString(@"请输入密码");
         [self.passwordTextField becomeFirstResponder];
     } else {
-        [self popViewController];
-        
-        LinKonDevice *device = [[LinKonDevice alloc] init];
-        device.sn = self.numberTextField.text;
-        device.nickname = self.nicknameTextField.text;
-        device.password = self.passwordTextField.text;
-        [[DeviceManager sharedManager] addDevice:device];
+        if ([self.device.password isEqualToString:self.passwordTextField.text]) {
+            // 原始密码未改动
+            WeakObj(self);
+            BaseAlertPage *alert = [BaseAlertPage alertPageWithTitle:KString(@"温馨提示") message:@"初始密码未改动，建议更换一个密码"];
+            [alert addActionTitle:KString(@"重新设置") handler:^(UIAlertAction *action) {
+                [selfWeak.passwordTextField becomeFirstResponder];
+            }];
+            [alert addActionTitle:KString(@"就用它") handler:^(UIAlertAction *action) {
+                [selfWeak addDeviceWithInput];
+            }];
+            [self presentViewController:alert animated:YES completion:nil];
+        } else {
+            [self addDeviceWithInput];
+        }
     }
+}
+
+- (void)barButtonItemLeftPressed:(id)sender {
+    [self hideKeyBoard];
+    [self popViewController];
+    [[DeviceManager sharedManager] addDevice:self.device];
 }
 
 #pragma mark - 懒加载
@@ -147,6 +170,7 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
     if (!_numberTextField) {
         _numberTextField = [Globals addedSubViewClass:[BaseTextField class] toView:self.view];
         _numberTextField.text = @"**********************************************************";
+        _numberTextField.userInteractionEnabled = NO;
     }
     return _numberTextField;
 }
@@ -154,7 +178,6 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
 - (BaseTextField *)nicknameTextField {
     if (!_nicknameTextField) {
         _nicknameTextField = [Globals addedSubViewClass:[BaseTextField class] toView:self.view];
-        _nicknameTextField.text = KString(@"温控器");
     }
     return _nicknameTextField;
 }
@@ -162,7 +185,6 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
 - (BaseTextField *)passwordTextField {
     if (!_passwordTextField) {
         _passwordTextField = [Globals addedSubViewClass:[BaseTextField class] toView:self.view];
-        _passwordTextField.text = @"123456";
     }
     return _passwordTextField;
 }

@@ -19,25 +19,56 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
 
 @implementation LinKonDevice
 
-+ (instancetype)deviceWithSN:(NSString *)sn {
++ (instancetype)randomDevice {
     LinKonDevice *item = [[LinKonDevice alloc] init];
-    item.sn = sn;
+
+    [item randomProperty];
+    
     return item;
 }
 
-- (instancetype)init {
-    if (self = [super init]) {
-        _connection = DeviceConnectionStateOffLine;
-        _running = DeviceRunningStateTurnOFF;
-        _mode = LinKonModeCool;
-        _scene = LinKonSceneConstant;
-        _wind = LinKonWindLow;
-        _setting = 28.0;
-        _lock = NO;
-        _humidity = 0.60;
-        _temperature = 23.5;
++ (instancetype)deviceWithSN:(NSString *)sn password:(NSString *)password {
+    LinKonDevice *item = [[LinKonDevice alloc] init];
+    
+    [item randomProperty];
+    item.sn = sn;
+    item.password = password;
+    item.connection = DeviceConnectionStateOffLine;
+    
+    return item;
+}
+
+- (void)randomProperty {
+    _sn = [self randomSN];
+    
+    // 连接状态确定为在线
+    _connection = DeviceConnectionStateOnLine;
+    
+    // 其他属性随机设置
+    _nickname = [NSString stringWithFormat:@"%@%02zd", KString(@"温控器"), rand() % 100];
+    _password = @"123456";
+    _running = (rand() % 100) > 20 ? DeviceRunningStateTurnON : DeviceRunningStateTurnOFF;
+    _mode = (rand() % 3) + 1;
+    _scene = (rand() % 3) + 1;
+    _wind = (rand() % 3) + 1;
+    _setting = [self randomTemperature];
+    _lock = (rand() % 2) == 0;
+    _humidity = (rand() % 100) / 100.0;
+    _temperature = [self randomTemperature];
+}
+
+- (NSString *)randomSN {
+    NSInteger preCode = rand() % 9000 + 1000;
+    NSMutableString *tempSN = [NSMutableString stringWithFormat:@"%zd",preCode];
+    for (int i = 0; i < 3; i++) {
+        preCode = rand() % 10000;
+        [tempSN appendFormat:@"%04zd", preCode];
     }
-    return self;
+    return [tempSN copy];
+}
+
+- (CGFloat)randomTemperature {
+    return (rand() % (int)(LINKON_TEMPERATURE_MAX - LINKON_TEMPERATURE_MIN)) + LINKON_TEMPERATURE_MIN;
 }
 
 - (NSString *)stateString {
@@ -117,6 +148,16 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
     }
     
     _setting = roundf(setting * 2.0) / 2.0;
+}
+
+- (void)setTemperature:(float)temperature {
+    if (temperature < LINKON_TEMPERATURE_MIN) {
+        temperature = LINKON_TEMPERATURE_MIN;
+    } else if (temperature > LINKON_TEMPERATURE_MAX) {
+        temperature = LINKON_TEMPERATURE_MAX;
+    }
+    
+    _temperature = roundf(temperature * 2.0) / 2.0;
 }
 
 - (void)setRunning:(DeviceRunningState)running {

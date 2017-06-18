@@ -21,7 +21,7 @@ const CGFloat DeviceAddInputOffsetY = 12.0;
 const CGFloat DeviceAddButtonHeight = 55.0;
 const CGFloat DeviceAddButtonOffsetY = 38.0;
 
-@interface DeviceAddPage () {
+@interface DeviceAddPage () <UITextFieldDelegate> {
 
 }
 
@@ -83,25 +83,54 @@ const CGFloat DeviceAddButtonOffsetY = 38.0;
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-paddingSide-[confirmButton]-paddingSide-|" options:0 metrics:metricsDictionary views:viewsDictionary]];
     
     [self.view layoutIfNeeded];
-    numberTextField.text = @"LinKon";
+    numberTextField.text = nil;
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField == self.numberTextField) {
+        // 四位加一个空格
+        if ([string isEqualToString:@""]) { // 删除字符
+            if ((textField.text.length - 2) % 5 == 0) {//1234 5
+                textField.text = [textField.text substringToIndex:textField.text.length - 1];
+            }
+            return YES;
+        } else {
+            if (textField.text.length >= 20) {
+                return NO;
+            }
+            if (textField.text.length % 5 == 0) {
+                textField.text = [NSString stringWithFormat:@"%@ ", textField.text];
+            }
+        }
+        return YES;
+    } else if (textField == self.passwordTextField) {
+        if ([string isEqualToString:@""]) {
+            return YES;
+        }
+        if (textField.text.length >= 20) {
+            return NO;
+        }
+    }
+    return YES;
+}
 #pragma mark - 点击事件
 
 - (void)baseButtonPressed:(id)sender {
     if (self.numberTextField.text.length < 1) {
         self.messageNotify = KString(@"请输入设备序列号");
         [self.numberTextField becomeFirstResponder];
+    } else if (self.numberTextField.text.length < 20) {
+        self.messageNotify = KString(@"请输入正确的设备序列号");
+        [self.numberTextField becomeFirstResponder];
     } else if (self.passwordTextField.text.length < 1) {
         self.messageNotify = KString(@"请输入密码");
         [self.passwordTextField becomeFirstResponder];
     } else {
-        LinKonDevice *device = [[LinKonDevice alloc] init];
-        device.sn = self.numberTextField.text;
-        device.nickname = KString(@"温控器");
-        device.password = self.passwordTextField.text;
+        NSString *sn = [self.numberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        LinKonDevice *device = [LinKonDevice deviceWithSN:sn password:self.passwordTextField.text];
         [[DeviceManager sharedManager] addDevice:device];
-        
         [self popViewController];
     }
 }
@@ -128,6 +157,9 @@ const CGFloat DeviceAddButtonOffsetY = 38.0;
     if (!_numberTextField) {
         _numberTextField = [Globals addedSubViewClass:[BaseTextField class] toView:self.view];
         _numberTextField.text = @"**********************************************************";
+        _numberTextField.placeholder = KString(@"请输入产品序列号");
+        _numberTextField.keyboardType = UIKeyboardTypeNumberPad;
+        _numberTextField.delegate = self;
     }
     return _numberTextField;
 }
@@ -135,7 +167,9 @@ const CGFloat DeviceAddButtonOffsetY = 38.0;
 - (BaseTextField *)passwordTextField {
     if (!_passwordTextField) {
         _passwordTextField = [Globals addedSubViewClass:[BaseTextField class] toView:self.view];
-        _passwordTextField.text = @"123456";
+        _passwordTextField.placeholder = KString(@"请输入产品密码");
+        _passwordTextField.secureTextEntry = YES;
+        _passwordTextField.delegate = self;
     }
     return _passwordTextField;
 }

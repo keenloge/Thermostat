@@ -10,20 +10,32 @@
 #import "BaseTextField.h"
 #import "BaseButton.h"
 #import "NSStringAdditions.h"
+#import "DeviceManager.h"
+#import "LinKonDevice.h"
+#import "DeviceManager.h"
 
 @interface DeviceNicknameEditPage () <UITextFieldDelegate>
 
 @property (nonatomic, strong) BaseTextField *nicknameTextField;
 @property (nonatomic, strong) ColorMainButton *confirmButton;
+@property (nonatomic, strong) LinKonDevice *device;
 
 @end
 
 @implementation DeviceNicknameEditPage
 
+- (instancetype)initWithDevice:(NSString *)sn {
+    if (self = [super init]) {
+        self.device = [[DeviceManager sharedManager] getDevice:sn];
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title = KString(@"修改设备名称");
+    self.nicknameTextField.text = self.device.nickname;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,7 +65,7 @@
 
 - (void)textFieldDidChanged:(UITextField *)sender {
     if (sender.markedTextRange == nil) {
-        self.confirmButton.enabled = sender.text.length > 0;
+        self.confirmButton.enabled = sender.text.length > 0 && ![sender.text isEqualToString:self.device.nickname];
     }
 }
 
@@ -70,6 +82,7 @@
 
 - (void)baseButtonPressed:(id)sender {
     [self popViewController];
+    [[DeviceManager sharedManager] editDevice:self.device.sn key:KDeviceNickname value:self.nicknameTextField.text];
 }
 
 #pragma mark - 懒加载

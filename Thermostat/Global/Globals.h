@@ -22,6 +22,8 @@
 + (id)addedSubViewClass:(Class)class toView:(UIView *)superView;
 
 
++ (NSString *)formatSN:(NSString *)sn;
+
 /**
  连接状态转字符串
 

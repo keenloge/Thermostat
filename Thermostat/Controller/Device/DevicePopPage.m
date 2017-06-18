@@ -114,7 +114,7 @@ const CGFloat DevicePopButtonPaddingLeft = 16.0;
         _titleLabel.font = UIFontOf3XPix(45);
         _titleLabel.textColor = HB_COLOR_POP_TITLE;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.text = self.device.sn;
+        _titleLabel.text = [Globals formatSN:self.device.sn];
     }
     return _titleLabel;
 }

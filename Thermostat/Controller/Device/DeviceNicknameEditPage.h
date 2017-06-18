@@ -10,4 +10,6 @@
 
 @interface DeviceNicknameEditPage : DeviceInputPage
 
+- (instancetype)initWithDevice:(NSString *)sn;
+
 @end

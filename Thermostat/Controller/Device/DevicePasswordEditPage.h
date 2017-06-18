@@ -10,4 +10,6 @@
 
 @interface DevicePasswordEditPage : DeviceInputPage
 
+- (instancetype)initWithDevice:(NSString *)sn;
+
 @end

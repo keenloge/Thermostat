@@ -140,4 +140,7 @@
  */
 @property (nonatomic, readonly) NSTimeInterval switchDelay;
 
++ (instancetype)randomDevice;
++ (instancetype)deviceWithSN:(NSString *)sn password:(NSString *)password;
+
 @end
