@@ -12,6 +12,7 @@
 
 @interface TaskCell : UITableViewCell
 
-@property (nonatomic, copy) LinKonTimerTask *task;
+@property (nonatomic, strong) LinKonTimerTask *task;
+@property (nonatomic, copy) void (^validBlock)(LinKonTimerTask *item);
 
 @end

@@ -17,6 +17,14 @@ const NSTimeInterval MinTimeOffset  = 10;
 // 最大延时时间 8小时
 const NSTimeInterval MaxTimeOffset  = 70.0;
 
+@interface LinKonDevice () {
+    
+}
+
+@property (nonatomic, strong) NSMutableArray *savedTimerArray;
+
+@end
+
 @implementation LinKonDevice
 
 + (instancetype)randomDevice {
@@ -177,6 +185,63 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
     _running = running;
 //    self.delay = 0.0;
     [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceDelay value:@(0.0)];
+}
+
+#pragma mark - 定时器
+
+- (NSMutableArray *)savedTimerArray {
+    if (!_savedTimerArray) {
+        _savedTimerArray = [NSMutableArray array];
+    }
+    return _savedTimerArray;
+}
+
+- (NSArray *)timerArray {
+    return [self.savedTimerArray copy];
+}
+
+- (BOOL)addTimerTask:(LinKonTimerTask *)timer {
+    for (LinKonTimerTask *item in self.savedTimerArray) {
+        if ([item isConflictTo:timer]) {
+            // 与现有定时器发生冲突
+            return NO;
+        }
+    }
+    
+    [self.savedTimerArray addObject:timer];
+    
+    return YES;
+}
+
+- (BOOL)removeTimerTask:(LinKonTimerTask *)timer {
+    for (LinKonTimerTask *item in self.savedTimerArray) {
+        if ([item.number isEqualToString:timer.number]) {
+            [self.savedTimerArray removeObject:item];
+            return YES;
+        }
+    }
+    return NO;
+}
+
+- (BOOL)editTimerTask:(LinKonTimerTask *)timer {
+    for (LinKonTimerTask *item in self.savedTimerArray) {
+        if ([item isConflictTo:timer]) {
+            // 与现有定时器发生冲突
+            return NO;
+        }
+    }
+    
+    for (int i = 0; i < self.savedTimerArray.count; i++) {
+        LinKonTimerTask *item = [self.savedTimerArray objectAtIndex:i];
+        if ([item.number isEqualToString:timer.number]) {
+            [self.savedTimerArray removeObjectAtIndex:i];
+            [self.savedTimerArray insertObject:timer atIndex:i];
+            return YES;
+        }
+    }
+    
+    // 没找到, 当冲突处理
+    return NO;
 }
 
 @end

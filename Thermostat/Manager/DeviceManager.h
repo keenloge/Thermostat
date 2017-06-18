@@ -10,6 +10,7 @@
 #import "NotifyTarget.h"
 
 @class LinKonDevice;
+@class LinKonTimerTask;
 
 @interface DeviceManager : NSObject
 
@@ -84,5 +85,46 @@
 - (void)editDevice:(NSString *)sn
                key:(NSString *)key
              value:(id)value;
+
+#pragma mark - 定时器
+
+/**
+ 获取任务
+ 
+ @param number 任务编号
+ @param sn 设备SN
+ @return 任务
+ */
+- (LinKonTimerTask *)getTask:(NSString *)number
+                      device:(NSString *)sn;
+
+/**
+ 添加定时器
+
+ @param timer 定时器
+ @param sn 设备SN
+ @return 是否添加成功
+ */
+- (BOOL)addTimerTask:(LinKonTimerTask *)timer toDevice:(NSString *)sn;
+
+
+/**
+ 移除定时器
+ 
+ @param timer 定时器
+ @param sn 设备SN
+ @return 是否移除成功
+ */
+- (BOOL)removeTimerTask:(LinKonTimerTask *)timer toDevice:(NSString *)sn;
+
+
+/**
+ 修改定时器
+ 
+ @param timer 定时器
+ @param sn 设备SN
+ @return 是否修改成功
+ */
+- (BOOL)editTimerTask:(LinKonTimerTask *)timer toDevice:(NSString *)sn;
 
 @end

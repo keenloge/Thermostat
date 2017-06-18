@@ -13,7 +13,7 @@
 #import "TimePickerPage.h"
 #import "TemperaturePickerPage.h"
 #import "EnumPickerPage.h"
-#import "TaskManager.h"
+#import "DeviceManager.h"
 #import "LinKonTimerTask.h"
 
 const CGFloat TaskEditRepeatRowsHeight  = 88.0;
@@ -34,6 +34,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 
 @property (nonatomic, assign) TaskEditType type;
 @property (nonatomic, strong) LinKonTimerTask *task;
+@property (nonatomic, copy) NSString *sn;
 
 @end
 
@@ -42,7 +43,8 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 - (instancetype)initWithTask:(NSString *)number device:(NSString *)sn {
     if (self = [super init]) {
         self.type = TaskEditTypeEdit;
-        self.task = [[[TaskManager sharedManager] getTask:number device:sn] copy];
+        self.sn = sn;
+        self.task = [[DeviceManager sharedManager] getTask:number device:sn];
     }
     return self;
 }
@@ -50,6 +52,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 - (instancetype)initWithType:(LinKonTimerTaskType)type device:(NSString *)sn {
     if (self = [super init]) {
         self.type = TaskEditTypeNew;
+        self.sn = sn;
         self.task = [[LinKonTimerTask alloc] initWithType:type device:sn];
     }
     return self;
@@ -318,11 +321,17 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 
 - (void)barButtonItemRightPressed:(id)sender {
     if (self.type == TaskEditTypeNew) {
-        [[TaskManager sharedManager] addTask:self.task];
+        if ([[DeviceManager sharedManager] addTimerTask:self.task toDevice:self.sn]) {
+            [self popViewController];
+            return;
+        }
     } else if (self.type == TaskEditTypeEdit) {
-        [[TaskManager sharedManager] editTask:self.task];
+        if ([[DeviceManager sharedManager] editTimerTask:self.task toDevice:self.sn]) {
+            [self popViewController];
+            return;
+        }
     }
-    [self popViewController];
+    self.messageNotify = KString(@"与其他定时器行为冲突");
 }
 
 @end

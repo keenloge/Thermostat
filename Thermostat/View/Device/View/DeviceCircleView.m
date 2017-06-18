@@ -46,9 +46,9 @@ const CGFloat CircleInfoViewBaseLineTopScale_3_5    = 114.0 / 360.0;
 const CGFloat CircleInfoViewBaseLineBottomScale     = 408.0 / 744.0;
 const CGFloat CircleInfoViewBaseLineBottomScale_3_5 = 204.0 / 360.0;
 
-// 计时器Y值偏移
+// 定时器Y值偏移
 const CGFloat CircleInfoViewTimerOffsetY            = -2.0;
-// 计时器X值偏移
+// 定时器X值偏移
 const CGFloat CircleInfoViewTimerOffsetX            = -5.0;
 
 
@@ -526,7 +526,7 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
     return _mainLabel;
 }
 
-#pragma mark - 计时器
+#pragma mark - 定时器
 
 - (UIView *)contentTimerView {
     if (!_contentTimerView) {

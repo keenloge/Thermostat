@@ -7,10 +7,11 @@
 //
 
 #import "TaskListPage.h"
-#import "TaskManager.h"
+#import "DeviceManager.h"
 #import "TaskBlankView.h"
 #import "TaskEditPage.h"
 #import "TaskCell.h"
+#import "LinKonDevice.h"
 #import "LinKonTimerTask.h"
 
 const CGFloat TaskListRowsHeight = 80.0;
@@ -57,9 +58,10 @@ const CGFloat TaskListRowsHeight = 80.0;
 
 - (void)baseInitialiseSubViews {
     WeakObj(self);
-    [[TaskManager sharedManager] listenTaskList:self device:self.sn block:^(NSArray *array) {
+    [[DeviceManager sharedManager] registerListener:self device:self.sn group:LinKonPropertyGroupTimer block:^(NSObject *object) {
+        LinKonDevice *device = (LinKonDevice *)object;
         [selfWeak.baseContentArr removeAllObjects];
-        [selfWeak.baseContentArr addObjectsFromArray:array];
+        [selfWeak.baseContentArr addObjectsFromArray:device.timerArray];
         [selfWeak.baseTableView reloadData];
         if (selfWeak.baseContentArr.count > 0) {
             [selfWeak hideBlankView];
@@ -106,6 +108,14 @@ const CGFloat TaskListRowsHeight = 80.0;
     LinKonTimerTask *item = [self.baseContentArr objectAtIndex:indexPath.row];
     cell.task = item;
     
+    WeakObj(self);
+    cell.validBlock = ^(LinKonTimerTask *item) {
+        if (![[DeviceManager sharedManager] editTimerTask:item toDevice:selfWeak.sn]) {
+            selfWeak.messageNotify = @"与其他定时器行为冲突";
+            [selfWeak.baseTableView reloadData];
+        }
+    };
+    
     return cell;
 }
 
@@ -134,7 +144,7 @@ const CGFloat TaskListRowsHeight = 80.0;
     UITableViewRowAction *removeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:KString(@"删除") handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         action.backgroundColor = UIColorFromHex(0xff0021);
         LinKonTimerTask *item = [selfWeak.baseContentArr objectAtIndex:indexPath.row];
-        [[TaskManager sharedManager] removeTask:item.number device:selfWeak.sn];
+        [[DeviceManager sharedManager] removeTimerTask:item toDevice:selfWeak.sn];
     }];
     return @[removeAction, editAction];
 }

@@ -101,4 +101,19 @@
  */
 - (Byte)switchRepeatWeak:(TimerRepeat)week;
 
+
+/**
+ 比较定时器是否冲突
+
+ @param task 定时器
+ @return 是否冲突
+ */
+- (BOOL)isConflictTo:(LinKonTimerTask *)task;
+
+
+/**
+ 重置有效周期
+ */
+- (void)resetTimerRange;
+
 @end

@@ -11,7 +11,6 @@
 #import "Declare.h"
 #import "ColorConfig.h"
 #import "UILabelAdditions.h"
-#import "TaskManager.h"
 #import "LinKonTimerTask.h"
 
 const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
@@ -141,7 +140,11 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
 #pragma mark - 点击事件
 
 - (void)switchValueChanged:(UISwitch *)sender {
-    [[TaskManager sharedManager] editTask:self.task.number device:self.task.sn key:KTaskValidate value:@(sender.isOn)];
+    if (self.validBlock) {
+        LinKonTimerTask *item = [self.task copy];
+        item.validate = sender.isOn;
+        self.validBlock(item);
+    }
 }
 
 #pragma mark - Setter
@@ -149,12 +152,7 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
 - (void)setTask:(LinKonTimerTask *)task {
     _task = task;
     
-    WeakObj(self);
-    [[TaskManager sharedManager] registerListener:self task:task.number device:task.sn key:KTaskValidate block:^(NSObject *object) {
-        LinKonTimerTask *task = (LinKonTimerTask *)object;
-        [selfWeak updateIconImageViewWithTask:task];
-    }];
-    
+    [self updateIconImageViewWithTask:task];
     [self updateTimeLabelWithTask:task];
     [self updatePlanLabelWithTask:task];
 }

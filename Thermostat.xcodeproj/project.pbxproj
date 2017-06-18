@@ -11,6 +11,7 @@
 		112387981EF3C1CA0030DC50 /* DevicePasswordEditPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112387971EF3C1CA0030DC50 /* DevicePasswordEditPage.m */; };
 		1123879B1EF3DBAF0030DC50 /* DeviceInputPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1123879A1EF3DBAF0030DC50 /* DeviceInputPage.m */; };
 		1123879F1EF3DE000030DC50 /* SideMenuPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1123879E1EF3DE000030DC50 /* SideMenuPage.m */; };
+		112429111EF6977600FE39C8 /* LinKonTimerRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 112429101EF6977600FE39C8 /* LinKonTimerRange.m */; };
 		1126D07D1EF2875900BE5289 /* InfoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1126D07C1EF2875900BE5289 /* InfoButton.m */; };
 		1126D0801EF2887000BE5289 /* BaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1126D07F1EF2887000BE5289 /* BaseCell.m */; };
 		112D4FC01EDF987700B5026E /* DeviceListPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FBF1EDF987700B5026E /* DeviceListPage.m */; };
@@ -88,7 +89,6 @@
 		11C2F6151EE3B236008ED62F /* TaskListPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C2F6141EE3B236008ED62F /* TaskListPage.m */; };
 		11C2F6181EE3B24C008ED62F /* TaskEditPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C2F6171EE3B24C008ED62F /* TaskEditPage.m */; };
 		11C2F61B1EE3B284008ED62F /* LinKonTimerTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C2F61A1EE3B284008ED62F /* LinKonTimerTask.m */; };
-		11C2F61E1EE3F13B008ED62F /* TaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C2F61D1EE3F13B008ED62F /* TaskManager.m */; };
 		11EF7AA91EE7CB6B004403C9 /* NSTimerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EF7AA81EE7CB6B004403C9 /* NSTimerAdditions.m */; };
 		11FA11391EE0EEE60017948D /* ControlTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA11381EE0EEE60017948D /* ControlTabButton.m */; };
 		11FA113C1EE0F0130017948D /* BaseIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA113B1EE0F0130017948D /* BaseIconCell.m */; };
@@ -107,6 +107,8 @@
 		1123879A1EF3DBAF0030DC50 /* DeviceInputPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInputPage.m; sourceTree = "<group>"; };
 		1123879D1EF3DE000030DC50 /* SideMenuPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuPage.h; sourceTree = "<group>"; };
 		1123879E1EF3DE000030DC50 /* SideMenuPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuPage.m; sourceTree = "<group>"; };
+		1124290F1EF6977600FE39C8 /* LinKonTimerRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinKonTimerRange.h; sourceTree = "<group>"; };
+		112429101EF6977600FE39C8 /* LinKonTimerRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonTimerRange.m; sourceTree = "<group>"; };
 		1126D07A1EF20E9600BE5289 /* Thermostat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thermostat-Prefix.pch"; sourceTree = "<group>"; };
 		1126D07B1EF2875900BE5289 /* InfoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoButton.h; sourceTree = "<group>"; };
 		1126D07C1EF2875900BE5289 /* InfoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoButton.m; sourceTree = "<group>"; };
@@ -255,8 +257,6 @@
 		11C2F6171EE3B24C008ED62F /* TaskEditPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskEditPage.m; sourceTree = "<group>"; };
 		11C2F6191EE3B284008ED62F /* LinKonTimerTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinKonTimerTask.h; sourceTree = "<group>"; };
 		11C2F61A1EE3B284008ED62F /* LinKonTimerTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonTimerTask.m; sourceTree = "<group>"; };
-		11C2F61C1EE3F13B008ED62F /* TaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskManager.h; sourceTree = "<group>"; };
-		11C2F61D1EE3F13B008ED62F /* TaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskManager.m; sourceTree = "<group>"; };
 		11EF7AA71EE7CB6B004403C9 /* NSTimerAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTimerAdditions.h; sourceTree = "<group>"; };
 		11EF7AA81EE7CB6B004403C9 /* NSTimerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTimerAdditions.m; sourceTree = "<group>"; };
 		11FA11371EE0EEE60017948D /* ControlTabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTabButton.h; sourceTree = "<group>"; };
@@ -559,8 +559,6 @@
 				113B90311EF51C4E00E96617 /* FeedBackManager.m */,
 				112D4FC11EDF988F00B5026E /* DeviceManager.h */,
 				112D4FC21EDF988F00B5026E /* DeviceManager.m */,
-				11C2F61C1EE3F13B008ED62F /* TaskManager.h */,
-				11C2F61D1EE3F13B008ED62F /* TaskManager.m */,
 				112D50041EE00EB700B5026E /* NotifyTarget.h */,
 				112D50051EE00EB700B5026E /* NotifyTarget.m */,
 			);
@@ -574,6 +572,8 @@
 				112D4FC51EDF989D00B5026E /* LinKonDevice.m */,
 				11C2F6191EE3B284008ED62F /* LinKonTimerTask.h */,
 				11C2F61A1EE3B284008ED62F /* LinKonTimerTask.m */,
+				1124290F1EF6977600FE39C8 /* LinKonTimerRange.h */,
+				112429101EF6977600FE39C8 /* LinKonTimerRange.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -867,7 +867,6 @@
 				112D50121EE01CDC00B5026E /* DeviceCircleView.m in Sources */,
 				11A60FC21EF60F7C007C7B91 /* BaseAlertPage.m in Sources */,
 				11AC582D1EE4FDE2003D12EB /* NSStringAdditions.m in Sources */,
-				11C2F61E1EE3F13B008ED62F /* TaskManager.m in Sources */,
 				117FD7591EDECB80003A60B1 /* NSDictionaryAdditions.m in Sources */,
 				11FA11461EE0F1130017948D /* SettingFooterView.m in Sources */,
 				112D50091EE01C9300B5026E /* DeviceInfoView.m in Sources */,
@@ -918,6 +917,7 @@
 				112D50151EE01E3D00B5026E /* TemperatureControlView.m in Sources */,
 				117FD74A1EDECABC003A60B1 /* BasePickerPage.m in Sources */,
 				112D4FE21EDFAE5300B5026E /* BaseView.m in Sources */,
+				112429111EF6977600FE39C8 /* LinKonTimerRange.m in Sources */,
 				117FD74D1EDECAF4003A60B1 /* BaseListViewPage.m in Sources */,
 				113227081EE6987400E1D0C4 /* DeviceSearchButton.m in Sources */,
 				1145C52A1EF4CDCC00988ABE /* SideSettingPage.m in Sources */,

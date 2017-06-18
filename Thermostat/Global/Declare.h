@@ -87,6 +87,12 @@ FOUNDATION_EXPORT const Byte TimerRepeatNone;
 // 周期 - 每天
 FOUNDATION_EXPORT const Byte TimerRepeatEveryDay;
 
+// 定时器最大时间
+FOUNDATION_EXPORT const NSInteger LinKonTimerTimeMax;
+
+// 定时器最小时间
+FOUNDATION_EXPORT const NSInteger LinKonTimerTimeMin;
+
 /**
  连接状态
  

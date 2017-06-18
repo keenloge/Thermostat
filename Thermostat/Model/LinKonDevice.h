@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Declare.h"
+#import "LinKonTimerTask.h"
 
 #define KDeviceSN            @"sn"
 #define KDeviceNickname      @"nickname"
@@ -103,6 +103,12 @@
 @property (nonatomic, assign) NSTimeInterval delay;
 
 
+/**
+ 定时器列表
+ */
+@property (nonatomic, readonly) NSArray *timerArray;
+
+
 #pragma mark - 只读属性
 
 /**
@@ -142,7 +148,33 @@
 
 + (instancetype)randomDevice;
 + (instancetype)deviceWithSN:(NSString *)sn password:(NSString *)password;
-
 + (LinKonPropertyGroup)groupProperty:(NSString *)key;
+
+
+/**
+ 添加定时器
+
+ @param timer 定时器
+ @return 是否添加成功
+ */
+- (BOOL)addTimerTask:(LinKonTimerTask *)timer;
+
+
+/**
+ 移除定时器
+
+ @param timer 定时器
+ @return 是否移除成功
+ */
+- (BOOL)removeTimerTask:(LinKonTimerTask *)timer;
+
+
+/**
+ 修改定时器
+
+ @param timer 定时器
+ @return 是否修改成功
+ */
+- (BOOL)editTimerTask:(LinKonTimerTask *)timer;
 
 @end

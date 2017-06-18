@@ -337,18 +337,145 @@ static DeviceManager *_currentDeviceManager;
         [device setValue:value forKey:key];
         
         LinKonPropertyGroup group = [LinKonDevice groupProperty:key];
-        for (int i = 0; i < self.editBlockArray.count; i++) {
-            NotifyTarget *item = [self.editBlockArray objectAtIndex:i];
-            if (!item.listener) {
-                // 移除监听者已释放的对象
-                [self.editBlockArray removeObjectAtIndex:i];
-                i--;
-                continue;
-            } else {
-                if ([item.sign isEqualToString:sn] && (item.propertyGroup & group) == group) {
-                    if (item.groupBlock) {
-                        item.groupBlock(device);
-                    }
+        [self notifyWithDevice:sn group:group];
+    }
+}
+
+
+#pragma mark - 定时器
+
+/**
+ 获取任务
+ 
+ @param number 任务编号
+ @param sn 设备SN
+ @return 任务
+ */
+- (LinKonTimerTask *)getTask:(NSString *)number
+                      device:(NSString *)sn {
+    if (!number || !sn) {
+        return nil;
+    }
+    
+    LinKonDevice *device = [self getDevice:sn];
+    if (!device) {
+        return nil;
+    }
+
+    for (LinKonTimerTask *item in device.timerArray) {
+        if ([item.number isEqualToString:number]) {
+            return [item copy];
+        }
+    }
+    return nil;
+}
+
+/**
+ 添加定时器
+ 
+ @param timer 定时器
+ @param sn 设备SN
+ @return 是否添加成功
+ */
+- (BOOL)addTimerTask:(LinKonTimerTask *)timer toDevice:(NSString *)sn {
+    if (!timer || !sn) {
+        return NO;
+    }
+    
+    LinKonDevice *device = [self getDevice:sn];
+    if (!device) {
+        return NO;
+    }
+    
+    [timer resetTimerRange];
+    
+    if ([device addTimerTask:timer]) {
+        // 添加成功
+        [self notifyWithDevice:sn group:LinKonPropertyGroupTimer];
+        return YES;
+    }
+    // 添加失败
+    return NO;
+}
+
+
+/**
+ 移除定时器
+ 
+ @param timer 定时器
+ @param sn 设备SN
+ @return 是否移除成功
+ */
+- (BOOL)removeTimerTask:(LinKonTimerTask *)timer toDevice:(NSString *)sn {
+    if (!timer || !sn) {
+        return NO;
+    }
+    
+    LinKonDevice *device = [self getDevice:sn];
+    if (!device) {
+        return NO;
+    }
+    
+    if ([device removeTimerTask:timer]) {
+        // 移除成功
+        [self notifyWithDevice:sn group:LinKonPropertyGroupTimer];
+        return YES;
+    }
+    // 移除失败
+    return NO;
+}
+
+
+/**
+ 修改定时器
+ 
+ @param timer 定时器
+ @param sn 设备SN
+ @return 是否修改成功
+ */
+- (BOOL)editTimerTask:(LinKonTimerTask *)timer toDevice:(NSString *)sn {
+    if (!timer || !sn) {
+        return NO;
+    }
+    
+    LinKonDevice *device = [self getDevice:sn];
+    if (!device) {
+        return NO;
+    }
+    
+    [timer resetTimerRange];
+
+    if ([device editTimerTask:timer]) {
+        // 修改成功
+        [self notifyWithDevice:sn group:LinKonPropertyGroupTimer];
+        return YES;
+    }
+    // 修改失败
+    return NO;
+}
+
+#pragma mark - 属性组修改通知
+
+/**
+ 设备属性修改通知
+
+ @param sn 设备SN
+ @param group 设备属性组
+ */
+- (void)notifyWithDevice:(NSString *)sn group:(LinKonPropertyGroup)group {
+    LinKonDevice *device = [self getDevice:sn];
+    
+    for (int i = 0; i < self.editBlockArray.count; i++) {
+        NotifyTarget *item = [self.editBlockArray objectAtIndex:i];
+        if (!item.listener) {
+            // 移除监听者已释放的对象
+            [self.editBlockArray removeObjectAtIndex:i];
+            i--;
+            continue;
+        } else {
+            if ([item.sign isEqualToString:sn] && (item.propertyGroup & group) == group) {
+                if (item.groupBlock) {
+                    item.groupBlock(device);
                 }
             }
         }
