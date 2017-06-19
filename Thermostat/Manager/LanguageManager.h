@@ -10,6 +10,13 @@
 
 #define KNotificationNameSwitchLanguage @"SwitchLanguage"
 
+
+/**
+ 语言类别
+
+ - LanguageTypeEnglish: 英文
+ - LanguageTypeChinese: 简体中文
+ */
 typedef NS_ENUM(NSInteger, LanguageType) {
     LanguageTypeEnglish,
     LanguageTypeChinese,

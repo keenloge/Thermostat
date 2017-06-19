@@ -10,7 +10,16 @@
 
 @interface FeedBackManager : NSObject
 
+
+/**
+ 声音反馈设置
+ */
 @property (nonatomic, assign, getter=isSound) BOOL sound;
+
+
+/**
+ 振动反馈设置
+ */
 @property (nonatomic, assign, getter=isVibrate) BOOL vibrate;
 
 + (instancetype)sharedManager;

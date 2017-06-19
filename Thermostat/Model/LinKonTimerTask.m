@@ -73,7 +73,7 @@ const NSInteger LinKonTimerTimeMin = 0;
 }
 
 - (Byte)switchRepeatWeak:(TimerRepeat)week {
-    BOOL isCheck = (self.repeat & week) > 0;
+    BOOL isCheck = (self.repeat & week) == week;
     
     if (isCheck) {
         return (~week) & self.repeat;

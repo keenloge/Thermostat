@@ -149,8 +149,31 @@
  */
 @property (nonatomic, readonly) NSTimeInterval switchDelay;
 
+
+/**
+ 随机生成设备
+
+ @return 设备对象
+ */
 + (instancetype)randomDevice;
+
+
+/**
+ 生成指定设备
+
+ @param sn 设备SN
+ @param password 密码
+ @return 设备对象
+ */
 + (instancetype)deviceWithSN:(NSString *)sn password:(NSString *)password;
+
+
+/**
+ 获取所属属性组
+
+ @param key 属性
+ @return 属性组
+ */
 + (LinKonPropertyGroup)groupProperty:(NSString *)key;
 
 

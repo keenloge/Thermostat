@@ -10,9 +10,28 @@
 
 @interface LinKonTimerRange : NSObject
 
+
+/**
+ 星期几
+ */
 @property (nonatomic, assign) TimerRepeat repeat;
+
+
+/**
+ 起始时间
+ */
 @property (nonatomic, assign) NSInteger timeFrom;
+
+
+/**
+ 结束时间
+ */
 @property (nonatomic, assign) NSInteger timeTo;
+
+
+/**
+ 时间点
+ */
 @property (nonatomic, assign) NSInteger timeAt;
 
 + (instancetype)rangeWithRepeat:(TimerRepeat)repeat timeAt:(NSInteger)timeAt;

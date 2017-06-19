@@ -23,11 +23,27 @@ typedef NS_ENUM(NSInteger, TemperatureUnitType) {
 
 @interface TemperatureUnitManager : NSObject
 
+
+/**
+ 当前单位类别
+ */
 @property (nonatomic, assign) TemperatureUnitType unitType;
+
+
+/**
+ 当前单位字符串
+ */
 @property (nonatomic, readonly) NSString *unitString;
 
 + (instancetype)sharedManager;
 
+
+/**
+ 修正温度数值
+
+ @param setting 摄氏度温度数值
+ @return 修正后的温度数值
+ */
 - (CGFloat)fixedTemperatureSetting:(CGFloat)setting;
 
 @end
