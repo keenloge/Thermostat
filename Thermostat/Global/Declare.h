@@ -81,11 +81,6 @@
 // 温控器温度间隔
 #define LINKON_TEMPERATURE_OFFSET   (0.5)
 
-// 周期 - 无
-FOUNDATION_EXPORT const Byte TimerRepeatNone;
-
-// 周期 - 每天
-FOUNDATION_EXPORT const Byte TimerRepeatEveryDay;
 
 // 定时器最大时间
 FOUNDATION_EXPORT const NSInteger LinKonTimerTimeMax;
@@ -162,22 +157,26 @@ typedef NS_ENUM(NSInteger, LinKonScene) {
 /**
  重复(每周)
  
+ - TimerRepeatNone: 无
+ - TimerRepeatSunday: 周日
  - TimerRepeatMonday: 周一
  - TimerRepeatTuesday: 周二
  - TimerRepeatWednesday: 周三
  - TimerRepeatThursday: 周四
  - TimerRepeatFriday: 周五
  - TimerRepeatSaturday: 周六
- - TimerRepeatSunday: 周日
+ - TimerRepeatEveryDay: 每天
  */
 typedef NS_ENUM(Byte, TimerRepeat) {
-    TimerRepeatMonday      = 1 << 0,
-    TimerRepeatTuesday     = 1 << 1,
-    TimerRepeatWednesday   = 1 << 2,
-    TimerRepeatThursday    = 1 << 3,
-    TimerRepeatFriday      = 1 << 4,
-    TimerRepeatSaturday    = 1 << 5,
-    TimerRepeatSunday      = 1 << 6,
+    TimerRepeatNone         = 0,
+    TimerRepeatSunday       = 1 << 0,
+    TimerRepeatMonday       = 1 << 1,
+    TimerRepeatTuesday      = 1 << 2,
+    TimerRepeatWednesday    = 1 << 3,
+    TimerRepeatThursday     = 1 << 4,
+    TimerRepeatFriday       = 1 << 5,
+    TimerRepeatSaturday     = 1 << 6,
+    TimerRepeatEveryDay     = TimerRepeatSunday | TimerRepeatMonday | TimerRepeatTuesday | TimerRepeatWednesday | TimerRepeatThursday | TimerRepeatFriday | TimerRepeatSaturday,
 };
 
 

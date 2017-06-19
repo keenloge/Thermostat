@@ -12,8 +12,6 @@
 #import "LinKonDevice.h"
 #import "LinKonTimerRange.h"
 
-const Byte TimerRepeatNone     = 0;
-const Byte TimerRepeatEveryDay = 127;
 
 // 定时器最大时间
 const NSInteger LinKonTimerTimeMax = 24 * 60 - 1;
@@ -185,7 +183,7 @@ const NSInteger LinKonTimerTimeMin = 0;
             }
         } else {
             // 起始周期
-            TimerRepeat repeatBegin = TimerRepeatMonday;
+            TimerRepeat repeatBegin = TimerRepeatSunday;
             // 周期总数
             NSInteger repeatCount = 7;
             
@@ -242,15 +240,15 @@ const NSInteger LinKonTimerTimeMin = 0;
     
     // weekday 从周日开始, 1 = 周日 , 2 = 周一 以此类推 7 = 周六
     NSInteger weekday = theComponents.weekday;
-    if (weekday == 1) {
-        weekday = 8;
-    }
-    weekday -= 2;
-    return TimerRepeatMonday << weekday;
+    weekday--;
+    return TimerRepeatSunday << weekday;
 }
 
 - (TimerRepeat)nextRepeat:(TimerRepeat)repeatNow {
-    return repeatNow == TimerRepeatSunday ? TimerRepeatMonday : repeatNow << 1;
+    if (repeatNow == TimerRepeatNone) {
+        return TimerRepeatNone;
+    }
+    return repeatNow == TimerRepeatSaturday ? TimerRepeatSunday : repeatNow << 1;
 }
 
 @end

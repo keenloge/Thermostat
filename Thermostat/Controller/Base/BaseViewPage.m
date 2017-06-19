@@ -10,6 +10,7 @@
 #import "NSDictionaryAdditions.h"
 #import "LanguageManager.h"
 #import "TemperatureUnitManager.h"
+#import "NSTimerAdditions.h"
 
 @interface BaseViewPage () {
     BOOL isDidAppear;
@@ -18,6 +19,7 @@
 
 @property (nonatomic, strong) UIView *notifyView;
 @property (nonatomic, strong) UILabel *notifyLabel;
+@property (nonatomic, strong) NSTimer *notifyTimer;
 
 @end
 
@@ -80,7 +82,16 @@
     if (_messageNotify.length > 0) {
         self.notifyLabel.text = _messageNotify;
         self.notifyView.hidden = NO;
-        [self performSelector:@selector(hideMessageNotifyView) withObject:nil afterDelay:1.5];
+        
+        if ([self.notifyTimer isValid]) {
+            [self.notifyTimer invalidate];
+            self.notifyTimer = nil;
+        }
+        
+        WeakObj(self);
+        self.notifyTimer = [NSTimer hb_scheduledTimerWithTimeInterval:1.5 repeats:NO block:^(NSTimer *timer) {
+            [selfWeak hideMessageNotifyView];
+        }];
     } else {
         self.notifyView.hidden = YES;
     }

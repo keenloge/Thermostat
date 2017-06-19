@@ -90,12 +90,7 @@
     UIButton *button = [Globals addedSubViewClass:[UIButton class] toView:self.buttonContentView];
     button.tag = tag;
     
-    if (tag == TimerRepeatEveryDay) {
-        [button setTitle:KString(@"全") forState:UIControlStateNormal];
-    } else {
-        [button setTitle:[Globals weekString:tag] forState:UIControlStateNormal];
-    }
-    
+    [button setTitle:[Globals weekString:tag] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [button setBackgroundImage:[UIImage imageWithColor:HB_COLOR_BASE_MAIN] forState:UIControlStateSelected];
     [button setBackgroundImage:[UIImage imageWithColor:UIColorFromHex(0xe5e5e5)] forState:UIControlStateNormal];

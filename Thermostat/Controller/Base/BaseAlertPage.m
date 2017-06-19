@@ -56,7 +56,7 @@
     CAAnimationGroup * animationGroup = [CAAnimationGroup animation];
     animationGroup.fillMode = kCAFillModeBackwards;
     animationGroup.beginTime = CACurrentMediaTime();
-    animationGroup.duration = .5;
+    animationGroup.duration = .3;
     animationGroup.repeatCount = 1;
     animationGroup.timingFunction = defaultCurve;
     
@@ -85,7 +85,7 @@
     CAAnimationGroup * animationGroup = [CAAnimationGroup animation];
     animationGroup.fillMode = kCAFillModeBackwards;
     animationGroup.beginTime = CACurrentMediaTime();
-    animationGroup.duration = .5;
+    animationGroup.duration = .3;
     animationGroup.repeatCount = 1;
     animationGroup.timingFunction = defaultCurve;
     

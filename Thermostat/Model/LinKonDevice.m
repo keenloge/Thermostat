@@ -202,7 +202,7 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
 
 - (BOOL)addTimerTask:(LinKonTimerTask *)timer {
     for (LinKonTimerTask *item in self.savedTimerArray) {
-        if ([item isConflictTo:timer]) {
+        if ([item.number isEqualToString:timer.number] || [item isConflictTo:timer]) {
             // 与现有定时器发生冲突
             return NO;
         }
@@ -225,7 +225,7 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
 
 - (BOOL)editTimerTask:(LinKonTimerTask *)timer {
     for (LinKonTimerTask *item in self.savedTimerArray) {
-        if ([item isConflictTo:timer]) {
+        if (![item.number isEqualToString:timer.number] && [item isConflictTo:timer]) {
             // 与现有定时器发生冲突
             return NO;
         }

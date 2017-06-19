@@ -114,9 +114,12 @@
             return KString(@"六");
         case TimerRepeatSunday:
             return KString(@"日");
+        case TimerRepeatEveryDay:
+            return KString(@"全");
         default:
             break;
     }
+    return nil;
 }
 
 + (NSString *)settingString:(float)setting {
