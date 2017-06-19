@@ -68,11 +68,7 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
     _sn = sn;
     
     WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:selfWeak device:sn group:LinKonPropertyGroupBinding | LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
+    [[DeviceManager sharedManager] registerListener:selfWeak device:sn group:LinKonPropertyGroupBinding | LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(LinKonDevice *device, NSString *key) {
         [selfWeak changeStateWithDevice:device];
     }];
 }

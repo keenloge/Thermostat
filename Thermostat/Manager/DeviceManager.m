@@ -246,8 +246,9 @@ static DeviceManager *_currentDeviceManager;
                   device:(NSString *)sn
                    group:(Byte)group
                    block:(NotifyTargetBlock)block {
+    // 取消对 sn 的非空检查, 因为可以不针对特定设备进行监听
     
-    if (!listener || !sn || (group == 0) || !block) {
+    if (!listener || (group == 0) || !block) {
         return;
     }
     
@@ -283,7 +284,7 @@ static DeviceManager *_currentDeviceManager;
     LinKonDevice *device = [self getDevice:sn];
     if (device) {
         if (block) {
-            block(device);
+            block(device, nil);
         }
     }
 }
@@ -337,7 +338,7 @@ static DeviceManager *_currentDeviceManager;
         [device setValue:value forKey:key];
         
         LinKonPropertyGroup group = [LinKonDevice groupProperty:key];
-        [self notifyWithDevice:sn group:group];
+        [self notifyWithDevice:sn group:group key:key];
     }
 }
 
@@ -391,7 +392,7 @@ static DeviceManager *_currentDeviceManager;
     
     if ([device addTimerTask:timer]) {
         // 添加成功
-        [self notifyWithDevice:sn group:LinKonPropertyGroupTimer];
+        [self notifyWithDevice:sn group:LinKonPropertyGroupTimer key:KDeviceTimerAdd];
         return YES;
     }
     // 添加失败
@@ -418,7 +419,7 @@ static DeviceManager *_currentDeviceManager;
     
     if ([device removeTimerTask:timer]) {
         // 移除成功
-        [self notifyWithDevice:sn group:LinKonPropertyGroupTimer];
+        [self notifyWithDevice:sn group:LinKonPropertyGroupTimer key:KDeviceTimerRemove];
         return YES;
     }
     // 移除失败
@@ -447,7 +448,7 @@ static DeviceManager *_currentDeviceManager;
 
     if ([device editTimerTask:timer]) {
         // 修改成功
-        [self notifyWithDevice:sn group:LinKonPropertyGroupTimer];
+        [self notifyWithDevice:sn group:LinKonPropertyGroupTimer key:KDeviceTimerEdit];
         return YES;
     }
     // 修改失败
@@ -462,7 +463,7 @@ static DeviceManager *_currentDeviceManager;
  @param sn 设备SN
  @param group 设备属性组
  */
-- (void)notifyWithDevice:(NSString *)sn group:(LinKonPropertyGroup)group {
+- (void)notifyWithDevice:(NSString *)sn group:(LinKonPropertyGroup)group key:(NSString *)key {
     LinKonDevice *device = [self getDevice:sn];
     
     for (int i = 0; i < self.editBlockArray.count; i++) {
@@ -473,9 +474,9 @@ static DeviceManager *_currentDeviceManager;
             i--;
             continue;
         } else {
-            if ([item.sign isEqualToString:sn] && (item.propertyGroup & group) == group) {
+            if ((!item.sign || [item.sign isEqualToString:sn]) && (item.propertyGroup & group) == group) {
                 if (item.groupBlock) {
-                    item.groupBlock(device);
+                    item.groupBlock(device, key);
                 }
             }
         }

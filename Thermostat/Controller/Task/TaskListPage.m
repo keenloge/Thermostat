@@ -58,8 +58,7 @@ const CGFloat TaskListRowsHeight = 80.0;
 
 - (void)baseInitialiseSubViews {
     WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:self device:self.sn group:LinKonPropertyGroupTimer block:^(NSObject *object) {
-        LinKonDevice *device = (LinKonDevice *)object;
+    [[DeviceManager sharedManager] registerListener:self device:self.sn group:LinKonPropertyGroupTimer block:^(LinKonDevice *device, NSString *key) {
         [selfWeak.baseContentArr removeAllObjects];
         [selfWeak.baseContentArr addObjectsFromArray:device.timerArray];
         [selfWeak.baseTableView reloadData];

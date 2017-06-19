@@ -38,6 +38,7 @@ const CGFloat PopMenuButtonTitleHeight  = 13.0;
     [self setTitleColor:HB_COLOR_POP_ACTION forState:UIControlStateNormal];
 //    [self setBackgroundImage:[UIImage new] forState:UIControlStateNormal];
     self.titleLabel.font = UIFontOf3XPix(39);
+    self.titleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (CGRect)contentRectForBounds:(CGRect)bounds {

@@ -79,12 +79,7 @@ const CGFloat KDeviceInfoIconSize               = 30.0;
     self.circleInfoView.sn = sn;
     
     WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
-        
+    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(LinKonDevice *device, NSString *key) {
         // 儿童锁图标控制
         selfWeak.lockImageView.alpha = device.lock ? 0.5 : 1.0;
         

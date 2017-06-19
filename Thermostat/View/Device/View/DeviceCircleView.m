@@ -228,11 +228,7 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
     [[NSRunLoop currentRunLoop] addTimer:self.roundTimer forMode:NSRunLoopCommonModes];
     [self.roundTimer fire];
     
-    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
+    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(LinKonDevice *device, NSString *key) {
         [selfWeak updateInfoViewWithDevice:device];
     }];
 }

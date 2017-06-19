@@ -103,6 +103,15 @@ const CGFloat DeviceListRowsHeight = 77.0;
             [selfWeak showBlankView];
         }
     }];
+    
+    
+    [[DeviceManager sharedManager] registerListener:self device:nil group:LinKonPropertyGroupBinding block:^(LinKonDevice *device, NSString *key) {
+        if ([key isEqualToString:KDeviceNickname]) {
+            selfWeak.messageNotify = KString(@"昵称修改成功");
+        } else if ([key isEqualToString:KDevicePassword]) {
+            selfWeak.messageNotify = KString(@"修改密码成功");
+        }
+    }];
 }
 
 - (void)baseResetLanguage {

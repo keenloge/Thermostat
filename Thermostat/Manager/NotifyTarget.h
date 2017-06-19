@@ -8,14 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class LinKonDevice;
 
 /**
  属性监听回调
 
- @param object 被改变的对象
+ @param device 改变的设备
+ @param key 改变的属性
  */
-typedef void(^NotifyTargetBlock)(NSObject *object);
-
+typedef void(^NotifyTargetBlock)(LinKonDevice *device, NSString *key);
 
 /**
  列表监听回调
@@ -46,12 +47,6 @@ typedef void(^NotifyListBlock)(NSArray *array);
  列表监听 Block
  */
 @property (nonatomic, copy) NotifyListBlock listBlock;
-
-///**
-// 属性监听 Block 字典
-// */
-//@property (nonatomic, strong) NSMutableDictionary<NSString*, NotifyTargetBlock> *blockDictionary;
-
 
 /**
  监听属性组

@@ -97,11 +97,7 @@
     _sn = sn;
     
     WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:self device:self.sn group:LinKonPropertyGroupState block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
+    [[DeviceManager sharedManager] registerListener:self device:self.sn group:LinKonPropertyGroupState block:^(LinKonDevice *device, NSString *key) {
         selfWeak.device = device;
         selfWeak.sceneButton.enabled = device.running != DeviceRunningStateTurnOFF;
         selfWeak.modeButton.enabled = device.running != DeviceRunningStateTurnOFF;

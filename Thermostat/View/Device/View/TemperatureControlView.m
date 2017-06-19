@@ -151,11 +151,7 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
     _sn = sn;
     
     WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(NSObject *object) {
-        if (![object isKindOfClass:[LinKonDevice class]]) {
-            return ;
-        }
-        LinKonDevice *device = (LinKonDevice *)object;
+    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(LinKonDevice *device, NSString *key) {
         [selfWeak updateSlideViewStateWithDevice:device];
         selfWeak.scrollToIndex = (device.setting - LINKON_TEMPERATURE_MIN) / LINKON_TEMPERATURE_OFFSET;
     }];

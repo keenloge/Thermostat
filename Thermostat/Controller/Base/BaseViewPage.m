@@ -80,7 +80,7 @@
     if (_messageNotify.length > 0) {
         self.notifyLabel.text = _messageNotify;
         self.notifyView.hidden = NO;
-        [self performSelector:@selector(hideMessageNotifyView) withObject:nil afterDelay:1.0];
+        [self performSelector:@selector(hideMessageNotifyView) withObject:nil afterDelay:1.5];
     } else {
         self.notifyView.hidden = YES;
     }
