@@ -14,7 +14,7 @@
 
 @implementation BaseAlertPage
 
-+ (instancetype)alertPageWithTitle:(NSString *)title message:(NSString *)message {
++ (instancetype)alertPageWithTitle:(NSString *)title message:(NSString *)message alignment:(NSTextAlignment)alignment {
     BaseAlertPage *alert = [BaseAlertPage alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
     if (title) {
@@ -30,7 +30,7 @@
     
     if (message) {
         NSMutableParagraphStyle *messageParagraph = [[NSMutableParagraphStyle alloc] init];
-        messageParagraph.alignment = NSTextAlignmentLeft;
+        messageParagraph.alignment = alignment;
         NSDictionary *messageAttributes = @{
                                             NSParagraphStyleAttributeName : messageParagraph,
                                             NSFontAttributeName : UIFontOf1XPix(14),

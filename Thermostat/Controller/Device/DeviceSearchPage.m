@@ -77,7 +77,7 @@ const CGFloat DeviceSearchButtonSize = 144.0;
     [message appendString:@"\n"];
     [message appendString:KString(@"Wi-Fi密码未输入，请确认Wi-Fi密码是否为空")];
     
-    BaseAlertPage *alert = [BaseAlertPage alertPageWithTitle:KString(@"温馨提示") message:message];
+    BaseAlertPage *alert = [BaseAlertPage alertPageWithTitle:KString(@"温馨提示") message:message alignment:NSTextAlignmentLeft];
     WeakObj(self);
     [alert addActionTitle:KString(@"重新输入") handler:^(UIAlertAction * _Nonnull action) {
         [selfWeak.passwordTextField becomeFirstResponder];
@@ -93,7 +93,7 @@ const CGFloat DeviceSearchButtonSize = 144.0;
 }
 
 - (void)showAlertWithSearching {
-    BaseAlertPage *alert = [BaseAlertPage alertPageWithTitle:KString(@"搜索过程大约需要3分钟，取消并重新开始？") message:nil];
+    BaseAlertPage *alert = [BaseAlertPage alertPageWithTitle:KString(@"搜索过程大约需要3分钟，取消并重新开始？") message:nil alignment:NSTextAlignmentCenter];
     WeakObj(self);
     [alert addActionTitle:KString(@"等待") handler:^(UIAlertAction *action) {
         

@@ -119,11 +119,11 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
         if ([self.device.password isEqualToString:self.passwordTextField.text]) {
             // 原始密码未改动
             WeakObj(self);
-            BaseAlertPage *alert = [BaseAlertPage alertPageWithTitle:KString(@"温馨提示") message:@"初始密码未改动，建议更换一个密码"];
-            [alert addActionTitle:KString(@"重新设置") handler:^(UIAlertAction *action) {
+            BaseAlertPage *alert = [BaseAlertPage alertPageWithTitle:KString(@"温馨提示") message:@"你的设备管理密码为出厂密码，为了安全考虑，建议重新设置密码" alignment:NSTextAlignmentCenter];
+            [alert addActionTitle:KString(@"设置密码") handler:^(UIAlertAction *action) {
                 [selfWeak.passwordTextField becomeFirstResponder];
             }];
-            [alert addActionTitle:KString(@"就用它") handler:^(UIAlertAction *action) {
+            [alert addActionTitle:KString(@"忽略") handler:^(UIAlertAction *action) {
                 [selfWeak addDeviceWithInput];
             }];
             [self presentViewController:alert animated:YES completion:nil];

@@ -10,7 +10,7 @@
 
 @interface BaseAlertPage : UIAlertController
 
-+ (instancetype)alertPageWithTitle:(NSString *)title message:(NSString *)message;
++ (instancetype)alertPageWithTitle:(NSString *)title message:(NSString *)message alignment:(NSTextAlignment)alignment;
 
 - (void)addActionTitle:(NSString *)title handler:(void (^)(UIAlertAction *action))handler;
 //- (void)addActionTitle:(NSString *)title style:(UIAlertActionStyle)style handler:(void (^)(UIAlertAction *action))handler;

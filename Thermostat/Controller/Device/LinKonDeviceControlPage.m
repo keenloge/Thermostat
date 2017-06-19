@@ -211,7 +211,7 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
             self.settingTableView.hidden = YES;
         }
         [self addBarButtonItemBackWithAction:@selector(barButtonItemLeftPressed:)];
-        [self addBarButtonItemRightNormalImageName:@"nav_add_blank" hightLited:nil];
+        [self addBarButtonItemRightNormalImageName:@"nav_dot" hightLited:nil];
         
         WeakObj(self);
         [[DeviceManager sharedManager] registerListener:self device:self.sn group:LinKonPropertyGroupBinding block:^(NSObject *object) {
