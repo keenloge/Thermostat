@@ -45,6 +45,65 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    CAMediaTimingFunction * defaultCurve = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    
+    CAAnimationGroup * animationGroup = [CAAnimationGroup animation];
+    animationGroup.fillMode = kCAFillModeBackwards;
+    animationGroup.beginTime = CACurrentMediaTime();
+    animationGroup.duration = .5;
+    animationGroup.repeatCount = 1;
+    animationGroup.timingFunction = defaultCurve;
+    
+    
+    // 平移
+    CABasicAnimation * translation = [CABasicAnimation animation];
+    translation.keyPath = @"transform.translation.y";
+    translation.fromValue = @(-MAIN_SCREEN_HEIGHT);
+    translation.toValue = @0;
+    
+    // 旋转
+    CABasicAnimation *rotation = [CABasicAnimation animation];
+    rotation.keyPath = @"transform.rotation";
+    rotation.fromValue = @(-M_PI * 1 / 6);
+    rotation.toValue = @(0);
+    
+    
+    animationGroup.animations = @[translation, rotation];
+    [self.view.layer addAnimation:animationGroup forKey:@"flyIn"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    CAMediaTimingFunction * defaultCurve = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+    
+    CAAnimationGroup * animationGroup = [CAAnimationGroup animation];
+    animationGroup.fillMode = kCAFillModeBackwards;
+    animationGroup.beginTime = CACurrentMediaTime();
+    animationGroup.duration = .5;
+    animationGroup.repeatCount = 1;
+    animationGroup.timingFunction = defaultCurve;
+    
+    // 平移
+    CABasicAnimation * translation = [CABasicAnimation animation];
+    translation.keyPath = @"transform.translation.y";
+    translation.fromValue = @0;
+    translation.toValue = @(MAIN_SCREEN_HEIGHT);
+    
+    // 旋转
+    CABasicAnimation *rotation = [CABasicAnimation animation];
+    rotation.keyPath = @"transform.rotation";
+    rotation.fromValue = @(0);
+    rotation.toValue = @(-M_PI * 1 / 6);
+    
+    
+    animationGroup.animations = @[translation, rotation];
+    [self.view.layer addAnimation:animationGroup forKey:@"flyOut"];
 }
 
 - (void)didReceiveMemoryWarning {

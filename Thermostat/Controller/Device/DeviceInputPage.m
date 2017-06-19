@@ -13,7 +13,7 @@ const CGFloat DeviceInputPaddingTop     = 43.0;
 // 左,右边距
 const CGFloat DeviceInputPaddingSide    = 27.0;
 // 输入框高度
-const CGFloat DeviceInputFieldHeight    = 50.0;
+const CGFloat DeviceInputFieldHeight    = 40.0;
 // 输入框纵向间距
 const CGFloat DeviceInputFieldOffsetX   = 12.0;
 // 输入框与标题横向间距
