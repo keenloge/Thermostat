@@ -32,7 +32,6 @@ const NSInteger LinKonTimerTimeMin = 0;
 - (instancetype)initWithType:(LinKonTimerTaskType)type device:(NSString *)sn {
     if (self = [super init]) {
         self.type = type;
-        self.sn = sn;
         self.number = [NSString uuidString];
         self.repeat = TimerRepeatNone;
         self.validate = YES;
@@ -57,7 +56,6 @@ const NSInteger LinKonTimerTimeMin = 0;
 - (id)copyWithZone:(NSZone *)zone{
     LinKonTimerTask *item = [[[self class] allocWithZone:zone] init];
     item.number = self.number;
-    item.sn = self.sn;
     item.type = self.type;
     item.repeat = self.repeat;
     item.validate = self.validate;

@@ -31,10 +31,6 @@
  */
 @property (nonatomic, copy) NSString *number;
 
-/**
- 设备序列号
- */
-@property (nonatomic, copy) NSString *sn;
 
 /**
  任务类别
@@ -112,7 +108,7 @@
 
 
 /**
- 重置有效周期
+ 重置周期时间数组
  */
 - (void)resetTimerRange;
 

@@ -12,6 +12,7 @@
 #import "DeviceManager.h"
 #import "LinKonDevice.h"
 #import "Globals.h"
+#import "FeedBackManager.h"
 
 const CGFloat KTemperatureControlCountShow      = 5.0;
 const CGFloat KTemperatureControlCutLineOffsetY = 12.0;
@@ -163,6 +164,13 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
     }
     _scrollToIndex = index;
     [self.contentScrollView setContentOffset:CGPointMake(CGRectGetWidth(self.contentScrollView.frame) * index, 0) animated:YES];
+}
+
+- (void)setCurrentIndex:(NSInteger)currentIndex {
+    if (_currentIndex != currentIndex) {
+        [[FeedBackManager sharedManager] soundScroll];
+    }
+    _currentIndex = currentIndex;
 }
 
 #pragma mark - Getter

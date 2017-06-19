@@ -167,12 +167,12 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
         [self.contentHeaderView addSubview:_headImageView];
         
         CGFloat imageSize = SideMenuContentImageSize;
-        _headImageView.backgroundColor = HB_COLOR_BASE_RED;
+        _headImageView.backgroundColor = HB_COLOR_BASE_MAIN;
         _headImageView.layer.borderColor = HB_COLOR_BASE_WHITE.CGColor;
         _headImageView.layer.borderWidth = SideMenuContentImageBorder;
         _headImageView.layer.cornerRadius = imageSize / 2.0;
         _headImageView.clipsToBounds = YES;
-        _headImageView.image = [UIImage imageNamed:@"icon_header"];
+        _headImageView.image = [UIImage imageNamed:@"cell_device"];
         
         WeakObj(self);
         [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {

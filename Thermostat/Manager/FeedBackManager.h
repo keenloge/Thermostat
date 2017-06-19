@@ -33,4 +33,10 @@
  */
 - (void)vibrateSoundTurnOff;
 
+
+/**
+ 滚动
+ */
+- (void)soundScroll;
+
 @end

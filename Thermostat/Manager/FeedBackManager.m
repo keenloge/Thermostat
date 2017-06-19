@@ -98,6 +98,10 @@ static FeedBackManager *_currentFeedBackManager;
     [self playSoundIfNeeded:1110];
 }
 
+- (void)soundScroll {
+    [self playSoundIfNeeded:1306];
+}
+
 - (void)vibrateIfNeeded {
     if (self.isVibrate) {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
