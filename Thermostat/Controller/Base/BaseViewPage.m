@@ -78,6 +78,9 @@
 
 - (void)setMessageNotify:(NSString *)messageNotify {
     _messageNotify = messageNotify;
+    if (!isDidAppear) {
+        return;
+    }
     
     if (_messageNotify.length > 0) {
         self.notifyLabel.text = _messageNotify;

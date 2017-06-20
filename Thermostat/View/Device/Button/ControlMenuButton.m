@@ -43,7 +43,6 @@ const CGFloat ControlMenuButtonImageSize = 55;
     self.imageView.contentMode = UIViewContentModeScaleAspectFit;
     self.backgroundColor = HB_COLOR_BASE_WHITE;
     self.tintColor = HB_COLOR_BASE_MAIN;
-    self.alpha = 1.0;
 }
 
 - (void)setEnabled:(BOOL)enabled {
@@ -51,10 +50,8 @@ const CGFloat ControlMenuButtonImageSize = 55;
     
     if (enabled) {
         self.tintColor = HB_COLOR_BASE_MAIN;
-        self.imageView.alpha = 1.0;
     } else {
-        self.tintColor = HB_COLOR_BASE_BLACK;
-        self.imageView.alpha = 0.4;
+        self.tintColor = HB_COLOR_BASE_LIGHT;
     }
 }
 
