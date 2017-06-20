@@ -30,8 +30,14 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
 
 @implementation SideMenuPage
 
+- (instancetype)init {
+    if (self = [super init]) {
+        self.preferredContentSize = CGSizeMake(KHorizontalRound(SideMenuContentSizeWidth), MAIN_SCREEN_HEIGHT);
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
-    self.preferredContentSize = CGSizeMake(KHorizontalRound(SideMenuContentSizeWidth), MAIN_SCREEN_HEIGHT);
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
