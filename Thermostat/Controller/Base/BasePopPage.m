@@ -95,7 +95,7 @@
     UIView *backgroundView = [[UIView alloc] init];
     [backgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
     backgroundView.backgroundColor = [UIColor blackColor];
-    backgroundView.alpha = 0.7;
+    backgroundView.alpha = 0.4;
     [self.view addSubview:backgroundView];
     
     NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(backgroundView);

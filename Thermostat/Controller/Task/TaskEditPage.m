@@ -93,7 +93,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 - (void)baseInitialiseSubViews {
     self.baseTableView.opaque = YES;
     self.baseTableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.baseTableView.backgroundColor = UIColorFromHex(0xf2f2f2);
+//    self.baseTableView.backgroundColor = UIColorFromHex(0xf2f2f2);
 }
 
 #pragma mark - UITableViewDataSource
@@ -175,8 +175,71 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    return [UIView new];
+    if ([self tableView:tableView heightForHeaderInSection:section] > 0.0) {
+        static NSString *identifierHeader = @"Header";
+        UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierHeader];
+        if (!headerView) {
+            headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:identifierHeader];
+            headerView.contentView.backgroundColor = HB_COLOR_BASE_WHITE;
+            
+            UIView *cutLineBottomView = [UIView new];
+            [headerView.contentView addSubview:cutLineBottomView];
+            
+            cutLineBottomView.backgroundColor = UIColorFromHex(0xd6d5d9);
+            
+            [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.bottom.right.mas_equalTo(0);
+                make.height.mas_equalTo(0.67);
+            }];
+        }
+        
+        return headerView;
+    }
+    return nil;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (section == 2 && self.task.type == LinKonTimerTaskTypeSwitch && self.task.running == DeviceRunningStateTurnON) {
+        return 36.0;
+    }
+    return 0.0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if ([self tableView:tableView heightForFooterInSection:section] > 0.0) {
+        static NSString *identifierFooter = @"Footer";
+        UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierFooter];
+        if (!headerView) {
+            headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:identifierFooter];
+            headerView.contentView.backgroundColor = HB_COLOR_BASE_WHITE;
+            
+            
+            UIView *bottomLineView = [UIView new];
+            [headerView.contentView addSubview:bottomLineView];
+            
+            bottomLineView.backgroundColor = UIColorFromHex(0xd6d5d9);
+            
+            [bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.bottom.right.mas_equalTo(0);
+                make.height.mas_equalTo(0.67);
+            }];
+            
+            UIView *topLineView = [UIView new];
+            [headerView.contentView addSubview:topLineView];
+            
+            topLineView.backgroundColor = UIColorFromHex(0xd6d5d9);
+            
+            [topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.top.right.mas_equalTo(0);
+                make.height.mas_equalTo(0.67);
+            }];
+        }
+        
+        return headerView;
+    }
+    return nil;
+}
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {

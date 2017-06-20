@@ -147,9 +147,11 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
         backgroundImageView.image = [UIImage imageNamed:@"bkg_banner0"];
         backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
         
-        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
         UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
         effectView.frame = backgroundImageView.bounds;
+        effectView.backgroundColor = UIColorFromRGBA(0, 0, 0, 0.6);
+        effectView.alpha = 0.9;
         [backgroundImageView addSubview:effectView];
         effectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
@@ -160,7 +162,7 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
         
         [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(0);
-            make.height.mas_equalTo(1);
+            make.height.mas_equalTo(0.67);
         }];
 
     }

@@ -87,7 +87,7 @@
         
         [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(0);
-            make.height.mas_equalTo(1);
+            make.height.mas_equalTo(0.67);
         }];
     }
     
