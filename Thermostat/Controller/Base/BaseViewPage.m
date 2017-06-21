@@ -301,7 +301,7 @@
     }
     
     CGFloat navigationBarSize = 44.0;
-    CGFloat navigationBarOffsetX = 13.0;
+    CGFloat navigationBarOffsetX = 16.0;
 
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(isRight ? navigationBarOffsetX : -navigationBarOffsetX,
                                                                   0,

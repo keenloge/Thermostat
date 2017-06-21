@@ -8,8 +8,24 @@
 
 #import "DeviceBlankView.h"
 
-const CGFloat KDeviceBlankButtonSize = 38.0;
+const CGFloat KDeviceBlankButtonSize = 45.0;
 const CGFloat KDeviceBlankLabelOffsetY = 6.0;
+
+@interface DeviceBlankButton : UIButton
+
+@end
+
+@implementation DeviceBlankButton
+
+- (CGRect)contentRectForBounds:(CGRect)bounds {
+    return bounds;
+}
+
+- (CGRect)imageRectForContentRect:(CGRect)contentRect {
+    return contentRect;
+}
+
+@end
 
 @interface DeviceBlankView ()
 
@@ -50,11 +66,12 @@ const CGFloat KDeviceBlankLabelOffsetY = 6.0;
 
 - (UIButton *)blankButton {
     if (!_blankButton) {
-        _blankButton = [UIButton new];
+        _blankButton = [DeviceBlankButton new];
         [self addSubview:_blankButton];
         [_blankButton setImage:[UIImage imageNamed:@"btn_device_search"] forState:UIControlStateNormal];
         [_blankButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
-
+        _blankButton.imageView.contentMode = UIViewContentModeScaleToFill;
+        
         WeakObj(self);
         [_blankButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.center.equalTo(selfWeak);

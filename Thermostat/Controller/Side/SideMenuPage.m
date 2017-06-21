@@ -147,10 +147,10 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
         backgroundImageView.image = [UIImage imageNamed:@"bkg_banner0"];
         backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
         
-        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
         UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
         effectView.frame = backgroundImageView.bounds;
-        effectView.backgroundColor = UIColorFromRGBA(0, 0, 0, 0.6);
+//        effectView.backgroundColor = UIColorFromRGBA(0, 0, 0, 0.6);
         effectView.alpha = 0.9;
         [backgroundImageView addSubview:effectView];
         effectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
