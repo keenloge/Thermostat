@@ -88,28 +88,11 @@ const NSInteger LinKonTimerTimeMin = 0;
         return NO;
     }
     
-    // 定时器类型不一样, 则不冲突
-    if (self.type != task.type) {
-        return NO;
-    }
-    
-    if (self.type == LinKonTimerTaskTypeSwitch) {
-        // 开关
-        for (LinKonTimerRange *outRange in self.rangeArray) {
-            for (LinKonTimerRange *inRange in task.rangeArray) {
-                if (outRange.repeat == inRange.repeat && outRange.timeAt == inRange.timeAt) {
+    for (LinKonTimerRange *outRange in self.rangeArray) {
+        for (LinKonTimerRange *inRange in task.rangeArray) {
+            if (outRange.repeat == inRange.repeat) {
+                if (!(outRange.timeFrom > inRange.timeTo || outRange.timeTo < inRange.timeFrom)) {
                     return YES;
-                }
-            }
-        }
-    } else {
-        // 阶段
-        for (LinKonTimerRange *outRange in self.rangeArray) {
-            for (LinKonTimerRange *inRange in task.rangeArray) {
-                if (outRange.repeat == inRange.repeat) {
-                    if (!(outRange.timeFrom > inRange.timeTo || outRange.timeTo < inRange.timeFrom)) {
-                        return YES;
-                    }
                 }
             }
         }
@@ -142,11 +125,11 @@ const NSInteger LinKonTimerTimeMin = 0;
                 // 开关定时器
                 if (self.timeFrom > timeNow) {
                     // 今天生效的定时器
-                    LinKonTimerRange *rangeNow = [LinKonTimerRange rangeWithRepeat:repeatNow timeAt:self.timeFrom];
+                    LinKonTimerRange *rangeNow = [LinKonTimerRange rangeWithRepeat:repeatNow timeFrom:self.timeFrom timeTo:self.timeFrom];
                     [tempArray addObject:rangeNow];
                 } else {
                     // 明天生效的定时器
-                    LinKonTimerRange *rangeNext = [LinKonTimerRange rangeWithRepeat:repeatNext timeAt:self.timeFrom];
+                    LinKonTimerRange *rangeNext = [LinKonTimerRange rangeWithRepeat:repeatNext timeFrom:self.timeFrom timeTo:self.timeFrom];
                     [tempArray addObject:rangeNext];
                 }
             } else {
@@ -192,7 +175,7 @@ const NSInteger LinKonTimerTimeMin = 0;
                 // 开关定时器
                 for (int i = 0; i < repeatCount; i++) {
                     if (((repeatBegin << i) & self.repeat) > 0) {
-                        LinKonTimerRange *range = [LinKonTimerRange rangeWithRepeat:repeatBegin << i timeAt:self.timeFrom];
+                        LinKonTimerRange *range = [LinKonTimerRange rangeWithRepeat:repeatBegin << i timeFrom:self.timeFrom timeTo:self.timeFrom];
                         [tempArray addObject:range];
                     }
                 }

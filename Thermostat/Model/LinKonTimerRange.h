@@ -29,12 +29,6 @@
 @property (nonatomic, assign) NSInteger timeTo;
 
 
-/**
- 时间点
- */
-@property (nonatomic, assign) NSInteger timeAt;
-
-+ (instancetype)rangeWithRepeat:(TimerRepeat)repeat timeAt:(NSInteger)timeAt;
 + (instancetype)rangeWithRepeat:(TimerRepeat)repeat timeFrom:(NSInteger)timeFrom timeTo:(NSInteger)timeTo;
 
 @end

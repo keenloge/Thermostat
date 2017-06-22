@@ -10,15 +10,6 @@
 
 @implementation LinKonTimerRange
 
-+ (instancetype)rangeWithRepeat:(TimerRepeat)repeat timeAt:(NSInteger)timeAt {
-    LinKonTimerRange *item = [[LinKonTimerRange alloc] init];
-    
-    item.repeat = repeat;
-    item.timeAt = timeAt;
-    
-    return item;
-}
-
 + (instancetype)rangeWithRepeat:(TimerRepeat)repeat timeFrom:(NSInteger)timeFrom timeTo:(NSInteger)timeTo {
     LinKonTimerRange *item = [[LinKonTimerRange alloc] init];
     

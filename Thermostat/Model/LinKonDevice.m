@@ -81,8 +81,8 @@
  @return 序列号
  */
 - (long long)randomSN {
-    long long tempSN = (rand() % 9000 + 1000) * 10000 * 10000 * 10000;
-    tempSN += (rand() % 10000) * 10000 * 10000;
+    long long tempSN = ((long long)(rand() % 9000 + 1000)) * 10000 * 10000 * 10000;
+    tempSN += ((long long)(rand() % 10000)) * 10000 * 10000;
     tempSN += (rand() % 10000) * 10000;
     tempSN += (rand() % 10000);
     return tempSN;
