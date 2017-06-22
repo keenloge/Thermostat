@@ -188,7 +188,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
             
             [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.bottom.right.mas_equalTo(0);
-                make.height.mas_equalTo(0.67);
+                make.height.mas_equalTo(IPHONE_INCH_5_5 ? 0.33 : 0.5);
             }];
         }
         
@@ -220,7 +220,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
             
             [bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.bottom.right.mas_equalTo(0);
-                make.height.mas_equalTo(0.67);
+                make.height.mas_equalTo(IPHONE_INCH_5_5 ? 0.33 : 0.5);
             }];
             
             UIView *topLineView = [UIView new];
@@ -230,7 +230,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
             
             [topLineView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.top.right.mas_equalTo(0);
-                make.height.mas_equalTo(0.67);
+                make.height.mas_equalTo(IPHONE_INCH_5_5 ? 0.33 : 0.5);
             }];
         }
         

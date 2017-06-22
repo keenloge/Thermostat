@@ -7,10 +7,9 @@
 //
 
 #import "SideSettingPage.h"
-#import "SideSettingSwitchCell.h"
-#import "SideSettingCheckCell.h"
 #import "TemperatureUnitManager.h"
 #import "FeedBackManager.h"
+#import "BaseTableViewCell.h"
 
 @interface SideSettingPage ()
 
@@ -87,7 +86,7 @@
         
         [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(0);
-            make.height.mas_equalTo(0.67);
+            make.height.mas_equalTo(IPHONE_INCH_5_5 ? 0.33 : 0.5);
         }];
     }
     
@@ -109,75 +108,77 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *baseIdentifierCell = @"BaseCell";
+    BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
+    if (!cell) {
+        cell = [[BaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
+        [cell updateTitleFont:UIFontOf1XPix(17) color:UIColorFromRGBA(0, 0, 0, 0.85) paddingLeft:16];
+        cell.tintColor = HB_COLOR_BASE_MAIN;
+    }
+ 
+    WeakObj(self);
     if (indexPath.section == 0) {
-        static NSString *identifierSwitchCell = @"SwitchCell";
-        SideSettingSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierSwitchCell];
-        if (cell == nil) {
-            cell = [[SideSettingSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierSwitchCell];
-        }
         
-        WeakObj(self);
+        cell.baseAccessoryType = BaseTableViewCellAccessoryTypeSwitch;
         if (indexPath.row == 0) {
-            cell.titleString = KString(@"声音");
-            cell.open = [FeedBackManager sharedManager].isSound;
-            cell.switchBlock = ^(BOOL value) {
-                [FeedBackManager sharedManager].sound = value;
+            cell.baseTitleString = KString(@"声音");
+            [cell updateBaseSwitchOn:[FeedBackManager sharedManager].isSound switchBlock:^(BOOL on) {
+                [FeedBackManager sharedManager].sound = on;
                 [selfWeak.baseTableView reloadData];
-            };
+            }];
         } else if (indexPath.row == 1) {
-            cell.titleString = KString(@"振动");
-            cell.open = [FeedBackManager sharedManager].isVibrate;
-            cell.switchBlock = ^(BOOL value) {
-                [FeedBackManager sharedManager].vibrate = value;
+            cell.baseTitleString = KString(@"振动");
+            [cell updateBaseSwitchOn:[FeedBackManager sharedManager].isVibrate switchBlock:^(BOOL on) {
+                [FeedBackManager sharedManager].vibrate = on;
                 [selfWeak.baseTableView reloadData];
-            };
+            }];
         }
         
-        return cell;
-    } else {
-        static NSString *identifierCheckCell = @"CheckCell";
-        SideSettingCheckCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCheckCell];
-        if (cell == nil) {
-            cell = [[SideSettingCheckCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierCheckCell];
-        }
+    } else if (indexPath.section == 1) {
         
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        if (indexPath.section == 1) {
-            if (indexPath.row == 0) {
-                cell.titleString = KString(@"摄氏度");
-                if ([TemperatureUnitManager sharedManager].unitType == TemperatureUnitTypeCentigrade) {
-                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                }
-            } else if (indexPath.row == 1) {
-                cell.titleString = KString(@"华氏度");
-                if ([TemperatureUnitManager sharedManager].unitType == TemperatureUnitTypeFahrenheit) {
-                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                }
+        if (indexPath.row == 0) {
+            cell.baseTitleString = KString(@"摄氏度");
+            if ([TemperatureUnitManager sharedManager].unitType == TemperatureUnitTypeCentigrade) {
+                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeCheck;
+            } else {
+                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeNone;
             }
-        } else if (indexPath.section == 2) {
-            if (indexPath.row == 0) {
-                cell.titleString = KString(@"简体中文");
-                if ([LanguageManager sharedManager].typeLanguage == LanguageTypeChinese) {
-                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                }
-            } else if (indexPath.row == 1) {
-                cell.titleString = KString(@"English");
-                if ([LanguageManager sharedManager].typeLanguage == LanguageTypeEnglish) {
-                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                }
+        } else if (indexPath.row == 1) {
+            cell.baseTitleString = KString(@"华氏度");
+            if ([TemperatureUnitManager sharedManager].unitType == TemperatureUnitTypeFahrenheit) {
+                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeCheck;
+            } else {
+                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeNone;
             }
         }
         
-        return cell;
+    } else if (indexPath.section == 2) {
+        
+        if (indexPath.row == 0) {
+            cell.baseTitleString = KString(@"简体中文");
+            if ([LanguageManager sharedManager].typeLanguage == LanguageTypeChinese) {
+                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeCheck;
+            } else {
+                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeNone;
+            }
+        } else if (indexPath.row == 1) {
+            cell.baseTitleString = KString(@"English");
+            if ([LanguageManager sharedManager].typeLanguage == LanguageTypeEnglish) {
+                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeCheck;
+            } else {
+                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeNone;
+            }
+        }
+        
     }
-}
-
-- (void)tableView:(UITableView *)tableView willDisplayCell:(SideSettingCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     if (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1) {
-        cell.lineOffset = 0;
+        cell.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     } else {
-        cell.lineOffset = 17;
+        cell.baseCutLineInsets = UIEdgeInsetsMake(0, 17, 0, 0);
     }
+    
+    return cell;
 }
 
 #pragma mark - UITableViewDelegate

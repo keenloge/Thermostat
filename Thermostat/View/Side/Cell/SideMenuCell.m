@@ -136,7 +136,7 @@ const CGFloat KSideMenuCellIconSize     = 18.0;
         
         [_cutLineView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(0);
-            make.height.mas_equalTo(0.67);
+            make.height.mas_equalTo(IPHONE_INCH_5_5 ? 0.33 : 0.5);
         }];
     }
     return _cutLineView;
