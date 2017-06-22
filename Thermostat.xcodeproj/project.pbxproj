@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1112F27A1EFB696C00AE3D6E /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1112F2791EFB696C00AE3D6E /* BaseTableViewCell.m */; };
+		1112F27F1EFBB40F00AE3D6E /* bkg_side.png in Resources */ = {isa = PBXBuildFile; fileRef = 1112F27C1EFBB40F00AE3D6E /* bkg_side.png */; };
+		1112F2801EFBB40F00AE3D6E /* bkg_side@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1112F27D1EFBB40F00AE3D6E /* bkg_side@2x.png */; };
+		1112F2811EFBB40F00AE3D6E /* bkg_side@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1112F27E1EFBB40F00AE3D6E /* bkg_side@3x.png */; };
 		111597E11EFA0ED700D315C8 /* LinKonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 111597E01EFA0ED700D315C8 /* LinKonHelper.m */; };
 		111597E41EFA2DA400D315C8 /* DeviceNotifyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 111597E31EFA2DA400D315C8 /* DeviceNotifyManager.m */; };
 		112387951EF3C1AF0030DC50 /* DeviceNicknameEditPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112387941EF3C1AF0030DC50 /* DeviceNicknameEditPage.m */; };
@@ -54,7 +57,6 @@
 		113B90321EF51C4E00E96617 /* FeedBackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B90311EF51C4E00E96617 /* FeedBackManager.m */; };
 		113B90351EF53AA800E96617 /* LinKonPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B90341EF53AA800E96617 /* LinKonPopView.m */; };
 		113B90381EF55C7900E96617 /* LinKonPopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B90371EF55C7900E96617 /* LinKonPopCell.m */; };
-		1145C5211EF4AD2B00988ABE /* SideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5201EF4AD2B00988ABE /* SideMenuCell.m */; };
 		1145C5241EF4B71000988ABE /* BaseGradientLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */; };
 		1145C5271EF4CDB400988ABE /* SideAboutPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5261EF4CDB400988ABE /* SideAboutPage.m */; };
 		1145C52A1EF4CDCC00988ABE /* SideSettingPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5291EF4CDCC00988ABE /* SideSettingPage.m */; };
@@ -101,6 +103,9 @@
 /* Begin PBXFileReference section */
 		1112F2781EFB696C00AE3D6E /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
 		1112F2791EFB696C00AE3D6E /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
+		1112F27C1EFBB40F00AE3D6E /* bkg_side.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkg_side.png; sourceTree = "<group>"; };
+		1112F27D1EFBB40F00AE3D6E /* bkg_side@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_side@2x.png"; sourceTree = "<group>"; };
+		1112F27E1EFBB40F00AE3D6E /* bkg_side@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_side@3x.png"; sourceTree = "<group>"; };
 		111597DF1EFA0ED700D315C8 /* LinKonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinKonHelper.h; sourceTree = "<group>"; };
 		111597E01EFA0ED700D315C8 /* LinKonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonHelper.m; sourceTree = "<group>"; };
 		111597E21EFA2DA400D315C8 /* DeviceNotifyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceNotifyManager.h; sourceTree = "<group>"; };
@@ -185,8 +190,6 @@
 		113B90341EF53AA800E96617 /* LinKonPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonPopView.m; sourceTree = "<group>"; };
 		113B90361EF55C7900E96617 /* LinKonPopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinKonPopCell.h; sourceTree = "<group>"; };
 		113B90371EF55C7900E96617 /* LinKonPopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonPopCell.m; sourceTree = "<group>"; };
-		1145C51F1EF4AD2B00988ABE /* SideMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuCell.h; sourceTree = "<group>"; };
-		1145C5201EF4AD2B00988ABE /* SideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuCell.m; sourceTree = "<group>"; };
 		1145C5221EF4B71000988ABE /* BaseGradientLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseGradientLayerView.h; sourceTree = "<group>"; };
 		1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseGradientLayerView.m; sourceTree = "<group>"; };
 		1145C5251EF4CDB400988ABE /* SideAboutPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideAboutPage.h; sourceTree = "<group>"; };
@@ -286,6 +289,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1112F27B1EFBB40200AE3D6E /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				1112F27C1EFBB40F00AE3D6E /* bkg_side.png */,
+				1112F27D1EFBB40F00AE3D6E /* bkg_side@2x.png */,
+				1112F27E1EFBB40F00AE3D6E /* bkg_side@3x.png */,
+			);
+			path = Background;
+			sourceTree = "<group>";
+		};
 		1123879C1EF3DDD80030DC50 /* Side */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,8 +400,6 @@
 		1145C51E1EF4AD0700988ABE /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				1145C51F1EF4AD2B00988ABE /* SideMenuCell.h */,
-				1145C5201EF4AD2B00988ABE /* SideMenuCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -581,6 +592,7 @@
 		117FD72A1EDEC7CE003A60B1 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				1112F27B1EFBB40200AE3D6E /* Background */,
 				112D4FC81EDF9FE000B5026E /* Banner */,
 			);
 			path = Resource;
@@ -786,6 +798,7 @@
 				112D4FD61EDF9FE100B5026E /* bkg_banner1@2x.png in Resources */,
 				112D4FD51EDF9FE100B5026E /* bkg_banner1.png in Resources */,
 				112D4FD81EDF9FE100B5026E /* bkg_banner2.png in Resources */,
+				1112F2811EFBB40F00AE3D6E /* bkg_side@3x.png in Resources */,
 				112D4FD41EDF9FE100B5026E /* bkg_banner0@3x.png in Resources */,
 				112D4FD31EDF9FE100B5026E /* bkg_banner0@2x.png in Resources */,
 				117FD7181EDEC2B9003A60B1 /* Assets.xcassets in Resources */,
@@ -793,7 +806,9 @@
 				117FD7331EDEC8C9003A60B1 /* InfoPlist.strings in Resources */,
 				112D4FD21EDF9FE100B5026E /* bkg_banner0.png in Resources */,
 				112D4FD91EDF9FE100B5026E /* bkg_banner2@2x.png in Resources */,
+				1112F2801EFBB40F00AE3D6E /* bkg_side@2x.png in Resources */,
 				112D4FDA1EDF9FE100B5026E /* bkg_banner2@3x.png in Resources */,
+				1112F27F1EFBB40F00AE3D6E /* bkg_side.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -926,7 +941,6 @@
 				112387981EF3C1CA0030DC50 /* DevicePasswordEditPage.m in Sources */,
 				112D50001EDFC59900B5026E /* DevicePopButton.m in Sources */,
 				112D4FC01EDF987700B5026E /* DeviceListPage.m in Sources */,
-				1145C5211EF4AD2B00988ABE /* SideMenuCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

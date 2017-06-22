@@ -59,6 +59,8 @@ typedef void(^BaseCellSwitchBlock)(BOOL on);
 @property (nonatomic, assign) UIEdgeInsets baseCutLineInsets;
 
 
+@property (nonatomic, assign) CGFloat baseAccessoryPaddingLeft;
+
 /**
  更新图片大小与位置
 
@@ -103,5 +105,17 @@ typedef void(^BaseCellSwitchBlock)(BOOL on);
  @param color 颜色
  */
 - (void)updateArrowColor:(UIColor *)color;
+
+
+/**
+ 更新渐变背景颜色
+
+ @param colors 颜色组
+ @param start 起始点
+ @param end 结束点
+ */
+- (void)updateBackgroundColors:(NSArray <UIColor *>*)colors
+                    pointStart:(CGPoint)start
+                      pointEnd:(CGPoint)end;
 
 @end

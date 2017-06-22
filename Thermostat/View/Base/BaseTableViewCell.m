@@ -7,6 +7,7 @@
 //
 
 #import "BaseTableViewCell.h"
+#import "BaseGradientLayerView.h"
 
 // 附件边距
 const CGFloat BaseTableViewCellPaddingAccessory = 10.0;
@@ -37,11 +38,21 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
 // 分割线
 @property (nonatomic, strong) UIView *baseCutLineView;
 
+// 渐变背景
+@property (nonatomic, strong) BaseGradientLayerView *backgroundLayerView;
+
 @property (nonatomic, copy) BaseCellSwitchBlock baseSwitchBlock;
 
 @end
 
 @implementation BaseTableViewCell
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.baseAccessoryPaddingLeft = BaseTableViewCellPaddingAccessory;
+    }
+    return self;
+}
 
 #pragma mark - 界面更新
 
@@ -84,6 +95,26 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
     if (self.baseAccessoryType == BaseTableViewCellAccessoryTypeArrow) {
         self.baseArrowImageView.tintColor = color;
     }
+}
+
+/**
+ 更新渐变背景颜色
+ 
+ @param colors 颜色组
+ @param start 起始点
+ @param end 结束点
+ */
+- (void)updateBackgroundColors:(NSArray <UIColor *>*)colors
+                    pointStart:(CGPoint)start
+                      pointEnd:(CGPoint)end {
+    CAGradientLayer *layer = (CAGradientLayer *)self.backgroundLayerView.layer;
+    NSMutableArray *tempArray = [NSMutableArray array];
+    for (UIColor *color in colors) {
+        [tempArray addObject:(__bridge id)color.CGColor];
+    }
+    layer.colors = tempArray;
+    layer.startPoint = start;
+    layer.endPoint = end;
 }
 
 #pragma mark - 点击事件
@@ -146,6 +177,21 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
         make.left.mas_equalTo(_baseCutLineInsets.left);
         make.right.mas_equalTo(-_baseCutLineInsets.right);
     }];
+}
+
+- (void)setBaseAccessoryPaddingLeft:(CGFloat)baseAccessoryPaddingLeft {
+    _baseAccessoryPaddingLeft = baseAccessoryPaddingLeft;
+    
+    UIView *tempView = nil;
+    for (UIView *subView in self.baseAccessoryView.subviews) {
+        tempView = subView;
+        [subView removeFromSuperview];
+    }
+    if (tempView == _baseArrowImageView) {
+        self.baseArrowImageView.opaque = YES;
+    } else if (tempView == _baseSwitch) {
+        self.baseSwitch.opaque = YES;
+    }
 }
 
 #pragma mark - 懒加载
@@ -244,7 +290,7 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
         WeakObj(self);
         [_baseSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.left.equalTo(selfWeak.baseAccessoryView);
-            make.right.equalTo(selfWeak.baseAccessoryView).offset(-BaseTableViewCellPaddingAccessory);
+            make.right.equalTo(selfWeak.baseAccessoryView).offset(-selfWeak.baseAccessoryPaddingLeft);
             make.width.mas_equalTo(CGRectGetWidth(selfWeak.baseSwitch.frame));
         }];
     }
@@ -265,11 +311,11 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
 
         [self.baseAccessoryView addSubview:_baseArrowImageView];
         WeakObj(self);
-        [_baseArrowImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_baseArrowImageView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(BaseTableViewCellArrowSize, BaseTableViewCellArrowSize));
             make.centerY.equalTo(selfWeak.baseAccessoryView);
             make.left.mas_equalTo(-(BaseTableViewCellArrowSize - BaseTableViewCellArrowWidth) / 2.0);
-            make.right.mas_equalTo((BaseTableViewCellArrowSize - BaseTableViewCellArrowWidth) / 2.0 - BaseTableViewCellPaddingAccessory);
+            make.right.mas_equalTo((BaseTableViewCellArrowSize - BaseTableViewCellArrowWidth) / 2.0 - selfWeak.baseAccessoryPaddingLeft);
         }];
     }
     
@@ -286,10 +332,20 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
         _baseCutLineView.backgroundColor = UIColorFromHex(0xd6d5d9);
         [_baseCutLineView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(0).priorityLow();
-            make.height.mas_equalTo(IPHONE_INCH_5_5 ? 0.33 : 0.5);
+            make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT);
         }];
     }
     return _baseCutLineView;
+}
+
+#pragma mark - 渐变背景
+- (BaseGradientLayerView *)backgroundLayerView {
+    if (!_backgroundLayerView) {
+        _backgroundLayerView = [[BaseGradientLayerView alloc] initWithFrame:self.contentView.bounds];
+        [self.contentView insertSubview:_backgroundLayerView atIndex:0];
+        _backgroundLayerView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    }
+    return _backgroundLayerView;
 }
 
 @end

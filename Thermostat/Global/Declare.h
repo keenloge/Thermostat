@@ -81,6 +81,8 @@
 // 温控器温度间隔
 #define LINKON_TEMPERATURE_OFFSET   (0.5)
 
+// 分割线高度
+#define LINKON_CUT_LINE_HEIGHT      (IPHONE_INCH_5_5 ? 0.33 : 0.5)
 
 // 定时器最大时间
 FOUNDATION_EXPORT const NSInteger LinKonTimerTimeMax;

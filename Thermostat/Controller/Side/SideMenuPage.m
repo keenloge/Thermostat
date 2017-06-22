@@ -7,9 +7,9 @@
 //
 
 #import "SideMenuPage.h"
-#import "SideMenuCell.h"
 #import "SideAboutPage.h"
 #import "SideSettingPage.h"
+#import "BaseTableViewCell.h"
 #import <ViewDeck.h>
 
 const CGFloat SideMenuContentSizeWidth      = 253.0;
@@ -21,6 +21,7 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
 
 @interface SideMenuPage () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) UIImageView *backgroundImageView;
 @property (nonatomic, strong) UITableView *menuTableView;
 @property (nonatomic, strong) UIView *contentHeaderView;
 @property (nonatomic, strong) UIImageView *headImageView;
@@ -58,6 +59,7 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
 */
 
 - (void)baseInitialiseSubViews {
+    self.backgroundImageView.opaque = YES;
     self.menuTableView.tableHeaderView = self.contentHeaderView;
     self.headImageView.opaque = YES;
     self.headTitleLabel.opaque = YES;
@@ -78,20 +80,26 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *identifierCell = @"SideMenuCell";
-    SideMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell];
-    if (cell == nil) {
-        cell = [[SideMenuCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierCell];
+    static NSString *baseIdentifierCell = @"BaseCell";
+    BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
+    if (!cell) {
+        cell = [[BaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
+        [cell updateTitleFont:UIFontOf3XPix(46) color:HB_COLOR_BASE_WHITE paddingLeft:19];
+        [cell updateIconImageSize:CGSizeMake(18, 18) paddingLeft:19];
+        cell.tintColor = HB_COLOR_BASE_WHITE;
+        cell.baseAccessoryType = BaseTableViewCellAccessoryTypeArrow;
+        [cell updateBackgroundColors:@[UIColorFromHex(0x4b4b4b), UIColorFromHex(0x3c3c3c)] pointStart:CGPointMake(0, 0) pointEnd:CGPointMake(0, 1)];
+        cell.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+        cell.baseAccessoryPaddingLeft = 21;
     }
-    
+
     if (indexPath.row == 0) {
-        cell.mainTitle = KString(@"设置");
-        cell.iconImage = [UIImage imageNamed:@"cell_setting"];
+        cell.baseTitleString = KString(@"设置");
+        cell.baseIconImage = [UIImage imageNamed:@"cell_setting"];
     } else if (indexPath.row == 1) {
-        cell.mainTitle = KString(@"关于我们");
-        cell.iconImage = [UIImage imageNamed:@"cell_about"];
+        cell.baseTitleString = KString(@"关于我们");
+        cell.baseIconImage = [UIImage imageNamed:@"cell_about"];
     }
-    
     
     return cell;
 }
@@ -112,6 +120,23 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
 
 #pragma mark - 懒加载
 
+- (UIImageView *)backgroundImageView {
+    if (!_backgroundImageView) {
+        _backgroundImageView = [UIImageView new];
+        [self.view insertSubview:_backgroundImageView atIndex:0];
+        
+        [_backgroundImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.bottom.mas_equalTo(0);
+            make.width.mas_equalTo(MAIN_SCREEN_WIDTH);
+        }];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"bkg_side" ofType:@"png"];
+        UIImage *image = [UIImage imageWithContentsOfFile:path];
+        _backgroundImageView.image = image;
+        self.view.clipsToBounds = YES;
+    }
+    return _backgroundImageView;
+}
+
 - (UITableView *)menuTableView {
     if (!_menuTableView) {
         _menuTableView = [UITableView new];
@@ -124,7 +149,7 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
         _menuTableView.dataSource = self;
         _menuTableView.delegate = self;
         
-        _menuTableView.backgroundColor = UIColorFromHex(0x1a1a1a);
+        _menuTableView.backgroundColor = [UIColor clearColor];
         
         WeakObj(self);
         [_menuTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -139,22 +164,6 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
     if (!_contentHeaderView) {
         _contentHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.preferredContentSize.width, KHorizontalRound(SideMenuContentHeaderHeight))];
         
-        
-        UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:_contentHeaderView.bounds];
-        [_contentHeaderView addSubview:backgroundImageView];
-        backgroundImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        
-        backgroundImageView.image = [UIImage imageNamed:@"bkg_banner0"];
-        backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
-        
-        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-        UIVisualEffectView *effectView = [[UIVisualEffectView alloc] initWithEffect:effect];
-        effectView.frame = backgroundImageView.bounds;
-//        effectView.backgroundColor = UIColorFromRGBA(0, 0, 0, 0.6);
-        effectView.alpha = 0.9;
-        [backgroundImageView addSubview:effectView];
-        effectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        
         UIView *cutLineBottomView = [UIView new];
         [_contentHeaderView addSubview:cutLineBottomView];
         
@@ -162,7 +171,7 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
         
         [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(0);
-            make.height.mas_equalTo(IPHONE_INCH_5_5 ? 0.33 : 0.5);
+            make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT);
         }];
 
     }
@@ -180,7 +189,7 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
         _headImageView.layer.borderWidth = SideMenuContentImageBorder;
         _headImageView.layer.cornerRadius = imageSize / 2.0;
         _headImageView.clipsToBounds = YES;
-        _headImageView.image = [UIImage imageNamed:@"cell_device"];
+        _headImageView.image = [UIImage imageNamed:@"icon_logo"];
         
         WeakObj(self);
         [_headImageView mas_makeConstraints:^(MASConstraintMaker *make) {

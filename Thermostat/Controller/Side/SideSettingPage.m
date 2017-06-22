@@ -86,7 +86,7 @@
         
         [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(0);
-            make.height.mas_equalTo(IPHONE_INCH_5_5 ? 0.33 : 0.5);
+            make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT);
         }];
     }
     
@@ -116,9 +116,12 @@
         cell.tintColor = HB_COLOR_BASE_MAIN;
     }
  
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    
     WeakObj(self);
     if (indexPath.section == 0) {
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.baseAccessoryType = BaseTableViewCellAccessoryTypeSwitch;
         if (indexPath.row == 0) {
             cell.baseTitleString = KString(@"声音");
