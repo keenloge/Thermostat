@@ -94,8 +94,6 @@
 		11EF7AA91EE7CB6B004403C9 /* NSTimerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EF7AA81EE7CB6B004403C9 /* NSTimerAdditions.m */; };
 		11FA11391EE0EEE60017948D /* ControlTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA11381EE0EEE60017948D /* ControlTabButton.m */; };
 		11FA113C1EE0F0130017948D /* BaseIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA113B1EE0F0130017948D /* BaseIconCell.m */; };
-		11FA113F1EE0F0560017948D /* SettingSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA113E1EE0F0560017948D /* SettingSwitchCell.m */; };
-		11FA11421EE0F0670017948D /* SettingArrowCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA11411EE0F0670017948D /* SettingArrowCell.m */; };
 		11FA11461EE0F1130017948D /* SettingFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA11451EE0F1130017948D /* SettingFooterView.m */; };
 		E92B874564B3B916D0128E3A /* libPods-Thermostat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E1808EB3CF494B08DB2BAE /* libPods-Thermostat.a */; };
 /* End PBXBuildFile section */
@@ -266,10 +264,6 @@
 		11FA11381EE0EEE60017948D /* ControlTabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlTabButton.m; sourceTree = "<group>"; };
 		11FA113A1EE0F0130017948D /* BaseIconCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseIconCell.h; sourceTree = "<group>"; };
 		11FA113B1EE0F0130017948D /* BaseIconCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseIconCell.m; sourceTree = "<group>"; };
-		11FA113D1EE0F0560017948D /* SettingSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingSwitchCell.h; sourceTree = "<group>"; };
-		11FA113E1EE0F0560017948D /* SettingSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingSwitchCell.m; sourceTree = "<group>"; };
-		11FA11401EE0F0670017948D /* SettingArrowCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingArrowCell.h; sourceTree = "<group>"; };
-		11FA11411EE0F0670017948D /* SettingArrowCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingArrowCell.m; sourceTree = "<group>"; };
 		11FA11441EE0F1130017948D /* SettingFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingFooterView.h; sourceTree = "<group>"; };
 		11FA11451EE0F1130017948D /* SettingFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingFooterView.m; sourceTree = "<group>"; };
 		6DE1C0E604C2D3F6B9E55043 /* Pods-Thermostat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thermostat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thermostat/Pods-Thermostat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -645,10 +639,6 @@
 			children = (
 				117FD7641EDECD92003A60B1 /* DeviceCell.h */,
 				117FD7651EDECD92003A60B1 /* DeviceCell.m */,
-				11FA113D1EE0F0560017948D /* SettingSwitchCell.h */,
-				11FA113E1EE0F0560017948D /* SettingSwitchCell.m */,
-				11FA11401EE0F0670017948D /* SettingArrowCell.h */,
-				11FA11411EE0F0670017948D /* SettingArrowCell.m */,
 				113B90361EF55C7900E96617 /* LinKonPopCell.h */,
 				113B90371EF55C7900E96617 /* LinKonPopCell.m */,
 			);
@@ -900,7 +890,6 @@
 				11AC58331EE50417003D12EB /* TaskSwitchCell.m in Sources */,
 				117FD76B1EDECE2C003A60B1 /* BannerView.m in Sources */,
 				112D50061EE00EB700B5026E /* NotifyTarget.m in Sources */,
-				11FA11421EE0F0670017948D /* SettingArrowCell.m in Sources */,
 				113B90351EF53AA800E96617 /* LinKonPopView.m in Sources */,
 				11FA113C1EE0F0130017948D /* BaseIconCell.m in Sources */,
 				1126D0801EF2887000BE5289 /* BaseCell.m in Sources */,
@@ -909,7 +898,6 @@
 				112D4FEB1EDFB48B00B5026E /* DeviceSearchPage.m in Sources */,
 				11C2F61B1EE3B284008ED62F /* LinKonTimerTask.m in Sources */,
 				112387951EF3C1AF0030DC50 /* DeviceNicknameEditPage.m in Sources */,
-				11FA113F1EE0F0560017948D /* SettingSwitchCell.m in Sources */,
 				112D4FEE1EDFB49D00B5026E /* DeviceInfoPage.m in Sources */,
 				11AC58361EE50434003D12EB /* TaskPickCell.m in Sources */,
 				1126D07D1EF2875900BE5289 /* InfoButton.m in Sources */,

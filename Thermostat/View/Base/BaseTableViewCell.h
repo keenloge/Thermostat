@@ -59,6 +59,10 @@ typedef void(^BaseCellSwitchBlock)(BOOL on);
 @property (nonatomic, assign) UIEdgeInsets baseCutLineInsets;
 
 
+
+/**
+ 附件 View 右边距
+ */
 @property (nonatomic, assign) CGFloat baseAccessoryPaddingLeft;
 
 /**

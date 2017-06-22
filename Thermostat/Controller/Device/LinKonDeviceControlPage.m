@@ -11,14 +11,13 @@
 #import "DeviceInfoView.h"
 #import "DeviceControlView.h"
 #import "SettingFooterView.h"
-#import "SettingSwitchCell.h"
-#import "SettingArrowCell.h"
 #import "LinKonPopView.h"
 #import "TaskListPage.h"
 #import "DeviceListManager.h"
 #import "LinKonDevice.h"
 #import "TemperatureUnitManager.h"
 #import "FeedBackManager.h"
+#import "BaseTableViewCell.h"
 
 // 设置列表行高
 const CGFloat DeviceControlSettingRowsHeight    = 68.0;
@@ -337,32 +336,30 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    BaseIconCell *cell = nil;
-    if (indexPath.section != 2) {
-        static NSString *identifierSwitchCell = @"SwitchCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:identifierSwitchCell];
-        if (cell == nil) {
-            cell = [[SettingSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierSwitchCell];
-        }
-    } else {
-        static NSString *identifierArrowCell = @"ArrowCell";
-        cell = [tableView dequeueReusableCellWithIdentifier:identifierArrowCell];
-        if (cell == nil) {
-            cell = [[SettingArrowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierArrowCell];
-        }
+    static NSString *baseIdentifierCell = @"BaseCell";
+    BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
+    if (!cell) {
+        cell = [[BaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
+        [cell updateTitleFont:UIFontOf3XPix(60) color:HB_COLOR_BASE_BLACK paddingLeft:10];
+        [cell updateIconImageSize:CGSizeMake(43, 43) paddingLeft:10];
+        cell.tintColor = HB_COLOR_BASE_MAIN;
     }
-    
+
     if (indexPath.section == 0) {
-        cell.iconImage = [UIImage imageNamed:@"cell_constant"];
-        cell.iconTitle = KString(@"智能恒温");
+        cell.baseIconImage = [UIImage imageNamed:@"cell_constant"];
+        cell.baseTitleString = KString(@"智能恒温");
+        cell.baseAccessoryType = BaseTableViewCellAccessoryTypeSwitch;
     } else if (indexPath.section == 1) {
-        cell.iconImage = [UIImage imageNamed:@"cell_chart"];
-        cell.iconTitle = KString(@"温度曲线");
+        cell.baseIconImage = [UIImage imageNamed:@"cell_chart"];
+        cell.baseTitleString = KString(@"温度曲线");
+        cell.baseAccessoryType = BaseTableViewCellAccessoryTypeSwitch;
     } else if (indexPath.section == 2) {
-        cell.iconImage = [UIImage imageNamed:@"cell_task"];
-        cell.iconTitle = KString(@"定时器");
+        cell.baseIconImage = [UIImage imageNamed:@"cell_task"];
+        cell.baseTitleString = KString(@"定时器");
+        cell.baseAccessoryType = BaseTableViewCellAccessoryTypeArrow;
     }
     
+
     return cell;
 }
 

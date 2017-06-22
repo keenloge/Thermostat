@@ -10,7 +10,7 @@
 #import "BaseGradientLayerView.h"
 
 // 附件边距
-const CGFloat BaseTableViewCellPaddingAccessory = 10.0;
+const CGFloat BaseTableViewCellPaddingAccessory = 14.0;
 // 文本边距
 const CGFloat BaseTableViewCellPaddingLabel     = 10.0;
 // 箭头有效宽度
@@ -49,7 +49,7 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.baseAccessoryPaddingLeft = BaseTableViewCellPaddingAccessory;
+        self.baseAccessoryPaddingLeft = KHorizontalRound(BaseTableViewCellPaddingAccessory);
     }
     return self;
 }
@@ -57,7 +57,7 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
 #pragma mark - 界面更新
 
 - (void)updateIconImageSize:(CGSize)size paddingLeft:(CGFloat)paddingLeft {
-    [self.baseImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.baseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(paddingLeft).priorityHigh();
         if (size.height > 0 && size.width > 0) {
             make.size.mas_equalTo(size).priorityHigh();
@@ -152,10 +152,10 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
     
     self.baseImageView.image = _baseIconImage;
     
-    WeakObj(self);
-    [self.baseImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(selfWeak.baseIconImage.size).priorityMedium();
-    }];
+//    WeakObj(self);
+//    [self.baseImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.size.mas_equalTo(selfWeak.baseIconImage.size).priorityLow();
+//    }];
 }
 
 - (void)setBaseTitleString:(NSString *)baseTitleString {
