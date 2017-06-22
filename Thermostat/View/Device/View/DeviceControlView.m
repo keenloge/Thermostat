@@ -48,13 +48,63 @@
     self.showsVerticalScrollIndicator = NO;
 }
 
+/**
+ 设置按钮图片
+ 
+ @param image 图片
+ @param tag 按钮Tag
+ */
+- (void)updateButtonImage:(UIImage *)image tag:(MenuControlButtonTag)tag {
+    [self.menuView updateButtonImage:image tag:tag];
+}
+
+
+/**
+ 设置按钮可用
+ 
+ @param enabled 可用
+ @param tag 按钮Tag
+ */
+- (void)updateButtonEnabled:(BOOL)enabled tag:(MenuControlButtonTag)tag {
+    [self.menuView updateButtonEnabled:enabled tag:tag];
+}
+
+
+/**
+ 设置温度选择器是否可用
+ 
+ @param enabled 是否可用
+ */
+- (void)updateTemperatureControlEnabled:(BOOL)enabled {
+    [self.temperatureView updateControlEnabled:enabled];
+}
+
+/**
+ 设置温度选择标题
+ 
+ @param array 温度标题组
+ @param block 选中回调
+ */
+- (void)updateTemperatureArray:(NSArray <NSString *>*)array
+                    checkBlock:(TemperatureControlCheckBlock)block {
+    [self.temperatureView updateTemperatureArray:array checkBlock:block];
+}
+
+
+/**
+ 设置当前选中项
+ 
+ @param index 当前选中项
+ */
+- (void)updateTemperatureCheckIndex:(NSInteger)index {
+    [self.temperatureView updateTemperatureCheckIndex:index];
+}
+
+
 #pragma mark - Setter
 
-- (void)setSn:(NSString *)sn {
-    _sn = sn;
-    
-    self.menuView.sn = sn;
-    self.temperatureView.sn = sn;
+- (void)setBlock:(MenuControlBlock)block {
+    self.menuView.block = block;
 }
 
 #pragma mark - 懒加载

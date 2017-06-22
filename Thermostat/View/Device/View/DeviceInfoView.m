@@ -9,7 +9,7 @@
 #import "DeviceInfoView.h"
 #import "ColorConfig.h"
 #import "DeviceCircleView.h"
-#import "DeviceManager.h"
+#import "DeviceListManager.h"
 #import "LinKonDevice.h"
 #import "Declare.h"
 
@@ -71,51 +71,52 @@ const CGFloat KDeviceInfoIconSize               = 30.0;
     self.windImageView.opaque = YES;
 }
 
-#pragma mark - Setter
+- (void)updateLockImageAlpha:(CGFloat)alpha {
+    self.lockImageView.alpha = alpha;
+}
 
-- (void)setSn:(NSString *)sn {
-    _sn = sn;
-    
-    self.circleInfoView.sn = sn;
-    
-    WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(LinKonDevice *device, NSString *key) {
-        // 儿童锁图标控制
-        selfWeak.lockImageView.alpha = device.lock ? 0.5 : 1.0;
-        
-        // 情景图标控制
-        switch (device.scene) {
-            case LinKonSceneConstant:
-                selfWeak.sceneImageView.image = [UIImage imageNamed:@"icon_scene_constant"];
-                break;
-            case LinKonSceneGreen:
-                selfWeak.sceneImageView.image = [UIImage imageNamed:@"icon_scene_green"];
-                break;
-            case LinKonSceneLeave:
-                selfWeak.sceneImageView.image = [UIImage imageNamed:@"icon_scene_leave"];
-                break;
-            default:
-                break;
-        }
-        selfWeak.sceneImageView.alpha = device.running == DeviceRunningStateTurnON ? 1.0 : 0.5;
-        
-        // 风速图标控制
-        switch (device.wind) {
-            case LinKonWindLow:
-                selfWeak.windImageView.image = [UIImage imageNamed:@"icon_wind_low"];
-                break;
-            case LinKonWindMedium:
-                selfWeak.windImageView.image = [UIImage imageNamed:@"icon_wind_medium"];
-                break;
-            case LinKonWindHigh:
-                selfWeak.windImageView.image = [UIImage imageNamed:@"icon_wind_high"];
-                break;
-            default:
-                break;
-        }
-        selfWeak.windImageView.alpha = device.running == DeviceRunningStateTurnON ? 1.0 : 0.5;
+- (void)updateSceneImage:(UIImage *)image alpha:(CGFloat)alpha {
+    self.sceneImageView.image = image;
+    self.sceneImageView.alpha = alpha;
+}
 
-    }];
+- (void)updateWindImage:(UIImage *)image alpha:(CGFloat)alpha {
+    self.windImageView.image = image;
+    self.windImageView.alpha = alpha;
+}
+
+- (void)updateRoundImage:(UIImage *)image
+               colorFrom:(UIColor *)colorFrom
+                 colorTo:(UIColor *)colorTo {
+    [self.circleInfoView updateRoundImage:image
+                                colorFrom:colorFrom
+                                  colorTo:colorTo];
+}
+
+- (void)updateHumidityString:(NSString *)text {
+    [self.circleInfoView updateHumidityString:text];
+}
+
+- (void)updateTemperatureString:(NSString *)text {
+    [self.circleInfoView updateTemperatureString:text];
+}
+
+- (void)updateStateString:(NSString *)state
+                  setting:(NSString *)setting
+                     mode:(NSString *)mode
+                     unit:(NSString *)unit {
+    [self.circleInfoView updateStateString:state
+                                   setting:setting
+                                      mode:mode
+                                      unit:unit];
+}
+
+- (void)updateTimerOffset:(NSInteger)timeOffset
+                    image:(UIImage *)image
+                    block:(DeviceDelayTimerFinishBlock)block {
+    [self.circleInfoView updateTimerOffset:timeOffset
+                                     image:image
+                                     block:block];
 }
 
 #pragma mark - 懒加载

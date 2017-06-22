@@ -11,7 +11,7 @@
 #import "Declare.h"
 #import "Globals.h"
 #import "LinKonDevice.h"
-#import "DeviceManager.h"
+#import "DeviceListManager.h"
 #import "InfoButton.h"
 
 #define KInfoButtonColor   UIColorFromHex(0xb3b3b3)
@@ -41,18 +41,18 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
 
 #pragma mark - 界面刷新
 
-- (void)changeStateWithDevice:(LinKonDevice *)device {
-    self.nicknameLabel.text = device.nickname;
-    self.stateLabel.text = device.stateString;
-    if (device.connection == DeviceConnectionStateOffLine) {
-        self.stateLabel.textColor = HB_COLOR_BASE_RED;
-    } else if (device.running == DeviceRunningStateTurnOFF) {
-        self.stateLabel.textColor = HB_COLOR_BASE_GREEN;
-    } else {
-        self.stateLabel.textColor = HB_COLOR_BASE_GRAY;
-    }
+- (void)updateImageIcon:(UIImage *)image {
+    self.iconImageView.image = image;
 }
 
+- (void)updateTitleString:(NSString *)title {
+    self.nicknameLabel.text = title;
+}
+
+- (void)updateStateString:(NSString *)state color:(UIColor *)color {
+    self.stateLabel.text = state;
+    self.stateLabel.textColor = color;
+}
 
 #pragma mark - 点击事件
 
@@ -63,15 +63,6 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
 }
 
 #pragma mark - Setter
-
-- (void)setSn:(NSString *)sn {
-    _sn = sn;
-    
-    WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:selfWeak device:sn group:LinKonPropertyGroupBinding | LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(LinKonDevice *device, NSString *key) {
-        [selfWeak changeStateWithDevice:device];
-    }];
-}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
@@ -117,7 +108,6 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
     if (!_iconImageView) {
         _iconImageView = [UIImageView new];
         [self.contentIconView addSubview:_iconImageView];
-        _iconImageView.image = [UIImage imageNamed:@"cell_device"];
         
         WeakObj(self);
         [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {

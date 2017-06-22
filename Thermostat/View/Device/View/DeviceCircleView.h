@@ -8,8 +8,25 @@
 
 #import "BaseView.h"
 
+typedef void(^DeviceDelayTimerFinishBlock)();
+
 @interface DeviceCircleView : BaseView
 
-@property (nonatomic, strong) NSString *sn;
+- (void)updateRoundImage:(UIImage *)image
+               colorFrom:(UIColor *)colorFrom
+                 colorTo:(UIColor *)colorTo;
+
+- (void)updateHumidityString:(NSString *)text;
+
+- (void)updateTemperatureString:(NSString *)text;
+
+- (void)updateStateString:(NSString *)state
+                  setting:(NSString *)setting
+                     mode:(NSString *)mode
+                     unit:(NSString *)unit;
+
+- (void)updateTimerOffset:(NSInteger)timeOffset
+                    image:(UIImage *)image
+                    block:(DeviceDelayTimerFinishBlock)block;
 
 @end

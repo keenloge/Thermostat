@@ -63,98 +63,39 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
 
 #pragma mark - 界面刷新
 
-- (void)updateIconImageViewWithTask:(LinKonTimerTask *)task {
-    NSString *imageName = nil;
-    if (task.validate) {
-        self.timeLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.85);
-        if (task.type == LinKonTimerTaskTypeSwitch) {
-            imageName = @"cell_switch_on";
-        } else if (task.type == LinKonTimerTaskTypeStage) {
-            imageName = @"cell_stage_on";
-        }
-    } else {
-        self.timeLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.6);
-        if (task.type == LinKonTimerTaskTypeSwitch) {
-            imageName = @"cell_switch_off";
-        } else if (task.type == LinKonTimerTaskTypeStage) {
-            imageName = @"cell_stage_off";
-        }
-    }
-    self.iconImageView.image = [UIImage imageNamed:imageName];
-    self.validSwitch.on = task.validate;
+- (void)updateIconImage:(UIImage *)image {
+    self.iconImageView.image = image;
 }
 
-- (void)updateTimeLabelWithTask:(LinKonTimerTask *)task {
-    if (task.type == LinKonTimerTaskTypeSwitch) {
-        // 开关时间
-        self.timeLabel.font = UIFontOf3XPix(KHorizontalRound(63));
-        self.toLabel.hidden = YES;
-        self.timeLabel.text = [Globals timeString:task.timeFrom];
-    } else if (task.type == LinKonTimerTaskTypeStage) {
-        // 起止时间
-        self.timeLabel.font = UIFontOf3XPix(KHorizontalRound(54));
-        self.toLabel.hidden = NO;
-        self.timeLabel.text = [NSString stringWithFormat:@"%@\n%@", [Globals timeString:task.timeFrom], [Globals timeString:task.timeTo]];
-        [self.timeLabel changeLineSpace:3];
-    }
-}
-
-- (void)updatePlanLabelWithTask:(LinKonTimerTask *)task {
-
-    // 周期
-    NSString *repeatString = [Globals repeatString:task.repeat];
+- (void)updateTimeString:(NSString *)timeString font:(UIFont *)font color:(UIColor *)color {
+    self.toLabel.hidden = ![timeString containsString:@"\n"];
     
-    NSString *settingString = nil;
-    if (task.type == LinKonTimerTaskTypeSwitch && task.running == DeviceRunningStateTurnOFF) {
-        settingString = KString(@"关");
-    } else {
-        // 设定
-        NSMutableArray *settingArray = [NSMutableArray array];
-        if (task.mode != LinKonModeAir) {
-            // 非换气, 才有温度
-            [settingArray addObject:[Globals settingString:task.setting]];
-        }
-        [settingArray addObject:[Globals windString:task.wind]];
-        [settingArray addObject:[Globals modeString:task.mode]];
-        [settingArray addObject:[Globals sceneString:task.scene]];
-        settingString = [settingArray componentsJoinedByString:@" "];
-    }
+    self.timeLabel.text = timeString;
+    self.timeLabel.font = font;
+    self.timeLabel.textColor = color;
+    [self.timeLabel changeLineSpace:3.0];
+}
 
-    if (repeatString.length > 0) {
-        NSAttributedString *repeatAttributedString = [[NSAttributedString alloc] initWithString:repeatString attributes:repeatDictionary];
-        
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
-
-        [attributedString appendAttributedString:repeatAttributedString];
-        settingString = [NSString stringWithFormat:@"\n%@", settingString];
-        NSAttributedString *settingAttributedString = [[NSAttributedString alloc] initWithString:settingString attributes:settingDictionary];
-        [attributedString appendAttributedString:settingAttributedString];
-        
-        self.planLabel.attributedText = attributedString;
+- (void)updatePlanString:(NSString *)planString attributedText:(NSAttributedString *)attributedText {
+    if (attributedText) {
+        self.planLabel.text = nil;
+        self.planLabel.attributedText = attributedText;
     } else {
         self.planLabel.attributedText = nil;
-        self.planLabel.text = settingString;
+        self.planLabel.text = planString;
     }
+}
+
+- (void)updateSwitchOn:(BOOL)on {
+    self.validSwitch.on = on;
 }
 
 #pragma mark - 点击事件
 
 - (void)switchValueChanged:(UISwitch *)sender {
-    if (self.validBlock) {
-        LinKonTimerTask *item = [self.task copy];
-        item.validate = sender.isOn;
-        self.validBlock(item);
+    if (self.switchBlock) {
+        self.switchBlock(sender.isOn);
     }
-}
-
-#pragma mark - Setter
-
-- (void)setTask:(LinKonTimerTask *)task {
-    _task = task;
-    
-    [self updateIconImageViewWithTask:task];
-    [self updateTimeLabelWithTask:task];
-    [self updatePlanLabelWithTask:task];
 }
 
 #pragma mark - 懒加载

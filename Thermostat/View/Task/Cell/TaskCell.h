@@ -8,11 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@class LinKonTimerTask;
-
 @interface TaskCell : UITableViewCell
 
-@property (nonatomic, strong) LinKonTimerTask *task;
-@property (nonatomic, copy) void (^validBlock)(LinKonTimerTask *item);
+@property (nonatomic, copy) void (^switchBlock)(BOOL isOpen);
+
+- (void)updateIconImage:(UIImage *)image;
+
+- (void)updateTimeString:(NSString *)timeString
+                    font:(UIFont *)font
+                   color:(UIColor *)color;
+
+- (void)updatePlanString:(NSString *)planString
+          attributedText:(NSAttributedString *)attributedText;
+
+- (void)updateSwitchOn:(BOOL)on;
 
 @end

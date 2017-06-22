@@ -11,6 +11,7 @@
 #import "LanguageManager.h"
 #import "TemperatureUnitManager.h"
 #import "NSTimerAdditions.h"
+#import "DeviceNotifyManager.h"
 
 @interface BaseViewPage () {
     BOOL isDidAppear;
@@ -24,6 +25,14 @@
 @end
 
 @implementation BaseViewPage
+
+- (instancetype)initWithSN:(long long)sn typeGroup:(Byte)typeGroup {
+    if (self = [super init]) {
+        self.baseSN = sn;
+        self.baseTypeGroup = typeGroup;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,6 +48,7 @@
     self.hidesBottomBarWhenPushed = YES;
     self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
     
+    
     WeakObj(self);
     [[NSNotificationCenter defaultCenter] addObserverForName:KNotificationNameSwitchLanguage object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
         [selfWeak baseResetLanguage];
@@ -53,8 +63,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    //    if (!isDidAppear) {
-    //    }
+
+    // 每当页面即将显示, 若必要, 注册通知
+    if (self.baseTypeGroup > DeviceNotifyTypeNone) {
+        WeakObj(self);
+        [[DeviceNotifyManager sharedManager] registerListener:self sn:self.baseSN typeGroup:self.baseTypeGroup block:^(long long sn, NSString *key) {
+            [selfWeak baseReceiveNotifyWithSN:sn key:key];
+        }];
+        
+        [self baseReceiveNotifyWithSN:self.baseSN key:nil];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -66,6 +84,16 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     isDidAppear = NO;
+    
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    // 当页面消失后, 若必要, 注销通知
+    if (self.baseTypeGroup > DeviceNotifyTypeNone) {
+        [[DeviceNotifyManager sharedManager] resignListener:self];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -76,14 +104,14 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)setMessageNotify:(NSString *)messageNotify {
-    _messageNotify = messageNotify;
+- (void)setBaseMessageNotify:(NSString *)baseMessageNotify {
+    _baseMessageNotify = baseMessageNotify;
     if (!isDidAppear) {
         return;
     }
     
-    if (_messageNotify.length > 0) {
-        self.notifyLabel.text = _messageNotify;
+    if (_baseMessageNotify.length > 0) {
+        self.notifyLabel.text = _baseMessageNotify;
         self.notifyView.hidden = NO;
         
         if ([self.notifyTimer isValid]) {
@@ -93,7 +121,7 @@
         
         WeakObj(self);
         self.notifyTimer = [NSTimer hb_scheduledTimerWithTimeInterval:1.5 repeats:NO block:^(NSTimer *timer) {
-            [selfWeak hideMessageNotifyView];
+            [selfWeak hidebaseMessageNotifyView];
         }];
     } else {
         self.notifyView.hidden = YES;
@@ -115,6 +143,16 @@
     
 }
 
+/**
+ 收到通知回调
+ 
+ @param sn 序列号
+ @param key 属性Key
+ */
+- (void)baseReceiveNotifyWithSN:(long long)sn key:(NSString *)key {
+
+}
+
 #pragma mark – 系统控件相关协议方法：UITextField、UITableView、UIAlertView
 
 #pragma mark - 自定义协议方法
@@ -133,7 +171,7 @@
 
 #pragma mark - 其他内部函数（以上某一类特有的功能接口，可以放在分类里面）
 
-- (void)hideMessageNotifyView {
+- (void)hidebaseMessageNotifyView {
     self.notifyView.alpha = 0.9;
     [UIView animateWithDuration:0.25 animations:^{
         self.notifyView.alpha = 0.0;

@@ -10,7 +10,7 @@
 #import "BaseLabel.h"
 #import "BaseTextField.h"
 #import "BaseButton.h"
-#import "DeviceManager.h"
+#import "DeviceListManager.h"
 #import "LinKonDevice.h"
 
 const CGFloat DeviceAddInputPaddingTop = 43.0;
@@ -119,18 +119,18 @@ const CGFloat DeviceAddButtonOffsetY = 38.0;
 
 - (void)baseButtonPressed:(id)sender {
     if (self.numberTextField.text.length < 1) {
-        self.messageNotify = KString(@"请输入设备序列号");
+        self.baseMessageNotify = KString(@"请输入设备序列号");
         [self.numberTextField becomeFirstResponder];
     } else if (self.numberTextField.text.length < 20) {
-        self.messageNotify = KString(@"请输入正确的设备序列号");
+        self.baseMessageNotify = KString(@"请输入正确的设备序列号");
         [self.numberTextField becomeFirstResponder];
     } else if (self.passwordTextField.text.length < 1) {
-        self.messageNotify = KString(@"请输入密码");
+        self.baseMessageNotify = KString(@"请输入密码");
         [self.passwordTextField becomeFirstResponder];
     } else {
-        NSString *sn = [self.numberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+        long long sn = [[self.numberTextField.text stringByReplacingOccurrencesOfString:@" " withString:@""] longLongValue];
         LinKonDevice *device = [LinKonDevice deviceWithSN:sn password:self.passwordTextField.text];
-        [[DeviceManager sharedManager] addDevice:device];
+        [[DeviceListManager sharedManager] addDevice:device];
         [self popViewController];
     }
 }

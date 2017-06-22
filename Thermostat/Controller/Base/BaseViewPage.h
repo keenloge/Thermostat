@@ -7,13 +7,41 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ColorConfig.h"
-#import "Declare.h"
 #import "Globals.h"
+#import "DeviceNotifyManager.h"
+#import "DeviceListManager.h"
+#import "LinKonHelper.h"
 
 @interface BaseViewPage : UIViewController
 
-@property (nonatomic, strong) NSString *messageNotify;
+
+/**
+ 设备序列号
+ */
+@property (nonatomic, assign) long long baseSN;
+
+
+/**
+ 监听通知类别组
+ */
+@property (nonatomic, assign) Byte  baseTypeGroup;
+
+
+/**
+ 消息提醒
+ */
+@property (nonatomic, strong) NSString *baseMessageNotify;
+
+
+
+/**
+ 界面控制类初始化
+
+ @param sn 序列号
+ @param typeGroup 通知类型组合
+ @return 界面控制类对象
+ */
+- (instancetype)initWithSN:(long long)sn typeGroup:(Byte)typeGroup;
 
 /**
  初始化加载子View
@@ -29,6 +57,14 @@
  切换温度单位后调用
  */
 - (void)baseResetUnit;
+
+/**
+ 收到通知回调
+
+ @param sn 序列号
+ @param key 属性Key
+ */
+- (void)baseReceiveNotifyWithSN:(long long)sn key:(NSString *)key;
 
 // Button
 - (void)baseAddTargetForButton:(UIButton *)sender;

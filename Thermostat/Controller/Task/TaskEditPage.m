@@ -13,7 +13,7 @@
 #import "TimePickerPage.h"
 #import "TemperaturePickerPage.h"
 #import "EnumPickerPage.h"
-#import "DeviceManager.h"
+#import "DeviceListManager.h"
 #import "LinKonTimerTask.h"
 
 const CGFloat TaskEditRepeatRowsHeight  = 88.0;
@@ -34,25 +34,24 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 
 @property (nonatomic, assign) TaskEditType type;
 @property (nonatomic, strong) LinKonTimerTask *task;
-@property (nonatomic, copy) NSString *sn;
 
 @end
 
 @implementation TaskEditPage
 
-- (instancetype)initWithTask:(NSString *)number device:(NSString *)sn {
+- (instancetype)initWithTask:(LinKonTimerTask *)task device:(long long)sn {
     if (self = [super init]) {
         self.type = TaskEditTypeEdit;
-        self.sn = sn;
-        self.task = [[DeviceManager sharedManager] getTask:number device:sn];
+        self.baseSN = sn;
+        self.task = [task copy];
     }
     return self;
 }
 
-- (instancetype)initWithType:(LinKonTimerTaskType)type device:(NSString *)sn {
+- (instancetype)initWithType:(LinKonTimerTaskType)type device:(long long)sn {
     if (self = [super init]) {
         self.type = TaskEditTypeNew;
-        self.sn = sn;
+        self.baseSN = sn;
         self.task = [[LinKonTimerTask alloc] initWithType:type device:sn];
     }
     return self;
@@ -296,30 +295,30 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
                 } else if (self.task.type == LinKonTimerTaskTypeStage) {
                     cell.titleString = KString(@"开始时间");
                 }
-                cell.detailString = [Globals timeString:self.task.timeFrom];
+                cell.detailString = [LinKonHelper timeString:self.task.timeFrom];
             } else if (indexPath.row == 1) {
                 cell.titleString = KString(@"结束时间");
                 if (self.task.timeFrom > self.task.timeTo) {
-                    cell.detailString = [NSString stringWithFormat:@"%@ %@", KString(@"次日"), [Globals timeString:self.task.timeTo]];
+                    cell.detailString = [NSString stringWithFormat:@"%@ %@", KString(@"次日"), [LinKonHelper timeString:self.task.timeTo]];
                 } else {
-                    cell.detailString = [Globals timeString:self.task.timeTo];
+                    cell.detailString = [LinKonHelper timeString:self.task.timeTo];
                 }
             }
         } else if (indexPath.section == 3) {
             if (indexPath.row == 0) {
                 cell.titleString = KString(@"温度");
-                cell.detailString = [Globals settingString:self.task.setting];
+                cell.detailString = [LinKonHelper settingString:self.task.setting];
             }
         } else if (indexPath.section == 4) {
             if (indexPath.row == 0) {
                 cell.titleString = KString(@"风速");
-                cell.detailString = [Globals windString:self.task.wind];
+                cell.detailString = [LinKonHelper windString:self.task.wind];
             } else if (indexPath.row == 1) {
                 cell.titleString = KString(@"模式");
-                cell.detailString = [Globals modeString:self.task.mode];
+                cell.detailString = [LinKonHelper modeString:self.task.mode];
             } else if (indexPath.row == 2) {
                 cell.titleString = KString(@"情景");
-                cell.detailString = [Globals sceneString:self.task.scene];
+                cell.detailString = [LinKonHelper sceneString:self.task.scene];
             }
         }
         return cell;
@@ -383,18 +382,19 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 #pragma mark - 点击事件
 
 - (void)barButtonItemRightPressed:(id)sender {
+    LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:self.baseSN];
     if (self.type == TaskEditTypeNew) {
-        if ([[DeviceManager sharedManager] addTimerTask:self.task toDevice:self.sn]) {
+        if ([device updateValue:self.task forKey:KDeviceTimerAdd]) {
             [self popViewController];
             return;
         }
     } else if (self.type == TaskEditTypeEdit) {
-        if ([[DeviceManager sharedManager] editTimerTask:self.task toDevice:self.sn]) {
+        if ([device updateValue:self.task forKey:KDeviceTimerEdit]) {
             [self popViewController];
             return;
         }
     }
-    self.messageNotify = KString(@"与其他定时器行为冲突");
+    self.baseMessageNotify = KString(@"与其他定时器行为冲突");
 }
 
 @end

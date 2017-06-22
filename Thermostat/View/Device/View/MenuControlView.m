@@ -8,10 +8,6 @@
 
 #import "MenuControlView.h"
 #import "ControlMenuButton.h"
-#import "ColorConfig.h"
-#import "DeviceManager.h"
-#import "LinKonDevice.h"
-#import "Declare.h"
 #import "FeedBackManager.h"
 
 @interface MenuControlView () {
@@ -23,7 +19,6 @@
     CGFloat bottomButtonHeight;
 }
 
-@property (nonatomic, strong) LinKonDevice *device;
 @property (nonatomic, strong) ControlMenuButton *timerButton;
 @property (nonatomic, strong) ControlMenuButton *runningButton;
 @property (nonatomic, strong) ControlMenuButton *sceneButton;
@@ -62,53 +57,24 @@
     self.windButton.opaque = YES;
 }
 
+- (void)updateButtonImage:(UIImage *)image tag:(MenuControlButtonTag)tag {
+    ControlMenuButton *button = [self viewWithTag:tag];
+    [button setImage:image forState:UIControlStateNormal];
+}
+
+- (void)updateButtonEnabled:(BOOL)enabled tag:(MenuControlButtonTag)tag {
+    ControlMenuButton *button = [self viewWithTag:tag];
+    button.enabled = enabled;
+}
+
 #pragma mark - 点击事件
 
 - (void)buttonPressed:(UIButton *)sender {
-    if (sender == self.runningButton) {
-        if (self.device.running == DeviceRunningStateTurnON) {
-            // 关机
-            [[FeedBackManager sharedManager] vibrateSoundTurnOff];
-        } else {
-            // 开机
-            [[FeedBackManager sharedManager] vibrateSoundTurnOn];
-        }
-        [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceRunning value:@(self.device.switchRunning)];
-    } else {
-        [[FeedBackManager sharedManager] vibrateSoundClick];
-
-        if (sender == self.modeButton) {
-            [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceMode value:@(self.device.switchMode)];
-        } else if (sender == self.windButton) {
-            [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceWind value:@(self.device.switchWind)];
-        } else if (sender == self.sceneButton) {
-            [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceScene value:@(self.device.switchScene)];
-        } else if (sender == self.lockButton) {
-            [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceLock value:@(!self.device.lock)];
-        } else if (sender == self.timerButton) {
-            [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceDelay value:@(self.device.switchDelay)];
-        }
+    if (self.block) {
+        self.block(sender.tag);
     }
 }
 
-#pragma mark - Setter
-
-- (void)setSn:(NSString *)sn {
-    _sn = sn;
-    
-    WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:self device:self.sn group:LinKonPropertyGroupState block:^(LinKonDevice *device, NSString *key) {
-        selfWeak.device = device;
-        selfWeak.sceneButton.enabled = device.running != DeviceRunningStateTurnOFF;
-        selfWeak.modeButton.enabled = device.running != DeviceRunningStateTurnOFF;
-        selfWeak.windButton.enabled = device.running != DeviceRunningStateTurnOFF;
-        if (device.running == DeviceRunningStateTurnON) {
-            [selfWeak.timerButton setImage:[UIImage imageNamed:@"btn_menu_timer_off"] forState:UIControlStateNormal];
-        } else {
-            [selfWeak.timerButton setImage:[UIImage imageNamed:@"btn_menu_timer_on"] forState:UIControlStateNormal];
-        }
-    }];
-}
 
 #pragma mark - 懒加载
 
@@ -119,6 +85,7 @@
                                                                            sideButtonWidth,
                                                                            topButtonHeight)];
         [self addSubview:_timerButton];
+        _timerButton.tag = MenuControlButtonTagTimer;
         [_timerButton setImage:[UIImage imageNamed:@"btn_menu_timer_on"] forState:UIControlStateNormal];
         [_timerButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -132,6 +99,7 @@
                                                                              middleButtonWidth,
                                                                              topButtonHeight)];
         [self addSubview:_runningButton];
+        _runningButton.tag = MenuControlButtonTagRunning;
         [_runningButton setImage:[UIImage imageNamed:@"btn_menu_running"] forState:UIControlStateNormal];
         [_runningButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -145,6 +113,7 @@
                                                                            sideButtonWidth,
                                                                            topButtonHeight)];
         [self addSubview:_sceneButton];
+        _sceneButton.tag = MenuControlButtonTagScene;
         [_sceneButton setImage:[UIImage imageNamed:@"btn_menu_scene"] forState:UIControlStateNormal];
         [_sceneButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -158,6 +127,7 @@
                                                                           sideButtonWidth,
                                                                           bottomButtonHeight)];
         [self addSubview:_lockButton];
+        _lockButton.tag = MenuControlButtonTagLock;
         [_lockButton setImage:[UIImage imageNamed:@"btn_menu_lock"] forState:UIControlStateNormal];
         [_lockButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -171,6 +141,7 @@
                                                                           middleButtonWidth,
                                                                           bottomButtonHeight)];
         [self addSubview:_modeButton];
+        _modeButton.tag = MenuControlButtonTagMode;
         [_modeButton setImage:[UIImage imageNamed:@"btn_menu_mode"] forState:UIControlStateNormal];
         [_modeButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -184,6 +155,7 @@
                                                                           sideButtonWidth,
                                                                           bottomButtonHeight)];
         [self addSubview:_windButton];
+        _windButton.tag = MenuControlButtonTagWind;
         [_windButton setImage:[UIImage imageNamed:@"btn_menu_wind"] forState:UIControlStateNormal];
         [_windButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     }

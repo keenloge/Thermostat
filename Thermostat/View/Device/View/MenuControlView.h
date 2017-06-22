@@ -8,8 +8,23 @@
 
 #import "BaseView.h"
 
+typedef NS_ENUM(NSInteger, MenuControlButtonTag) {
+    MenuControlButtonTagTimer   = 1,
+    MenuControlButtonTagRunning,
+    MenuControlButtonTagScene,
+    MenuControlButtonTagLock,
+    MenuControlButtonTagMode,
+    MenuControlButtonTagWind,
+};
+
+typedef void(^MenuControlBlock)(MenuControlButtonTag tag);
+
 @interface MenuControlView : BaseView
 
-@property (nonatomic, strong) NSString *sn;
+@property (nonatomic, copy) MenuControlBlock block;
+
+- (void)updateButtonImage:(UIImage *)image tag:(MenuControlButtonTag)tag;
+
+- (void)updateButtonEnabled:(BOOL)enabled tag:(MenuControlButtonTag)tag;
 
 @end

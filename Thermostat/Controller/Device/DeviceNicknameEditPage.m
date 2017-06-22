@@ -7,12 +7,10 @@
 //
 
 #import "DeviceNicknameEditPage.h"
+#import "NSStringAdditions.h"
 #import "BaseTextField.h"
 #import "BaseButton.h"
-#import "NSStringAdditions.h"
-#import "DeviceManager.h"
 #import "LinKonDevice.h"
-#import "DeviceManager.h"
 
 @interface DeviceNicknameEditPage () <UITextFieldDelegate>
 
@@ -24,9 +22,9 @@
 
 @implementation DeviceNicknameEditPage
 
-- (instancetype)initWithDevice:(NSString *)sn {
+- (instancetype)initWithDevice:(long long)sn {
     if (self = [super init]) {
-        self.device = [[DeviceManager sharedManager] getDevice:sn];
+        self.device = [[DeviceListManager sharedManager] getDevice:sn];
     }
     return self;
 }
@@ -82,7 +80,7 @@
 
 - (void)baseButtonPressed:(id)sender {
     [self popViewController];
-    [[DeviceManager sharedManager] editDevice:self.device.sn key:KDeviceNickname value:self.nicknameTextField.text];
+    [self.device updateValue:self.nicknameTextField.text forKey:KDeviceNickname];
 }
 
 #pragma mark - 懒加载

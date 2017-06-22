@@ -7,7 +7,7 @@
 //
 
 #import "TemperaturePickerPage.h"
-#import "Globals.h"
+#import "LinKonHelper.h"
 
 @interface TemperaturePickerPage () {
     CGFloat startNumber;
@@ -84,7 +84,7 @@
 
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [Globals settingString:startNumber + offsetNumber * row];
+    return [LinKonHelper settingString:startNumber + offsetNumber * row];
 }
 
 @end

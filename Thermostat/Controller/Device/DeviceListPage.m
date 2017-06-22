@@ -8,7 +8,6 @@
 
 #import "DeviceListPage.h"
 #import "BannerView.h"
-#import "DeviceManager.h"
 #import "DeviceBlankView.h"
 #import "DeviceSearchPage.h"
 #import "DeviceAddPage.h"
@@ -49,6 +48,13 @@ const CGFloat DeviceListRowsHeight = 77.0;
 
 @implementation DeviceListPage
 
+- (instancetype)init {
+    if (self = [super initWithSN:0 typeGroup:DeviceNotifyTypeList | DeviceNotifyTypeIdentity | DeviceNotifyTypeState | DeviceNotifyTypeSetting]) {
+        
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -88,30 +94,6 @@ const CGFloat DeviceListRowsHeight = 77.0;
     self.baseTableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.baseTableView.rowHeight = DeviceListRowsHeight;
     self.baseTableView.tableHeaderView = self.linkonBannerView;
-    
-    WeakObj(self);
-    [[DeviceManager sharedManager] listenDeviceList:self block:^(NSArray *array) {
-        [selfWeak.baseContentArr removeAllObjects];
-        [selfWeak.baseContentArr addObjectsFromArray:array];
-        // 重新加载设备列表
-        [selfWeak.baseTableView reloadData];
-        if (selfWeak.baseContentArr.count > 0) {
-            // 隐藏空白页面
-            [selfWeak hideBlankView];
-        } else {
-            // 显示空白页面
-            [selfWeak showBlankView];
-        }
-    }];
-    
-    
-    [[DeviceManager sharedManager] registerListener:self device:nil group:LinKonPropertyGroupBinding block:^(LinKonDevice *device, NSString *key) {
-        if ([key isEqualToString:KDeviceNickname]) {
-            selfWeak.messageNotify = KString(@"昵称修改成功");
-        } else if ([key isEqualToString:KDevicePassword]) {
-            selfWeak.messageNotify = KString(@"修改密码成功");
-        }
-    }];
 }
 
 - (void)baseResetLanguage {
@@ -121,6 +103,23 @@ const CGFloat DeviceListRowsHeight = 77.0;
 
 - (void)baseResetUnit {
     [self.baseTableView reloadData];
+}
+
+- (void)baseReceiveNotifyWithSN:(long long)sn key:(NSString *)key {
+    if ([key isEqualToString:KDeviceNickname]) {
+        self.baseMessageNotify = KString(@"昵称修改成功");
+    } else if ([key isEqualToString:KDevicePassword]) {
+        self.baseMessageNotify = KString(@"修改密码成功");
+    } else {
+        [self.baseContentArr removeAllObjects];
+        [self.baseContentArr addObjectsFromArray:[[DeviceListManager sharedManager] getDeviceList]];
+        [self.baseTableView reloadData];
+        if (self.baseContentArr.count > 0) {
+            [self hideBlankView];
+        } else {
+            [self showBlankView];
+        }
+    }
 }
 
 - (void)showBlankView {
@@ -155,8 +154,10 @@ const CGFloat DeviceListRowsHeight = 77.0;
     
     LinKonDevice *device = [self.baseContentArr objectAtIndex:indexPath.row];
     
-    cell.sn = device.sn;
-    
+    [cell updateImageIcon:[UIImage imageNamed:@"cell_device"]];
+    [cell updateTitleString:device.nickname];
+    [cell updateStateString:[LinKonHelper stateString:device] color:[LinKonHelper stateColor:device]];
+
     WeakObj(self);
     WeakObj(device);
     cell.infoBlock = ^{
@@ -170,7 +171,7 @@ const CGFloat DeviceListRowsHeight = 77.0;
                     editPage = [[DevicePasswordEditPage alloc] initWithDevice:deviceWeak.sn];
                     break;
                 case DevicePopActionRemove:
-                    [[DeviceManager sharedManager] removeDevice:deviceWeak.sn];
+                    [[DeviceListManager sharedManager] removeDevice:deviceWeak.sn];
                     break;
                 default:
                     break;
@@ -194,7 +195,7 @@ const CGFloat DeviceListRowsHeight = 77.0;
     
     LinKonDevice *device = [self.baseContentArr objectAtIndex:indexPath.row];
     if (device.connection == DeviceConnectionStateOffLine) {
-        [[DeviceManager sharedManager] editDevice:device.sn key:KDeviceConnection value:@(DeviceConnectionStateOnLine)];
+        [device updateValue:@(DeviceConnectionStateOnLine) forKey:KDeviceConnection];
     } else {
         id con = [[LinKonDeviceControlPage alloc] initWithDevice:device.sn];
         BaseNavigationPage *navCon = [[BaseNavigationPage alloc] initWithRootViewController:con];

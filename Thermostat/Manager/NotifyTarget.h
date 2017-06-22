@@ -7,28 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class LinKonDevice;
-
-/**
- 属性监听回调
-
- @param device 改变的设备
- @param key 改变的属性
- */
-typedef void(^NotifyTargetBlock)(LinKonDevice *device, NSString *key);
+#import "DeviceNotifyManager.h"
 
 /**
- 列表监听回调
-
- @param array 对象列表
- */
-typedef void(^NotifyListBlock)(NSArray *array);
-
-
-/**
- 监听通知
- 一个 "监听者" 监听一个 "对象" 的多个 "属性", 或者监听 "对象" 列表.
+ 通知实例
  */
 @interface NotifyTarget : NSObject
 
@@ -41,21 +23,17 @@ typedef void(^NotifyListBlock)(NSArray *array);
 /**
  对象唯一标志
  */
-@property (nonatomic, copy) NSString *sign;
+@property (nonatomic, assign) long long sn;
 
 /**
- 列表监听 Block
+ 通知类别组合
  */
-@property (nonatomic, copy) NotifyListBlock listBlock;
+@property (nonatomic, assign) Byte typeGroup;
 
 /**
- 监听属性组
+ 监听回调
  */
-@property (nonatomic, assign) Byte propertyGroup;
+@property (nonatomic, copy) DeviceNotifyBlock block;
 
-/**
- 属性监听回调
- */
-@property (nonatomic, copy) NotifyTargetBlock groupBlock;
 
 @end

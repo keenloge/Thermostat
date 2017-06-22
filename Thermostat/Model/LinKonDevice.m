@@ -7,15 +7,8 @@
 //
 
 #import "LinKonDevice.h"
-#import "Declare.h"
-#import "DeviceManager.h"
-#import "Globals.h"
+#import "DeviceNotifyManager.h"
 
-// 延时开关时间间隔 30分
-const NSTimeInterval MinTimeOffset  = 10;
-
-// 最大延时时间 8小时
-const NSTimeInterval MaxTimeOffset  = 70.0;
 
 @interface LinKonDevice () {
     
@@ -27,6 +20,11 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
 
 @implementation LinKonDevice
 
+/**
+ 随机生成设备
+ 
+ @return 设备对象
+ */
 + (instancetype)randomDevice {
     LinKonDevice *item = [[LinKonDevice alloc] init];
 
@@ -35,30 +33,28 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
     return item;
 }
 
-+ (instancetype)deviceWithSN:(NSString *)sn password:(NSString *)password {
+/**
+ 生成指定设备
+ 
+ @param sn 设备SN
+ @param password 密码
+ @return 设备对象
+ */
++ (instancetype)deviceWithSN:(long long)sn password:(NSString *)password {
     LinKonDevice *item = [[LinKonDevice alloc] init];
     
     [item randomProperty];
-    item.sn = sn;
-    item.password = password;
-    item.connection = DeviceConnectionStateOffLine;
+    item->_sn = sn;
+    item->_password = password;
+    item->_connection = DeviceConnectionStateOffLine;
     
     return item;
 }
 
-+ (LinKonPropertyGroup)groupProperty:(NSString *)key {
-    if ([key isEqualToString:KDeviceConnection]
-        || [key isEqualToString:KDeviceRunning]) {
-        return LinKonPropertyGroupState;
-    } else if ([key isEqualToString:KDeviceNickname]
-               || [key isEqualToString:KDevicePassword]) {
-        return LinKonPropertyGroupBinding;
-    } else {
-        return LinKonPropertyGroupSetting;
-    }
-    return LinKonPropertyGroupNone;
-}
 
+/**
+ 赋值随机属性
+ */
 - (void)randomProperty {
     _sn = [self randomSN];
     
@@ -78,88 +74,30 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
     _temperature = [self randomTemperature];
 }
 
-- (NSString *)randomSN {
-    NSInteger preCode = rand() % 9000 + 1000;
-    NSMutableString *tempSN = [NSMutableString stringWithFormat:@"%zd",preCode];
-    for (int i = 0; i < 3; i++) {
-        preCode = rand() % 10000;
-        [tempSN appendFormat:@"%04zd", preCode];
-    }
-    return [tempSN copy];
+
+/**
+ 生成随机序列号
+
+ @return 序列号
+ */
+- (long long)randomSN {
+    long long tempSN = (rand() % 9000 + 1000) * 10000 * 10000 * 10000;
+    tempSN += (rand() % 10000) * 10000 * 10000;
+    tempSN += (rand() % 10000) * 10000;
+    tempSN += (rand() % 10000);
+    return tempSN;
 }
 
+
+/**
+ 生成随机温度
+
+ @return 温度
+ */
 - (CGFloat)randomTemperature {
     return (rand() % (int)(LINKON_TEMPERATURE_MAX - LINKON_TEMPERATURE_MIN)) + LINKON_TEMPERATURE_MIN;
 }
 
-- (NSString *)stateString {
-    if (self.connection == DeviceConnectionStateOffLine) {
-        return [Globals connectionString:self.connection];
-    } else if (self.running == DeviceRunningStateTurnOFF) {
-        return [Globals runningString:self.running];
-    } else if (self.mode == LinKonModeAir) {
-        return [Globals modeString:self.mode];
-    } else {
-        return [NSString stringWithFormat:@"%@ %@", [Globals modeString:self.mode], [Globals settingString:self.setting]];
-    }
-}
-
-- (DeviceRunningState)switchRunning {
-    if (self.running == DeviceRunningStateTurnOFF) {
-        return DeviceRunningStateTurnON;
-    } else {
-        return DeviceRunningStateTurnOFF;
-    }
-}
-
-- (LinKonMode)switchMode {
-    switch (self.mode) {
-        case LinKonModeCool:
-            return LinKonModeHot;
-        case LinKonModeHot:
-            return LinKonModeAir;
-        case LinKonModeAir:
-            return LinKonModeCool;
-        default:
-            break;
-    }
-}
-
-- (LinKonScene)switchScene {
-    switch (self.scene) {
-        case LinKonSceneConstant:
-            return LinKonSceneGreen;
-        case LinKonSceneGreen:
-            return LinKonSceneLeave;
-        case LinKonSceneLeave:
-            return LinKonSceneConstant;
-        default:
-            break;
-    }
-}
-
-- (LinKonWind)switchWind {
-    switch (self.wind) {
-        case LinKonWindLow:
-            return LinKonWindMedium;
-        case LinKonWindMedium:
-            return LinKonWindHigh;
-        case LinKonWindHigh:
-            return LinKonWindLow;
-        default:
-            break;
-    }
-}
-
-- (NSTimeInterval)switchDelay {
-    if (self.delay < [NSDate timeIntervalSinceReferenceDate]) {
-        return [NSDate timeIntervalSinceReferenceDate] + MinTimeOffset;
-    } else if (self.delay + MinTimeOffset > [NSDate timeIntervalSinceReferenceDate] + MaxTimeOffset) {
-        return 0.0;
-    } else {
-        return self.delay + MinTimeOffset;
-    }
-}
 
 - (void)setSetting:(float)setting {
     if (setting < LINKON_TEMPERATURE_MIN) {
@@ -181,13 +119,7 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
     _temperature = roundf(temperature * 2.0) / 2.0;
 }
 
-- (void)setRunning:(DeviceRunningState)running {
-    _running = running;
-//    self.delay = 0.0;
-    [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceDelay value:@(0.0)];
-}
-
-#pragma mark - 定时器
+#pragma mark - Getter
 
 - (NSMutableArray *)savedTimerArray {
     if (!_savedTimerArray) {
@@ -197,10 +129,17 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
 }
 
 - (NSArray *)timerArray {
-    return [self.savedTimerArray copy];
+    NSMutableArray *tempArray = [NSMutableArray array];
+    for (LinKonTimerTask *timer in self.savedTimerArray) {
+        [tempArray addObject:[timer copy]];
+    }
+    return [tempArray copy];
 }
 
+#pragma mark - 定时器 增 删 改
+
 - (BOOL)addTimerTask:(LinKonTimerTask *)timer {
+    [timer resetTimerRange];
     for (LinKonTimerTask *item in self.savedTimerArray) {
         if ([item.number isEqualToString:timer.number] || [item isConflictTo:timer]) {
             // 与现有定时器发生冲突
@@ -224,6 +163,7 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
 }
 
 - (BOOL)editTimerTask:(LinKonTimerTask *)timer {
+    [timer resetTimerRange];
     for (LinKonTimerTask *item in self.savedTimerArray) {
         if (![item.number isEqualToString:timer.number] && [item isConflictTo:timer]) {
             // 与现有定时器发生冲突
@@ -242,6 +182,74 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
     
     // 没找到, 当冲突处理
     return NO;
+}
+
+#pragma mark - 修改设备属性
+
+/**
+ 修改设备属性
+ 
+ @param value 属性值
+ @param key 属性Key
+ @return 是否修改成功
+ */
+- (BOOL)updateValue:(id)value forKey:(NSString *)key {
+    if (!value || !key) {
+        return NO;
+    }
+    
+    BOOL success = NO;
+    if ([key isEqualToString:KDeviceTimerAdd]) {
+        // 添加定时器
+        success = [self addTimerTask:value];
+    } else if ([key isEqualToString:KDeviceTimerEdit]) {
+        // 修改定时器
+        success = [self editTimerTask:value];
+    } else if ([key isEqualToString:KDeviceTimerRemove]) {
+        // 删除定时器
+        success = [self removeTimerTask:value];
+    } else {
+        // 其他普通属性
+        [self setValue:value forKey:key];
+        success = YES;
+        
+        if ([key isEqualToString:KDeviceRunning]) {
+            // 更改运行状态, 需要重置延时开关
+            _delay = 0.0;
+        }
+    }
+    
+    if (success) {
+        // 发送通知
+        [[DeviceNotifyManager sharedManager] postNotifyType:[self notifyTypeWithKey:key] sn:_sn key:key];
+    }
+    
+    return success;
+}
+
+
+/**
+ 获取对应通知类别
+ 
+ @param key 属性Key
+ @return 通知类别
+ */
+- (DeviceNotifyType)notifyTypeWithKey:(NSString *)key {
+    if ([key isEqualToString:KDeviceConnection]
+        || [key isEqualToString:KDeviceRunning]) {
+        return DeviceNotifyTypeState;
+    } else if ([key isEqualToString:KDeviceNickname]
+               || [key isEqualToString:KDevicePassword]) {
+        return DeviceNotifyTypeIdentity;
+    } else if ([key isEqualToString:KDeviceTimerAdd]
+               || [key isEqualToString:KDeviceTimerEdit]
+               || [key isEqualToString:KDeviceTimerRemove]) {
+        return DeviceNotifyTypeTimer;
+    } else {
+        return DeviceNotifyTypeSetting;
+    }
+    
+    return DeviceNotifyTypeNone;
 }
 
 @end

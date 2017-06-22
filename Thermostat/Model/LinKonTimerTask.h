@@ -24,7 +24,7 @@
 
 @interface LinKonTimerTask : NSObject
 
-- (instancetype)initWithType:(LinKonTimerTaskType)type device:(NSString *)sn;
+- (instancetype)initWithType:(LinKonTimerTaskType)type device:(long long)sn;
 
 /**
  任务编号, 唯一

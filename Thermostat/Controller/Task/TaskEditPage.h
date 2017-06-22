@@ -7,12 +7,12 @@
 //
 
 #import "BaseListViewPage.h"
-#import "Declare.h"
 
+@class LinKonTimerTask;
 
 @interface TaskEditPage : BaseListViewPage
 
-- (instancetype)initWithTask:(NSString *)number device:(NSString *)sn;
-- (instancetype)initWithType:(LinKonTimerTaskType)type device:(NSString *)sn;
+- (instancetype)initWithTask:(LinKonTimerTask *)task device:(long long)sn;
+- (instancetype)initWithType:(LinKonTimerTaskType)type device:(long long)sn;
 
 @end

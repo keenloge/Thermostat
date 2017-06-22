@@ -7,8 +7,7 @@
 //
 
 #import "EnumPickerPage.h"
-#import "Globals.h"
-#import "Declare.h"
+#import "LinKonHelper.h"
 
 @interface EnumPickerPage () {
     
@@ -109,11 +108,11 @@
     
     NSInteger value = [[self.contentArray objectAtIndex:row] integerValue];
     if (self.type == EnumPickerTypeWind) {
-        rowTitle = [Globals windString:value];
+        rowTitle = [LinKonHelper windString:value];
     } else if (self.type == EnumPickerTypeMode) {
-        rowTitle = [Globals modeString:value];
+        rowTitle = [LinKonHelper modeString:value];
     } else if (self.type == EnumPickerTypeScene) {
-        rowTitle = [Globals sceneString:value];
+        rowTitle = [LinKonHelper sceneString:value];
     }
     
     return rowTitle;

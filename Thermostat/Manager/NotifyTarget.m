@@ -15,18 +15,5 @@
 
 @implementation NotifyTarget
 
-//- (NSMutableArray *)keyArray {
-//    if (!_keyArray) {
-//        _keyArray = [NSMutableArray array];
-//    }
-//    return _keyArray;
-//}
-
-//- (NSMutableDictionary *)blockDictionary {
-//    if (!_blockDictionary) {
-//        _blockDictionary = [NSMutableDictionary dictionary];
-//    }
-//    return _blockDictionary;
-//}
 
 @end

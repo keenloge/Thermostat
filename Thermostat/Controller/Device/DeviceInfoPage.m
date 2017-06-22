@@ -10,7 +10,7 @@
 #import "BaseLabel.h"
 #import "BaseTextField.h"
 #import "BaseButton.h"
-#import "DeviceManager.h"
+#import "DeviceListManager.h"
 #import "LinKonDevice.h"
 #import "BaseAlertPage.h"
 
@@ -46,7 +46,7 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
     [self addBarButtonItemBackWithAction:@selector(barButtonItemLeftPressed:)];
     
     self.device = [LinKonDevice randomDevice];
-    self.numberTextField.text = [Globals formatSN:self.device.sn];
+    self.numberTextField.text = [LinKonHelper formatSN:self.device.sn];
     self.nicknameTextField.text = self.device.nickname;
     self.passwordTextField.text = self.device.password;
 }
@@ -68,9 +68,9 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
 
 - (void)addDeviceWithInput {
     [self popViewController];
-    self.device.nickname = self.nicknameTextField.text;
-    self.device.password = self.passwordTextField.text;
-    [[DeviceManager sharedManager] addDevice:self.device];
+    [self.device setValue:self.nicknameTextField.text forKey:KDeviceNickname];
+    [self.device setValue:self.passwordTextField.text forKey:KDevicePassword];
+    [[DeviceListManager sharedManager] addDevice:self.device];
 }
 
 #pragma mark - 界面布局
@@ -110,10 +110,10 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
 - (void)baseButtonPressed:(id)sender {
     [self hideKeyBoard];
    if (self.nicknameTextField.text.length < 1) {
-        self.messageNotify = KString(@"请输入设备昵称");
+        self.baseMessageNotify = KString(@"请输入设备昵称");
         [self.nicknameTextField becomeFirstResponder];
     } else if (self.passwordTextField.text.length < 1) {
-        self.messageNotify = KString(@"请输入密码");
+        self.baseMessageNotify = KString(@"请输入密码");
         [self.passwordTextField becomeFirstResponder];
     } else {
         if ([self.device.password isEqualToString:self.passwordTextField.text]) {
@@ -136,7 +136,7 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
 - (void)barButtonItemLeftPressed:(id)sender {
     [self hideKeyBoard];
     [self popViewController];
-    [[DeviceManager sharedManager] addDevice:self.device];
+    [[DeviceListManager sharedManager] addDevice:self.device];
 }
 
 #pragma mark - 懒加载

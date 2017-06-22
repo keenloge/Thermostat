@@ -32,78 +32,78 @@
 /**
  序列号
  */
-@property (nonatomic, copy) NSString *sn;
+@property (nonatomic, readonly) long long sn;
 
 
 /**
  昵称
  */
-@property (nonatomic, copy) NSString *nickname;
+@property (nonatomic, readonly) NSString *nickname;
 
 
 /**
  密码
  */
-@property (nonatomic, copy) NSString *password;
+@property (nonatomic, readonly) NSString *password;
 
 
 /**
  连接状态
  */
-@property (nonatomic, assign) DeviceConnectionState connection;
+@property (nonatomic, readonly) DeviceConnectionState connection;
 
 
 /**
  运行状态
  */
-@property (nonatomic, assign) DeviceRunningState running;
+@property (nonatomic, readonly) DeviceRunningState running;
 
 
 /**
  当前湿度
  */
-@property (nonatomic, assign) float humidity;
+@property (nonatomic, readonly) float humidity;
 
 
 /**
  当前温度
  */
-@property (nonatomic, assign) float temperature;
+@property (nonatomic, readonly) float temperature;
 
 /**
  风速
  */
-@property (nonatomic, assign) LinKonWind wind;
+@property (nonatomic, readonly) LinKonWind wind;
 
 
 /**
  模式
  */
-@property (nonatomic, assign) LinKonMode mode;
+@property (nonatomic, readonly) LinKonMode mode;
 
 
 /**
  情景
  */
-@property (nonatomic, assign) LinKonScene scene;
+@property (nonatomic, readonly) LinKonScene scene;
 
 
 /**
  设定温度
  */
-@property (nonatomic, assign) float setting;
+@property (nonatomic, readonly) float setting;
 
 
 /**
  儿童锁
  */
-@property (nonatomic, assign) BOOL lock;
+@property (nonatomic, readonly) BOOL lock;
 
 
 /**
  延时开关截止时间
  */
-@property (nonatomic, assign) NSTimeInterval delay;
+@property (nonatomic, readonly) NSTimeInterval delay;
 
 
 /**
@@ -112,42 +112,6 @@
 @property (nonatomic, readonly) NSArray *timerArray;
 
 
-#pragma mark - 只读属性
-
-/**
- 状态字符
- */
-@property (nonatomic, readonly) NSString *stateString;
-
-
-/**
- 切换运行状态
- */
-@property (nonatomic, readonly) DeviceRunningState switchRunning;
-
-
-/**
- 切换模式
- */
-@property (nonatomic, readonly) LinKonMode switchMode;
-
-
-/**
- 切换情景
- */
-@property (nonatomic, readonly) LinKonScene switchScene;
-
-
-/**
- 切换风速
- */
-@property (nonatomic, readonly) LinKonWind switchWind;
-
-
-/**
- 切换延时
- */
-@property (nonatomic, readonly) NSTimeInterval switchDelay;
 
 
 /**
@@ -165,42 +129,18 @@
  @param password 密码
  @return 设备对象
  */
-+ (instancetype)deviceWithSN:(NSString *)sn password:(NSString *)password;
++ (instancetype)deviceWithSN:(long long)sn password:(NSString *)password;
 
-
-/**
- 获取所属属性组
-
- @param key 属性
- @return 属性组
- */
-+ (LinKonPropertyGroup)groupProperty:(NSString *)key;
 
 
 /**
- 添加定时器
+ 修改设备属性
 
- @param timer 定时器
- @return 是否添加成功
- */
-- (BOOL)addTimerTask:(LinKonTimerTask *)timer;
-
-
-/**
- 移除定时器
-
- @param timer 定时器
- @return 是否移除成功
- */
-- (BOOL)removeTimerTask:(LinKonTimerTask *)timer;
-
-
-/**
- 修改定时器
-
- @param timer 定时器
+ @param value 属性值
+ @param key 属性Key
  @return 是否修改成功
  */
-- (BOOL)editTimerTask:(LinKonTimerTask *)timer;
+- (BOOL)updateValue:(id)value forKey:(NSString *)key;
+
 
 @end

@@ -15,6 +15,11 @@ typedef void(^DeviceCellInfoBlock)();
 @interface DeviceCell : BaseCell
 
 @property (nonatomic, copy) DeviceCellInfoBlock infoBlock;
-@property (nonatomic, copy) NSString *sn;
+
+- (void)updateImageIcon:(UIImage *)image;
+
+- (void)updateTitleString:(NSString *)title;
+
+- (void)updateStateString:(NSString *)state color:(UIColor *)color;
 
 @end

@@ -9,7 +9,7 @@
 #import "DeviceCircleView.h"
 #import "ColorConfig.h"
 #import "Declare.h"
-#import "DeviceManager.h"
+#import "DeviceListManager.h"
 #import "LinKonDevice.h"
 #import "NSTimerAdditions.h"
 #import "Globals.h"
@@ -86,9 +86,11 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
 @property (nonatomic, strong) UIImageView *timerImageView;
 @property (nonatomic, strong) UILabel *timerLabel;
 
-@property (nonatomic, assign) int   timeOffset;
+@property (nonatomic, assign) NSInteger timeOffset;
 @property (nonatomic, strong) NSTimer *countDownTimer;
 @property (nonatomic, strong) NSTimer *roundTimer;
+
+@property (nonatomic, copy) DeviceDelayTimerFinishBlock block;
 
 @end
 
@@ -103,7 +105,7 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
 */
 
 - (void)dealloc {
-    [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceDelay value:@(0)];
+//    [[DeviceListManager sharedManager] editDevice:self.sn key:KDeviceDelay value:@(0)];
     if ([self.countDownTimer isValid]) {
         [self.countDownTimer invalidate];
         self.countDownTimer = nil;
@@ -138,69 +140,66 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
     self.contentTimerView.opaque = YES;
     self.timerImageView.opaque = YES;
     self.timerLabel.opaque = YES;
+    
+    WeakObj(self);
+    self.roundTimer = [NSTimer hb_scheduledTimerWithTimeInterval:13 repeats:YES block:^(NSTimer *timer) {
+        [selfWeak animationRoundImageView];
+    }];
+    [[NSRunLoop currentRunLoop] addTimer:self.roundTimer forMode:NSRunLoopCommonModes];
+    [self.roundTimer fire];
 }
 
-- (void)updateInfoViewWithDevice:(LinKonDevice *)device {
-    self.roundImageView.hidden = NO;
-    
-    // 延时开关机
-    if (device.delay > 0.0) {
-        self.contentTimerView.hidden = NO;
-        if (device.running == DeviceRunningStateTurnON) {
-            self.timerImageView.image = [UIImage imageNamed:@"icon_timer_off"];
-        } else {
-            self.timerImageView.image = [UIImage imageNamed:@"icon_timer_on"];
-        }
-        self.timeOffset = device.delay - [NSDate timeIntervalSinceReferenceDate];
-    } else {
-        if ([self.countDownTimer isValid]) {
-            [self.countDownTimer invalidate];
-            self.countDownTimer = nil;
-        }
-        self.contentTimerView.hidden = YES;
-    }
-    
-    // 当前温度, 湿度
-    self.humidityLabel.text = [NSString stringWithFormat:@"%.0f%%", device.humidity * 100];
-    self.temperatureLabel.text = [Globals settingString:device.temperature];
-    
-    // 模式 设定温度
-    if (device.running == DeviceRunningStateTurnOFF || device.mode == LinKonModeAir) {
-        // 待机 或者 换气
+- (void)updateRoundImage:(UIImage *)image
+               colorFrom:(UIColor *)colorFrom
+                 colorTo:(UIColor *)colorTo {
+    self.roundImageView.hidden = image == nil;
+    self.roundImageView.image = image;
+    self.inLayer.colors = @[(__bridge id)colorFrom.CGColor, (__bridge id)colorTo.CGColor];
+}
+
+- (void)updateHumidityString:(NSString *)text {
+    self.humidityLabel.text = text;
+}
+
+- (void)updateTemperatureString:(NSString *)text {
+    self.temperatureLabel.text = text;
+}
+
+- (void)updateStateString:(NSString *)state
+                  setting:(NSString *)setting
+                     mode:(NSString *)mode
+                     unit:(NSString *)unit {
+    if (state.length > 0) {
         self.mainLabel.hidden = NO;
         self.contentSettingView.hidden = YES;
-        
-        if (device.running == DeviceRunningStateTurnOFF) {
-            self.mainLabel.text = [Globals runningString:device.running];
-            self.inLayer.colors = @[(__bridge id)UIColorFromHex(0xa6ff94).CGColor, (__bridge id)UIColorFromHex(0x38c1ff).CGColor];
-            self.roundImageView.hidden = YES;
-        } else {
-            self.mainLabel.text = [Globals modeString:device.mode];
-            self.inLayer.colors = @[(__bridge id)UIColorFromHex(0xa6cff9).CGColor, (__bridge id)UIColorFromHex(0x3498ff).CGColor];
-            self.roundImageView.image = [UIImage imageNamed:@"bkg_cycle_air"];
-        }
+        setting = @" ";
+        mode = @" ";
+        unit = @" ";
     } else {
         self.mainLabel.hidden = YES;
         self.contentSettingView.hidden = NO;
+    }
+    self.mainLabel.text = state;
+    self.settingLabel.text = setting;
+    self.modeLabel.text = mode;
+    self.unitLabel.text = unit;
+}
+
+- (void)updateTimerOffset:(NSInteger)timeOffset image:(UIImage *)image block:(DeviceDelayTimerFinishBlock)block {
+    // 不管怎么样, 先取消旧的 Timer
+    if ([self.countDownTimer isValid]) {
+        [self.countDownTimer invalidate];
+        self.countDownTimer = nil;
+    }
+
+    if (timeOffset <= 0) {
+        self.contentTimerView.hidden = YES;
+    } else {
+        self.contentTimerView.hidden = NO;
+        self.timerImageView.image = image;
+        self.block = block;
         
-        CGFloat setting = [[TemperatureUnitManager sharedManager] fixedTemperatureSetting:device.setting];
-        self.settingLabel.text = [NSString stringWithFormat:@"%.1f", setting];
-        self.modeLabel.text = [Globals modeString:device.mode];
-        switch (device.mode) {
-            case LinKonModeHot:
-                self.inLayer.colors = @[(__bridge id)UIColorFromHex(0xff5c23).CGColor, (__bridge id)UIColorFromHex(0xffd1d1).CGColor];
-                self.roundImageView.image = [UIImage imageNamed:@"bkg_cycle_hot"];
-                break;
-            case LinKonModeCool:
-                self.inLayer.colors = @[(__bridge id)UIColorFromHex(0x3243d2).CGColor, (__bridge id)UIColorFromHex(0x54bdf1).CGColor];
-                self.roundImageView.image = [UIImage imageNamed:@"bkg_cycle_cool"];
-                break;
-            case LinKonModeAir:
-                // 不应该到这里来了
-                break;
-            default:
-                break;
-        }
+        self.timeOffset = timeOffset;
     }
 }
 
@@ -218,22 +217,7 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
 
 #pragma mark - Setter
 
-- (void)setSn:(NSString *)sn {
-    _sn = sn;
-    
-    WeakObj(self);
-    self.roundTimer = [NSTimer hb_scheduledTimerWithTimeInterval:13 repeats:YES block:^(NSTimer *timer) {
-        [selfWeak animationRoundImageView];
-    }];
-    [[NSRunLoop currentRunLoop] addTimer:self.roundTimer forMode:NSRunLoopCommonModes];
-    [self.roundTimer fire];
-    
-    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(LinKonDevice *device, NSString *key) {
-        [selfWeak updateInfoViewWithDevice:device];
-    }];
-}
-
-- (void)setTimeOffset:(int)timeOffset {
+- (void)setTimeOffset:(NSInteger)timeOffset {
     _timeOffset = timeOffset;
     
     if ([self.countDownTimer isValid]) {
@@ -241,8 +225,7 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
         self.countDownTimer = nil;
     }
     
-    __block int timeOut = _timeOffset;
-    __block NSString *blockSN = self.sn;
+    __block NSInteger timeOut = _timeOffset;
     WeakObj(self);
     self.countDownTimer = [NSTimer hb_scheduledTimerWithTimeInterval:1 repeats:YES block:^(NSTimer *timer) {
         if (timeOut > 0) {
@@ -255,8 +238,11 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
         } else {
             // 倒计时结束了
             [timer invalidate];
-            LinKonDevice *device = [[DeviceManager sharedManager] getDevice:blockSN];
-            [[DeviceManager sharedManager] editDevice:blockSN key:KDeviceRunning value:@(device.switchRunning)];
+            if (selfWeak.block) {
+                selfWeak.block();
+            }
+//            LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:blockSN];
+//            [[DeviceListManager sharedManager] editDevice:blockSN key:KDeviceRunning value:@(device.switchRunning)];
         }
     }];
     [[NSRunLoop currentRunLoop] addTimer:self.countDownTimer forMode:NSRunLoopCommonModes];

@@ -10,6 +10,6 @@
 
 @interface LinKonDeviceControlPage : BaseViewPage
 
-- (instancetype)initWithDevice:(NSString *)sn;
+- (instancetype)initWithDevice:(long long)sn;
 
 @end

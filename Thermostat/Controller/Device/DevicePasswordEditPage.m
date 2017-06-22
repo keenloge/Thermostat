@@ -7,12 +7,10 @@
 //
 
 #import "DevicePasswordEditPage.h"
+#import "NSStringAdditions.h"
 #import "BaseTextField.h"
 #import "BaseButton.h"
-#import "NSStringAdditions.h"
-#import "DeviceManager.h"
 #import "LinKonDevice.h"
-#import "DeviceManager.h"
 
 @interface DevicePasswordEditPage () <UITextFieldDelegate>
 
@@ -26,9 +24,9 @@
 
 @implementation DevicePasswordEditPage
 
-- (instancetype)initWithDevice:(NSString *)sn {
+- (instancetype)initWithDevice:(long long)sn {
     if (self = [super init]) {
-        self.device = [[DeviceManager sharedManager] getDevice:sn];
+        self.device = [[DeviceListManager sharedManager] getDevice:sn];
     }
     return self;
 }
@@ -95,14 +93,14 @@
 - (void)baseButtonPressed:(id)sender {
     [self hideKeyBoard];
     if (![self.passwordOldTextField.text isEqualToString:self.device.password]) {
-        self.messageNotify = KString(@"旧密码不正确");
+        self.baseMessageNotify = KString(@"旧密码不正确");
     } else if (![self.passwordNewTextField.text isEqualToString:self.passwordConfirmTextField.text]) {
-        self.messageNotify = KString(@"新密码和确认密码不一样");
+        self.baseMessageNotify = KString(@"新密码和确认密码不一样");
     } else if ([self.passwordOldTextField.text isEqualToString:self.passwordNewTextField.text]) {
-        self.messageNotify = KString(@"新密码和旧密码一样");
+        self.baseMessageNotify = KString(@"新密码和旧密码一样");
     } else {
         [self popViewController];
-        [[DeviceManager sharedManager] editDevice:self.device.sn key:KDevicePassword value:self.passwordNewTextField.text];
+        [self.device updateValue:self.passwordNewTextField.text forKey:KDevicePassword];
     }
 }
 

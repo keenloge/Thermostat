@@ -8,7 +8,7 @@
 
 #import "LinKonTimerTask.h"
 #import "NSStringAdditions.h"
-#import "DeviceManager.h"
+#import "DeviceListManager.h"
 #import "LinKonDevice.h"
 #import "LinKonTimerRange.h"
 
@@ -27,7 +27,7 @@ const NSInteger LinKonTimerTimeMin = 0;
 
 @implementation LinKonTimerTask
 
-- (instancetype)initWithType:(LinKonTimerTaskType)type device:(NSString *)sn {
+- (instancetype)initWithType:(LinKonTimerTaskType)type device:(long long)sn {
     if (self = [super init]) {
         self.type = type;
         self.number = [NSString uuidString];
@@ -42,7 +42,7 @@ const NSInteger LinKonTimerTimeMin = 0;
             self.timeTo = self.timeFrom + 30;
         }
         
-        LinKonDevice *device = [[DeviceManager sharedManager] getDevice:sn];
+        LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:sn];
         self.wind = device.wind;
         self.mode = device.mode;
         self.scene = device.scene;

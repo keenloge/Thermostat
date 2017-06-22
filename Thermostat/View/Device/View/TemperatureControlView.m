@@ -7,11 +7,6 @@
 //
 
 #import "TemperatureControlView.h"
-#import "ColorConfig.h"
-#import "Declare.h"
-#import "DeviceManager.h"
-#import "LinKonDevice.h"
-#import "Globals.h"
 #import "FeedBackManager.h"
 
 const CGFloat KTemperatureControlCountShow      = 5.0;
@@ -32,9 +27,12 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
 @property (nonatomic, strong) UIView *topLineView;
 @property (nonatomic, strong) UIView *bottomLineView;
 
+@property (nonatomic, strong) NSArray *titleArray;
 @property (nonatomic, strong) NSArray *slideViewArray;
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, assign) NSInteger scrollToIndex;
+
+@property (nonatomic, copy) TemperatureControlCheckBlock block;
 
 @end
 
@@ -55,7 +53,9 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
 }
 
 - (void)editTemperature {
-    [[DeviceManager sharedManager] editDevice:self.sn key:KDeviceSetting value:@(self.currentIndex * LINKON_TEMPERATURE_OFFSET + LINKON_TEMPERATURE_MIN)];
+    if (self.block) {
+        self.block(self.currentIndex);
+    }
 }
 
 #pragma mark - 界面刷新
@@ -74,6 +74,26 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
     self.topLineView.opaque = YES;
     self.bottomLineView.opaque = YES;
 }
+
+- (void)updateControlEnabled:(BOOL)enabled {
+    self.userInteractionEnabled = enabled;
+    
+    for (UILabel *label in self.slideViewArray) {
+        label.textColor = self.userInteractionEnabled ? label.textColor = HB_COLOR_BASE_MAIN : HB_COLOR_BASE_LIGHT;
+    }
+}
+
+- (void)updateTemperatureArray:(NSArray <NSString *>*)array
+                    checkBlock:(TemperatureControlCheckBlock)block {
+    self.titleArray = [NSArray arrayWithArray:array];
+    self.block = block;
+    self.slideViewArray = nil;
+}
+
+- (void)updateTemperatureCheckIndex:(NSInteger)index {
+    self.scrollToIndex = index;
+}
+
 
 - (void)updateSlideView {
     CGFloat itemWidth = CGRectGetWidth(self.contentScrollView.frame);
@@ -98,16 +118,6 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
         
         label.alpha = labelAlpha;
         label.transform = CGAffineTransformMakeScale(labelScale, labelScale);
-    }
-}
-
-- (void)updateSlideViewStateWithDevice:(LinKonDevice *)device {
-    self.userInteractionEnabled = YES;
-    if (device.running == DeviceRunningStateTurnOFF || device.mode == LinKonModeAir) {
-        self.userInteractionEnabled = NO;
-    }
-    for (UILabel *label in self.slideViewArray) {
-        label.textColor = self.userInteractionEnabled ? label.textColor = HB_COLOR_BASE_MAIN : HB_COLOR_BASE_LIGHT;
     }
 }
 
@@ -148,16 +158,6 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
 
 #pragma mark - Setter
 
-- (void)setSn:(NSString *)sn {
-    _sn = sn;
-    
-    WeakObj(self);
-    [[DeviceManager sharedManager] registerListener:self device:sn group:LinKonPropertyGroupState | LinKonPropertyGroupSetting block:^(LinKonDevice *device, NSString *key) {
-        [selfWeak updateSlideViewStateWithDevice:device];
-        selfWeak.scrollToIndex = (device.setting - LINKON_TEMPERATURE_MIN) / LINKON_TEMPERATURE_OFFSET;
-    }];
-}
-
 - (void)setScrollToIndex:(NSInteger)index {
     if (index < 0 || index >= self.slideViewArray.count) {
         return;
@@ -182,14 +182,14 @@ const CGFloat KTemperatureControlCutLineWidth   = 1.0;
         CGFloat itemOffsetX = 0.0;
         NSInteger count = 0;
         NSMutableArray *tmpArray = [NSMutableArray array];
-        for (CGFloat i = LINKON_TEMPERATURE_MIN; i <= LINKON_TEMPERATURE_MAX; i += LINKON_TEMPERATURE_OFFSET) {
+        for (int i = 0; i < self.titleArray.count; i++) {
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((itemWidth + itemOffsetX) * count, 0, itemWidth, itemHeight)];
             [_contentScrollView addSubview:label];
             label.backgroundColor = HB_COLOR_BASE_WHITE;
             label.font = UIFontOf3XPix(KHorizontalRound(68));
             label.textAlignment = NSTextAlignmentCenter;
             label.textColor = HB_COLOR_BASE_MAIN;
-            label.text = [Globals settingString:i];
+            label.text = [self.titleArray objectAtIndex:i];
             [tmpArray addObject:label];
             count++;
         }
