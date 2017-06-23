@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) UIImageView *arrowImageView;
 @property (nonatomic, strong) UITableView *popTableView;
-@property (nonatomic, strong) BaseTableCell *popCell;
 
 @property (nonatomic, strong) NSArray *popImageArray;
 @property (nonatomic, strong) NSArray *popTitleArray;
@@ -57,24 +56,6 @@
     [self.popTableView reloadData];
 }
 
-- (BaseTableCell *)createNewPopCell {
-    BaseTableCell *cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PopCell"];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    cell.contentView.backgroundColor = UIColorFromRGBA(0, 0, 0, 0.85);
-    
-    [cell updateIconImageSize:CGSizeMake(32, 32) paddingLeft:14];
-    
-    cell.baseTitleLabel.textColor = HB_COLOR_BASE_WHITE;
-    cell.baseTitleLabel.font = UIFontOf3XPix(54);
-    cell.baseTitleLabel.numberOfLines = 0;
-    
-    [cell updateTitlePaddingLeft:12];
-    [cell updateTitleMaxWidth:106 paddingTop:14];
-    
-    return cell;
-}
-
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -86,21 +67,30 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.popCell.baseTitleLabel.text = [self.popTitleArray objectAtIndex:indexPath.row];
-    CGSize size = [self.popCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    return MAX(60, size.height) + 1;
+    return UITableViewAutomaticDimension;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *tmpIdentifierCell = @"PopCell";
     BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:tmpIdentifierCell];
     if (cell == nil) {
-        cell = [self createNewPopCell];
+        cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tmpIdentifierCell];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        cell.contentView.backgroundColor = UIColorFromRGBA(0, 0, 0, 0.85);
+        
+        [cell updateIconImageSize:CGSizeMake(32, 32) paddingLeft:14];
+        [cell updateTitleInsets:UIEdgeInsetsMake(14, 12, 14, 12)];
+        cell.baseTitleLabel.textColor = HB_COLOR_BASE_WHITE;
+        cell.baseTitleLabel.font = UIFontOf3XPix(54);
+        cell.baseTitleLabel.numberOfLines = 0;
+        
+        [cell updateMinHeight:60.0];
     }
     
     cell.baseImageView.image = [self.popImageArray objectAtIndex:indexPath.row];
     cell.baseTitleLabel.text = [self.popTitleArray objectAtIndex:indexPath.row];
-    
+
     return cell;
 }
 
@@ -148,6 +138,7 @@
         _popTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 178, 500) style:UITableViewStylePlain];
         [self addSubview:_popTableView];
         
+        _popTableView.estimatedRowHeight = 60.0;
         _popTableView.scrollEnabled = NO;
         _popTableView.separatorColor = UIColorFromRGBA(0, 0, 0, 0.7);
         _popTableView.separatorInset = UIEdgeInsetsZero;
@@ -164,13 +155,6 @@
         }];
     }
     return _popTableView;
-}
-
-- (BaseTableCell *)popCell {
-    if (!_popCell) {
-        _popCell = [self createNewPopCell];
-    }
-    return _popCell;
 }
 
 @end

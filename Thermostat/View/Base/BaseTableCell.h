@@ -97,12 +97,13 @@ typedef void(^BaseTableCellSwitchBlock)(BOOL on);
 - (void)updateTitlePaddingLeft:(CGFloat)paddingLeft;
 
 
-/**
- 更新标题最大宽度
 
- @param width 宽度
+/**
+ 更新标题缩进 用于自动计算高度
+
+ @param insets 缩进
  */
-- (void)updateTitleMaxWidth:(CGFloat)width paddingTop:(CGFloat)top;
+- (void)updateTitleInsets:(UIEdgeInsets)insets;
 
 /**
  更新内容
@@ -110,6 +111,14 @@ typedef void(^BaseTableCellSwitchBlock)(BOOL on);
  @param paddingRight 右边距
  */
 - (void)updateDetailPaddingRight:(CGFloat)paddingRight;
+
+
+/**
+ 设置最小行高
+
+ @param height 行高
+ */
+- (void)updateMinHeight:(CGFloat)height;
 
 
 /**

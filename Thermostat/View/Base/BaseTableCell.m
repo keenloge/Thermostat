@@ -63,6 +63,7 @@ const CGFloat BaseTableCellArrowSize            = 77.0;
 #pragma mark - 界面更新
 
 - (void)updateIconImageSize:(CGSize)size paddingLeft:(CGFloat)paddingLeft {
+    [self.baseImageView setContentCompressionResistancePriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
     [self.baseImageView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(paddingLeft).priorityHigh();
         if (size.height > 0 && size.width > 0) {
@@ -78,10 +79,21 @@ const CGFloat BaseTableCellArrowSize            = 77.0;
     }];
 }
 
-- (void)updateTitleMaxWidth:(CGFloat)width paddingTop:(CGFloat)top {
+- (void)updateTitleInsets:(UIEdgeInsets)insets {
+    [self.baseTitleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisVertical];
+    [self.baseTitleLabel setContentCompressionResistancePriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+    WeakObj(self);
     [self.baseTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_greaterThanOrEqualTo(top);
-        make.width.mas_lessThanOrEqualTo(width);
+        make.top.mas_equalTo(insets.top).priorityLow();
+        make.left.equalTo(selfWeak.baseImageView.mas_right).offset(insets.left).priorityLow();
+        make.bottom.mas_equalTo(-insets.bottom).priorityLow();
+        make.right.mas_equalTo(-insets.right);
+    }];
+}
+
+- (void)updateMinHeight:(CGFloat)height {
+    [self.baseContentView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_greaterThanOrEqualTo(height).priorityHigh();
     }];
 }
 
