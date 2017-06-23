@@ -13,7 +13,7 @@
 #import "EnumPickerPage.h"
 #import "DeviceListManager.h"
 #import "LinKonTimerTask.h"
-#import "BaseTableViewCell.h"
+#import "BaseTableCell.h"
 
 const CGFloat TaskEditRepeatRowsHeight  = 88.0;
 const CGFloat TaskEditSettingRowsHeight = 44.0;
@@ -257,11 +257,11 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
     } else if (indexPath.section == 2) {
         
         static NSString *switchIdentifierCell = @"SwitchCell";
-        BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:switchIdentifierCell];
+        BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:switchIdentifierCell];
         if (!cell) {
-            cell = [[BaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:switchIdentifierCell];
+            cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:switchIdentifierCell];
             [cell updateTitleFont:UIFontOf3XPix(51) color:UIColorFromRGBA(0, 0, 0, 0.85) paddingLeft:15];
-            cell.baseAccessoryType = BaseTableViewCellAccessoryTypeSwitch;
+            cell.baseCellType = BaseTableCellTypeSwitch;
             cell.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         }
         cell.baseTitleString = KString(@"开关");
@@ -275,14 +275,14 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
         return cell;
     } else {
         static NSString *arrowIdentifierCell = @"ArrowCell";
-        BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:arrowIdentifierCell];
+        BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:arrowIdentifierCell];
         if (!cell) {
-            cell = [[BaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:arrowIdentifierCell];
+            cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:arrowIdentifierCell];
             [cell updateTitleFont:UIFontOf3XPix(51) color:UIColorFromRGBA(0, 0, 0, 0.85) paddingLeft:15];
             [cell updateDetailFont:UIFontOf3XPix(42) color:UIColorFromRGBA(0, 0, 0, 0.62) paddingRight:15];
 
             cell.tintColor = UIColorFromHex(0xc7c7cc);
-            cell.baseAccessoryType = BaseTableViewCellAccessoryTypeArrow;
+            cell.baseCellType = BaseTableCellTypeArrow;
 //            cell.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         }
         
@@ -336,7 +336,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
     
     WeakObj(self);
     if (indexPath.section == 0) {
-        BaseTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        BaseTableCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (indexPath.row == 0) {
             con = [[TimePickerPage alloc] initWithTitle:cell.baseTitleString time:self.task.timeFrom block:^(NSInteger time) {
                 selfWeak.task.timeFrom = time;

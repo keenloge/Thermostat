@@ -1,5 +1,5 @@
 //
-//  BaseTableViewCell.h
+//  BaseTableCell.h
 //  Thermostat
 //
 //  Created by Keen on 2017/6/22.
@@ -12,27 +12,27 @@
 /**
  附件样式
 
- - BaseTableViewCellAccessoryTypeNone: 无
- - BaseTableViewCellAccessoryTypeArrow: 箭头
- - BaseTableViewCellAccessoryTypeSwitch: 开关
- BaseTableViewCellAccessoryTypeCheck: 勾
+ - BaseTableCellTypeNone: 无
+ - BaseTableCellTypeArrow: 箭头
+ - BaseTableCellTypeSwitch: 开关
+ BaseTableCellTypeCheck: 勾
  */
-typedef NS_ENUM(NSInteger, BaseTableViewCellAccessoryType) {
-    BaseTableViewCellAccessoryTypeNone      = 0,
-    BaseTableViewCellAccessoryTypeArrow,
-    BaseTableViewCellAccessoryTypeSwitch,
-    BaseTableViewCellAccessoryTypeCheck,
+typedef NS_ENUM(NSInteger, BaseTableCellType) {
+    BaseTableCellTypeNone      = 0,
+    BaseTableCellTypeArrow,
+    BaseTableCellTypeSwitch,
+    BaseTableCellTypeCheck,
 };
 
-typedef void(^BaseCellSwitchBlock)(BOOL on);
+typedef void(^BaseTableCellSwitchBlock)(BOOL on);
 
-@interface BaseTableViewCell : UITableViewCell
+@interface BaseTableCell : UITableViewCell
 
 
 /**
  附件样式
  */
-@property (nonatomic, assign) BaseTableViewCellAccessoryType baseAccessoryType;
+@property (nonatomic, assign) BaseTableCellType baseCellType;
 
 
 /**
@@ -95,16 +95,16 @@ typedef void(^BaseCellSwitchBlock)(BOOL on);
 
 
 /**
- 更新开关, 仅当 BaseTableViewCellAccessoryTypeSwitch 时, 生效
+ 更新开关, 仅当 BaseTableCellTypeSwitch 时, 生效
 
  @param on 打开
  @param block 回调
  */
-- (void)updateBaseSwitchOn:(BOOL)on switchBlock:(BaseCellSwitchBlock)block;
+- (void)updateBaseSwitchOn:(BOOL)on switchBlock:(BaseTableCellSwitchBlock)block;
 
 
 /**
- 更新箭头颜色, 仅当 BaseTableViewCellAccessoryTypeArrow 时, 生效
+ 更新箭头颜色, 仅当 BaseTableCellTypeArrow 时, 生效
 
  @param color 颜色
  */

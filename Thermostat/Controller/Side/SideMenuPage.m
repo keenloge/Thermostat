@@ -9,7 +9,7 @@
 #import "SideMenuPage.h"
 #import "SideAboutPage.h"
 #import "SideSettingPage.h"
-#import "BaseTableViewCell.h"
+#import "BaseTableCell.h"
 #import <ViewDeck.h>
 
 const CGFloat SideMenuContentSizeWidth      = 253.0;
@@ -80,14 +80,14 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *baseIdentifierCell = @"BaseCell";
-    BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
+    static NSString *baseIdentifierCell = @"SideMenuCell";
+    BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
     if (!cell) {
-        cell = [[BaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
+        cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
         [cell updateTitleFont:UIFontOf3XPix(46) color:HB_COLOR_BASE_WHITE paddingLeft:19];
         [cell updateIconImageSize:CGSizeMake(18, 18) paddingLeft:19];
         cell.tintColor = HB_COLOR_BASE_WHITE;
-        cell.baseAccessoryType = BaseTableViewCellAccessoryTypeArrow;
+        cell.baseCellType = BaseTableCellTypeArrow;
         [cell updateBackgroundColors:@[UIColorFromHex(0x4b4b4b), UIColorFromHex(0x3c3c3c)] pointStart:CGPointMake(0, 0) pointEnd:CGPointMake(0, 1)];
         cell.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         cell.baseAccessoryPaddingLeft = 21;

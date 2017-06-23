@@ -1,24 +1,24 @@
 //
-//  BaseTableViewCell.m
+//  BaseTableCell.m
 //  Thermostat
 //
 //  Created by Keen on 2017/6/22.
 //  Copyright © 2017年 GalaxyWind. All rights reserved.
 //
 
-#import "BaseTableViewCell.h"
+#import "BaseTableCell.h"
 #import "BaseGradientLayerView.h"
 
 // 附件边距
-const CGFloat BaseTableViewCellPaddingAccessory = 14.0;
+const CGFloat BaseTableCellPaddingAccessory = 14.0;
 // 文本边距
-const CGFloat BaseTableViewCellPaddingLabel     = 10.0;
+const CGFloat BaseTableCellPaddingLabel     = 10.0;
 // 箭头有效宽度
-const CGFloat BaseTableViewCellArrowWidth       = 8.0;
+const CGFloat BaseTableCellArrowWidth       = 8.0;
 // 箭头图片宽度
-const CGFloat BaseTableViewCellArrowSize        = 77.0;
+const CGFloat BaseTableCellArrowSize        = 77.0;
 
-@interface BaseTableViewCell () {
+@interface BaseTableCell () {
     
 }
 
@@ -41,15 +41,15 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
 // 渐变背景
 @property (nonatomic, strong) BaseGradientLayerView *backgroundLayerView;
 
-@property (nonatomic, copy) BaseCellSwitchBlock baseSwitchBlock;
+@property (nonatomic, copy) BaseTableCellSwitchBlock baseSwitchBlock;
 
 @end
 
-@implementation BaseTableViewCell
+@implementation BaseTableCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.baseAccessoryPaddingLeft = KHorizontalRound(BaseTableViewCellPaddingAccessory);
+        self.baseAccessoryPaddingLeft = KHorizontalRound(BaseTableCellPaddingAccessory);
     }
     return self;
 }
@@ -84,15 +84,15 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
 }
 
 
-- (void)updateBaseSwitchOn:(BOOL)on switchBlock:(BaseCellSwitchBlock)block {
-    if (self.baseAccessoryType == BaseTableViewCellAccessoryTypeSwitch) {
+- (void)updateBaseSwitchOn:(BOOL)on switchBlock:(BaseTableCellSwitchBlock)block {
+    if (self.baseCellType == BaseTableCellTypeSwitch) {
         [self.baseSwitch setOn:on];
         self.baseSwitchBlock = block;
     }
 }
 
 - (void)updateArrowColor:(UIColor *)color {
-    if (self.baseAccessoryType == BaseTableViewCellAccessoryTypeArrow) {
+    if (self.baseCellType == BaseTableCellTypeArrow) {
         self.baseArrowImageView.tintColor = color;
     }
 }
@@ -127,19 +127,19 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
 
 #pragma mark - Setter
 
-- (void)setBaseAccessoryType:(BaseTableViewCellAccessoryType)baseAccessoryType {
-    _baseAccessoryType = baseAccessoryType;
+- (void)setBaseCellType:(BaseTableCellType)baseCellType {
+    _baseCellType = baseCellType;
 
     self.accessoryType = UITableViewCellAccessoryNone;
-    if (_baseAccessoryType == BaseTableViewCellAccessoryTypeSwitch) {
+    if (_baseCellType == BaseTableCellTypeSwitch) {
         self.baseSwitch.opaque = YES;
-    } else if (_baseAccessoryType == BaseTableViewCellAccessoryTypeArrow) {
+    } else if (_baseCellType == BaseTableCellTypeArrow) {
         self.baseArrowImageView.opaque = YES;
-    } else if (_baseAccessoryType == BaseTableViewCellAccessoryTypeNone) {
+    } else if (_baseCellType == BaseTableCellTypeNone) {
         for (UIView *subView in self.baseAccessoryView.subviews) {
             [subView removeFromSuperview];
         }
-    } else if (_baseAccessoryType == BaseTableViewCellAccessoryTypeCheck) {
+    } else if (_baseCellType == BaseTableCellTypeCheck) {
         for (UIView *subView in self.baseAccessoryView.subviews) {
             [subView removeFromSuperview];
         }
@@ -220,7 +220,7 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
         WeakObj(self);
         [_baseTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(selfWeak.baseContentView).priorityLow();
-            make.left.equalTo(selfWeak.baseImageView.mas_right).offset(BaseTableViewCellPaddingLabel);
+            make.left.equalTo(selfWeak.baseImageView.mas_right).offset(BaseTableCellPaddingLabel);
         }];
     }
     return _baseTitleLabel;
@@ -236,7 +236,7 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
         WeakObj(self);
         [_baseDetailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(selfWeak.baseContentView).priorityLow();
-            make.right.mas_equalTo(-BaseTableViewCellPaddingLabel).priorityLow();
+            make.right.mas_equalTo(-BaseTableCellPaddingLabel).priorityLow();
         }];
     }
     return _baseDetailLabel;
@@ -312,10 +312,10 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
         [self.baseAccessoryView addSubview:_baseArrowImageView];
         WeakObj(self);
         [_baseArrowImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(BaseTableViewCellArrowSize, BaseTableViewCellArrowSize));
+            make.size.mas_equalTo(CGSizeMake(BaseTableCellArrowSize, BaseTableCellArrowSize));
             make.centerY.equalTo(selfWeak.baseAccessoryView);
-            make.left.mas_equalTo(-(BaseTableViewCellArrowSize - BaseTableViewCellArrowWidth) / 2.0);
-            make.right.mas_equalTo((BaseTableViewCellArrowSize - BaseTableViewCellArrowWidth) / 2.0 - selfWeak.baseAccessoryPaddingLeft);
+            make.left.mas_equalTo(-(BaseTableCellArrowSize - BaseTableCellArrowWidth) / 2.0);
+            make.right.mas_equalTo((BaseTableCellArrowSize - BaseTableCellArrowWidth) / 2.0 - selfWeak.baseAccessoryPaddingLeft);
         }];
     }
     

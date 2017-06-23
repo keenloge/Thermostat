@@ -45,7 +45,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *tmpIdentifierCell = @"BaseCell";
+    static NSString *tmpIdentifierCell = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tmpIdentifierCell];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tmpIdentifierCell];

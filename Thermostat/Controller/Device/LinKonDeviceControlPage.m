@@ -17,7 +17,7 @@
 #import "LinKonDevice.h"
 #import "TemperatureUnitManager.h"
 #import "FeedBackManager.h"
-#import "BaseTableViewCell.h"
+#import "BaseTableCell.h"
 
 // 设置列表行高
 const CGFloat DeviceControlSettingRowsHeight    = 68.0;
@@ -336,10 +336,10 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *baseIdentifierCell = @"BaseCell";
-    BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
+    static NSString *baseIdentifierCell = @"ControlSettingCell";
+    BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
     if (!cell) {
-        cell = [[BaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
+        cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
         [cell updateTitleFont:UIFontOf3XPix(60) color:HB_COLOR_BASE_BLACK paddingLeft:10];
         [cell updateIconImageSize:CGSizeMake(43, 43) paddingLeft:10];
         cell.tintColor = HB_COLOR_BASE_MAIN;
@@ -348,15 +348,15 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
     if (indexPath.section == 0) {
         cell.baseIconImage = [UIImage imageNamed:@"cell_constant"];
         cell.baseTitleString = KString(@"智能恒温");
-        cell.baseAccessoryType = BaseTableViewCellAccessoryTypeSwitch;
+        cell.baseCellType = BaseTableCellTypeSwitch;
     } else if (indexPath.section == 1) {
         cell.baseIconImage = [UIImage imageNamed:@"cell_chart"];
         cell.baseTitleString = KString(@"温度曲线");
-        cell.baseAccessoryType = BaseTableViewCellAccessoryTypeSwitch;
+        cell.baseCellType = BaseTableCellTypeSwitch;
     } else if (indexPath.section == 2) {
         cell.baseIconImage = [UIImage imageNamed:@"cell_task"];
         cell.baseTitleString = KString(@"定时器");
-        cell.baseAccessoryType = BaseTableViewCellAccessoryTypeArrow;
+        cell.baseCellType = BaseTableCellTypeArrow;
     }
     
 

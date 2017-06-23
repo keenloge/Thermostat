@@ -9,7 +9,7 @@
 #import "SideSettingPage.h"
 #import "TemperatureUnitManager.h"
 #import "FeedBackManager.h"
-#import "BaseTableViewCell.h"
+#import "BaseTableCell.h"
 
 @interface SideSettingPage ()
 
@@ -108,10 +108,10 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *baseIdentifierCell = @"BaseCell";
-    BaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
+    static NSString *baseIdentifierCell = @"SideSettingCell";
+    BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
     if (!cell) {
-        cell = [[BaseTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
+        cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
         [cell updateTitleFont:UIFontOf1XPix(17) color:UIColorFromRGBA(0, 0, 0, 0.85) paddingLeft:16];
         cell.tintColor = HB_COLOR_BASE_MAIN;
     }
@@ -122,7 +122,7 @@
     if (indexPath.section == 0) {
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.baseAccessoryType = BaseTableViewCellAccessoryTypeSwitch;
+        cell.baseCellType = BaseTableCellTypeSwitch;
         if (indexPath.row == 0) {
             cell.baseTitleString = KString(@"声音");
             [cell updateBaseSwitchOn:[FeedBackManager sharedManager].isSound switchBlock:^(BOOL on) {
@@ -142,16 +142,16 @@
         if (indexPath.row == 0) {
             cell.baseTitleString = KString(@"摄氏度");
             if ([TemperatureUnitManager sharedManager].unitType == TemperatureUnitTypeCentigrade) {
-                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeCheck;
+                cell.baseCellType = BaseTableCellTypeCheck;
             } else {
-                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeNone;
+                cell.baseCellType = BaseTableCellTypeNone;
             }
         } else if (indexPath.row == 1) {
             cell.baseTitleString = KString(@"华氏度");
             if ([TemperatureUnitManager sharedManager].unitType == TemperatureUnitTypeFahrenheit) {
-                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeCheck;
+                cell.baseCellType = BaseTableCellTypeCheck;
             } else {
-                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeNone;
+                cell.baseCellType = BaseTableCellTypeNone;
             }
         }
         
@@ -160,16 +160,16 @@
         if (indexPath.row == 0) {
             cell.baseTitleString = KString(@"简体中文");
             if ([LanguageManager sharedManager].typeLanguage == LanguageTypeChinese) {
-                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeCheck;
+                cell.baseCellType = BaseTableCellTypeCheck;
             } else {
-                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeNone;
+                cell.baseCellType = BaseTableCellTypeNone;
             }
         } else if (indexPath.row == 1) {
             cell.baseTitleString = KString(@"English");
             if ([LanguageManager sharedManager].typeLanguage == LanguageTypeEnglish) {
-                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeCheck;
+                cell.baseCellType = BaseTableCellTypeCheck;
             } else {
-                cell.baseAccessoryType = BaseTableViewCellAccessoryTypeNone;
+                cell.baseCellType = BaseTableCellTypeNone;
             }
         }
         

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1112F27A1EFB696C00AE3D6E /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1112F2791EFB696C00AE3D6E /* BaseTableViewCell.m */; };
+		1112F27A1EFB696C00AE3D6E /* BaseTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1112F2791EFB696C00AE3D6E /* BaseTableCell.m */; };
 		1112F27F1EFBB40F00AE3D6E /* bkg_side.png in Resources */ = {isa = PBXBuildFile; fileRef = 1112F27C1EFBB40F00AE3D6E /* bkg_side.png */; };
 		1112F2801EFBB40F00AE3D6E /* bkg_side@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1112F27D1EFBB40F00AE3D6E /* bkg_side@2x.png */; };
 		1112F2811EFBB40F00AE3D6E /* bkg_side@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1112F27E1EFBB40F00AE3D6E /* bkg_side@3x.png */; };
@@ -91,14 +91,13 @@
 		11C2F61B1EE3B284008ED62F /* LinKonTimerTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C2F61A1EE3B284008ED62F /* LinKonTimerTask.m */; };
 		11EF7AA91EE7CB6B004403C9 /* NSTimerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EF7AA81EE7CB6B004403C9 /* NSTimerAdditions.m */; };
 		11FA11391EE0EEE60017948D /* ControlTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA11381EE0EEE60017948D /* ControlTabButton.m */; };
-		11FA113C1EE0F0130017948D /* BaseIconCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA113B1EE0F0130017948D /* BaseIconCell.m */; };
 		11FA11461EE0F1130017948D /* SettingFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA11451EE0F1130017948D /* SettingFooterView.m */; };
 		E92B874564B3B916D0128E3A /* libPods-Thermostat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E1808EB3CF494B08DB2BAE /* libPods-Thermostat.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1112F2781EFB696C00AE3D6E /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
-		1112F2791EFB696C00AE3D6E /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
+		1112F2781EFB696C00AE3D6E /* BaseTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableCell.h; sourceTree = "<group>"; };
+		1112F2791EFB696C00AE3D6E /* BaseTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableCell.m; sourceTree = "<group>"; };
 		1112F27C1EFBB40F00AE3D6E /* bkg_side.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkg_side.png; sourceTree = "<group>"; };
 		1112F27D1EFBB40F00AE3D6E /* bkg_side@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_side@2x.png"; sourceTree = "<group>"; };
 		1112F27E1EFBB40F00AE3D6E /* bkg_side@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_side@3x.png"; sourceTree = "<group>"; };
@@ -256,8 +255,6 @@
 		11EF7AA81EE7CB6B004403C9 /* NSTimerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTimerAdditions.m; sourceTree = "<group>"; };
 		11FA11371EE0EEE60017948D /* ControlTabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTabButton.h; sourceTree = "<group>"; };
 		11FA11381EE0EEE60017948D /* ControlTabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlTabButton.m; sourceTree = "<group>"; };
-		11FA113A1EE0F0130017948D /* BaseIconCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseIconCell.h; sourceTree = "<group>"; };
-		11FA113B1EE0F0130017948D /* BaseIconCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseIconCell.m; sourceTree = "<group>"; };
 		11FA11441EE0F1130017948D /* SettingFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingFooterView.h; sourceTree = "<group>"; };
 		11FA11451EE0F1130017948D /* SettingFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingFooterView.m; sourceTree = "<group>"; };
 		6DE1C0E604C2D3F6B9E55043 /* Pods-Thermostat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thermostat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thermostat/Pods-Thermostat.debug.xcconfig"; sourceTree = "<group>"; };
@@ -365,14 +362,12 @@
 				112D4FF91EDFB74D00B5026E /* BaseLabel.m */,
 				112D4FFB1EDFB76200B5026E /* BaseTextField.h */,
 				112D4FFC1EDFB76200B5026E /* BaseTextField.m */,
-				11FA113A1EE0F0130017948D /* BaseIconCell.h */,
-				11FA113B1EE0F0130017948D /* BaseIconCell.m */,
 				1126D07E1EF2887000BE5289 /* BaseCell.h */,
 				1126D07F1EF2887000BE5289 /* BaseCell.m */,
 				1145C5221EF4B71000988ABE /* BaseGradientLayerView.h */,
 				1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */,
-				1112F2781EFB696C00AE3D6E /* BaseTableViewCell.h */,
-				1112F2791EFB696C00AE3D6E /* BaseTableViewCell.m */,
+				1112F2781EFB696C00AE3D6E /* BaseTableCell.h */,
+				1112F2791EFB696C00AE3D6E /* BaseTableCell.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -880,7 +875,6 @@
 				117FD76B1EDECE2C003A60B1 /* BannerView.m in Sources */,
 				112D50061EE00EB700B5026E /* NotifyTarget.m in Sources */,
 				113B90351EF53AA800E96617 /* LinKonPopView.m in Sources */,
-				11FA113C1EE0F0130017948D /* BaseIconCell.m in Sources */,
 				1126D0801EF2887000BE5289 /* BaseCell.m in Sources */,
 				1123879B1EF3DBAF0030DC50 /* DeviceInputPage.m in Sources */,
 				113B90381EF55C7900E96617 /* LinKonPopCell.m in Sources */,
@@ -900,7 +894,7 @@
 				117FD7411EDECA5C003A60B1 /* BaseNavigationPage.m in Sources */,
 				112D4FDE1EDFAE1600B5026E /* DeviceBlankView.m in Sources */,
 				112D4FC61EDF989D00B5026E /* LinKonDevice.m in Sources */,
-				1112F27A1EFB696C00AE3D6E /* BaseTableViewCell.m in Sources */,
+				1112F27A1EFB696C00AE3D6E /* BaseTableCell.m in Sources */,
 				112D500C1EE01CA700B5026E /* DeviceControlView.m in Sources */,
 				1145C5241EF4B71000988ABE /* BaseGradientLayerView.m in Sources */,
 				112D50181EE01EB900B5026E /* MenuControlView.m in Sources */,
