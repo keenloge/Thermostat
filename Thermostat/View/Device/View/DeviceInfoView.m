@@ -21,13 +21,13 @@ const CGFloat KDeviceCircleInfoViewSize_3_5 = 212.0;
 const CGFloat KDeviceCircleInfoViewOffsetY  = 8.0;
 
 // 设备 儿童锁, 情景, 风速 图标X偏移
-const CGFloat KDeviceInfoIconOffsetX            = 35.0;
+const CGFloat KDeviceInfoIconOffsetX            = 40.0;
 // 底部间距
-const CGFloat KDeviceInfoIconPaddingBottom      = 12.0;
+const CGFloat KDeviceInfoIconPaddingBottom      = 17.0;
 // 3.5寸设备上的底部间距
-const CGFloat KDeviceInfoIconPaddingBottom_3_5  = 6.0;
+const CGFloat KDeviceInfoIconPaddingBottom_3_5  = 10.0;
 // 图标大小
-const CGFloat KDeviceInfoIconSize               = 30.0;
+const CGFloat KDeviceInfoIconSize               = 24;
 
 @interface DeviceInfoView () {
     CGFloat imageViewOffsetX;

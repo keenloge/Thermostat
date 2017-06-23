@@ -30,12 +30,12 @@ const CGFloat CircleInfoViewInLayerInset            = 3.0;
 const CGFloat CircleInfoViewInLayerBorderWidth      = 3.0;
 
 
-// 当前温度, 湿度, 倒计时图标 大小
-const CGFloat CircleInfoViewImageIconSize           = 30.0;
-// 当前温度与湿度横向间距
-const CGFloat CircleInfoViewImageIconOffsetX        = 27.0;
+// 当前温度, 湿度 大小
+const CGFloat CircleInfoViewImageIconSize           = 16.0;
+// 当前温度与湿度横向间距(中心间距)
+const CGFloat CircleInfoViewImageIconOffsetCenterX  = 55.0;
 // 当前温度湿度图标与文字纵向间距
-const CGFloat CircleInfoViewImageIconOffsetY        = -4.0;
+const CGFloat CircleInfoViewImageIconOffsetY        = 4.0;
 
 
 // 基准线均以 inLayer 为标准, 用纵横个两条线, 将 inLayer 分为九分(井字,九宫格)
@@ -51,6 +51,8 @@ const CGFloat CircleInfoViewTimerOffsetY            = -2.0;
 // 定时器X值偏移
 const CGFloat CircleInfoViewTimerOffsetX            = -5.0;
 
+// 倒计时图标大小
+const CGFloat CircleInfoViewTimerIconSize           = 30.0;
 
 // 一小时包含秒数 60 * 60
 const CGFloat CircleInfoViewSecondsPerHour          = 3600.0;
@@ -351,7 +353,7 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
         WeakObj(self);
         [_temperatureImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.right.bottom.equalTo(selfWeak.contentIconView);
-            make.left.equalTo(selfWeak.humidityImageView.mas_right).offset(KHorizontalRound(CircleInfoViewImageIconOffsetX));
+            make.centerX.equalTo(selfWeak.humidityImageView).offset(KHorizontalRound(CircleInfoViewImageIconOffsetCenterX));
             make.width.equalTo(selfWeak.humidityImageView);
         }];
     }
@@ -537,7 +539,7 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
         WeakObj(self);
         [_timerImageView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.bottom.equalTo(selfWeak.contentTimerView);
-            CGFloat size = KHorizontalRound(CircleInfoViewImageIconSize);
+            CGFloat size = KHorizontalRound(CircleInfoViewTimerIconSize);
             make.size.mas_equalTo(CGSizeMake(size, size));
         }];
     }
