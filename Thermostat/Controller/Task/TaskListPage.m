@@ -187,24 +187,24 @@ const CGFloat TaskListRowsHeight = 80.0;
         planString = settingString;
     }
 
-    
-    [cell updateIconImage:[UIImage imageNamed:imageName]];
+    cell.baseImageView.image = [UIImage imageNamed:imageName];
+
     [cell updateTimeString:timeString font:timeFont color:timeColor];
     [cell updatePlanString:planString attributedText:attributedText];
-    [cell updateSwitchOn:task.validate];
     
     WeakObj(self);
     WeakObj(task);
-    cell.switchBlock = ^(BOOL isOpen) {
-        task.validate = isOpen;
+
+    [cell updateBaseSwitchOn:task.validate switchBlock:^(BOOL on) {
+        task.validate = on;
         LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:selfWeak.baseSN];
         if (![device updateValue:task forKey:KDeviceTimerEdit]) {
             // 修改失败, 撤销操作, 刷新界面
             selfWeak.baseMessageNotify = KString(@"与其他定时器行为冲突");
-            taskWeak.validate = !isOpen;
+            taskWeak.validate = !on;
             [selfWeak.baseTableView reloadData];
         }
-    };
+    }];
     
     return cell;
 }

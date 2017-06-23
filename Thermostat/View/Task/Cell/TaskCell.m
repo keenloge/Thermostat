@@ -8,10 +8,7 @@
 
 #import "TaskCell.h"
 #import "Globals.h"
-#import "Declare.h"
-#import "ColorConfig.h"
 #import "UILabelAdditions.h"
-#import "LinKonTimerTask.h"
 
 const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
 
@@ -22,13 +19,8 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
     NSDictionary *settingDictionary;
 }
 
-@property (nonatomic, strong) UIImageView *iconImageView;
-@property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *toLabel;
 @property (nonatomic, strong) UIView *cutLineView;
-@property (nonatomic, strong) UILabel *planLabel;
-@property (nonatomic, strong) UISwitch *validSwitch;
-
 
 @end
 
@@ -36,6 +28,31 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        // 右侧开关
+        self.baseAttachType = BaseTableCellAttachTypeSwitch;
+        
+        // 图片大小与边距
+        [self updateIconImageSize:CGSizeMake(24, 24) paddingLeft:KHorizontalRound(14)];
+        
+        // 标题
+        self.baseTitleLabel.numberOfLines = 0;
+        self.baseTitleLabel.textAlignment = NSTextAlignmentCenter;
+        [self updateTitlePaddingLeft:0];
+        WeakObj(self);
+        [self.baseTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(selfWeak.toLabel.mas_centerX).priorityHigh();
+        }];
+        
+        // 内容
+        self.baseDetailLabel.numberOfLines = 0;
+        self.baseDetailLabel.textAlignment = NSTextAlignmentLeft;
+        self.baseDetailLabel.font = UIFontOf3XPix(KHorizontalRound(34));
+        self.baseDetailLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.6);
+        [self updateDetailPaddingRight:8];
+        [self.baseDetailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(selfWeak.cutLineView.mas_right).offset(KHorizontalRound(10));
+        }];
+        
         lineSpace = 8.0;
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         [paragraphStyle setLineSpacing:lineSpace];
@@ -46,12 +63,8 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
                               NSParagraphStyleAttributeName : paragraphStyle,
                               NSForegroundColorAttributeName : UIColorFromRGBA(0, 0, 0, 0.6)};
 
-        self.iconImageView.opaque = YES;
-        self.timeLabel.opaque = YES;
         self.toLabel.opaque = YES;
         self.cutLineView.opaque = YES;
-        self.planLabel.opaque = YES;
-        self.validSwitch.opaque = YES;
     }
     return self;
 }
@@ -63,82 +76,32 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
 
 #pragma mark - 界面刷新
 
-- (void)updateIconImage:(UIImage *)image {
-    self.iconImageView.image = image;
-}
-
 - (void)updateTimeString:(NSString *)timeString font:(UIFont *)font color:(UIColor *)color {
     self.toLabel.hidden = ![timeString containsString:@"\n"];
     
-    self.timeLabel.text = timeString;
-    self.timeLabel.font = font;
-    self.timeLabel.textColor = color;
-    [self.timeLabel changeLineSpace:3.0];
+    self.baseTitleLabel.text = timeString;
+    self.baseTitleLabel.font = font;
+    self.baseTitleLabel.textColor = color;
+    [self.baseTitleLabel changeLineSpace:3.0];
 }
 
 - (void)updatePlanString:(NSString *)planString attributedText:(NSAttributedString *)attributedText {
     if (attributedText) {
-        self.planLabel.text = nil;
-        self.planLabel.attributedText = attributedText;
+        self.baseDetailLabel.text = nil;
+        self.baseDetailLabel.attributedText = attributedText;
     } else {
-        self.planLabel.attributedText = nil;
-        self.planLabel.text = planString;
+        self.baseDetailLabel.attributedText = nil;
+        self.baseDetailLabel.text = planString;
     }
 }
 
-- (void)updateSwitchOn:(BOOL)on {
-    self.validSwitch.on = on;
-}
-
-#pragma mark - 点击事件
-
-- (void)switchValueChanged:(UISwitch *)sender {
-    if (self.switchBlock) {
-        self.switchBlock(sender.isOn);
-    }
-}
 
 #pragma mark - 懒加载
-
-- (UIImageView *)iconImageView {
-    if (!_iconImageView) {
-        _iconImageView = [UIImageView new];
-        [self.contentView addSubview:_iconImageView];
-        
-        CGFloat iconSize = 24;
-        
-        WeakObj(self);
-        [_iconImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(selfWeak.contentView).offset(KHorizontalRound(14));
-            make.size.mas_equalTo(CGSizeMake(iconSize, iconSize));
-            make.centerY.equalTo(selfWeak.contentView);
-        }];
-    }
-    return _iconImageView;
-}
-
-- (UILabel *)timeLabel {
-    if (!_timeLabel) {
-        _timeLabel = [UILabel new];
-        [self.contentView addSubview:_timeLabel];
-
-        _timeLabel.numberOfLines = 0;
-        _timeLabel.textAlignment = NSTextAlignmentCenter;
-        
-        WeakObj(self);
-        [_timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(selfWeak.iconImageView.mas_right);
-            make.right.equalTo(selfWeak.toLabel.mas_centerX);
-            make.centerY.equalTo(selfWeak.contentView);
-        }];
-    }
-    return _timeLabel;
-}
 
 - (UILabel *)toLabel {
     if (!_toLabel) {
         _toLabel = [UILabel new];
-        [self.contentView addSubview:_toLabel];
+        [self.baseContentView addSubview:_toLabel];
         
         _toLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.6);
         _toLabel.font = UIFontOf3XPix(KHorizontalRound(48));
@@ -147,7 +110,7 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
         WeakObj(self);
         [_toLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(selfWeak.cutLineView.mas_left).offset(-KHorizontalRound(15));
-            make.centerY.equalTo(selfWeak.contentView);
+            make.centerY.equalTo(selfWeak.baseContentView);
         }];
     }
     return _toLabel;
@@ -156,55 +119,18 @@ const CGFloat KTaskCellCutLineOffsetYScale = 444.0 / 1242.0;
 - (UIView *)cutLineView {
     if (!_cutLineView) {
         _cutLineView = [UIView new];
-        [self.contentView addSubview:_cutLineView];
+        [self.baseContentView addSubview:_cutLineView];
         
         _cutLineView.backgroundColor = UIColorFromRGBA(0, 0, 0, 0.2);
         
         WeakObj(self);
         [_cutLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(selfWeak.contentView).offset(MAIN_SCREEN_WIDTH * KTaskCellCutLineOffsetYScale);
+            make.left.equalTo(selfWeak.baseContentView).offset(MAIN_SCREEN_WIDTH * KTaskCellCutLineOffsetYScale);
             make.size.mas_equalTo(CGSizeMake(1, 33));
-            make.centerY.equalTo(selfWeak.contentView);
+            make.centerY.equalTo(selfWeak.baseContentView);
         }];
     }
     return _cutLineView;
 }
-
-- (UILabel *)planLabel {
-    if (!_planLabel) {
-        _planLabel = [UILabel new];
-        [self.contentView addSubview:_planLabel];
-        
-        _planLabel.numberOfLines = 0;
-        _planLabel.font = UIFontOf3XPix(KHorizontalRound(34));
-        _planLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.6);
-        
-        WeakObj(self);
-        [_planLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(selfWeak.cutLineView.mas_right).offset(KHorizontalRound(10));
-            make.centerY.equalTo(selfWeak.contentView);
-        }];
-    }
-    return _planLabel;
-}
-
-- (UISwitch *)validSwitch {
-    if (!_validSwitch) {
-        _validSwitch = [UISwitch new];
-        [self.contentView addSubview:_validSwitch];
-        
-        [_validSwitch addTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
-        
-        WeakObj(self);
-        [_validSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(CGRectGetWidth(selfWeak.validSwitch.frame));
-            make.left.greaterThanOrEqualTo(selfWeak.planLabel.mas_right).offset(8).priorityHigh();
-            make.right.equalTo(selfWeak.contentView).offset(-KHorizontalRound(14));
-            make.centerY.equalTo(selfWeak.contentView);
-        }];
-    }
-    return _validSwitch;
-}
-
 
 @end

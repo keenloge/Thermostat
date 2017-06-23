@@ -19,7 +19,6 @@
 		1123879F1EF3DE000030DC50 /* SideMenuPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1123879E1EF3DE000030DC50 /* SideMenuPage.m */; };
 		112429111EF6977600FE39C8 /* LinKonTimerRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 112429101EF6977600FE39C8 /* LinKonTimerRange.m */; };
 		1126D07D1EF2875900BE5289 /* InfoButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1126D07C1EF2875900BE5289 /* InfoButton.m */; };
-		1126D0801EF2887000BE5289 /* BaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1126D07F1EF2887000BE5289 /* BaseCell.m */; };
 		112D4FC01EDF987700B5026E /* DeviceListPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FBF1EDF987700B5026E /* DeviceListPage.m */; };
 		112D4FC31EDF988F00B5026E /* DeviceListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FC21EDF988F00B5026E /* DeviceListManager.m */; };
 		112D4FC61EDF989D00B5026E /* LinKonDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 112D4FC51EDF989D00B5026E /* LinKonDevice.m */; };
@@ -56,7 +55,6 @@
 		113B902F1EF5183600E96617 /* TemperatureUnitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B902E1EF5183600E96617 /* TemperatureUnitManager.m */; };
 		113B90321EF51C4E00E96617 /* FeedBackManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B90311EF51C4E00E96617 /* FeedBackManager.m */; };
 		113B90351EF53AA800E96617 /* LinKonPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 113B90341EF53AA800E96617 /* LinKonPopView.m */; };
-		1145C5241EF4B71000988ABE /* BaseGradientLayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */; };
 		1145C5271EF4CDB400988ABE /* SideAboutPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5261EF4CDB400988ABE /* SideAboutPage.m */; };
 		1145C52A1EF4CDCC00988ABE /* SideSettingPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C5291EF4CDCC00988ABE /* SideSettingPage.m */; };
 		1145C52D1EF4D21300988ABE /* ViewDeckAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1145C52C1EF4D21300988ABE /* ViewDeckAdditions.m */; };
@@ -117,8 +115,6 @@
 		1126D07A1EF20E9600BE5289 /* Thermostat-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Thermostat-Prefix.pch"; sourceTree = "<group>"; };
 		1126D07B1EF2875900BE5289 /* InfoButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoButton.h; sourceTree = "<group>"; };
 		1126D07C1EF2875900BE5289 /* InfoButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoButton.m; sourceTree = "<group>"; };
-		1126D07E1EF2887000BE5289 /* BaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCell.h; sourceTree = "<group>"; };
-		1126D07F1EF2887000BE5289 /* BaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCell.m; sourceTree = "<group>"; };
 		112D4FBE1EDF987700B5026E /* DeviceListPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListPage.h; sourceTree = "<group>"; };
 		112D4FBF1EDF987700B5026E /* DeviceListPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceListPage.m; sourceTree = "<group>"; };
 		112D4FC11EDF988F00B5026E /* DeviceListManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceListManager.h; sourceTree = "<group>"; };
@@ -182,8 +178,6 @@
 		113B90311EF51C4E00E96617 /* FeedBackManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackManager.m; sourceTree = "<group>"; };
 		113B90331EF53AA800E96617 /* LinKonPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinKonPopView.h; sourceTree = "<group>"; };
 		113B90341EF53AA800E96617 /* LinKonPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonPopView.m; sourceTree = "<group>"; };
-		1145C5221EF4B71000988ABE /* BaseGradientLayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseGradientLayerView.h; sourceTree = "<group>"; };
-		1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseGradientLayerView.m; sourceTree = "<group>"; };
 		1145C5251EF4CDB400988ABE /* SideAboutPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideAboutPage.h; sourceTree = "<group>"; };
 		1145C5261EF4CDB400988ABE /* SideAboutPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideAboutPage.m; sourceTree = "<group>"; };
 		1145C5281EF4CDCC00988ABE /* SideSettingPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideSettingPage.h; sourceTree = "<group>"; };
@@ -359,10 +353,6 @@
 				112D4FF91EDFB74D00B5026E /* BaseLabel.m */,
 				112D4FFB1EDFB76200B5026E /* BaseTextField.h */,
 				112D4FFC1EDFB76200B5026E /* BaseTextField.m */,
-				1126D07E1EF2887000BE5289 /* BaseCell.h */,
-				1126D07F1EF2887000BE5289 /* BaseCell.m */,
-				1145C5221EF4B71000988ABE /* BaseGradientLayerView.h */,
-				1145C5231EF4B71000988ABE /* BaseGradientLayerView.m */,
 				1112F2781EFB696C00AE3D6E /* BaseTableCell.h */,
 				1112F2791EFB696C00AE3D6E /* BaseTableCell.m */,
 			);
@@ -870,7 +860,6 @@
 				117FD76B1EDECE2C003A60B1 /* BannerView.m in Sources */,
 				112D50061EE00EB700B5026E /* NotifyTarget.m in Sources */,
 				113B90351EF53AA800E96617 /* LinKonPopView.m in Sources */,
-				1126D0801EF2887000BE5289 /* BaseCell.m in Sources */,
 				1123879B1EF3DBAF0030DC50 /* DeviceInputPage.m in Sources */,
 				112D4FEB1EDFB48B00B5026E /* DeviceSearchPage.m in Sources */,
 				11C2F61B1EE3B284008ED62F /* LinKonTimerTask.m in Sources */,
@@ -890,7 +879,6 @@
 				112D4FC61EDF989D00B5026E /* LinKonDevice.m in Sources */,
 				1112F27A1EFB696C00AE3D6E /* BaseTableCell.m in Sources */,
 				112D500C1EE01CA700B5026E /* DeviceControlView.m in Sources */,
-				1145C5241EF4B71000988ABE /* BaseGradientLayerView.m in Sources */,
 				112D50181EE01EB900B5026E /* MenuControlView.m in Sources */,
 				1123879F1EF3DE000030DC50 /* SideMenuPage.m in Sources */,
 				112D50151EE01E3D00B5026E /* TemperatureControlView.m in Sources */,

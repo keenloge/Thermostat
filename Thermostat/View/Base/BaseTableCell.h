@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-
 /**
  附件样式
 
@@ -28,6 +27,17 @@ typedef void(^BaseTableCellSwitchBlock)(BOOL on);
 
 @interface BaseTableCell : UITableViewCell
 
+
+/**
+ 内容容器 View
+ */
+@property (nonatomic, readonly) UIView *baseContentView;
+
+
+/**
+ 附件容器 View
+ */
+@property (nonatomic, readonly) UIView *baseAttachView;
 
 /**
  图标
@@ -123,3 +133,8 @@ typedef void(^BaseTableCellSwitchBlock)(BOOL on);
                       pointEnd:(CGPoint)end;
 
 @end
+
+@interface BaseTableCellGradientLayerView : UIView
+
+@end
+

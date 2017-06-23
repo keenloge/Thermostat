@@ -7,16 +7,15 @@
 //
 
 #import "BaseTableCell.h"
-#import "BaseGradientLayerView.h"
 
 // 附件边距
-const CGFloat BaseTableCellPaddingAccessory = 14.0;
+const CGFloat BaseTableCellAttachPaddingLeft    = 14.0;
 // 文本边距
-const CGFloat BaseTableCellPaddingLabel     = 10.0;
+const CGFloat BaseTableCellLabelPaddingSide     = 10.0;
 // 箭头有效宽度
-const CGFloat BaseTableCellArrowWidth       = 8.0;
+const CGFloat BaseTableCellArrowWidth           = 8.0;
 // 箭头图片宽度
-const CGFloat BaseTableCellArrowSize        = 77.0;
+const CGFloat BaseTableCellArrowSize            = 77.0;
 
 @interface BaseTableCell () {
     
@@ -24,7 +23,7 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
 
 // 容器界面
 @property (nonatomic, strong) UIView *baseContentView;
-@property (nonatomic, strong) UIView *baseAccessoryView;
+@property (nonatomic, strong) UIView *baseAttachView;
 
 // 右侧附加界面
 @property (nonatomic, strong) UISwitch *baseSwitch;
@@ -39,7 +38,7 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
 @property (nonatomic, strong) UIView *baseCutLineView;
 
 // 渐变背景
-@property (nonatomic, strong) BaseGradientLayerView *backgroundLayerView;
+@property (nonatomic, strong) BaseTableCellGradientLayerView *backgroundLayerView;
 
 @property (nonatomic, copy) BaseTableCellSwitchBlock baseSwitchBlock;
 
@@ -50,7 +49,7 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         _baseAttachType = BaseTableCellAttachTypeNone;
-        _baseAttachPaddingLeft = KHorizontalRound(BaseTableCellPaddingAccessory);
+        _baseAttachPaddingLeft = KHorizontalRound(BaseTableCellAttachPaddingLeft);
         
         [self baseInitialiseSubViews];
     }
@@ -139,11 +138,11 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
     } else if (_baseAttachType == BaseTableCellAttachTypeArrow) {
         self.baseArrowImageView.opaque = YES;
     } else if (_baseAttachType == BaseTableCellAttachTypeNone) {
-        for (UIView *subView in self.baseAccessoryView.subviews) {
+        for (UIView *subView in self.baseAttachView.subviews) {
             [subView removeFromSuperview];
         }
     } else if (_baseAttachType == BaseTableCellAttachTypeCheck) {
-        for (UIView *subView in self.baseAccessoryView.subviews) {
+        for (UIView *subView in self.baseAttachView.subviews) {
             [subView removeFromSuperview];
         }
         self.accessoryType = UITableViewCellAccessoryCheckmark;
@@ -163,7 +162,7 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
     _baseAttachPaddingLeft = baseAttachPaddingLeft;
     
     UIView *tempView = nil;
-    for (UIView *subView in self.baseAccessoryView.subviews) {
+    for (UIView *subView in self.baseAttachView.subviews) {
         tempView = subView;
         [subView removeFromSuperview];
     }
@@ -184,7 +183,7 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
         WeakObj(self);
         [_baseContentView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.bottom.equalTo(selfWeak.contentView);
-            make.right.equalTo(selfWeak.baseAccessoryView.mas_left);
+            make.right.equalTo(selfWeak.baseAttachView.mas_left);
         }];
     }
     return _baseContentView;
@@ -200,7 +199,7 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
         WeakObj(self);
         [_baseTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(selfWeak.baseContentView).priorityLow();
-            make.left.equalTo(selfWeak.baseImageView.mas_right).offset(BaseTableCellPaddingLabel);
+            make.left.equalTo(selfWeak.baseImageView.mas_right).offset(BaseTableCellLabelPaddingSide);
         }];
     }
     return _baseTitleLabel;
@@ -216,7 +215,7 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
         WeakObj(self);
         [_baseDetailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(selfWeak.baseContentView).priorityLow();
-            make.right.mas_equalTo(-BaseTableCellPaddingLabel).priorityLow();
+            make.right.mas_equalTo(-BaseTableCellLabelPaddingSide).priorityLow();
         }];
     }
     return _baseDetailLabel;
@@ -240,19 +239,19 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
 
 #pragma mark - AccessoryView
 
-- (UIView *)baseAccessoryView {
-    if (!_baseAccessoryView) {
-        _baseAccessoryView = [UIView new];
-        [self.contentView addSubview:_baseAccessoryView];
+- (UIView *)baseAttachView {
+    if (!_baseAttachView) {
+        _baseAttachView = [UIView new];
+        [self.contentView addSubview:_baseAttachView];
         
         WeakObj(self);
-        [_baseAccessoryView mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_baseAttachView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.right.equalTo(selfWeak.contentView);
             make.width.mas_equalTo(0).priorityLow();
         }];
     }
     
-    return _baseAccessoryView;
+    return _baseAttachView;
 }
 
 - (UISwitch *)baseSwitch {
@@ -262,15 +261,15 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
         
     }
     if (!_baseSwitch.superview) {
-        for (UIView *subView in self.baseAccessoryView.subviews) {
+        for (UIView *subView in self.baseAttachView.subviews) {
             [subView removeFromSuperview];
         }
         
-        [self.baseAccessoryView addSubview:_baseSwitch];
+        [self.baseAttachView addSubview:_baseSwitch];
         WeakObj(self);
         [_baseSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerY.left.equalTo(selfWeak.baseAccessoryView);
-            make.right.equalTo(selfWeak.baseAccessoryView).offset(-selfWeak.baseAttachPaddingLeft);
+            make.centerY.left.equalTo(selfWeak.baseAttachView);
+            make.right.equalTo(selfWeak.baseAttachView).offset(-selfWeak.baseAttachPaddingLeft);
             make.width.mas_equalTo(CGRectGetWidth(selfWeak.baseSwitch.frame));
         }];
     }
@@ -285,15 +284,15 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
         
     }
     if (!_baseArrowImageView.superview) {
-        for (UIView *subView in self.baseAccessoryView.subviews) {
+        for (UIView *subView in self.baseAttachView.subviews) {
             [subView removeFromSuperview];
         }
 
-        [self.baseAccessoryView addSubview:_baseArrowImageView];
+        [self.baseAttachView addSubview:_baseArrowImageView];
         WeakObj(self);
         [_baseArrowImageView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(BaseTableCellArrowSize, BaseTableCellArrowSize));
-            make.centerY.equalTo(selfWeak.baseAccessoryView);
+            make.centerY.equalTo(selfWeak.baseAttachView);
             make.left.mas_equalTo(-(BaseTableCellArrowSize - BaseTableCellArrowWidth) / 2.0);
             make.right.mas_equalTo((BaseTableCellArrowSize - BaseTableCellArrowWidth) / 2.0 - selfWeak.baseAttachPaddingLeft);
         }];
@@ -309,7 +308,7 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
         _baseCutLineView = [UIView new];
         [self addSubview:_baseCutLineView];
         
-        _baseCutLineView.backgroundColor = UIColorFromHex(0xd6d5d9);
+        _baseCutLineView.backgroundColor = UIColorFromHex(0xcccccc);
         [_baseCutLineView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(0).priorityLow();
             make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT);
@@ -319,9 +318,9 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
 }
 
 #pragma mark - 渐变背景
-- (BaseGradientLayerView *)backgroundLayerView {
+- (BaseTableCellGradientLayerView *)backgroundLayerView {
     if (!_backgroundLayerView) {
-        _backgroundLayerView = [[BaseGradientLayerView alloc] initWithFrame:self.contentView.bounds];
+        _backgroundLayerView = [[BaseTableCellGradientLayerView alloc] initWithFrame:self.contentView.bounds];
         [self.contentView insertSubview:_backgroundLayerView atIndex:0];
         _backgroundLayerView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     }
@@ -329,3 +328,12 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
 }
 
 @end
+
+@implementation BaseTableCellGradientLayerView
+
++ (Class)layerClass{
+    return [CAGradientLayer class];
+}
+
+@end
+

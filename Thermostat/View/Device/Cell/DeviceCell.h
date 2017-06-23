@@ -6,13 +6,13 @@
 //  Copyright © 2017年 GalaxyWind. All rights reserved.
 //
 
-#import "BaseCell.h"
+#import "BaseTableCell.h"
 
 @class LinKonDevice;
 
 typedef void(^DeviceCellInfoBlock)();
 
-@interface DeviceCell : BaseCell
+@interface DeviceCell : BaseTableCell
 
 @property (nonatomic, copy) DeviceCellInfoBlock infoBlock;
 

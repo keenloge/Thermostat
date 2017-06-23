@@ -18,7 +18,11 @@
     [paragraphStyle setAlignment:self.textAlignment];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [labelText length])];
     self.attributedText = attributedString;
-    [self sizeToFit];
+    if (self.superview) {
+        [self.superview layoutIfNeeded];
+    } else {
+        [self sizeToFit];
+    }
 }
 
 @end

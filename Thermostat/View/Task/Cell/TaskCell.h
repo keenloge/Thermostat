@@ -6,13 +6,9 @@
 //  Copyright © 2017年 GalaxyWind. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseTableCell.h"
 
-@interface TaskCell : UITableViewCell
-
-@property (nonatomic, copy) void (^switchBlock)(BOOL isOpen);
-
-- (void)updateIconImage:(UIImage *)image;
+@interface TaskCell : BaseTableCell
 
 - (void)updateTimeString:(NSString *)timeString
                     font:(UIFont *)font
@@ -20,7 +16,5 @@
 
 - (void)updatePlanString:(NSString *)planString
           attributedText:(NSAttributedString *)attributedText;
-
-- (void)updateSwitchOn:(BOOL)on;
 
 @end

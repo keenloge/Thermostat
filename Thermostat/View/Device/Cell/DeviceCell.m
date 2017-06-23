@@ -89,7 +89,7 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
 - (UIView *)contentIconView {
     if (!_contentIconView) {
         _contentIconView = [UIView new];
-        [self.contentView addSubview:_contentIconView];
+        [self.baseContentView addSubview:_contentIconView];
         _contentIconView.layer.cornerRadius = LinKonCellCircleSize / 2.0;
         _contentIconView.backgroundColor = HB_COLOR_BASE_MAIN;
         
@@ -122,7 +122,7 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
 - (UILabel *)nicknameLabel {
     if (!_nicknameLabel) {
         _nicknameLabel = [UILabel new];
-        [self.contentView addSubview:_nicknameLabel];
+        [self.baseContentView addSubview:_nicknameLabel];
         _nicknameLabel.font = UIFontOf3XPix(51);
         _nicknameLabel.textColor = UIColorFromHex(0x484848);
         
@@ -140,7 +140,7 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
 - (UILabel *)stateLabel {
     if (!_stateLabel) {
         _stateLabel = [UILabel new];
-        [self.contentView addSubview:_stateLabel];
+        [self.baseContentView addSubview:_stateLabel];
         _stateLabel.font = UIFontOf3XPix(42);
         _stateLabel.textColor = UIColorFromHex(0x666666);
         
@@ -157,7 +157,7 @@ const CGFloat LinKonCellInfoWidth       = 64.0;
 - (InfoButton *)infoButton {
     if (!_infoButton) {
         _infoButton = [InfoButton new];
-        [self.contentView addSubview:_infoButton];
+        [self.baseContentView addSubview:_infoButton];
         [_infoButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
         
         WeakObj(self);
