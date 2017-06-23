@@ -140,6 +140,7 @@ const CGFloat DeviceAddButtonOffsetY = 38.0;
 - (InputFrontLabel *)numberLabel {
     if (!_numberLabel) {
         _numberLabel = [Globals addedSubViewClass:[InputFrontLabel class] toView:self.view];
+        [_numberLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
         _numberLabel.text = KString(@"序列号");
     }
     return _numberLabel;
@@ -156,7 +157,6 @@ const CGFloat DeviceAddButtonOffsetY = 38.0;
 - (BaseTextField *)numberTextField {
     if (!_numberTextField) {
         _numberTextField = [Globals addedSubViewClass:[BaseTextField class] toView:self.view];
-        _numberTextField.text = @"**********************************************************";
         _numberTextField.placeholder = KString(@"请输入产品序列号");
         _numberTextField.keyboardType = UIKeyboardTypeNumberPad;
         _numberTextField.delegate = self;

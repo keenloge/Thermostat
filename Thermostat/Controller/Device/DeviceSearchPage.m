@@ -196,6 +196,7 @@ const CGFloat DeviceSearchButtonSize = 144.0;
 - (UILabel *)passwordLabel {
     if (!_passwordLabel) {
         _passwordLabel = [Globals addedSubViewClass:[InputFrontLabel class] toView:self.view];
+        [_passwordLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
         _passwordLabel.text = KString(@"密码");
     }
     return _passwordLabel;
@@ -204,7 +205,6 @@ const CGFloat DeviceSearchButtonSize = 144.0;
 - (UITextField *)ssidTextField {
     if (!_ssidTextField) {
         _ssidTextField = [Globals addedSubViewClass:[BaseTextField class] toView:self.view];
-        _ssidTextField.text = @"**************************************************";
         _ssidTextField.userInteractionEnabled = NO;
     }
     return _ssidTextField;

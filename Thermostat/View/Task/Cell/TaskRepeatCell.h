@@ -6,11 +6,11 @@
 //  Copyright © 2017年 GalaxyWind. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseTableCell.h"
 
 typedef void(^TaskRepeatBlock)(Byte repeat);
 
-@interface TaskRepeatCell : UITableViewCell
+@interface TaskRepeatCell : BaseTableCell
 
 @property (nonatomic, assign) Byte repeat;
 @property (nonatomic, copy) TaskRepeatBlock block;

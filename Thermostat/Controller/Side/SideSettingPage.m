@@ -10,6 +10,7 @@
 #import "TemperatureUnitManager.h"
 #import "FeedBackManager.h"
 #import "BaseTableCell.h"
+#import "BaseHeaderFooterView.h"
 
 @interface SideSettingPage ()
 
@@ -59,45 +60,22 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     static NSString *identifierHeader = @"Header";
-    NSInteger labelTag = 11;
-    UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierHeader];
+    BaseHeaderFooterView *headerView = (BaseHeaderFooterView *)[tableView dequeueReusableCellWithIdentifier:identifierHeader];
     if (!headerView) {
-        headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:identifierHeader];
-        headerView.contentView.backgroundColor = UIColorFromHex(0xf7f7f7);
-        
-        UILabel *titleLabel = [UILabel new];
-        [headerView.contentView addSubview:titleLabel];
-        
-        titleLabel.tag = labelTag;
-        titleLabel.textColor = HB_COLOR_BASE_BLACK;
-        titleLabel.alpha = 0.6;
-        titleLabel.font = UIFontOf1XPix(14);
-        
-        [titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.bottom.mas_equalTo(0);
-            make.left.mas_equalTo(17);
-        }];
-        
-        
-        UIView *cutLineBottomView = [UIView new];
-        [headerView.contentView addSubview:cutLineBottomView];
-        
-        cutLineBottomView.backgroundColor = UIColorFromHex(0xd6d5d9);
-        
-        [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.bottom.right.mas_equalTo(0);
-            make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT);
-        }];
+        headerView = [[BaseHeaderFooterView alloc] initWithReuseIdentifier:identifierHeader];
+        headerView.baseTitleLabel.textColor = HB_COLOR_BASE_BLACK;
+        headerView.baseTitleLabel.alpha = 0.6;
+        headerView.baseTitleLabel.font = UIFontOf1XPix(14);
+        [headerView updateTitlePaddingLeft:17];
+        headerView.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     }
     
-    UILabel *titleLabel = [headerView viewWithTag:labelTag];
-    
     if (section == 0) {
-        titleLabel.text = KString(@"控制反馈");
+        headerView.baseTitleLabel.text = KString(@"控制反馈");
     } else if (section == 1) {
-        titleLabel.text = KString(@"温度单位");
+        headerView.baseTitleLabel.text = KString(@"温度单位");
     } else if (section == 2) {
-        titleLabel.text = KString(@"语言设置");
+        headerView.baseTitleLabel.text = KString(@"语言设置");
     }
     
     return headerView;

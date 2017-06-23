@@ -10,7 +10,6 @@
 #import "ControlTabButton.h"
 #import "DeviceInfoView.h"
 #import "DeviceControlView.h"
-#import "SettingFooterView.h"
 #import "LinKonPopView.h"
 #import "TaskListPage.h"
 #import "DeviceListManager.h"
@@ -18,6 +17,7 @@
 #import "TemperatureUnitManager.h"
 #import "FeedBackManager.h"
 #import "BaseTableCell.h"
+#import "BaseHeaderFooterView.h"
 
 // 设置列表行高
 const CGFloat DeviceControlSettingRowsHeight    = 68.0;
@@ -320,15 +320,25 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if (section != 2) {
         static NSString *identifierFooter = @"Footer";
-        SettingFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierFooter];
+        BaseHeaderFooterView *footerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierFooter];
         if (!footerView) {
-            footerView = [[SettingFooterView alloc] initWithReuseIdentifier:identifierFooter];
+            footerView = [[BaseHeaderFooterView alloc] initWithReuseIdentifier:identifierFooter];
+            footerView.contentView.backgroundColor = UIColorFromHex(0xf2f2f2);
+            footerView.baseTitleLabel.font = UIFontOf3XPix(38);
+            footerView.baseTitleLabel.textColor = HB_COLOR_BASE_GRAY;
+            footerView.baseTitleLabel.numberOfLines = 0;
+            [footerView updateTitlePaddingLeft:KHorizontalRound(15)];
+
+            footerView.baseDetailLabel.font = UIFontOf3XPix(38);
+            footerView.baseDetailLabel.textColor = HB_COLOR_BASE_MAIN;
+            footerView.baseDetailLabel.text = KString(@"了解详情");
+            [footerView updateDetailPaddingRight:KHorizontalRound(15)];
         }
         
         if (section == 0) {
-            footerView.introduce = KString(@"开启后，将室内温度智能恒温控制在设置的温度内。");
+            footerView.baseTitleLabel.text = KString(@"开启后，将室内温度智能恒温控制在设置的温度内。");
         } else if (section == 1) {
-            footerView.introduce = KString(@"开启后，空调将按曲线自动设置温度。");
+            footerView.baseTitleLabel.text = KString(@"开启后，空调将按曲线自动设置温度。");
         }
         
         return footerView;

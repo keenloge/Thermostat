@@ -144,6 +144,7 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
 - (InputFrontLabel *)numberLabel {
     if (!_numberLabel) {
         _numberLabel = [Globals addedSubViewClass:[InputFrontLabel class] toView:self.view];
+        [_numberLabel setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
         _numberLabel.text = KString(@"序列号");
         _numberLabel.userInteractionEnabled = NO;
     }
@@ -169,7 +170,6 @@ const CGFloat DeviceInfoButtonOffsetY = 38.0;
 - (BaseTextField *)numberTextField {
     if (!_numberTextField) {
         _numberTextField = [Globals addedSubViewClass:[BaseTextField class] toView:self.view];
-        _numberTextField.text = @"**********************************************************";
         _numberTextField.userInteractionEnabled = NO;
     }
     return _numberTextField;

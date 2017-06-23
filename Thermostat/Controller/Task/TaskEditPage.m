@@ -14,6 +14,7 @@
 #import "DeviceListManager.h"
 #import "LinKonTimerTask.h"
 #import "BaseTableCell.h"
+#import "BaseHeaderFooterView.h"
 
 const CGFloat TaskEditRepeatRowsHeight  = 88.0;
 const CGFloat TaskEditSettingRowsHeight = 44.0;
@@ -174,20 +175,11 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     if ([self tableView:tableView heightForHeaderInSection:section] > 0.0) {
         static NSString *identifierHeader = @"Header";
-        UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierHeader];
+        BaseHeaderFooterView *headerView = (BaseHeaderFooterView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierHeader];
         if (!headerView) {
-            headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:identifierHeader];
+            headerView = [[BaseHeaderFooterView alloc] initWithReuseIdentifier:identifierHeader];
             headerView.contentView.backgroundColor = HB_COLOR_BASE_WHITE;
-            
-            UIView *cutLineBottomView = [UIView new];
-            [headerView.contentView addSubview:cutLineBottomView];
-            
-            cutLineBottomView.backgroundColor = UIColorFromHex(0xd6d5d9);
-            
-            [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.bottom.right.mas_equalTo(0);
-                make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT);
-            }];
+            headerView.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         }
         
         return headerView;
@@ -205,24 +197,14 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if ([self tableView:tableView heightForFooterInSection:section] > 0.0) {
         static NSString *identifierFooter = @"Footer";
-        UITableViewHeaderFooterView *headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierFooter];
-        if (!headerView) {
-            headerView = [[UITableViewHeaderFooterView alloc] initWithReuseIdentifier:identifierFooter];
-            headerView.contentView.backgroundColor = HB_COLOR_BASE_WHITE;
-            
-            
-            UIView *bottomLineView = [UIView new];
-            [headerView.contentView addSubview:bottomLineView];
-            
-            bottomLineView.backgroundColor = UIColorFromHex(0xd6d5d9);
-            
-            [bottomLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.bottom.right.mas_equalTo(0);
-                make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT);
-            }];
+        BaseHeaderFooterView *footerView = (BaseHeaderFooterView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:identifierFooter];
+        if (!footerView) {
+            footerView = [[BaseHeaderFooterView alloc] initWithReuseIdentifier:identifierFooter];
+            footerView.contentView.backgroundColor = HB_COLOR_BASE_WHITE;
+            footerView.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         }
         
-        return headerView;
+        return footerView;
     }
     return nil;
 }
@@ -244,6 +226,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
         TaskRepeatCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierRepeatCell];
         if (cell == nil) {
             cell = [[TaskRepeatCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierRepeatCell];
+            cell.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         }
         
         cell.repeat = self.task.repeat;

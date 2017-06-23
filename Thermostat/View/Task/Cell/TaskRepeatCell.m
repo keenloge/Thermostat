@@ -82,16 +82,6 @@
         [buttonContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[tuesdayButton(buttonSize)]-buttonOffsetY-[saturdayButton(mondayButton)]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
         [buttonContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[wednesdayButton(buttonSize)]-buttonOffsetY-[sundayButton(mondayButton)]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
         [buttonContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[thursdayButton(buttonSize)]-buttonOffsetY-[allDayButton(mondayButton)]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
-        
-        UIView *cutLineBottomView = [UIView new];
-        [self.contentView addSubview:cutLineBottomView];
-        
-        cutLineBottomView.backgroundColor = UIColorFromHex(0xd6d5d9);
-        
-        [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.bottom.right.mas_equalTo(0);
-            make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT);
-        }];
     }
     return self;
 }

@@ -11,6 +11,7 @@
 		1112F27F1EFBB40F00AE3D6E /* bkg_side.png in Resources */ = {isa = PBXBuildFile; fileRef = 1112F27C1EFBB40F00AE3D6E /* bkg_side.png */; };
 		1112F2801EFBB40F00AE3D6E /* bkg_side@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1112F27D1EFBB40F00AE3D6E /* bkg_side@2x.png */; };
 		1112F2811EFBB40F00AE3D6E /* bkg_side@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1112F27E1EFBB40F00AE3D6E /* bkg_side@3x.png */; };
+		11149DE61EFCC5D000CE2444 /* BaseHeaderFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11149DE51EFCC5D000CE2444 /* BaseHeaderFooterView.m */; };
 		111597E11EFA0ED700D315C8 /* LinKonHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 111597E01EFA0ED700D315C8 /* LinKonHelper.m */; };
 		111597E41EFA2DA400D315C8 /* DeviceNotifyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 111597E31EFA2DA400D315C8 /* DeviceNotifyManager.m */; };
 		112387951EF3C1AF0030DC50 /* DeviceNicknameEditPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 112387941EF3C1AF0030DC50 /* DeviceNicknameEditPage.m */; };
@@ -88,7 +89,6 @@
 		11C2F61B1EE3B284008ED62F /* LinKonTimerTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 11C2F61A1EE3B284008ED62F /* LinKonTimerTask.m */; };
 		11EF7AA91EE7CB6B004403C9 /* NSTimerAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11EF7AA81EE7CB6B004403C9 /* NSTimerAdditions.m */; };
 		11FA11391EE0EEE60017948D /* ControlTabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA11381EE0EEE60017948D /* ControlTabButton.m */; };
-		11FA11461EE0F1130017948D /* SettingFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11FA11451EE0F1130017948D /* SettingFooterView.m */; };
 		E92B874564B3B916D0128E3A /* libPods-Thermostat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 87E1808EB3CF494B08DB2BAE /* libPods-Thermostat.a */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +98,8 @@
 		1112F27C1EFBB40F00AE3D6E /* bkg_side.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bkg_side.png; sourceTree = "<group>"; };
 		1112F27D1EFBB40F00AE3D6E /* bkg_side@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_side@2x.png"; sourceTree = "<group>"; };
 		1112F27E1EFBB40F00AE3D6E /* bkg_side@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bkg_side@3x.png"; sourceTree = "<group>"; };
+		11149DE41EFCC5D000CE2444 /* BaseHeaderFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseHeaderFooterView.h; sourceTree = "<group>"; };
+		11149DE51EFCC5D000CE2444 /* BaseHeaderFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseHeaderFooterView.m; sourceTree = "<group>"; };
 		111597DF1EFA0ED700D315C8 /* LinKonHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LinKonHelper.h; sourceTree = "<group>"; };
 		111597E01EFA0ED700D315C8 /* LinKonHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LinKonHelper.m; sourceTree = "<group>"; };
 		111597E21EFA2DA400D315C8 /* DeviceNotifyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceNotifyManager.h; sourceTree = "<group>"; };
@@ -246,8 +248,6 @@
 		11EF7AA81EE7CB6B004403C9 /* NSTimerAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTimerAdditions.m; sourceTree = "<group>"; };
 		11FA11371EE0EEE60017948D /* ControlTabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControlTabButton.h; sourceTree = "<group>"; };
 		11FA11381EE0EEE60017948D /* ControlTabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ControlTabButton.m; sourceTree = "<group>"; };
-		11FA11441EE0F1130017948D /* SettingFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingFooterView.h; sourceTree = "<group>"; };
-		11FA11451EE0F1130017948D /* SettingFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingFooterView.m; sourceTree = "<group>"; };
 		6DE1C0E604C2D3F6B9E55043 /* Pods-Thermostat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thermostat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Thermostat/Pods-Thermostat.debug.xcconfig"; sourceTree = "<group>"; };
 		87E1808EB3CF494B08DB2BAE /* libPods-Thermostat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Thermostat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC444A6E0FAA64B27C30ACE5 /* Pods-Thermostat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Thermostat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Thermostat/Pods-Thermostat.release.xcconfig"; sourceTree = "<group>"; };
@@ -355,6 +355,8 @@
 				112D4FFC1EDFB76200B5026E /* BaseTextField.m */,
 				1112F2781EFB696C00AE3D6E /* BaseTableCell.h */,
 				1112F2791EFB696C00AE3D6E /* BaseTableCell.m */,
+				11149DE41EFCC5D000CE2444 /* BaseHeaderFooterView.h */,
+				11149DE51EFCC5D000CE2444 /* BaseHeaderFooterView.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -667,8 +669,6 @@
 		11FA11431EE0F0FA0017948D /* Footer */ = {
 			isa = PBXGroup;
 			children = (
-				11FA11441EE0F1130017948D /* SettingFooterView.h */,
-				11FA11451EE0F1130017948D /* SettingFooterView.m */,
 			);
 			path = Footer;
 			sourceTree = "<group>";
@@ -839,10 +839,10 @@
 				11FA11391EE0EEE60017948D /* ControlTabButton.m in Sources */,
 				112D4FFA1EDFB74D00B5026E /* BaseLabel.m in Sources */,
 				112D50121EE01CDC00B5026E /* DeviceCircleView.m in Sources */,
+				11149DE61EFCC5D000CE2444 /* BaseHeaderFooterView.m in Sources */,
 				11A60FC21EF60F7C007C7B91 /* BaseAlertPage.m in Sources */,
 				11AC582D1EE4FDE2003D12EB /* NSStringAdditions.m in Sources */,
 				117FD7591EDECB80003A60B1 /* NSDictionaryAdditions.m in Sources */,
-				11FA11461EE0F1130017948D /* SettingFooterView.m in Sources */,
 				112D50091EE01C9300B5026E /* DeviceInfoView.m in Sources */,
 				117FD75E1EDECBD6003A60B1 /* Globals.m in Sources */,
 				111597E41EFA2DA400D315C8 /* DeviceNotifyManager.m in Sources */,
