@@ -12,16 +12,16 @@
 /**
  附件样式
 
- - BaseTableCellTypeNone: 无
- - BaseTableCellTypeArrow: 箭头
- - BaseTableCellTypeSwitch: 开关
- BaseTableCellTypeCheck: 勾
+ - BaseTableCellAttachTypeNone: 无
+ - BaseTableCellAttachTypeArrow: 箭头
+ - BaseTableCellAttachTypeSwitch: 开关
+ BaseTableCellAttachTypeCheck: 勾
  */
-typedef NS_ENUM(NSInteger, BaseTableCellType) {
-    BaseTableCellTypeNone      = 0,
-    BaseTableCellTypeArrow,
-    BaseTableCellTypeSwitch,
-    BaseTableCellTypeCheck,
+typedef NS_ENUM(NSInteger, BaseTableCellAttachType) {
+    BaseTableCellAttachTypeNone      = 0,
+    BaseTableCellAttachTypeArrow,
+    BaseTableCellAttachTypeSwitch,
+    BaseTableCellAttachTypeCheck,
 };
 
 typedef void(^BaseTableCellSwitchBlock)(BOOL on);
@@ -30,27 +30,26 @@ typedef void(^BaseTableCellSwitchBlock)(BOOL on);
 
 
 /**
- 附件样式
- */
-@property (nonatomic, assign) BaseTableCellType baseCellType;
-
-
-/**
  图标
  */
-@property (nonatomic, strong) UIImage *baseIconImage;
+@property (nonatomic, readonly) UIImageView *baseImageView;
 
 
 /**
  标题
  */
-@property (nonatomic, copy) NSString *baseTitleString;
+@property (nonatomic, readonly) UILabel *baseTitleLabel;
 
 
 /**
  内容
  */
-@property (nonatomic, copy) NSString *baseDetailString;
+@property (nonatomic, readonly) UILabel *baseDetailLabel;
+
+/**
+ 附件样式
+ */
+@property (nonatomic, assign) BaseTableCellAttachType baseAttachType;
 
 
 /**
@@ -63,7 +62,13 @@ typedef void(^BaseTableCellSwitchBlock)(BOOL on);
 /**
  附件 View 右边距
  */
-@property (nonatomic, assign) CGFloat baseAccessoryPaddingLeft;
+@property (nonatomic, assign) CGFloat baseAttachPaddingLeft;
+
+/**
+ 布局子View
+ */
+- (void)baseInitialiseSubViews;
+
 
 /**
  更新图片大小与位置
@@ -77,38 +82,26 @@ typedef void(^BaseTableCellSwitchBlock)(BOOL on);
 /**
  更新标题
 
- @param font 字体
- @param color 颜色
  @param paddingLeft 左边距
  */
-- (void)updateTitleFont:(UIFont *)font color:(UIColor *)color paddingLeft:(CGFloat)paddingLeft;
+- (void)updateTitlePaddingLeft:(CGFloat)paddingLeft;
 
 
 /**
  更新内容
 
- @param font 字体
- @param color 颜色
  @param paddingRight 右边距
  */
-- (void)updateDetailFont:(UIFont *)font color:(UIColor *)color paddingRight:(CGFloat)paddingRight;
+- (void)updateDetailPaddingRight:(CGFloat)paddingRight;
 
 
 /**
- 更新开关, 仅当 BaseTableCellTypeSwitch 时, 生效
+ 更新开关, 仅当 BaseTableCellAttachTypeSwitch 时, 生效
 
  @param on 打开
  @param block 回调
  */
 - (void)updateBaseSwitchOn:(BOOL)on switchBlock:(BaseTableCellSwitchBlock)block;
-
-
-/**
- 更新箭头颜色, 仅当 BaseTableCellTypeArrow 时, 生效
-
- @param color 颜色
- */
-- (void)updateArrowColor:(UIColor *)color;
 
 
 /**

@@ -340,23 +340,26 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
     BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
     if (!cell) {
         cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
-        [cell updateTitleFont:UIFontOf3XPix(60) color:HB_COLOR_BASE_BLACK paddingLeft:10];
+        cell.baseTitleLabel.font = UIFontOf3XPix(60);
+        cell.baseTitleLabel.textColor = HB_COLOR_BASE_BLACK;
+        
+        [cell updateTitlePaddingLeft:10];
         [cell updateIconImageSize:CGSizeMake(43, 43) paddingLeft:10];
         cell.tintColor = HB_COLOR_BASE_MAIN;
     }
 
     if (indexPath.section == 0) {
-        cell.baseIconImage = [UIImage imageNamed:@"cell_constant"];
-        cell.baseTitleString = KString(@"智能恒温");
-        cell.baseCellType = BaseTableCellTypeSwitch;
+        cell.baseImageView.image = [UIImage imageNamed:@"cell_constant"];
+        cell.baseTitleLabel.text = KString(@"智能恒温");
+        cell.baseAttachType = BaseTableCellAttachTypeSwitch;
     } else if (indexPath.section == 1) {
-        cell.baseIconImage = [UIImage imageNamed:@"cell_chart"];
-        cell.baseTitleString = KString(@"温度曲线");
-        cell.baseCellType = BaseTableCellTypeSwitch;
+        cell.baseImageView.image = [UIImage imageNamed:@"cell_chart"];
+        cell.baseTitleLabel.text = KString(@"温度曲线");
+        cell.baseAttachType = BaseTableCellAttachTypeSwitch;
     } else if (indexPath.section == 2) {
-        cell.baseIconImage = [UIImage imageNamed:@"cell_task"];
-        cell.baseTitleString = KString(@"定时器");
-        cell.baseCellType = BaseTableCellTypeArrow;
+        cell.baseImageView.image = [UIImage imageNamed:@"cell_task"];
+        cell.baseTitleLabel.text = KString(@"定时器");
+        cell.baseAttachType = BaseTableCellAttachTypeArrow;
     }
     
 

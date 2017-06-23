@@ -84,21 +84,25 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
     BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
     if (!cell) {
         cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
-        [cell updateTitleFont:UIFontOf3XPix(46) color:HB_COLOR_BASE_WHITE paddingLeft:19];
         [cell updateIconImageSize:CGSizeMake(18, 18) paddingLeft:19];
+        
+        cell.baseTitleLabel.font = UIFontOf3XPix(46);
+        cell.baseTitleLabel.textColor = HB_COLOR_BASE_WHITE;
+        [cell updateTitlePaddingLeft:19];
+        
         cell.tintColor = HB_COLOR_BASE_WHITE;
-        cell.baseCellType = BaseTableCellTypeArrow;
+        cell.baseAttachType = BaseTableCellAttachTypeArrow;
         [cell updateBackgroundColors:@[UIColorFromHex(0x4b4b4b), UIColorFromHex(0x3c3c3c)] pointStart:CGPointMake(0, 0) pointEnd:CGPointMake(0, 1)];
         cell.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
-        cell.baseAccessoryPaddingLeft = 21;
+        cell.baseAttachPaddingLeft = 21;
     }
 
     if (indexPath.row == 0) {
-        cell.baseTitleString = KString(@"设置");
-        cell.baseIconImage = [UIImage imageNamed:@"cell_setting"];
+        cell.baseTitleLabel.text = KString(@"设置");
+        cell.baseImageView.image = [UIImage imageNamed:@"cell_setting"];
     } else if (indexPath.row == 1) {
-        cell.baseTitleString = KString(@"关于我们");
-        cell.baseIconImage = [UIImage imageNamed:@"cell_about"];
+        cell.baseTitleLabel.text = KString(@"关于我们");
+        cell.baseImageView.image = [UIImage imageNamed:@"cell_about"];
     }
     
     return cell;

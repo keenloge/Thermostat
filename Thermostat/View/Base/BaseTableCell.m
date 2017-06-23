@@ -49,15 +49,22 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.baseAccessoryPaddingLeft = KHorizontalRound(BaseTableCellPaddingAccessory);
+        _baseAttachType = BaseTableCellAttachTypeNone;
+        _baseAttachPaddingLeft = KHorizontalRound(BaseTableCellPaddingAccessory);
+        
+        [self baseInitialiseSubViews];
     }
     return self;
+}
+
+- (void)baseInitialiseSubViews {
+    
 }
 
 #pragma mark - 界面更新
 
 - (void)updateIconImageSize:(CGSize)size paddingLeft:(CGFloat)paddingLeft {
-    [self.baseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.baseImageView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(paddingLeft).priorityHigh();
         if (size.height > 0 && size.width > 0) {
             make.size.mas_equalTo(size).priorityHigh();
@@ -65,19 +72,14 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
     }];
 }
 
-- (void)updateTitleFont:(UIFont *)font color:(UIColor *)color paddingLeft:(CGFloat)paddingLeft {
-    self.baseTitleLabel.font = font;
-    self.baseTitleLabel.textColor = color;
-    
+- (void)updateTitlePaddingLeft:(CGFloat)paddingLeft {
     WeakObj(self);
     [self.baseTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(selfWeak.baseImageView.mas_right).offset(paddingLeft);
     }];
 }
 
-- (void)updateDetailFont:(UIFont *)font color:(UIColor *)color paddingRight:(CGFloat)paddingRight {
-    self.baseDetailLabel.font = font;
-    self.baseDetailLabel.textColor = color;
+- (void)updateDetailPaddingRight:(CGFloat)paddingRight {
     [self.baseDetailLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-paddingRight);
     }];
@@ -85,15 +87,9 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
 
 
 - (void)updateBaseSwitchOn:(BOOL)on switchBlock:(BaseTableCellSwitchBlock)block {
-    if (self.baseCellType == BaseTableCellTypeSwitch) {
+    if (self.baseAttachType == BaseTableCellAttachTypeSwitch) {
         [self.baseSwitch setOn:on];
         self.baseSwitchBlock = block;
-    }
-}
-
-- (void)updateArrowColor:(UIColor *)color {
-    if (self.baseCellType == BaseTableCellTypeArrow) {
-        self.baseArrowImageView.tintColor = color;
     }
 }
 
@@ -127,47 +123,24 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
 
 #pragma mark - Setter
 
-- (void)setBaseCellType:(BaseTableCellType)baseCellType {
-    _baseCellType = baseCellType;
+- (void)setBaseAttachType:(BaseTableCellAttachType)baseAttachType {
+    _baseAttachType = baseAttachType;
 
     self.accessoryType = UITableViewCellAccessoryNone;
-    if (_baseCellType == BaseTableCellTypeSwitch) {
+    if (_baseAttachType == BaseTableCellAttachTypeSwitch) {
         self.baseSwitch.opaque = YES;
-    } else if (_baseCellType == BaseTableCellTypeArrow) {
+    } else if (_baseAttachType == BaseTableCellAttachTypeArrow) {
         self.baseArrowImageView.opaque = YES;
-    } else if (_baseCellType == BaseTableCellTypeNone) {
+    } else if (_baseAttachType == BaseTableCellAttachTypeNone) {
         for (UIView *subView in self.baseAccessoryView.subviews) {
             [subView removeFromSuperview];
         }
-    } else if (_baseCellType == BaseTableCellTypeCheck) {
+    } else if (_baseAttachType == BaseTableCellAttachTypeCheck) {
         for (UIView *subView in self.baseAccessoryView.subviews) {
             [subView removeFromSuperview];
         }
         self.accessoryType = UITableViewCellAccessoryCheckmark;
     }
-}
-
-- (void)setBaseIconImage:(UIImage *)baseIconImage {
-    _baseIconImage = baseIconImage;
-    
-    self.baseImageView.image = _baseIconImage;
-    
-//    WeakObj(self);
-//    [self.baseImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-//        make.size.mas_equalTo(selfWeak.baseIconImage.size).priorityLow();
-//    }];
-}
-
-- (void)setBaseTitleString:(NSString *)baseTitleString {
-    _baseTitleString = [baseTitleString copy];
-    
-    self.baseTitleLabel.text = _baseTitleString;
-}
-
-- (void)setBaseDetailString:(NSString *)baseDetailString {
-    _baseDetailString = [baseDetailString copy];
-    
-    self.baseDetailLabel.text = _baseDetailString;
 }
 
 - (void)setBaseCutLineInsets:(UIEdgeInsets)baseCutLineInsets {
@@ -179,8 +152,8 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
     }];
 }
 
-- (void)setBaseAccessoryPaddingLeft:(CGFloat)baseAccessoryPaddingLeft {
-    _baseAccessoryPaddingLeft = baseAccessoryPaddingLeft;
+- (void)setBaseAttachPaddingLeft:(CGFloat)baseAttachPaddingLeft {
+    _baseAttachPaddingLeft = baseAttachPaddingLeft;
     
     UIView *tempView = nil;
     for (UIView *subView in self.baseAccessoryView.subviews) {
@@ -290,7 +263,7 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
         WeakObj(self);
         [_baseSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.left.equalTo(selfWeak.baseAccessoryView);
-            make.right.equalTo(selfWeak.baseAccessoryView).offset(-selfWeak.baseAccessoryPaddingLeft);
+            make.right.equalTo(selfWeak.baseAccessoryView).offset(-selfWeak.baseAttachPaddingLeft);
             make.width.mas_equalTo(CGRectGetWidth(selfWeak.baseSwitch.frame));
         }];
     }
@@ -315,7 +288,7 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
             make.size.mas_equalTo(CGSizeMake(BaseTableCellArrowSize, BaseTableCellArrowSize));
             make.centerY.equalTo(selfWeak.baseAccessoryView);
             make.left.mas_equalTo(-(BaseTableCellArrowSize - BaseTableCellArrowWidth) / 2.0);
-            make.right.mas_equalTo((BaseTableCellArrowSize - BaseTableCellArrowWidth) / 2.0 - selfWeak.baseAccessoryPaddingLeft);
+            make.right.mas_equalTo((BaseTableCellArrowSize - BaseTableCellArrowWidth) / 2.0 - selfWeak.baseAttachPaddingLeft);
         }];
     }
     

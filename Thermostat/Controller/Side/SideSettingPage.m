@@ -112,7 +112,9 @@
     BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
     if (!cell) {
         cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
-        [cell updateTitleFont:UIFontOf1XPix(17) color:UIColorFromRGBA(0, 0, 0, 0.85) paddingLeft:16];
+        cell.baseTitleLabel.font = UIFontOf1XPix(17);
+        cell.baseTitleLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.85);
+        [cell updateTitlePaddingLeft:16];
         cell.tintColor = HB_COLOR_BASE_MAIN;
     }
  
@@ -122,15 +124,15 @@
     if (indexPath.section == 0) {
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.baseCellType = BaseTableCellTypeSwitch;
+        cell.baseAttachType = BaseTableCellAttachTypeSwitch;
         if (indexPath.row == 0) {
-            cell.baseTitleString = KString(@"声音");
+            cell.baseTitleLabel.text = KString(@"声音");
             [cell updateBaseSwitchOn:[FeedBackManager sharedManager].isSound switchBlock:^(BOOL on) {
                 [FeedBackManager sharedManager].sound = on;
                 [selfWeak.baseTableView reloadData];
             }];
         } else if (indexPath.row == 1) {
-            cell.baseTitleString = KString(@"振动");
+            cell.baseTitleLabel.text = KString(@"振动");
             [cell updateBaseSwitchOn:[FeedBackManager sharedManager].isVibrate switchBlock:^(BOOL on) {
                 [FeedBackManager sharedManager].vibrate = on;
                 [selfWeak.baseTableView reloadData];
@@ -140,36 +142,36 @@
     } else if (indexPath.section == 1) {
         
         if (indexPath.row == 0) {
-            cell.baseTitleString = KString(@"摄氏度");
+            cell.baseTitleLabel.text = KString(@"摄氏度");
             if ([TemperatureUnitManager sharedManager].unitType == TemperatureUnitTypeCentigrade) {
-                cell.baseCellType = BaseTableCellTypeCheck;
+                cell.baseAttachType = BaseTableCellAttachTypeCheck;
             } else {
-                cell.baseCellType = BaseTableCellTypeNone;
+                cell.baseAttachType = BaseTableCellAttachTypeNone;
             }
         } else if (indexPath.row == 1) {
-            cell.baseTitleString = KString(@"华氏度");
+            cell.baseTitleLabel.text = KString(@"华氏度");
             if ([TemperatureUnitManager sharedManager].unitType == TemperatureUnitTypeFahrenheit) {
-                cell.baseCellType = BaseTableCellTypeCheck;
+                cell.baseAttachType = BaseTableCellAttachTypeCheck;
             } else {
-                cell.baseCellType = BaseTableCellTypeNone;
+                cell.baseAttachType = BaseTableCellAttachTypeNone;
             }
         }
         
     } else if (indexPath.section == 2) {
         
         if (indexPath.row == 0) {
-            cell.baseTitleString = KString(@"简体中文");
+            cell.baseTitleLabel.text = KString(@"简体中文");
             if ([LanguageManager sharedManager].typeLanguage == LanguageTypeChinese) {
-                cell.baseCellType = BaseTableCellTypeCheck;
+                cell.baseAttachType = BaseTableCellAttachTypeCheck;
             } else {
-                cell.baseCellType = BaseTableCellTypeNone;
+                cell.baseAttachType = BaseTableCellAttachTypeNone;
             }
         } else if (indexPath.row == 1) {
-            cell.baseTitleString = KString(@"English");
+            cell.baseTitleLabel.text = KString(@"English");
             if ([LanguageManager sharedManager].typeLanguage == LanguageTypeEnglish) {
-                cell.baseCellType = BaseTableCellTypeCheck;
+                cell.baseAttachType = BaseTableCellAttachTypeCheck;
             } else {
-                cell.baseCellType = BaseTableCellTypeNone;
+                cell.baseAttachType = BaseTableCellAttachTypeNone;
             }
         }
         

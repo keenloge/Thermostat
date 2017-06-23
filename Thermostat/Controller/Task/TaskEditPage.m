@@ -260,11 +260,13 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
         BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:switchIdentifierCell];
         if (!cell) {
             cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:switchIdentifierCell];
-            [cell updateTitleFont:UIFontOf3XPix(51) color:UIColorFromRGBA(0, 0, 0, 0.85) paddingLeft:15];
-            cell.baseCellType = BaseTableCellTypeSwitch;
+            cell.baseTitleLabel.font = UIFontOf3XPix(51);
+            cell.baseTitleLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.85);
+            [cell updateTitlePaddingLeft:15];
+            cell.baseAttachType = BaseTableCellAttachTypeSwitch;
             cell.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
         }
-        cell.baseTitleString = KString(@"开关");
+        cell.baseTitleLabel.text = KString(@"开关");
 
         WeakObj(self);
         [cell updateBaseSwitchOn:self.task.running == DeviceRunningStateTurnON switchBlock:^(BOOL on) {
@@ -278,48 +280,52 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
         BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:arrowIdentifierCell];
         if (!cell) {
             cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:arrowIdentifierCell];
-            [cell updateTitleFont:UIFontOf3XPix(51) color:UIColorFromRGBA(0, 0, 0, 0.85) paddingLeft:15];
-            [cell updateDetailFont:UIFontOf3XPix(42) color:UIColorFromRGBA(0, 0, 0, 0.62) paddingRight:15];
+            cell.baseTitleLabel.font = UIFontOf3XPix(51);
+            cell.baseTitleLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.85);
+            [cell updateTitlePaddingLeft:15];
+            
+            cell.baseDetailLabel.font = UIFontOf3XPix(42);
+            cell.baseDetailLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.62);
+            [cell updateDetailPaddingRight:15];
 
             cell.tintColor = UIColorFromHex(0xc7c7cc);
-            cell.baseCellType = BaseTableCellTypeArrow;
-//            cell.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+            cell.baseAttachType = BaseTableCellAttachTypeArrow;
         }
         
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
                 if (self.task.type == LinKonTimerTaskTypeSwitch) {
-                    cell.baseTitleString = KString(@"时间");
+                    cell.baseTitleLabel.text = KString(@"时间");
                 } else if (self.task.type == LinKonTimerTaskTypeStage) {
-                    cell.baseTitleString = KString(@"开始时间");
+                    cell.baseTitleLabel.text = KString(@"开始时间");
                 }
-                cell.baseDetailString = [LinKonHelper timeString:self.task.timeFrom];
+                cell.baseDetailLabel.text = [LinKonHelper timeString:self.task.timeFrom];
             } else if (indexPath.row == 1) {
-                cell.baseTitleString = KString(@"结束时间");
+                cell.baseTitleLabel.text = KString(@"结束时间");
                 if (self.task.timeFrom > self.task.timeTo) {
-                    cell.baseDetailString = [NSString stringWithFormat:@"%@ %@", KString(@"次日"), [LinKonHelper timeString:self.task.timeTo]];
+                    cell.baseDetailLabel.text = [NSString stringWithFormat:@"%@ %@", KString(@"次日"), [LinKonHelper timeString:self.task.timeTo]];
                 } else {
-                    cell.baseDetailString = [LinKonHelper timeString:self.task.timeTo];
+                    cell.baseDetailLabel.text = [LinKonHelper timeString:self.task.timeTo];
                 }
             }
             cell.baseCutLineInsets = UIEdgeInsetsMake(0, 15, 0, 0);
         } else if (indexPath.section == 3) {
             if (indexPath.row == 0) {
-                cell.baseTitleString = KString(@"温度");
-                cell.baseDetailString = [LinKonHelper settingString:self.task.setting];
+                cell.baseTitleLabel.text = KString(@"温度");
+                cell.baseDetailLabel.text = [LinKonHelper settingString:self.task.setting];
             }
             cell.baseCutLineInsets = UIEdgeInsetsMake(0, 15, 0, 0);
         } else if (indexPath.section == 4) {
             cell.baseCutLineInsets = UIEdgeInsetsMake(0, 15, 0, 0);
             if (indexPath.row == 0) {
-                cell.baseTitleString = KString(@"风速");
-                cell.baseDetailString = [LinKonHelper windString:self.task.wind];
+                cell.baseTitleLabel.text = KString(@"风速");
+                cell.baseDetailLabel.text = [LinKonHelper windString:self.task.wind];
             } else if (indexPath.row == 1) {
-                cell.baseTitleString = KString(@"模式");
-                cell.baseDetailString = [LinKonHelper modeString:self.task.mode];
+                cell.baseTitleLabel.text = KString(@"模式");
+                cell.baseDetailLabel.text = [LinKonHelper modeString:self.task.mode];
             } else if (indexPath.row == 2) {
-                cell.baseTitleString = KString(@"情景");
-                cell.baseDetailString = [LinKonHelper sceneString:self.task.scene];
+                cell.baseTitleLabel.text = KString(@"情景");
+                cell.baseDetailLabel.text = [LinKonHelper sceneString:self.task.scene];
                 cell.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
             }
         }
@@ -338,12 +344,12 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
     if (indexPath.section == 0) {
         BaseTableCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         if (indexPath.row == 0) {
-            con = [[TimePickerPage alloc] initWithTitle:cell.baseTitleString time:self.task.timeFrom block:^(NSInteger time) {
+            con = [[TimePickerPage alloc] initWithTitle:cell.baseTitleLabel.text time:self.task.timeFrom block:^(NSInteger time) {
                 selfWeak.task.timeFrom = time;
                 [selfWeak.baseTableView reloadData];
             }];
         } else if (indexPath.row == 1) {
-            con = [[TimePickerPage alloc] initWithTitle:cell.baseTitleString time:self.task.timeTo block:^(NSInteger time) {
+            con = [[TimePickerPage alloc] initWithTitle:cell.baseTitleLabel.text time:self.task.timeTo block:^(NSInteger time) {
                 selfWeak.task.timeTo = time;
                 [selfWeak.baseTableView reloadData];
             }];
