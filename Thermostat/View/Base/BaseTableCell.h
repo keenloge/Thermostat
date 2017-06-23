@@ -80,12 +80,19 @@ typedef void(^BaseTableCellSwitchBlock)(BOOL on);
 
 
 /**
- 更新标题
+ 更新标题左边距
 
  @param paddingLeft 左边距
  */
 - (void)updateTitlePaddingLeft:(CGFloat)paddingLeft;
 
+
+/**
+ 更新标题最大宽度
+
+ @param width 宽度
+ */
+- (void)updateTitleMaxWidth:(CGFloat)width paddingTop:(CGFloat)top;
 
 /**
  更新内容

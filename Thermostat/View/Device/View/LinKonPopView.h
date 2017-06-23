@@ -12,4 +12,7 @@
 
 @property (nonatomic, copy) void (^popBlock)(NSInteger index);
 
+- (void)updatePopImageArray:(NSArray <UIImage *>*)imageArray
+                 titleArray:(NSArray <NSString *>*)titleArray;
+
 @end

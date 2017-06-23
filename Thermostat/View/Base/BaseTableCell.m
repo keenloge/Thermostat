@@ -79,6 +79,13 @@ const CGFloat BaseTableCellArrowSize        = 77.0;
     }];
 }
 
+- (void)updateTitleMaxWidth:(CGFloat)width paddingTop:(CGFloat)top {
+    [self.baseTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_greaterThanOrEqualTo(top);
+        make.width.mas_lessThanOrEqualTo(width);
+    }];
+}
+
 - (void)updateDetailPaddingRight:(CGFloat)paddingRight {
     [self.baseDetailLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-paddingRight);

@@ -50,6 +50,8 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
 @property (nonatomic, strong) UITableView *settingTableView;
 
 @property (nonatomic, strong) LinKonPopView *popView;
+@property (nonatomic, strong) NSArray *popImageArray;
+@property (nonatomic, strong) NSArray *popTitleArray;
 
 @property (nonatomic, assign) NSInteger selectedIndex;
 
@@ -514,9 +516,11 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
         _popView = [LinKonPopView new];
         [self.view addSubview:_popView];
         
+        [_popView updatePopImageArray:self.popImageArray titleArray:self.popTitleArray];
+        
         WeakObj(self);
         _popView.popBlock = ^(NSInteger index) {
-            selfWeak.baseMessageNotify = @"24小时曲线";
+            selfWeak.baseMessageNotify = [selfWeak.popTitleArray objectAtIndex:index];
         };
         
         [_popView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -525,6 +529,24 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
         }];
     }
     return _popView;
+}
+
+- (NSArray *)popImageArray {
+    if (!_popImageArray) {
+        _popImageArray = @[
+                           [UIImage imageNamed:@"cell_pop_curve"],
+                           ];
+    }
+    return _popImageArray;
+}
+
+- (NSArray *)popTitleArray {
+    if (!_popTitleArray) {
+        _popTitleArray = @[
+                           KString(@"24小时曲线"),
+                           ];
+    }
+    return _popTitleArray;
 }
 
 @end

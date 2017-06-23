@@ -7,16 +7,16 @@
 //
 
 #import "LinKonPopView.h"
-#import "LinKonPopCell.h"
+#import "BaseTableCell.h"
 
 @interface LinKonPopView () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIImageView *arrowImageView;
 @property (nonatomic, strong) UITableView *popTableView;
-@property (nonatomic, strong) LinKonPopCell *popCell;
+@property (nonatomic, strong) BaseTableCell *popCell;
 
-@property (nonatomic, strong) NSArray *iconNameArray;
-@property (nonatomic, strong) NSArray *titleNameArray;
+@property (nonatomic, strong) NSArray *popImageArray;
+@property (nonatomic, strong) NSArray *popTitleArray;
 
 @end
 
@@ -51,6 +51,30 @@
     }];
 }
 
+- (void)updatePopImageArray:(NSArray<UIImage *> *)imageArray titleArray:(NSArray<NSString *> *)titleArray {
+    self.popImageArray = [imageArray copy];
+    self.popTitleArray = [titleArray copy];
+    [self.popTableView reloadData];
+}
+
+- (BaseTableCell *)createNewPopCell {
+    BaseTableCell *cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PopCell"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell.contentView.backgroundColor = UIColorFromRGBA(0, 0, 0, 0.85);
+    
+    [cell updateIconImageSize:CGSizeMake(32, 32) paddingLeft:14];
+    
+    cell.baseTitleLabel.textColor = HB_COLOR_BASE_WHITE;
+    cell.baseTitleLabel.font = UIFontOf3XPix(54);
+    cell.baseTitleLabel.numberOfLines = 0;
+    
+    [cell updateTitlePaddingLeft:12];
+    [cell updateTitleMaxWidth:106 paddingTop:14];
+    
+    return cell;
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -58,24 +82,24 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return MIN(self.iconNameArray.count, self.titleNameArray.count);
+    return MIN(self.popImageArray.count, self.popTitleArray.count);
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    self.popCell.nameString = [self.titleNameArray objectAtIndex:indexPath.row];
+    self.popCell.baseTitleLabel.text = [self.popTitleArray objectAtIndex:indexPath.row];
     CGSize size = [self.popCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     return MAX(60, size.height) + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *tmpIdentifierCell = @"PopCell";
-    LinKonPopCell *cell = [tableView dequeueReusableCellWithIdentifier:tmpIdentifierCell];
+    BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:tmpIdentifierCell];
     if (cell == nil) {
-        cell = [[LinKonPopCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:tmpIdentifierCell];
+        cell = [self createNewPopCell];
     }
     
-    cell.iconImage = [UIImage imageNamed:[self.iconNameArray objectAtIndex:indexPath.row]];
-    cell.nameString = [self.titleNameArray objectAtIndex:indexPath.row];
+    cell.baseImageView.image = [self.popImageArray objectAtIndex:indexPath.row];
+    cell.baseTitleLabel.text = [self.popTitleArray objectAtIndex:indexPath.row];
     
     return cell;
 }
@@ -101,24 +125,6 @@
 }
 
 #pragma mark - 懒加载
-
-- (NSArray *)iconNameArray {
-    if (!_iconNameArray) {
-        _iconNameArray = @[
-                           @"cell_pop_curve",
-                           ];
-    }
-    return _iconNameArray;
-}
-
-- (NSArray *)titleNameArray {
-    if (!_titleNameArray) {
-        _titleNameArray = @[
-                            KString(@"24小时曲线"),
-                            ];
-    }
-    return _titleNameArray;
-}
 
 - (UIImageView *)arrowImageView {
     if (!_arrowImageView) {
@@ -160,9 +166,9 @@
     return _popTableView;
 }
 
-- (LinKonPopCell *)popCell {
+- (BaseTableCell *)popCell {
     if (!_popCell) {
-        _popCell = [[LinKonPopCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"PopCell"];
+        _popCell = [self createNewPopCell];
     }
     return _popCell;
 }
