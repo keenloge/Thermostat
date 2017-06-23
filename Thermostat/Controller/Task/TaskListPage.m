@@ -101,7 +101,7 @@ const CGFloat TaskListRowsHeight = 80.0;
     }
     self.baseTableView.separatorInset = UIEdgeInsetsMake(0, KHorizontalRound(57), 0, 0);
     self.baseTableView.hidden = NO;
-    self.baseTableView.rowHeight = TaskListRowsHeight;
+    self.baseTableView.rowHeight = KHorizontalRound(TaskListRowsHeight);
 }
 
 #pragma mark - UITableViewDataSource

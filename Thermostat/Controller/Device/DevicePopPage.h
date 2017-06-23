@@ -8,8 +8,6 @@
 
 #import "BasePopPage.h"
 
-@class LinKonDevice;
-
 
 /**
  设备弹窗事件
@@ -35,7 +33,7 @@ typedef void(^DevicePopBlock)(DevicePopAction action);
 
 @interface DevicePopPage : BasePopPage
 
-- (instancetype)initWithDevice:(LinKonDevice *)item
+- (instancetype)initWithDevice:(long long)sn
                          block:(DevicePopBlock)aBlock;
 
 @end

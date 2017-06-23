@@ -75,7 +75,7 @@ const CGFloat BaseTableCellArrowSize            = 77.0;
 - (void)updateTitlePaddingLeft:(CGFloat)paddingLeft {
     WeakObj(self);
     [self.baseTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(selfWeak.baseImageView.mas_right).offset(paddingLeft);
+        make.left.equalTo(selfWeak.baseImageView.mas_right).offset(paddingLeft).priorityHigh();
     }];
 }
 
@@ -99,7 +99,7 @@ const CGFloat BaseTableCellArrowSize            = 77.0;
 
 - (void)updateDetailPaddingRight:(CGFloat)paddingRight {
     [self.baseDetailLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-paddingRight);
+        make.right.mas_equalTo(-paddingRight).priorityHigh();
     }];
 }
 
@@ -164,9 +164,10 @@ const CGFloat BaseTableCellArrowSize            = 77.0;
 - (void)setBaseCutLineInsets:(UIEdgeInsets)baseCutLineInsets {
     _baseCutLineInsets = baseCutLineInsets;
     
-    [self.baseCutLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(_baseCutLineInsets.left);
-        make.right.mas_equalTo(-_baseCutLineInsets.right);
+    WeakObj(self);
+    [self.baseCutLineView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(selfWeak.baseCutLineInsets.left);
+        make.right.mas_equalTo(-selfWeak.baseCutLineInsets.right);
     }];
 }
 
@@ -211,7 +212,7 @@ const CGFloat BaseTableCellArrowSize            = 77.0;
         WeakObj(self);
         [_baseTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(selfWeak.baseContentView).priorityLow();
-            make.left.equalTo(selfWeak.baseImageView.mas_right).offset(BaseTableCellLabelPaddingSide);
+            make.left.equalTo(selfWeak.baseImageView.mas_right).offset(BaseTableCellLabelPaddingSide).priorityLow();
         }];
     }
     return _baseTitleLabel;

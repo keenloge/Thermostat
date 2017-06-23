@@ -39,7 +39,7 @@
 */
 
 - (void)baseInitialiseSubViews {
-    self.baseTableView.rowHeight = 54.0;
+    self.baseTableView.rowHeight = KHorizontalRound(54.0);
     self.baseTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
@@ -65,8 +65,8 @@
         headerView = [[BaseHeaderFooterView alloc] initWithReuseIdentifier:identifierHeader];
         headerView.baseTitleLabel.textColor = HB_COLOR_BASE_BLACK;
         headerView.baseTitleLabel.alpha = 0.6;
-        headerView.baseTitleLabel.font = UIFontOf1XPix(14);
-        [headerView updateTitlePaddingLeft:17];
+        headerView.baseTitleLabel.font = UIFontOf1XPix(KHorizontalRound(14.0));
+        [headerView updateTitlePaddingLeft:KHorizontalRound(17)];
         headerView.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     }
     
@@ -90,9 +90,9 @@
     BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
     if (!cell) {
         cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
-        cell.baseTitleLabel.font = UIFontOf1XPix(17);
+        cell.baseTitleLabel.font = UIFontOf1XPix(KHorizontalRound(17));
         cell.baseTitleLabel.textColor = UIColorFromRGBA(0, 0, 0, 0.85);
-        [cell updateTitlePaddingLeft:16];
+        [cell updateTitlePaddingLeft:KHorizontalRound(16)];
         cell.tintColor = HB_COLOR_BASE_MAIN;
     }
  
@@ -158,7 +158,7 @@
     if (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1) {
         cell.baseCutLineInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     } else {
-        cell.baseCutLineInsets = UIEdgeInsetsMake(0, 17, 0, 0);
+        cell.baseCutLineInsets = UIEdgeInsetsMake(0, KHorizontalRound(17), 0, 0);
     }
     
     return cell;

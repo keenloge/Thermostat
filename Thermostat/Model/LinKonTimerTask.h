@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Declare.h"
 
 #define KTaskNumber     @"number"
 #define KTaskSN         @"sn"

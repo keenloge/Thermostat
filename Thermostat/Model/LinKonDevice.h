@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "LinKonTimerTask.h"
 
-#define KDeviceSN           @"sn"
 #define KDeviceNickname     @"nickname"
 #define KDevicePassword     @"password"
 #define KDeviceConnection   @"connection"

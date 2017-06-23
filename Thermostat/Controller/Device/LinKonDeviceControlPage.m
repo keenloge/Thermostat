@@ -352,11 +352,11 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
     BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
     if (!cell) {
         cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
-        cell.baseTitleLabel.font = UIFontOf3XPix(60);
+        cell.baseTitleLabel.font = UIFontOf3XPix(KHorizontalRound(60));
         cell.baseTitleLabel.textColor = HB_COLOR_BASE_BLACK;
         
-        [cell updateTitlePaddingLeft:10];
-        [cell updateIconImageSize:CGSizeMake(43, 43) paddingLeft:10];
+        [cell updateTitlePaddingLeft:KHorizontalRound(10)];
+        [cell updateIconImageSize:CGSizeMake(KHorizontalRound(43), KHorizontalRound(43)) paddingLeft:KHorizontalRound(10)];
         cell.tintColor = HB_COLOR_BASE_MAIN;
     }
 
@@ -513,7 +513,7 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
         
         _settingTableView.dataSource = self;
         _settingTableView.delegate = self;
-        _settingTableView.rowHeight = DeviceControlSettingRowsHeight;
+        _settingTableView.rowHeight = KHorizontalRound(DeviceControlSettingRowsHeight);
         _settingTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _settingTableView.tableFooterView = [UIView new];
         

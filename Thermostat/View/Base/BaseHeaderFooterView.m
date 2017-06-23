@@ -34,13 +34,13 @@
 
 - (void)updateTitlePaddingLeft:(CGFloat)paddingLeft {
     [self.baseTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(paddingLeft);
+        make.left.mas_equalTo(paddingLeft).priorityHigh();
     }];
 }
 
 - (void)updateDetailPaddingRight:(CGFloat)paddingRight {
     [self.baseDetailLabel mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(-paddingRight);
+        make.right.mas_equalTo(-paddingRight).priorityHigh();
     }];
 }
 
@@ -61,7 +61,8 @@
         [self.contentView addSubview:_baseTitleLabel];
         _baseTitleLabel.font = [UIFont systemFontOfSize:17];
         _baseTitleLabel.textColor = [UIColor blackColor];
-        
+        [_baseTitleLabel setContentHuggingPriority:UILayoutPriorityRequired forAxis:UILayoutConstraintAxisHorizontal];
+
         WeakObj(self);
         [_baseTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(selfWeak).priorityLow();
@@ -82,8 +83,8 @@
         WeakObj(self);
         [_baseDetailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(selfWeak).priorityLow();
-            make.right.mas_equalTo(-10);
-            make.left.equalTo(selfWeak.baseTitleLabel.mas_right).offset(8);
+            make.right.mas_equalTo(-10).priorityLow();
+            make.left.greaterThanOrEqualTo(selfWeak.baseTitleLabel.mas_right).offset(8);
         }];
     }
     return _baseDetailLabel;

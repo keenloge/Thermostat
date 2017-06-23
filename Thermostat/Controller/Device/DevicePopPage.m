@@ -13,6 +13,7 @@
 #import "ColorConfig.h"
 #import "LinKonDevice.h"
 #import "LinKonHelper.h"
+#import "DeviceListManager.h"
 
 const CGFloat DevicePopTitleHeight = 38.0;
 const CGFloat DevicePopCutLineHeight = 1.0;
@@ -35,10 +36,10 @@ const CGFloat DevicePopButtonPaddingLeft = 16.0;
 
 @implementation DevicePopPage
 
-- (instancetype)initWithDevice:(LinKonDevice *)item
+- (instancetype)initWithDevice:(long long)sn
                          block:(DevicePopBlock)aBlock {
     if (self = [super init]) {
-        self.device = item;
+        self.device = [[DeviceListManager sharedManager] getDevice:sn];
         self.block = aBlock;
     }
     return self;

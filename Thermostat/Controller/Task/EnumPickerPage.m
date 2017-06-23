@@ -108,7 +108,7 @@
     
     NSInteger value = [[self.contentArray objectAtIndex:row] integerValue];
     if (self.type == EnumPickerTypeWind) {
-        rowTitle = [LinKonHelper windString:value];
+        rowTitle = [LinKonHelper windShortString:value];
     } else if (self.type == EnumPickerTypeMode) {
         rowTitle = [LinKonHelper modeString:value];
     } else if (self.type == EnumPickerTypeScene) {

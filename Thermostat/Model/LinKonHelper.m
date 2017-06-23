@@ -72,6 +72,21 @@ const NSTimeInterval MaxTimeOffset  = 70.0;
     return nil;
 }
 
++ (NSString *)windShortString:(LinKonWind)wind {
+    switch (wind) {
+        case LinKonWindLow:
+            return KString(@"低");
+        case LinKonWindMedium:
+            return KString(@"中");
+        case LinKonWindHigh:
+            return KString(@"高");
+        default:
+            break;
+    }
+    return nil;
+}
+
+
 + (NSString *)modeString:(LinKonMode)mode {
     switch (mode) {
         case LinKonModeHot:

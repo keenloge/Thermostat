@@ -361,21 +361,6 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
-		1145C51D1EF4ACF400988ABE /* Side */ = {
-			isa = PBXGroup;
-			children = (
-				1145C51E1EF4AD0700988ABE /* Cell */,
-			);
-			path = Side;
-			sourceTree = "<group>";
-		};
-		1145C51E1EF4AD0700988ABE /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cell;
-			sourceTree = "<group>";
-		};
 		117FD6FF1EDEC2B9003A60B1 = {
 			isa = PBXGroup;
 			children = (
@@ -573,7 +558,6 @@
 		117FD72B1EDEC7CE003A60B1 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1145C51D1EF4ACF400988ABE /* Side */,
 				112D4FDF1EDFAE4500B5026E /* Base */,
 				117FD72C1EDEC7CE003A60B1 /* Device */,
 				117FD72D1EDEC7CE003A60B1 /* Public */,
@@ -585,7 +569,6 @@
 		117FD72C1EDEC7CE003A60B1 /* Device */ = {
 			isa = PBXGroup;
 			children = (
-				11FA11431EE0F0FA0017948D /* Footer */,
 				112D4FDB1EDFADFB00B5026E /* View */,
 				112D4FC71EDF9D6800B5026E /* Button */,
 				117FD7631EDECD5E003A60B1 /* Cell */,
@@ -597,7 +580,6 @@
 			isa = PBXGroup;
 			children = (
 				117FD7681EDECE2C003A60B1 /* Banner */,
-				117FD7671EDECDF2003A60B1 /* Input */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -619,13 +601,6 @@
 				117FD7651EDECD92003A60B1 /* DeviceCell.m */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		117FD7671EDECDF2003A60B1 /* Input */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Input;
 			sourceTree = "<group>";
 		};
 		117FD7681EDECE2C003A60B1 /* Banner */ = {
@@ -664,13 +639,6 @@
 				11AC582F1EE503FB003D12EB /* TaskRepeatCell.m */,
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		11FA11431EE0F0FA0017948D /* Footer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Footer;
 			sourceTree = "<group>";
 		};
 		CA06F51A9EEE574A44D4A0D9 /* Pods */ = {

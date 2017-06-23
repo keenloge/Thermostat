@@ -111,7 +111,7 @@ const CGFloat DeviceSearchButtonSize = 144.0;
 
 - (void)beginSearch {
     WeakObj(self);
-    [self.searchButton startAnimationWithDuration:5 finishBlock:^{
+    [self.searchButton startAnimationWithDuration:2 finishBlock:^{
         selfWeak.searching = NO;
         id con = [[DeviceInfoPage alloc] init];
         [selfWeak pushViewController:con skipCount:1];

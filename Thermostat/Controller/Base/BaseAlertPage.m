@@ -9,7 +9,7 @@
 #import "BaseAlertPage.h"
 
 const CGFloat KBaseAlertPresentDuration = 0.3;
-const CGFloat KBaseAlertDismissDuration = 0.3;
+const CGFloat KBaseAlertDismissDuration = 0.25;
 
 
 @interface BaseAlertDismissAnimator : NSObject<UIViewControllerAnimatedTransitioning>

@@ -40,6 +40,14 @@
 
 
 /**
+ 风速转短字符串
+
+ @param wind 风速
+ @return 风速短字符串
+ */
++ (NSString *)windShortString:(LinKonWind)wind;
+
+/**
  模式转字符串
  
  @param mode 模式

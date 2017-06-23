@@ -161,7 +161,7 @@ const CGFloat DeviceListRowsHeight = 77.0;
     WeakObj(self);
     WeakObj(device);
     cell.infoBlock = ^{
-        id popPage = [[DevicePopPage alloc] initWithDevice:device block:^(DevicePopAction aTag) {
+        id popPage = [[DevicePopPage alloc] initWithDevice:device.sn block:^(DevicePopAction aTag) {
             id editPage = nil;
             switch (aTag) {
                 case DevicePopActionNickname:
