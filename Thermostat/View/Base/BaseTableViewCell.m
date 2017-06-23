@@ -76,9 +76,9 @@ const CGFloat BaseTableViewCellArrowSize        = 77.0;
 }
 
 - (void)updateDetailFont:(UIFont *)font color:(UIColor *)color paddingRight:(CGFloat)paddingRight {
-    self.baseTitleLabel.font = font;
-    self.baseTitleLabel.textColor = color;
-    [self.baseTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
+    self.baseDetailLabel.font = font;
+    self.baseDetailLabel.textColor = color;
+    [self.baseDetailLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(-paddingRight);
     }];
 }

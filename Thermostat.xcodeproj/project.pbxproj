@@ -83,8 +83,6 @@
 		11AC58271EE4F245003D12EB /* TaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC58261EE4F245003D12EB /* TaskCell.m */; };
 		11AC582D1EE4FDE2003D12EB /* NSStringAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC582C1EE4FDE2003D12EB /* NSStringAdditions.m */; };
 		11AC58301EE503FB003D12EB /* TaskRepeatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC582F1EE503FB003D12EB /* TaskRepeatCell.m */; };
-		11AC58331EE50417003D12EB /* TaskSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC58321EE50417003D12EB /* TaskSwitchCell.m */; };
-		11AC58361EE50434003D12EB /* TaskPickCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC58351EE50434003D12EB /* TaskPickCell.m */; };
 		11AC58391EE50B3B003D12EB /* TimePickerPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC58381EE50B3B003D12EB /* TimePickerPage.m */; };
 		11AC583C1EE50B4E003D12EB /* TemperaturePickerPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC583B1EE50B4E003D12EB /* TemperaturePickerPage.m */; };
 		11AC583F1EE50B66003D12EB /* EnumPickerPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC583E1EE50B66003D12EB /* EnumPickerPage.m */; };
@@ -242,10 +240,6 @@
 		11AC582C1EE4FDE2003D12EB /* NSStringAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringAdditions.m; sourceTree = "<group>"; };
 		11AC582E1EE503FB003D12EB /* TaskRepeatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskRepeatCell.h; sourceTree = "<group>"; };
 		11AC582F1EE503FB003D12EB /* TaskRepeatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskRepeatCell.m; sourceTree = "<group>"; };
-		11AC58311EE50417003D12EB /* TaskSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskSwitchCell.h; sourceTree = "<group>"; };
-		11AC58321EE50417003D12EB /* TaskSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskSwitchCell.m; sourceTree = "<group>"; };
-		11AC58341EE50434003D12EB /* TaskPickCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskPickCell.h; sourceTree = "<group>"; };
-		11AC58351EE50434003D12EB /* TaskPickCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskPickCell.m; sourceTree = "<group>"; };
 		11AC58371EE50B3B003D12EB /* TimePickerPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimePickerPage.h; sourceTree = "<group>"; };
 		11AC58381EE50B3B003D12EB /* TimePickerPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimePickerPage.m; sourceTree = "<group>"; };
 		11AC583A1EE50B4E003D12EB /* TemperaturePickerPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TemperaturePickerPage.h; sourceTree = "<group>"; };
@@ -686,10 +680,6 @@
 				11AC58261EE4F245003D12EB /* TaskCell.m */,
 				11AC582E1EE503FB003D12EB /* TaskRepeatCell.h */,
 				11AC582F1EE503FB003D12EB /* TaskRepeatCell.m */,
-				11AC58311EE50417003D12EB /* TaskSwitchCell.h */,
-				11AC58321EE50417003D12EB /* TaskSwitchCell.m */,
-				11AC58341EE50434003D12EB /* TaskPickCell.h */,
-				11AC58351EE50434003D12EB /* TaskPickCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -887,7 +877,6 @@
 				113226FF1EE6454100E1D0C4 /* LanguageManager.m in Sources */,
 				111597E11EFA0ED700D315C8 /* LinKonHelper.m in Sources */,
 				112D4FFD1EDFB76200B5026E /* BaseTextField.m in Sources */,
-				11AC58331EE50417003D12EB /* TaskSwitchCell.m in Sources */,
 				117FD76B1EDECE2C003A60B1 /* BannerView.m in Sources */,
 				112D50061EE00EB700B5026E /* NotifyTarget.m in Sources */,
 				113B90351EF53AA800E96617 /* LinKonPopView.m in Sources */,
@@ -899,7 +888,6 @@
 				11C2F61B1EE3B284008ED62F /* LinKonTimerTask.m in Sources */,
 				112387951EF3C1AF0030DC50 /* DeviceNicknameEditPage.m in Sources */,
 				112D4FEE1EDFB49D00B5026E /* DeviceInfoPage.m in Sources */,
-				11AC58361EE50434003D12EB /* TaskPickCell.m in Sources */,
 				1126D07D1EF2875900BE5289 /* InfoButton.m in Sources */,
 				117FD7661EDECD92003A60B1 /* DeviceCell.m in Sources */,
 				11AC58301EE503FB003D12EB /* TaskRepeatCell.m in Sources */,
