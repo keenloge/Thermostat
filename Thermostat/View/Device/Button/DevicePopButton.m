@@ -17,7 +17,7 @@ const CGFloat PopMenuButtonOffsetTop    = 22.0;
 const CGFloat PopMenuButtonOffsetBottom = 16.0;
 
 // 图片大小
-const CGFloat PopMenuButtonImageSize    = 30.0;
+const CGFloat PopMenuButtonImageSize    = 25.0;
 
 // 标题高度
 const CGFloat PopMenuButtonTitleHeight  = 13.0;

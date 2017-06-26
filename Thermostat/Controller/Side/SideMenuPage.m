@@ -175,7 +175,7 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
         
         [cutLineBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(0);
-            make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT);
+            make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT_1PX);
         }];
 
     }

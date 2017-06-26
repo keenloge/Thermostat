@@ -75,8 +75,8 @@ const CGFloat BasePickerOffset = 1.0;
     NSDictionary *metricsDictionary = @{
                                         @"titleHeight" : @(BasePickerTitleHeight),
                                         @"buttonHeight" : @(BasePickerButtonHeight),
-                                        @"checkHeight" : @(BasePickerCheckHeight),
-                                        @"offset" : @(BasePickerOffset),
+                                        @"checkHeight" : @(BasePickerCheckHeight + LINKON_CUT_LINE_HEIGHT_2PX),
+                                        @"offset" : @(LINKON_CUT_LINE_HEIGHT_2PX),
                                         };
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|" options:0 metrics:nil views:viewsDictionary]];
@@ -114,7 +114,7 @@ const CGFloat BasePickerOffset = 1.0;
 }
 
 - (CGFloat)pickerView:(UIPickerView *)pickerView rowHeightForComponent:(NSInteger)component {
-    return 35.0;
+    return 35.0 - LINKON_CUT_LINE_HEIGHT_2PX * 3;
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {

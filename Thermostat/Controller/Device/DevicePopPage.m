@@ -68,34 +68,12 @@ const CGFloat DevicePopButtonPaddingLeft = 16.0;
 #pragma mark - 界面布局
 
 - (void)baseInitialiseSubViews {
-    UILabel *titleLabel = self.titleLabel;
-    UIView *cutLineView = self.cutLineView;
-    UIView *menuContentView = self.menuContentView;
-    
-    DevicePopButton *nicknameButton = self.nicknameButton;
-    DevicePopButton *passwordButton = self.passwordButton;
-    DevicePopButton *removeButton = self.removeButton;
-    
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(titleLabel, cutLineView, menuContentView, nicknameButton, passwordButton, removeButton);
-    NSDictionary *metricsDictionary = @{
-                                        @"titleHeight" : @(DevicePopTitleHeight),
-                                        @"cutLineHeight" : @(DevicePopCutLineHeight),
-                                        @"buttonHeight" : @(DevicePopButtonHeight),
-                                        @"buttonWidth" : @(DevicePopButtonWidth),
-                                        @"paddingLeft" : @(DevicePopButtonPaddingLeft)
-                                        };
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[titleLabel]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[cutLineView]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[menuContentView]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[titleLabel(titleHeight)][cutLineView(cutLineHeight)][menuContentView(buttonHeight)]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
-    
-    [menuContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-paddingLeft-[nicknameButton(buttonWidth)][passwordButton(nicknameButton)][removeButton(nicknameButton)]" options:0 metrics:metricsDictionary views:viewsDictionary]];
-    [menuContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[nicknameButton]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
-    [menuContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[passwordButton]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
-    [menuContentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[removeButton]|" options:0 metrics:metricsDictionary views:viewsDictionary]];
-
-    [self.view layoutIfNeeded];
+    self.titleLabel.opaque = YES;
+    self.cutLineView.opaque = YES;
+    self.menuContentView.opaque = YES;
+    self.nicknameButton.opaque = YES;
+    self.passwordButton.opaque = YES;
+    self.removeButton.opaque = YES;
 }
 
 #pragma mark - 点击事件
@@ -111,61 +89,107 @@ const CGFloat DevicePopButtonPaddingLeft = 16.0;
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = [Globals addedSubViewClass:[UILabel class] toView:self.view];
+        _titleLabel = [UILabel new];
+        [self.view addSubview:_titleLabel];
+        
         _titleLabel.backgroundColor = HB_COLOR_BASE_WHITE;
         _titleLabel.font = UIFontOf3XPix(45);
         _titleLabel.textColor = HB_COLOR_POP_TITLE;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
         _titleLabel.text = [LinKonHelper formatSN:self.device.sn];
+        
+        WeakObj(self);
+        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.bottom.equalTo(selfWeak.cutLineView.mas_top);
+            make.height.mas_equalTo(DevicePopTitleHeight);
+        }];
     }
     return _titleLabel;
 }
 
 - (UIView *)cutLineView {
     if (!_cutLineView) {
-        _cutLineView = [Globals addedSubViewClass:[UIView class] toView:self.view];
+        _cutLineView = [UIView new];
+        [self.view addSubview:_cutLineView];
         _cutLineView.backgroundColor = HB_COLOR_POP_LINE;
+        
+        WeakObj(self);
+        [_cutLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(0);
+            make.bottom.equalTo(selfWeak.menuContentView.mas_top);
+            make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT_2PX);
+        }];
     }
     return _cutLineView;
 }
 
 - (UIView *)menuContentView {
     if (!_menuContentView) {
-        _menuContentView = [Globals addedSubViewClass:[UIView class] toView:self.view];
+        _menuContentView = [UIView new];
+        [self.view addSubview:_menuContentView];
         _menuContentView.backgroundColor = HB_COLOR_BASE_WHITE;
+        
+        [_menuContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.bottom.right.mas_equalTo(0);
+            make.height.mas_equalTo(DevicePopButtonHeight);
+        }];
     }
     return _menuContentView;
 }
 
 - (DevicePopButton *)nicknameButton {
     if (!_nicknameButton) {
-        _nicknameButton = [Globals addedSubViewClass:[DevicePopButton class] toView:self.menuContentView];
+        _nicknameButton = [DevicePopButton new];
+        [self.menuContentView addSubview:_nicknameButton];
+        
         _nicknameButton.tag = DevicePopActionNickname;
         [_nicknameButton setImage:[UIImage imageNamed:@"btn_pop_nickname"] forState:UIControlStateNormal];
         [_nicknameButton setTitle:KString(@"修改昵称") forState:UIControlStateNormal];
         [_nicknameButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        WeakObj(self);
+        [_nicknameButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(DevicePopButtonPaddingLeft);
+            make.top.bottom.mas_equalTo(@[@(0), selfWeak.passwordButton, selfWeak.removeButton]);
+            make.width.mas_equalTo(@[@(DevicePopButtonWidth), selfWeak.passwordButton, selfWeak.removeButton]);
+        }];
     }
     return _nicknameButton;
 }
 
 - (DevicePopButton *)passwordButton {
     if (!_passwordButton) {
-        _passwordButton = [Globals addedSubViewClass:[DevicePopButton class] toView:self.menuContentView];
+        _passwordButton = [DevicePopButton new];
+        [self.menuContentView addSubview:_passwordButton];
+        
         _passwordButton.tag = DevicePopActionPassword;
         [_passwordButton setImage:[UIImage imageNamed:@"btn_pop_password"] forState:UIControlStateNormal];
         [_passwordButton setTitle:KString(@"修改密码") forState:UIControlStateNormal];
         [_passwordButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        WeakObj(self);
+        [_passwordButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(selfWeak.nicknameButton.mas_right);
+        }];
     }
     return _passwordButton;
 }
 
 - (DevicePopButton *)removeButton {
     if (!_removeButton) {
-        _removeButton = [Globals addedSubViewClass:[DevicePopButton class] toView:self.menuContentView];
+        _removeButton = [DevicePopButton new];
+        [self.menuContentView addSubview:_removeButton];
+        
         _removeButton.tag = DevicePopActionRemove;
         [_removeButton setImage:[UIImage imageNamed:@"btn_pop_delete"] forState:UIControlStateNormal];
         [_removeButton setTitle:KString(@"删除") forState:UIControlStateNormal];
         [_removeButton addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        
+        WeakObj(self);
+        [_removeButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(selfWeak.passwordButton.mas_right);
+        }];
     }
     return _removeButton;
 }

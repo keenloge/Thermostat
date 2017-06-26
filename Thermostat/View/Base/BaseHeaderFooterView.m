@@ -100,7 +100,7 @@
         _baseCutLineView.backgroundColor = UIColorFromHex(0xcccccc);
         [_baseCutLineView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.right.mas_equalTo(0).priorityLow();
-            make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT);
+            make.height.mas_equalTo(LINKON_CUT_LINE_HEIGHT_1PX);
         }];
     }
     return _baseCutLineView;
