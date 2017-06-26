@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class LinKonDevice;
+@class BaseDevice;
 
 #define KDeviceListAdd     @"listAdd"
 #define KDeviceListRemove  @"listRemove"
@@ -32,7 +32,7 @@
  @param device 设备
  */
 
-- (void)addDevice:(LinKonDevice *)device;
+- (void)addDevice:(BaseDevice *)device;
 
 /**
  移除设备
@@ -49,7 +49,7 @@
  @return 设备
  */
 
-- (LinKonDevice *)getDevice:(long long)sn;
+- (BaseDevice *)getDevice:(long long)sn;
 
 
 

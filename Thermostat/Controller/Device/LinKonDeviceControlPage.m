@@ -99,7 +99,7 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
     
     WeakObj(self);
     self.controlView.block = ^(MenuControlButtonTag tag) {
-        LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:selfWeak.baseSN];
+        LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:selfWeak.baseSN];
         
         switch (tag) {
             case MenuControlButtonTagTimer:
@@ -143,13 +143,13 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
         [tempArray addObject:[LinKonHelper settingString:i]];
     }
     [self.controlView updateTemperatureArray:tempArray checkBlock:^(NSInteger index) {
-        LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:selfWeak.baseSN];
+        LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:selfWeak.baseSN];
         [device updateValue:@(index * LINKON_TEMPERATURE_OFFSET + LINKON_TEMPERATURE_MIN) forKey:KDeviceSetting];
     }];
 }
 
 - (void)baseReceiveNotifyWithSN:(long long)sn key:(NSString *)key {
-    LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:self.baseSN];
+    LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:self.baseSN];
     
     // 更新设备昵称
     if (self.selectedIndex == ControlTabButtonTagControl) {
@@ -424,7 +424,7 @@ typedef NS_ENUM(NSInteger, ControlTabButtonTag) {
         }
         [self addBarButtonItemBackWithAction:@selector(barButtonItemLeftPressed:)];
         [self addBarButtonItemRightNormalImageName:@"nav_dot" hightLited:nil];
-        LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:self.baseSN];
+        LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:self.baseSN];
         self.navigationItem.title = device.nickname;
     }
 }

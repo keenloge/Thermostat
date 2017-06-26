@@ -26,7 +26,7 @@
 
 - (instancetype)initWithDevice:(long long)sn {
     if (self = [super init]) {
-        self.device = [[DeviceListManager sharedManager] getDevice:sn];
+        self.device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:sn];
     }
     return self;
 }

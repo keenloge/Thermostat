@@ -75,6 +75,7 @@
 		117FD75E1EDECBD6003A60B1 /* Globals.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD75D1EDECBD6003A60B1 /* Globals.m */; };
 		117FD7661EDECD92003A60B1 /* DeviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD7651EDECD92003A60B1 /* DeviceCell.m */; };
 		117FD76B1EDECE2C003A60B1 /* BannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 117FD76A1EDECE2C003A60B1 /* BannerView.m */; };
+		1192E8A61F00A3EF00A96790 /* BaseDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1192E8A51F00A3EF00A96790 /* BaseDevice.m */; };
 		11A60FC21EF60F7C007C7B91 /* BaseAlertPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A60FC11EF60F7C007C7B91 /* BaseAlertPage.m */; };
 		11AC581F1EE4EE69003D12EB /* TaskBlankView.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC581E1EE4EE69003D12EB /* TaskBlankView.m */; };
 		11AC58231EE4EF36003D12EB /* TaskBlankButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 11AC58221EE4EF36003D12EB /* TaskBlankButton.m */; };
@@ -220,6 +221,8 @@
 		117FD7651EDECD92003A60B1 /* DeviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceCell.m; sourceTree = "<group>"; };
 		117FD7691EDECE2C003A60B1 /* BannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerView.h; sourceTree = "<group>"; };
 		117FD76A1EDECE2C003A60B1 /* BannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerView.m; sourceTree = "<group>"; };
+		1192E8A41F00A3EF00A96790 /* BaseDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseDevice.h; sourceTree = "<group>"; };
+		1192E8A51F00A3EF00A96790 /* BaseDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseDevice.m; sourceTree = "<group>"; };
 		11A60FC01EF60F7C007C7B91 /* BaseAlertPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseAlertPage.h; sourceTree = "<group>"; };
 		11A60FC11EF60F7C007C7B91 /* BaseAlertPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseAlertPage.m; sourceTree = "<group>"; };
 		11AC581D1EE4EE69003D12EB /* TaskBlankView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskBlankView.h; sourceTree = "<group>"; };
@@ -534,6 +537,8 @@
 		117FD7291EDEC7CE003A60B1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1192E8A41F00A3EF00A96790 /* BaseDevice.h */,
+				1192E8A51F00A3EF00A96790 /* BaseDevice.m */,
 				112D4FC41EDF989D00B5026E /* LinKonDevice.h */,
 				112D4FC51EDF989D00B5026E /* LinKonDevice.m */,
 				11C2F6191EE3B284008ED62F /* LinKonTimerTask.h */,
@@ -811,6 +816,7 @@
 				11A60FC21EF60F7C007C7B91 /* BaseAlertPage.m in Sources */,
 				11AC582D1EE4FDE2003D12EB /* NSStringAdditions.m in Sources */,
 				117FD7591EDECB80003A60B1 /* NSDictionaryAdditions.m in Sources */,
+				1192E8A61F00A3EF00A96790 /* BaseDevice.m in Sources */,
 				112D50091EE01C9300B5026E /* DeviceInfoView.m in Sources */,
 				117FD75E1EDECBD6003A60B1 /* Globals.m in Sources */,
 				111597E41EFA2DA400D315C8 /* DeviceNotifyManager.m in Sources */,

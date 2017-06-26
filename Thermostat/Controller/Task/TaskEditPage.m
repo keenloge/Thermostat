@@ -373,7 +373,7 @@ typedef NS_ENUM(NSInteger, TaskEditType) {
 #pragma mark - 点击事件
 
 - (void)barButtonItemRightPressed:(id)sender {
-    LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:self.baseSN];
+    LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:self.baseSN];
     if (self.type == TaskEditTypeNew) {
         if ([device updateValue:self.task forKey:KDeviceTimerAdd]) {
             [self popViewController];

@@ -72,7 +72,7 @@ const CGFloat TaskListRowsHeight = 80.0;
 }
 
 - (void)baseReceiveNotifyWithSN:(long long)sn key:(NSString *)key {
-    LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:self.baseSN];
+    LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:self.baseSN];
     [self.baseContentArr removeAllObjects];
     [self.baseContentArr addObjectsFromArray:device.timerArray];
     [self.baseTableView reloadData];
@@ -197,7 +197,7 @@ const CGFloat TaskListRowsHeight = 80.0;
 
     [cell updateBaseSwitchOn:task.validate switchBlock:^(BOOL on) {
         task.validate = on;
-        LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:selfWeak.baseSN];
+        LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:selfWeak.baseSN];
         if (![device updateValue:task forKey:KDeviceTimerEdit]) {
             // 修改失败, 撤销操作, 刷新界面
             selfWeak.baseMessageNotify = KString(@"与其他定时器行为冲突");
@@ -233,7 +233,7 @@ const CGFloat TaskListRowsHeight = 80.0;
     }];
     UITableViewRowAction *removeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:KString(@"删除") handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         action.backgroundColor = UIColorFromHex(0xff0021);
-        LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:selfWeak.baseSN];
+        LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:selfWeak.baseSN];
         LinKonTimerTask *item = [selfWeak.baseContentArr objectAtIndex:indexPath.row];
         [device updateValue:item forKey:KDeviceTimerRemove];
     }];

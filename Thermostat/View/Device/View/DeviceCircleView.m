@@ -243,7 +243,7 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
             if (selfWeak.block) {
                 selfWeak.block();
             }
-//            LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:blockSN];
+//            LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:blockSN];
 //            [[DeviceListManager sharedManager] editDevice:blockSN key:KDeviceRunning value:@(device.switchRunning)];
         }
     }];

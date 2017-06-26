@@ -6,11 +6,9 @@
 //  Copyright © 2017年 GalaxyWind. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "BaseDevice.h"
 #import "LinKonTimerTask.h"
 
-#define KDeviceNickname     @"nickname"
-#define KDevicePassword     @"password"
 #define KDeviceConnection   @"connection"
 #define KDeviceRunning      @"running"
 #define KDeviceWind         @"wind"
@@ -25,26 +23,7 @@
 #define KDeviceTimerEdit    @"timerEdit"
 #define KDeviceTimerRemove  @"timerRemove"
 
-@interface LinKonDevice : NSObject
-
-
-/**
- 序列号
- */
-@property (nonatomic, readonly) long long sn;
-
-
-/**
- 昵称
- */
-@property (nonatomic, readonly) NSString *nickname;
-
-
-/**
- 密码
- */
-@property (nonatomic, readonly) NSString *password;
-
+@interface LinKonDevice : BaseDevice
 
 /**
  连接状态
@@ -56,7 +35,6 @@
  运行状态
  */
 @property (nonatomic, readonly) DeviceRunningState running;
-
 
 /**
  当前湿度
@@ -129,17 +107,6 @@
  @return 设备对象
  */
 + (instancetype)deviceWithSN:(long long)sn password:(NSString *)password;
-
-
-
-/**
- 修改设备属性
-
- @param value 属性值
- @param key 属性Key
- @return 是否修改成功
- */
-- (BOOL)updateValue:(id)value forKey:(NSString *)key;
 
 
 @end

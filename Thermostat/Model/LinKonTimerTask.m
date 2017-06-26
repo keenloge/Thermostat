@@ -42,7 +42,7 @@ const NSInteger LinKonTimerTimeMin = 0;
             self.timeTo = self.timeFrom + 30;
         }
         
-        LinKonDevice *device = [[DeviceListManager sharedManager] getDevice:sn];
+        LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:sn];
         self.wind = device.wind;
         self.mode = device.mode;
         self.scene = device.scene;

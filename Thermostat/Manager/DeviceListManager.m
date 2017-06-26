@@ -7,8 +7,8 @@
 //
 
 #import "DeviceListManager.h"
-#import "LinKonDevice.h"
 #import "DeviceNotifyManager.h"
+#import "BaseDevice.h"
 
 static DeviceListManager *_currentDeviceListManager;
 
@@ -18,7 +18,7 @@ static DeviceListManager *_currentDeviceListManager;
 /**
  设备列表
  */
-@property (nonatomic, strong) NSMutableArray<LinKonDevice*> *savedDeviceArray;
+@property (nonatomic, strong) NSMutableArray<BaseDevice*> *savedDeviceArray;
 
 @end
 
@@ -67,7 +67,7 @@ static DeviceListManager *_currentDeviceListManager;
  @param device 设备
  */
 
-- (void)addDevice:(LinKonDevice *)device {
+- (void)addDevice:(BaseDevice *)device {
     if (device.sn <= 0) {
         return;
     }
@@ -79,7 +79,7 @@ static DeviceListManager *_currentDeviceListManager;
     [self.savedDeviceArray addObject:device];
     
     // 通知监听了设备列表的对象
-    [[DeviceNotifyManager sharedManager] postNotifyType:DeviceNotifyTypeList sn:device.sn key:KDeviceListAdd];
+    [[DeviceNotifyManager sharedManager] postNotifyType:DeviceNotifyTypeList sn:device.sn object:KDeviceListAdd];
 }
 
 /**
@@ -105,12 +105,12 @@ static DeviceListManager *_currentDeviceListManager;
     }
     
     for (int i = 0; i < self.savedDeviceArray.count; i++) {
-        LinKonDevice *device = [self.savedDeviceArray objectAtIndex:i];
+        BaseDevice *device = [self.savedDeviceArray objectAtIndex:i];
         if (device.sn == sn) {
             [self.savedDeviceArray removeObjectAtIndex:i];
             
             if (notify) {
-                [[DeviceNotifyManager sharedManager] postNotifyType:DeviceNotifyTypeList sn:sn key:KDeviceListRemove];
+                [[DeviceNotifyManager sharedManager] postNotifyType:DeviceNotifyTypeList sn:sn object:KDeviceListRemove];
             }
         }
     }
@@ -123,12 +123,12 @@ static DeviceListManager *_currentDeviceListManager;
  @return 设备
  */
 
-- (LinKonDevice *)getDevice:(long long)sn {
+- (BaseDevice *)getDevice:(long long)sn {
     if (sn <= 0) {
         return nil;
     }
     
-    for (LinKonDevice *item in self.savedDeviceArray) {
+    for (BaseDevice *item in self.savedDeviceArray) {
         if (item.sn == sn) {
             return item;
         }

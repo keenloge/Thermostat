@@ -123,12 +123,12 @@ static DeviceNotifyManager *_currentDeviceNotifyManager;
  
  @param type 通知类别
  @param sn 序列号
- @param key 变更Key
+ @param object 消息附加对象
  */
 - (void)postNotifyType:(DeviceNotifyType)type
                     sn:(long long)sn
-                   key:(NSString *)key {
-    if (type == 0) {
+                object:(id)object {
+    if (type == 0 || sn == 0) {
         return;
     }
     
@@ -142,7 +142,7 @@ static DeviceNotifyManager *_currentDeviceNotifyManager;
         
         if ((target.typeGroup & type) == type && (target.sn == sn || target.sn == 0)) {
             if (target.block) {
-                target.block(sn, key);
+                target.block(sn, object);
             }
         }
     }

@@ -39,7 +39,7 @@ const CGFloat DevicePopButtonPaddingLeft = 16.0;
 - (instancetype)initWithDevice:(long long)sn
                          block:(DevicePopBlock)aBlock {
     if (self = [super init]) {
-        self.device = [[DeviceListManager sharedManager] getDevice:sn];
+        self.device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:sn];
         self.block = aBlock;
     }
     return self;

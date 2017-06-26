@@ -20,6 +20,10 @@
 
 @implementation LinKonDevice
 
+@synthesize sn = _sn;
+@synthesize nickname = _nickname;
+@synthesize password = _password;
+
 /**
  随机生成设备
  
@@ -221,7 +225,7 @@
     
     if (success) {
         // 发送通知
-        [[DeviceNotifyManager sharedManager] postNotifyType:[self notifyTypeWithKey:key] sn:_sn key:key];
+        [[DeviceNotifyManager sharedManager] postNotifyType:[self notifyTypeWithKey:key] sn:_sn object:key];
     }
     
     return success;
@@ -235,12 +239,14 @@
  @return 通知类别
  */
 - (DeviceNotifyType)notifyTypeWithKey:(NSString *)key {
+    DeviceNotifyType type = [super notifyTypeWithKey:key];
+    if (type != DeviceNotifyTypeNone) {
+        return type;
+    }
+    
     if ([key isEqualToString:KDeviceConnection]
         || [key isEqualToString:KDeviceRunning]) {
         return DeviceNotifyTypeState;
-    } else if ([key isEqualToString:KDeviceNickname]
-               || [key isEqualToString:KDevicePassword]) {
-        return DeviceNotifyTypeIdentity;
     } else if ([key isEqualToString:KDeviceTimerAdd]
                || [key isEqualToString:KDeviceTimerEdit]
                || [key isEqualToString:KDeviceTimerRemove]) {

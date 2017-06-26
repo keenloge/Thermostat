@@ -33,9 +33,9 @@ typedef NS_ENUM(Byte, DeviceNotifyType) {
  设备通知回调
 
  @param sn 序列号
- @param key 变更Key
+ @param object 附加消息对象
  */
-typedef void(^DeviceNotifyBlock)(long long sn, NSString *key);
+typedef void(^DeviceNotifyBlock)(long long sn, id object);
 
 @interface DeviceNotifyManager : NSObject
 
@@ -69,10 +69,10 @@ typedef void(^DeviceNotifyBlock)(long long sn, NSString *key);
 
  @param type 通知类别
  @param sn 序列号
- @param key 变更Key
+ @param object 消息附加对象
  */
 - (void)postNotifyType:(DeviceNotifyType)type
                     sn:(long long)sn
-                   key:(NSString *)key;
+                object:(id)object;
 
 @end
