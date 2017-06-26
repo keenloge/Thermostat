@@ -8,6 +8,10 @@
 
 #import "BaseButton.h"
 
+
+/**
+ 设备列表行, 右侧信息(i)按钮
+ */
 @interface InfoButton : BaseButton
 
 @end

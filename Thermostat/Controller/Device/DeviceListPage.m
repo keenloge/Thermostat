@@ -110,15 +110,19 @@ const CGFloat DeviceListRowsHeight = 77.0;
         self.baseMessageNotify = KString(@"昵称修改成功");
     } else if ([key isEqualToString:KDevicePassword]) {
         self.baseMessageNotify = KString(@"修改密码成功");
+        
+        // 修改密码无需刷新当前列表
+        return;
+    }
+    
+    // 刷新设备列表
+    [self.baseContentArr removeAllObjects];
+    [self.baseContentArr addObjectsFromArray:[[DeviceListManager sharedManager] getDeviceList]];
+    [self.baseTableView reloadData];
+    if (self.baseContentArr.count > 0) {
+        [self hideBlankView];
     } else {
-        [self.baseContentArr removeAllObjects];
-        [self.baseContentArr addObjectsFromArray:[[DeviceListManager sharedManager] getDeviceList]];
-        [self.baseTableView reloadData];
-        if (self.baseContentArr.count > 0) {
-            [self hideBlankView];
-        } else {
-            [self showBlankView];
-        }
+        [self showBlankView];
     }
 }
 

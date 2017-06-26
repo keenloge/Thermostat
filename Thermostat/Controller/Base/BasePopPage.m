@@ -75,6 +75,8 @@
     BOOL isDidAppear;
 }
 
+@property (nonatomic, strong) UIView *baseBackgroundView;
+
 @end
 
 @implementation BasePopPage
@@ -91,17 +93,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor clearColor];
-    
-    UIView *backgroundView = [[UIView alloc] init];
-    [backgroundView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    backgroundView.backgroundColor = [UIColor blackColor];
-    backgroundView.alpha = 0.4;
-    [self.view addSubview:backgroundView];
-    
-    NSDictionary *viewsDictionary = NSDictionaryOfVariableBindings(backgroundView);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[backgroundView]|" options:0 metrics:nil views:viewsDictionary]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[backgroundView]|" options:0 metrics:nil views:viewsDictionary]];
-    [self.view layoutIfNeeded];
+
+    self.baseBackgroundView.opaque = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -162,6 +155,22 @@
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
     ASPopupDismissAnimator *animator = [[ASPopupDismissAnimator alloc] init];
     return animator;
+}
+
+#pragma mark - 懒加载
+
+- (UIView *)baseBackgroundView {
+    if (!_baseBackgroundView) {
+        _baseBackgroundView = [UIView new];
+        [self.view addSubview:_baseBackgroundView];
+        _baseBackgroundView.backgroundColor = [UIColor blackColor];
+        _baseBackgroundView.alpha = 0.4;
+
+        [_baseBackgroundView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_equalTo(UIEdgeInsetsZero);
+        }];
+    }
+    return _baseBackgroundView;
 }
 
 @end

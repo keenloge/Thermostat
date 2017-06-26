@@ -8,6 +8,10 @@
 
 #import "BaseButton.h"
 
+
+/**
+ 设备控制界面控制菜单按钮
+ */
 @interface ControlMenuButton : BaseButton
 
 @end

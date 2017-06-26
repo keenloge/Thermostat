@@ -59,6 +59,10 @@
     [self.nicknameTextField addTarget:self action:@selector(textFieldDidChanged:) forControlEvents:UIControlEventEditingChanged];
 }
 
+- (void)editNickName:(NSString *)nickName {
+    [self.device updateValue:nickName forKey:KDeviceNickname];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidChanged:(UITextField *)sender {
@@ -80,7 +84,7 @@
 
 - (void)baseButtonPressed:(id)sender {
     [self popViewController];
-    [self.device updateValue:self.nicknameTextField.text forKey:KDeviceNickname];
+    [self performSelector:@selector(editNickName:) withObject:self.nicknameTextField.text afterDelay:0.3];
 }
 
 #pragma mark - 懒加载

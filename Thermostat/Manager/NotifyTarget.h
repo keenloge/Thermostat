@@ -10,7 +10,7 @@
 #import "DeviceNotifyManager.h"
 
 /**
- 通知实例
+ 监听实例类
  */
 @interface NotifyTarget : NSObject
 
@@ -21,7 +21,7 @@
 @property (nonatomic, weak) id listener;
 
 /**
- 对象唯一标志
+ 设备唯一标志
  */
 @property (nonatomic, assign) long long sn;
 

@@ -8,6 +8,10 @@
 
 #import "BaseButton.h"
 
+
+/**
+ 设备控制界面底部切换按钮
+ */
 @interface ControlTabButton : BaseButton
 
 @end

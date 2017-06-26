@@ -71,6 +71,10 @@
                                 && self.passwordConfirmTextField.text.length > 0;
 }
 
+- (void)editPassword:(NSString *)password {
+    [self.device updateValue:password forKey:KDevicePassword];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (void)textFieldDidChanged:(UITextField *)sender {
@@ -100,7 +104,7 @@
         self.baseMessageNotify = KString(@"新密码和旧密码一样");
     } else {
         [self popViewController];
-        [self.device updateValue:self.passwordNewTextField.text forKey:KDevicePassword];
+        [self performSelector:@selector(editPassword:) withObject:self.passwordNewTextField.text afterDelay:0.3];
     }
 }
 

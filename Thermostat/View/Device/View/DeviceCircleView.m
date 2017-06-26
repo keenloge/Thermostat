@@ -212,8 +212,8 @@ const CGFloat CircleInfoViewSecondsPerMinute        = 60.0;
     animation.toValue =  [NSNumber numberWithFloat: M_PI *2];
     animation.duration  = 10;
     animation.autoreverses = NO;
-    animation.fillMode =kCAFillModeForwards;
-    animation.repeatCount = 1;MAXFLOAT; //如果这里想设置成一直自旋转，可以设置为MAXFLOAT，否则设置具体的数值则代表执行多少次
+    animation.fillMode = kCAFillModeForwards;
+    animation.repeatCount = 1; // MAXFLOAT; //如果这里想设置成一直自旋转，可以设置为MAXFLOAT，否则设置具体的数值则代表执行多少次
     [self.roundImageView.layer addAnimation:animation forKey:nil];
 }
 

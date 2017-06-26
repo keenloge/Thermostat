@@ -123,7 +123,7 @@ static DeviceNotifyManager *_currentDeviceNotifyManager;
  
  @param type 通知类别
  @param sn 序列号
- @param object 消息附加对象
+ @param object 附件对象
  */
 - (void)postNotifyType:(DeviceNotifyType)type
                     sn:(long long)sn

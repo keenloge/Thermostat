@@ -8,6 +8,10 @@
 
 #import "BaseButton.h"
 
+
+/**
+ 设备列表弹窗按钮
+ */
 @interface DevicePopButton : BaseButton
 
 @end

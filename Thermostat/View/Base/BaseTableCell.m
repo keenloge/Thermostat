@@ -85,7 +85,7 @@ const CGFloat BaseTableCellArrowSize            = 77.0;
     WeakObj(self);
     [self.baseTitleLabel mas_updateConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(insets.top).priorityLow();
-        make.left.equalTo(selfWeak.baseImageView.mas_right).offset(insets.left).priorityLow();
+        make.left.equalTo(selfWeak.baseImageView.mas_right).offset(insets.left);
         make.bottom.mas_equalTo(-insets.bottom).priorityLow();
         make.right.mas_equalTo(-insets.right);
     }];

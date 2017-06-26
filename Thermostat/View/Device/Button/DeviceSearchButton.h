@@ -10,6 +10,10 @@
 
 typedef void(^DeviceSearchBlock)();
 
+
+/**
+ 设备搜索界面搜索按钮
+ */
 @interface DeviceSearchButton : BaseButton
 
 
