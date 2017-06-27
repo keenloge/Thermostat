@@ -87,6 +87,8 @@
 @property (nonatomic, assign) float setting;
 
 
+@property (nonatomic, readonly) NSArray *timeRangeArray;
+
 
 /**
  切换周期

@@ -67,6 +67,14 @@ const NSInteger LinKonTimerTimeMin = 0;
     return item;
 }
 
+- (NSInteger)timeTo {
+    if (self.type == LinKonTimerTaskTypeSwitch) {
+        // 开关定时器的结束时间无效
+        _timeTo = -1;
+    }
+    return _timeTo;
+}
+
 - (NSInteger)minuteToNow {
     NSInteger secondInt = [NSDate timeIntervalSinceReferenceDate] + [NSTimeZone systemTimeZone].secondsFromGMT;
     return (secondInt / 60) % (24 * 60);
@@ -102,6 +110,42 @@ const NSInteger LinKonTimerTimeMin = 0;
 
 - (void)resetTimerRange {
     self.rangeArray = nil;
+}
+
+- (NSArray *)timeRangeArray {
+    NSMutableArray *tempArray = [NSMutableArray array];
+    
+    if (self.repeat == TimerRepeatNone) {
+        // 非周期定时器
+        
+        // 今天是周几
+        TimerRepeat repeatNow = [self currentTimerRepeat];
+        
+        // 现在时间
+        NSInteger timeNow = [self minuteToNow];
+        
+        if (self.timeFrom > timeNow) {
+            // 今天生效的定时器
+            [tempArray addObjectsFromArray:[LinKonTimerRange rangeArrayWithRepeat:repeatNow timeFrom:self.timeFrom timeTo:self.timeTo]];
+        } else {
+            // 明天生效的定时器
+            // 明天是周几
+            TimerRepeat repeatNext = [self nextRepeat:repeatNow];
+            [tempArray addObjectsFromArray:[LinKonTimerRange rangeArrayWithRepeat:repeatNext timeFrom:self.timeFrom timeTo:self.timeTo]];
+        }
+    } else {
+        // 起始周期
+        TimerRepeat repeatBegin = 1;
+        // 周期总数
+        NSInteger repeatCount = 7;
+        
+        for (int i = 0; i < repeatCount; i++) {
+            if (((repeatBegin << i) & self.repeat) > 0) {
+                [tempArray addObjectsFromArray:[LinKonTimerRange rangeArrayWithRepeat:repeatBegin << i timeFrom:self.timeFrom timeTo:self.timeTo]];
+            }
+        }
+    }
+    return [tempArray copy];
 }
 
 - (NSArray *)rangeArray {

@@ -8,7 +8,7 @@
 
 #import "LinKonDevice.h"
 #import "DeviceNotifyManager.h"
-
+#import "LinKonTimerRange.h"
 
 @interface LinKonDevice () {
     
@@ -143,13 +143,37 @@
 #pragma mark - 定时器 增 删 改
 
 - (BOOL)addTimerTask:(LinKonTimerTask *)timer {
-    [timer resetTimerRange];
-    for (LinKonTimerTask *item in self.savedTimerArray) {
-        if ([item.number isEqualToString:timer.number] || [item isConflictTo:timer]) {
-            // 与现有定时器发生冲突
-            return NO;
+    // 新版冲突算法开始
+    if (timer.validate) {
+        Byte rangeArray[7 * 24 * 60] = {0};
+        for (LinKonTimerTask *task in self.timerArray) {
+            if (task.validate) {
+                for (LinKonTimerRange *range in task.timeRangeArray) {
+                    for (int i = range.timeFrom; i <= range.timeTo; i++) {
+                        rangeArray[i] = 1;
+                    }
+                }
+            }
+        }
+        
+        for (LinKonTimerRange *range in timer.timeRangeArray) {
+            for (int i = range.timeFrom; i <= range.timeTo; i++) {
+                if (rangeArray[i] == 1) {
+                    return NO;
+                }
+            }
         }
     }
+    // 新版冲突算法结束
+    
+    
+//    [timer resetTimerRange];
+//    for (LinKonTimerTask *item in self.savedTimerArray) {
+//        if ([item.number isEqualToString:timer.number] || [item isConflictTo:timer]) {
+//            // 与现有定时器发生冲突
+//            return NO;
+//        }
+//    }
     
     [self.savedTimerArray addObject:timer];
     
@@ -167,13 +191,36 @@
 }
 
 - (BOOL)editTimerTask:(LinKonTimerTask *)timer {
-    [timer resetTimerRange];
-    for (LinKonTimerTask *item in self.savedTimerArray) {
-        if (![item.number isEqualToString:timer.number] && [item isConflictTo:timer]) {
-            // 与现有定时器发生冲突
-            return NO;
+//    [timer resetTimerRange];
+//    for (LinKonTimerTask *item in self.savedTimerArray) {
+//        if (![item.number isEqualToString:timer.number] && [item isConflictTo:timer]) {
+//            // 与现有定时器发生冲突
+//            return NO;
+//        }
+//    }
+    
+    // 新版冲突算法开始
+    if (timer.validate) {
+        Byte rangeArray[7 * 24 * 60] = {0};
+        for (LinKonTimerTask *task in self.timerArray) {
+            if (![task.number isEqualToString:timer.number] && task.validate) {
+                for (LinKonTimerRange *range in task.timeRangeArray) {
+                    for (int i = range.timeFrom; i <= range.timeTo; i++) {
+                        rangeArray[i] = 1;
+                    }
+                }
+            }
+        }
+        
+        for (LinKonTimerRange *range in timer.timeRangeArray) {
+            for (int i = range.timeFrom; i <= range.timeTo; i++) {
+                if (rangeArray[i] == 1) {
+                    return NO;
+                }
+            }
         }
     }
+    // 新版冲突算法结束
     
     for (int i = 0; i < self.savedTimerArray.count; i++) {
         LinKonTimerTask *item = [self.savedTimerArray objectAtIndex:i];
