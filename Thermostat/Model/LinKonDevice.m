@@ -182,7 +182,7 @@
 
 - (BOOL)removeTimerTask:(LinKonTimerTask *)timer {
     for (LinKonTimerTask *item in self.savedTimerArray) {
-        if ([item.number isEqualToString:timer.number]) {
+        if (item.ID == timer.ID) {
             [self.savedTimerArray removeObject:item];
             return YES;
         }
@@ -203,7 +203,7 @@
     if (timer.validate) {
         Byte rangeArray[7 * 24 * 60] = {0};
         for (LinKonTimerTask *task in self.timerArray) {
-            if (![task.number isEqualToString:timer.number] && task.validate) {
+            if (task.ID != timer.ID && task.validate) {
                 for (LinKonTimerRange *range in task.timeRangeArray) {
                     for (NSInteger i = range.timeFrom; i <= range.timeTo; i++) {
                         rangeArray[i] = 1;
@@ -224,7 +224,7 @@
     
     for (int i = 0; i < self.savedTimerArray.count; i++) {
         LinKonTimerTask *item = [self.savedTimerArray objectAtIndex:i];
-        if ([item.number isEqualToString:timer.number]) {
+        if (item.ID == timer.ID) {
             [self.savedTimerArray removeObjectAtIndex:i];
             [self.savedTimerArray insertObject:timer atIndex:i];
             return YES;

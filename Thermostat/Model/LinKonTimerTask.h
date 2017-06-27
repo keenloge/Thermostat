@@ -28,7 +28,7 @@
 /**
  任务编号, 唯一
  */
-@property (nonatomic, copy) NSString *number;
+@property (nonatomic, assign) NSInteger ID;
 
 
 /**

@@ -30,7 +30,14 @@ const NSInteger LinKonTimerTimeMin = 0;
 - (instancetype)initWithType:(LinKonTimerTaskType)type device:(long long)sn {
     if (self = [super init]) {
         self.type = type;
-        self.number = [NSString uuidString];
+        LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:sn];
+
+        LinKonTimerTask *lastTimer = [device.timerArray lastObject];
+        if (lastTimer) {
+            self.ID = lastTimer.ID + 1;
+        } else {
+            self.ID = 1;
+        }
         self.repeat = TimerRepeatNone;
         self.validate = YES;
         self.timeFrom = [self minuteToNow];
@@ -42,7 +49,6 @@ const NSInteger LinKonTimerTimeMin = 0;
             self.timeTo = self.timeFrom + 30;
         }
         
-        LinKonDevice *device = (LinKonDevice *)[[DeviceListManager sharedManager] getDevice:sn];
         self.wind = device.wind;
         self.mode = device.mode;
         self.scene = device.scene;
@@ -53,7 +59,7 @@ const NSInteger LinKonTimerTimeMin = 0;
 
 - (id)copyWithZone:(NSZone *)zone{
     LinKonTimerTask *item = [[[self class] allocWithZone:zone] init];
-    item.number = self.number;
+    item.ID = self.ID;
     item.type = self.type;
     item.repeat = self.repeat;
     item.validate = self.validate;
