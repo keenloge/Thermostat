@@ -69,8 +69,8 @@ const NSInteger LinKonTimerTimeMin = 0;
 
 - (NSInteger)timeTo {
     if (self.type == LinKonTimerTaskTypeSwitch) {
-        // 开关定时器的结束时间无效
-        _timeTo = -1;
+        // 开关定时器起止时间相同
+        _timeTo = self.timeFrom;
     }
     return _timeTo;
 }

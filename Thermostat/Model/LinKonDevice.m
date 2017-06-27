@@ -149,7 +149,7 @@
         for (LinKonTimerTask *task in self.timerArray) {
             if (task.validate) {
                 for (LinKonTimerRange *range in task.timeRangeArray) {
-                    for (int i = range.timeFrom; i <= range.timeTo; i++) {
+                    for (NSInteger i = range.timeFrom; i <= range.timeTo; i++) {
                         rangeArray[i] = 1;
                     }
                 }
@@ -157,7 +157,7 @@
         }
         
         for (LinKonTimerRange *range in timer.timeRangeArray) {
-            for (int i = range.timeFrom; i <= range.timeTo; i++) {
+            for (NSInteger i = range.timeFrom; i <= range.timeTo; i++) {
                 if (rangeArray[i] == 1) {
                     return NO;
                 }
@@ -205,7 +205,7 @@
         for (LinKonTimerTask *task in self.timerArray) {
             if (![task.number isEqualToString:timer.number] && task.validate) {
                 for (LinKonTimerRange *range in task.timeRangeArray) {
-                    for (int i = range.timeFrom; i <= range.timeTo; i++) {
+                    for (NSInteger i = range.timeFrom; i <= range.timeTo; i++) {
                         rangeArray[i] = 1;
                     }
                 }
@@ -213,7 +213,7 @@
         }
         
         for (LinKonTimerRange *range in timer.timeRangeArray) {
-            for (int i = range.timeFrom; i <= range.timeTo; i++) {
+            for (NSInteger i = range.timeFrom; i <= range.timeTo; i++) {
                 if (rangeArray[i] == 1) {
                     return NO;
                 }
