@@ -84,6 +84,8 @@ const CGFloat SideMenuContentLabelOffsetY   = 10.0;
     BaseTableCell *cell = [tableView dequeueReusableCellWithIdentifier:baseIdentifierCell];
     if (!cell) {
         cell = [[BaseTableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:baseIdentifierCell];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
         [cell updateIconImageSize:CGSizeMake(18, 18) paddingLeft:19];
         
         cell.baseTitleLabel.font = UIFontOf3XPix(46);
